@@ -14,20 +14,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kQ5-pN-fdu">
-                                <rect key="frame" x="185" y="132" width="81" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JMt-lh-z1L">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bb2-zh-jjZ">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSEveryone" id="PGo-Be-njy"/>
+                            </imageView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="bb2-zh-jjZ" secondAttribute="bottom" id="C1E-ux-2xe"/>
+                            <constraint firstAttribute="trailing" secondItem="bb2-zh-jjZ" secondAttribute="trailing" id="ZSU-8H-1tr"/>
+                            <constraint firstItem="bb2-zh-jjZ" firstAttribute="leading" secondItem="ghI-zX-j8N" secondAttribute="leading" id="a8B-4D-uZ5"/>
+                            <constraint firstItem="bb2-zh-jjZ" firstAttribute="top" secondItem="ghI-zX-j8N" secondAttribute="top" id="acK-kb-1Hz"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="bb2-zh-jjZ" id="MGZ-gv-WWd"/>
+                    </connections>
                 </viewController>
                 <customObject id="oD1-Sc-6gf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2" y="-27"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSEveryone" width="32" height="32"/>
+    </resources>
 </document>

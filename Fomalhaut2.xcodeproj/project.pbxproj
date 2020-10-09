@@ -3,14 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE296BBA253063BA00674C99 /* ZipDocument.swift */; };
+		CE296BCD2530671700674C99 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = CE296BCC2530671700674C99 /* ZIPFoundation */; };
+		CE296BDF25306C6000674C99 /* PageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE296BDE25306C6000674C99 /* PageView.storyboard */; };
+		CE296BE425306C8900674C99 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE296BE325306C8900674C99 /* PageViewController.swift */; };
 		CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280925305AA000986C9A /* AppDelegate.swift */; };
 		CE30280C25305AA000986C9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280B25305AA000986C9A /* ViewController.swift */; };
-		CE30280E25305AA000986C9A /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280D25305AA000986C9A /* Document.swift */; };
 		CE30281025305AA200986C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE30280F25305AA200986C9A /* Assets.xcassets */; };
 		CE30281325305AA200986C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30281125305AA200986C9A /* Main.storyboard */; };
 		CE30281F25305AA200986C9A /* Fomalhaut2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30281E25305AA200986C9A /* Fomalhaut2Tests.swift */; };
@@ -37,10 +39,11 @@
 
 /* Begin PBXFileReference section */
 		CE296BBA253063BA00674C99 /* ZipDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipDocument.swift; sourceTree = "<group>"; };
+		CE296BDE25306C6000674C99 /* PageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PageView.storyboard; sourceTree = "<group>"; };
+		CE296BE325306C8900674C99 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		CE30280625305AA000986C9A /* Fomalhaut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fomalhaut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE30280925305AA000986C9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE30280B25305AA000986C9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CE30280D25305AA000986C9A /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		CE30280F25305AA200986C9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE30281225305AA200986C9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE30281425305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE296BCD2530671700674C99 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,10 +109,11 @@
 				CE30280925305AA000986C9A /* AppDelegate.swift */,
 				CE30280B25305AA000986C9A /* ViewController.swift */,
 				CE296BBA253063BA00674C99 /* ZipDocument.swift */,
-				CE30280D25305AA000986C9A /* Document.swift */,
 				CE30284C25305D3E00986C9A /* BookViewController.swift */,
+				CE296BE325306C8900674C99 /* PageViewController.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
+				CE296BDE25306C6000674C99 /* PageView.storyboard */,
 				CE30281425305AA200986C9A /* Info.plist */,
 				CE30281525305AA200986C9A /* Fomalhaut2.entitlements */,
 			);
@@ -149,6 +154,9 @@
 			dependencies = (
 			);
 			name = Fomalhaut2;
+			packageProductDependencies = (
+				CE296BCC2530671700674C99 /* ZIPFoundation */,
+			);
 			productName = Fomalhaut2;
 			productReference = CE30280625305AA000986C9A /* Fomalhaut2.app */;
 			productType = "com.apple.product-type.application";
@@ -220,6 +228,9 @@
 				Base,
 			);
 			mainGroup = CE3027FD25305AA000986C9A;
+			packageReferences = (
+				CE296BCB2530671700674C99 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+			);
 			productRefGroup = CE30280725305AA000986C9A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -236,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE296BDF25306C6000674C99 /* PageView.storyboard in Resources */,
 				CE30281025305AA200986C9A /* Assets.xcassets in Resources */,
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,
 			);
@@ -263,9 +275,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE30280C25305AA000986C9A /* ViewController.swift in Sources */,
+				CE296BE425306C8900674C99 /* PageViewController.swift in Sources */,
 				CE30284D25305D3E00986C9A /* BookViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
-				CE30280E25305AA000986C9A /* Document.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -596,6 +608,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE296BCB2530671700674C99 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.9.11;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE296BCC2530671700674C99 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE296BCB2530671700674C99 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE3027FE25305AA000986C9A /* Project object */;
 }

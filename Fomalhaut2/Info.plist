@@ -20,7 +20,7 @@
 			<key>LSItemContentTypes</key>
 			<array/>
 			<key>NSDocumentClass</key>
-			<string>$(PRODUCT_MODULE_NAME).Document</string>
+			<string>$(PRODUCT_MODULE_NAME).ZipDocument</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>

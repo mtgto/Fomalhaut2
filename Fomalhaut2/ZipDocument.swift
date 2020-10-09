@@ -1,6 +1,23 @@
 import Cocoa
+import ZIPFoundation
 
 class ZipDocument: NSDocument {
+  private let archive: Archive
+  
+  init(contentsOf url: URL, ofType typeName: String) throws {
+    debugPrint("url: \(url)")
+    guard let archive = Archive(url: url, accessMode: .read, preferredEncoding: .shiftJIS) else {
+      throw NSError(domain: NSOSStatusErrorDomain, code: 1, userInfo: nil)
+    }
+    self.archive = archive
+  }
+  
+  override func makeWindowControllers() {
+    // Returns the Storyboard that contains your Document window.
+    let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
+    let windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller")) as! NSWindowController
+    self.addWindowController(windowController)
+  }
 
     /*
     override var windowNibName: String? {
@@ -26,9 +43,4 @@ class ZipDocument: NSDocument {
         // Alternatively, you could remove this method and override read(from:ofType:) instead.  If you do, you should also override isEntireFileLoaded to return false if the contents are lazily loaded.
         throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
     }
-
-    override class var autosavesInPlace: Bool {
-        return true
-    }
-
 }

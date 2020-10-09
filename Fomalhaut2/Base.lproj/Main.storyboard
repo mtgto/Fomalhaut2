@@ -695,50 +695,23 @@
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="5gI-5U-AMq" kind="relationship" relationship="window.shadowedContentViewController" id="nsd-lR-9xd"/>
+                        <segue destination="iRN-Vq-4xS" kind="relationship" relationship="window.shadowedContentViewController" id="hds-2s-NFq"/>
                     </connections>
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="hIz-AP-VOD">
-            <objects>
-                <viewController id="5gI-5U-AMq" customClass="ViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="ERx-hH-rdd">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="246" translatesAutoresizingMaskIntoConstraints="NO" id="TyV-c9-G0C">
-                                <rect key="frame" x="116" y="125" width="248" height="21"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Your document contents here" id="Cc7-nU-5Mv">
-                                    <font key="font" metaFont="system" size="18"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="centerY" secondItem="TyV-c9-G0C" secondAttribute="centerY" id="Rxv-Yd-F43"/>
-                            <constraint firstAttribute="centerX" secondItem="TyV-c9-G0C" secondAttribute="centerX" id="Zn4-Y4-lbg"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="75" y="655"/>
-        </scene>
         <!--Book View Controller-->
         <scene sceneID="Vnz-sL-BO0">
             <objects>
                 <splitViewController id="iRN-Vq-4xS" customClass="BookViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem id="cq0-Mo-jmQ"/>
-                        <splitViewItem id="Q8u-5W-pqJ"/>
+                        <splitViewItem id="oh0-ks-P4O"/>
+                        <splitViewItem id="uCv-yT-Nna"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Ak2-S8-2ut">
-                        <rect key="frame" x="0.0" y="0.0" width="481" height="300"/>
+                        <rect key="frame" x="-5" y="0.0" width="488" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <outlet property="delegate" destination="iRN-Vq-4xS" id="dF2-jz-Vum"/>
@@ -746,39 +719,29 @@
                     </splitView>
                     <connections>
                         <outlet property="splitView" destination="Ak2-S8-2ut" id="X4V-jk-cAQ"/>
-                        <segue destination="brG-8o-AtH" kind="relationship" relationship="splitItems" id="nRU-fe-3d5"/>
-                        <segue destination="eJe-ud-6Uj" kind="relationship" relationship="splitItems" id="2VS-pR-Q8K"/>
+                        <segue destination="SbD-BH-qcw" kind="relationship" relationship="splitItems" id="m4i-DK-vnr"/>
+                        <segue destination="xmg-8x-2lV" kind="relationship" relationship="splitItems" id="SwR-to-r8V"/>
                     </connections>
                 </splitViewController>
                 <customObject id="FBO-wc-xma" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75.5" y="995"/>
+            <point key="canvasLocation" x="71" y="595"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="rYr-6e-hOw">
+        <!--PageView-->
+        <scene sceneID="PLb-9U-fZa">
             <objects>
-                <viewController id="brG-8o-AtH" sceneMemberID="viewController">
-                    <view key="view" id="RGS-p5-lcv">
-                        <rect key="frame" x="0.0" y="0.0" width="180" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="Uys-MB-pRK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="PageView" id="SbD-BH-qcw" sceneMemberID="viewController"/>
+                <customObject id="ufg-ei-yYD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="595" y="809"/>
+            <point key="canvasLocation" x="74" y="939"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="amQ-Az-FV0">
+        <!--PageView-->
+        <scene sceneID="b05-hA-tXI">
             <objects>
-                <viewController id="eJe-ud-6Uj" sceneMemberID="viewController">
-                    <view key="view" id="qPW-nd-xPZ">
-                        <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="tFj-MC-l7c" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="PageView" id="xmg-8x-2lV" sceneMemberID="viewController"/>
+                <customObject id="6T8-9l-F8M" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="640" y="1181"/>
+            <point key="canvasLocation" x="251" y="939"/>
         </scene>
     </scenes>
 </document>

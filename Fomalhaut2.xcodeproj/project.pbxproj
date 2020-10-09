@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE296BBA253063BA00674C99 /* ZipDocument.swift */; };
 		CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280925305AA000986C9A /* AppDelegate.swift */; };
 		CE30280C25305AA000986C9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280B25305AA000986C9A /* ViewController.swift */; };
 		CE30280E25305AA000986C9A /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280D25305AA000986C9A /* Document.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE296BBA253063BA00674C99 /* ZipDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipDocument.swift; sourceTree = "<group>"; };
 		CE30280625305AA000986C9A /* Fomalhaut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fomalhaut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE30280925305AA000986C9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE30280B25305AA000986C9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				CE30280925305AA000986C9A /* AppDelegate.swift */,
 				CE30280B25305AA000986C9A /* ViewController.swift */,
+				CE296BBA253063BA00674C99 /* ZipDocument.swift */,
 				CE30280D25305AA000986C9A /* Document.swift */,
 				CE30284C25305D3E00986C9A /* BookViewController.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
@@ -263,6 +266,7 @@
 				CE30284D25305D3E00986C9A /* BookViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
 				CE30280E25305AA000986C9A /* Document.swift in Sources */,
+				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

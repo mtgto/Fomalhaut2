@@ -1,10 +1,3 @@
-//
-//  BookViewController.swift
-//  Fomalhaut2
-//
-//  Created by User on 2020/10/09.
-//
-
 import Cocoa
 
 class BookViewController: NSSplitViewController {

@@ -16,7 +16,7 @@
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bb2-zh-jjZ">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSEveryone" id="PGo-Be-njy"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="PGo-Be-njy"/>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -35,7 +35,4 @@
             <point key="canvasLocation" x="2" y="-27"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="NSEveryone" width="32" height="32"/>
-    </resources>
 </document>

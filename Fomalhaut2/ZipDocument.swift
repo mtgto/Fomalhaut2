@@ -2,21 +2,21 @@ import Cocoa
 import ZIPFoundation
 
 class ZipDocument: NSDocument {
-  private let archive: Archive
-  private lazy var entries: [Entry] = self.archive.sorted { (lhs, rhs) -> Bool in
+  private var archive: Archive?
+  private lazy var entries: [Entry] = self.archive!.sorted { (lhs, rhs) -> Bool in
     lhs.path < rhs.path
+  }.filter { (entry) -> Bool in
+    let path = entry.path.lowercased()
+    return path.hasSuffix(".jpg") || path.hasSuffix(".png") || path.hasSuffix(".gif")
+      || path.hasSuffix(".bmp")
   }
 
-  init(contentsOf url: URL, ofType typeName: String) throws {
+  override func read(from url: URL, ofType typeName: String) throws {
     guard let archive = Archive(url: url, accessMode: .read, preferredEncoding: .shiftJIS) else {
-      throw NSError(domain: NSOSStatusErrorDomain, code: 1, userInfo: nil)
+      throw NSError(domain: "net.mtgto.Fomalhaut2", code: 0, userInfo: nil)
     }
     self.archive = archive
   }
-
-  //  override class var autosavesInPlace: Bool {
-  //    return true
-  //  }
 
   override func makeWindowControllers() {
     // Returns the Storyboard that contains your Document window.
@@ -30,29 +30,9 @@ class ZipDocument: NSDocument {
     self.addWindowController(windowController)
   }
 
-  /*
-    override var windowNibName: String? {
-        // Override returning the nib file name of the document
-        // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
-        return "ZipDocument"
-    }
-    */
-
   override func windowControllerDidLoadNib(_ aController: NSWindowController) {
     super.windowControllerDidLoadNib(aController)
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
-  }
-
-  override func data(ofType typeName: String) throws -> Data {
-    // Insert code here to write your document to data of the specified type, throwing an error in case of failure.
-    // Alternatively, you could remove this method and override fileWrapper(ofType:), write(to:ofType:), or write(to:ofType:for:originalContentsURL:) instead.
-    throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
-  }
-
-  override func read(from data: Data, ofType typeName: String) throws {
-    // Insert code here to read your document from the given data of the specified type, throwing an error in case of failure.
-    // Alternatively, you could remove this method and override read(from:ofType:) instead.  If you do, you should also override isEntireFileLoaded to return false if the contents are lazily loaded.
-    throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
   }
 }
 
@@ -65,7 +45,7 @@ extension ZipDocument: BookAccessible {
     let entry = self.entries[page]
     var rawData = Data()
     do {
-      _ = try self.archive.extract(entry) { (data) in
+      _ = try self.archive!.extract(entry) { (data) in
         rawData.append(data)
         if rawData.count >= entry.uncompressedSize {
           guard let image = NSImage(data: rawData) else {

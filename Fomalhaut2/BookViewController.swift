@@ -17,6 +17,9 @@ class BookViewController: NSSplitViewController {
         document.image(at: 0) { (result) in
           switch result {
           case .success(let image):
+            if let viewController = self.splitViewItems[0].viewController as? PageViewController {
+              viewController.imageView.image = image
+            }
             print("success")
             break
           case .failure(let error):

@@ -22,6 +22,7 @@
 		CE30284D25305D3E00986C9A /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30284C25305D3E00986C9A /* BookViewController.swift */; };
 		CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */; };
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
+		CE9EE6232533078E00B5AF5C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE6222533078E00B5AF5C /* Nuke */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 				CE296C312530A4E400674C99 /* RxCocoa in Frameworks */,
 				CE296BCD2530671700674C99 /* ZIPFoundation in Frameworks */,
 				CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */,
+				CE9EE6232533078E00B5AF5C /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +170,7 @@
 				CE296C302530A4E400674C99 /* RxCocoa */,
 				CE296C322530A4E400674C99 /* RxSwift */,
 				CE9EE5EA2532C53100B5AF5C /* XCGLogger */,
+				CE9EE6222533078E00B5AF5C /* Nuke */,
 			);
 			productName = Fomalhaut2;
 			productReference = CE30280625305AA000986C9A /* Fomalhaut2.app */;
@@ -244,6 +247,7 @@
 				CE296BCB2530671700674C99 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */,
+				CE9EE6212533078E00B5AF5C /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = CE30280725305AA000986C9A /* Products */;
 			projectDirPath = "";
@@ -649,6 +653,14 @@
 				minimumVersion = 7.0.1;
 			};
 		};
+		CE9EE6212533078E00B5AF5C /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 9.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -671,6 +683,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */;
 			productName = XCGLogger;
+		};
+		CE9EE6222533078E00B5AF5C /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE9EE6212533078E00B5AF5C /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

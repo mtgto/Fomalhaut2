@@ -1,4 +1,5 @@
 import Cocoa
+import Nuke
 import ZIPFoundation
 
 class ZipDocument: NSDocument {
@@ -10,6 +11,11 @@ class ZipDocument: NSDocument {
     return path.hasSuffix(".jpg") || path.hasSuffix(".png") || path.hasSuffix(".gif")
       || path.hasSuffix(".bmp")
   }
+  
+  private let imageCache: ImageCache = {
+    let imageCache = ImageCache()
+    return imageCache
+  }()
 
   override func read(from url: URL, ofType typeName: String) throws {
     guard let archive = Archive(url: url, accessMode: .read, preferredEncoding: .shiftJIS) else {
@@ -44,16 +50,19 @@ extension ZipDocument: BookAccessible {
 
   func image(at page: Int, completion: @escaping (_ image: Result<NSImage, Error>) -> Void) {
     let entry = self.entries[page]
+    let decoder = ImageDecoder()
     var rawData = Data()
     do {
-      _ = try self.archive!.extract(entry) { (data) in
+      // TODO: assert max bufferSize
+      _ = try self.archive!.extract(entry, bufferSize: UInt32(entry.uncompressedSize)) { (data) in
+        log.debug("size of data = \(data.count)")
         rawData.append(data)
         if rawData.count >= entry.uncompressedSize {
-          guard let image = NSImage(data: rawData) else {
+          guard let imageContainer = decoder.decode(rawData) else {
             completion(.failure(BookAccessibleError.brokenFile))
             return
           }
-          completion(.success(image))
+          completion(.success(imageContainer.image))
         }
       }
     } catch {

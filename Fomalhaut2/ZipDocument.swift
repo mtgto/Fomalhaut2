@@ -37,6 +37,7 @@ class ZipDocument: NSDocument {
 }
 
 extension ZipDocument: BookAccessible {
+
   func pageCount() -> Int {
     return self.entries.count
   }

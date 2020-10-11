@@ -1,10 +1,12 @@
 import Cocoa
+import RxCocoa
 import RxRelay
 import RxSwift
 
 class BookViewController: NSSplitViewController {
   private var pageCount: Int = 0
   private var currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+  private var image: PublishSubject<NSImage> = PublishSubject<NSImage>()
   private let disposeBag = DisposeBag()
 
   override func viewDidLoad() {
@@ -17,6 +19,14 @@ class BookViewController: NSSplitViewController {
     if let viewController = self.splitViewItems[1].viewController as? PageViewController {
       viewController.imageView.imageAlignment = .alignLeft
     }
+
+    if let viewController = self.splitViewItems[0].viewController as? PageViewController {
+      self.image
+        .asDriver(onErrorDriveWith: .empty())
+        .asObservable()
+        .bind(to: viewController.imageView.rx.image)
+        .disposed(by: self.disposeBag)
+    }
   }
 
   override var representedObject: Any? {
@@ -27,18 +37,18 @@ class BookViewController: NSSplitViewController {
 
         self.currentPageIndex.asObservable().subscribe(onNext: { (pageIndex) in
           log.info("page index = \(pageIndex)")
-          document.image(at: pageIndex) { (result) in
-            switch result {
-            case .success(let image):
-              if let viewController = self.splitViewItems[0].viewController as? PageViewController {
-                viewController.imageView.image = image
-                self.view.window?.contentAspectRatio = NSSize(
-                  width: image.size.width, height: image.size.height)
+          // TODO: cache already loaded images
+          pageLoadingOperationQueue.addOperation {
+            document.image(at: pageIndex) { (result) in
+              switch result {
+              case .success(let image):
+                self.image.onNext(image)
+                log.debug("success to load image at \(pageIndex)")
+                break
+              case .failure(let error):
+                log.info("fail to laod image at \(pageIndex): \(error)")
+                self.image.onError(error)
               }
-              print("success")
-              break
-            case .failure(let error):
-              print("\(error)")
             }
           }
         }).disposed(by: self.disposeBag)

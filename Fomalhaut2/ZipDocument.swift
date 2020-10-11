@@ -1,5 +1,4 @@
 import Cocoa
-import Nuke
 import ZIPFoundation
 
 class ZipDocument: NSDocument {
@@ -51,7 +50,6 @@ extension ZipDocument: BookAccessible {
       return
     }
     let entry = self.entries[page]
-    let decoder = ImageDecoder()
     var rawData = Data()
     do {
       // TODO: assert max bufferSize
@@ -59,12 +57,12 @@ extension ZipDocument: BookAccessible {
         log.debug("size of data = \(data.count)")
         rawData.append(data)
         if rawData.count >= entry.uncompressedSize {
-          guard let imageContainer = decoder.decode(rawData) else {
+          guard let image = NSImage(data: rawData) else {
             completion(.failure(BookAccessibleError.brokenFile))
             return
           }
-          imageCache.setObject(imageContainer.image, forKey: imageCacheKey, cost: rawData.count)
-          completion(.success(imageContainer.image))
+          imageCache.setObject(image, forKey: imageCacheKey, cost: rawData.count)
+          completion(.success(image))
         }
       }
     } catch {

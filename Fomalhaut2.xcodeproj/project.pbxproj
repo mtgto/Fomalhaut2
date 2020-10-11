@@ -23,6 +23,7 @@
 		CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */; };
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE6232533078E00B5AF5C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE6222533078E00B5AF5C /* Nuke */; };
+		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		CE30282B25305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE30284C25305D3E00986C9A /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWindowController.swift; sourceTree = "<group>"; };
+		CE9EE62725330EE100B5AF5C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				CE30284C25305D3E00986C9A /* BookViewController.swift */,
 				CE296BE325306C8900674C99 /* PageViewController.swift */,
 				CE296BBA253063BA00674C99 /* ZipDocument.swift */,
+				CE9EE62725330EE100B5AF5C /* ImageCache.swift */,
 				CE296BEB2530722A00674C99 /* BookAccessible.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
@@ -297,6 +300,7 @@
 				CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */,
 				CE30284D25305D3E00986C9A /* BookViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
+				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

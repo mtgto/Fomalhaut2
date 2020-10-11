@@ -37,14 +37,12 @@ class BookViewController: NSSplitViewController {
 
         self.currentPageIndex.asObservable().subscribe(onNext: { (pageIndex) in
           log.info("page index = \(pageIndex)")
-          // TODO: cache already loaded images
           pageLoadingOperationQueue.addOperation {
             document.image(at: pageIndex) { (result) in
               switch result {
               case .success(let image):
                 self.image.onNext(image)
                 log.debug("success to load image at \(pageIndex)")
-                break
               case .failure(let error):
                 log.info("fail to laod image at \(pageIndex): \(error)")
                 self.image.onError(error)
@@ -58,6 +56,21 @@ class BookViewController: NSSplitViewController {
 
   override func mouseUp(with event: NSEvent) {
     log.info("mouseUp")
-    self.currentPageIndex.accept(self.currentPageIndex.value + 1)
+    if self.currentPageIndex.value + 1 < self.pageCount {
+      self.currentPageIndex.accept(self.currentPageIndex.value + 1)
+    }
+  }
+
+  // increment page (two page increment)
+  func incrementPage() {
+    if self.currentPageIndex.value + 1 < self.pageCount {
+      self.currentPageIndex.accept(self.currentPageIndex.value + 1)
+    }
+  }
+
+  func decrementPage() {
+    if self.currentPageIndex.value > 0 {
+      self.currentPageIndex.accept(self.currentPageIndex.value - 1)
+    }
   }
 }

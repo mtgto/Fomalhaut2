@@ -11,11 +11,6 @@ class ZipDocument: NSDocument {
     return path.hasSuffix(".jpg") || path.hasSuffix(".png") || path.hasSuffix(".gif")
       || path.hasSuffix(".bmp")
   }
-  
-  private let imageCache: ImageCache = {
-    let imageCache = ImageCache()
-    return imageCache
-  }()
 
   override func read(from url: URL, ofType typeName: String) throws {
     guard let archive = Archive(url: url, accessMode: .read, preferredEncoding: .shiftJIS) else {
@@ -49,6 +44,12 @@ extension ZipDocument: BookAccessible {
   }
 
   func image(at page: Int, completion: @escaping (_ image: Result<NSImage, Error>) -> Void) {
+    let imageCacheKey = ImageCacheKey(archiveURL: self.archive!.url, pageIndex: page)
+    if let image = imageCache.object(forKey: imageCacheKey) {
+      log.debug("success to load from cache")
+      completion(.success(image))
+      return
+    }
     let entry = self.entries[page]
     let decoder = ImageDecoder()
     var rawData = Data()
@@ -62,6 +63,7 @@ extension ZipDocument: BookAccessible {
             completion(.failure(BookAccessibleError.brokenFile))
             return
           }
+          imageCache.setObject(imageContainer.image, forKey: imageCacheKey, cost: rawData.count)
           completion(.success(imageContainer.image))
         }
       }

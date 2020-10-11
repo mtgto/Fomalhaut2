@@ -12,12 +12,16 @@
 		CE296BDF25306C6000674C99 /* PageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE296BDE25306C6000674C99 /* PageView.storyboard */; };
 		CE296BE425306C8900674C99 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE296BE325306C8900674C99 /* PageViewController.swift */; };
 		CE296BEC2530722A00674C99 /* BookAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE296BEB2530722A00674C99 /* BookAccessible.swift */; };
+		CE296C312530A4E400674C99 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CE296C302530A4E400674C99 /* RxCocoa */; };
+		CE296C332530A4E400674C99 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE296C322530A4E400674C99 /* RxSwift */; };
 		CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280925305AA000986C9A /* AppDelegate.swift */; };
 		CE30281025305AA200986C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE30280F25305AA200986C9A /* Assets.xcassets */; };
 		CE30281325305AA200986C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30281125305AA200986C9A /* Main.storyboard */; };
 		CE30281F25305AA200986C9A /* Fomalhaut2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30281E25305AA200986C9A /* Fomalhaut2Tests.swift */; };
 		CE30282A25305AA200986C9A /* Fomalhaut2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */; };
 		CE30284D25305D3E00986C9A /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30284C25305D3E00986C9A /* BookViewController.swift */; };
+		CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */; };
+		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,7 @@
 		CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fomalhaut2UITests.swift; sourceTree = "<group>"; };
 		CE30282B25305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE30284C25305D3E00986C9A /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
+		CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +67,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE296C332530A4E400674C99 /* RxSwift in Frameworks */,
+				CE296C312530A4E400674C99 /* RxCocoa in Frameworks */,
 				CE296BCD2530671700674C99 /* ZIPFoundation in Frameworks */,
+				CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				CE30280925305AA000986C9A /* AppDelegate.swift */,
+				CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */,
 				CE30284C25305D3E00986C9A /* BookViewController.swift */,
 				CE296BE325306C8900674C99 /* PageViewController.swift */,
 				CE296BBA253063BA00674C99 /* ZipDocument.swift */,
@@ -156,6 +165,9 @@
 			name = Fomalhaut2;
 			packageProductDependencies = (
 				CE296BCC2530671700674C99 /* ZIPFoundation */,
+				CE296C302530A4E400674C99 /* RxCocoa */,
+				CE296C322530A4E400674C99 /* RxSwift */,
+				CE9EE5EA2532C53100B5AF5C /* XCGLogger */,
 			);
 			productName = Fomalhaut2;
 			productReference = CE30280625305AA000986C9A /* Fomalhaut2.app */;
@@ -230,6 +242,8 @@
 			mainGroup = CE3027FD25305AA000986C9A;
 			packageReferences = (
 				CE296BCB2530671700674C99 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */,
 			);
 			productRefGroup = CE30280725305AA000986C9A /* Products */;
 			projectDirPath = "";
@@ -276,6 +290,7 @@
 			files = (
 				CE296BEC2530722A00674C99 /* BookAccessible.swift in Sources */,
 				CE296BE425306C8900674C99 /* PageViewController.swift in Sources */,
+				CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */,
 				CE30284D25305D3E00986C9A /* BookViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
@@ -618,6 +633,22 @@
 				minimumVersion = 0.9.11;
 			};
 		};
+		CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
+		CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 7.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -625,6 +656,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE296BCB2530671700674C99 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
+		};
+		CE296C302530A4E400674C99 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		CE296C322530A4E400674C99 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		CE9EE5EA2532C53100B5AF5C /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

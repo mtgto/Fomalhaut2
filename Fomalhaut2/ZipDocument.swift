@@ -8,7 +8,7 @@ class ZipDocument: NSDocument {
     lhs.path < rhs.path
   }.filter { (entry) -> Bool in
     let path = entry.path.lowercased()
-    return path.hasSuffix(".jpg") || path.hasSuffix(".png") || path.hasSuffix(".gif")
+    return path.hasSuffix(".jpg") || path.hasSuffix(".jpeg") || path.hasSuffix(".png") || path.hasSuffix(".gif")
       || path.hasSuffix(".bmp")
   }
 

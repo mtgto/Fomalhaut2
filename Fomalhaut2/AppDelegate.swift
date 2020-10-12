@@ -5,7 +5,7 @@ let log = XCGLogger.default
 
 let pageLoadingOperationQueue: OperationQueue = {
   let queue = OperationQueue()
-  queue.maxConcurrentOperationCount = 2
+  queue.maxConcurrentOperationCount = 1
   return queue
 }()
 

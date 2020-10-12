@@ -7,7 +7,8 @@ class ZipDocument: NSDocument {
     lhs.path < rhs.path
   }.filter { (entry) -> Bool in
     let path = entry.path.lowercased()
-    return path.hasSuffix(".jpg") || path.hasSuffix(".jpeg") || path.hasSuffix(".png") || path.hasSuffix(".gif")
+    return path.hasSuffix(".jpg") || path.hasSuffix(".jpeg") || path.hasSuffix(".png")
+      || path.hasSuffix(".gif")
       || path.hasSuffix(".bmp")
   }
 
@@ -42,19 +43,22 @@ extension ZipDocument: BookAccessible {
     return self.entries.count
   }
 
+  // NOTE: This method is not thread safe!
+  // cf. https://github.com/weichsel/ZIPFoundation/issues/29
   func image(at page: Int, completion: @escaping (_ image: Result<NSImage, Error>) -> Void) {
     let imageCacheKey = ImageCacheKey(archiveURL: self.archive!.url, pageIndex: page)
     if let image = imageCache.object(forKey: imageCacheKey) {
-      log.debug("success to load from cache")
+      log.debug("success to load from cache at \(page)")
       completion(.success(image))
       return
     }
     let entry = self.entries[page]
     var rawData = Data()
     do {
+      // Set bufferSize as uncomressed size to reduce the number of calls closure.
       // TODO: assert max bufferSize
       _ = try self.archive!.extract(entry, bufferSize: UInt32(entry.uncompressedSize)) { (data) in
-        log.debug("size of data = \(data.count)")
+        // log.debug("size of data = \(data.count)")
         rawData.append(data)
         if rawData.count >= entry.uncompressedSize {
           guard let image = NSImage(data: rawData) else {

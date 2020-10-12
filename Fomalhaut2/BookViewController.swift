@@ -23,8 +23,7 @@ class BookViewController: NSSplitViewController {
     if let viewController = self.splitViewItems[0].viewController as? PageViewController {
       self.image
         .asDriver(onErrorDriveWith: .empty())
-        .asObservable()
-        .bind(to: viewController.imageView.rx.image)
+        .drive(viewController.imageView.rx.image)
         .disposed(by: self.disposeBag)
     }
   }

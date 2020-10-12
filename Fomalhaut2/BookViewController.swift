@@ -7,7 +7,7 @@ class BookViewController: NSSplitViewController {
   private var pageCount: Int = 0
   private var currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   private var leftImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
-  private var rightImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
+  private var rightImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()
   private let disposeBag = DisposeBag()
 
   override func viewDidLoad() {
@@ -21,19 +21,15 @@ class BookViewController: NSSplitViewController {
       viewController.imageView.imageAlignment = .alignLeft
     }
 
-    if let viewController = self.splitViewItems[0].viewController as? PageViewController {
-      self.leftImage
-        .asDriver(onErrorDriveWith: .empty())
-        .drive(viewController.imageView.rx.image)
-        .disposed(by: self.disposeBag)
-    }
-
-    if let viewController = self.splitViewItems[1].viewController as? PageViewController {
-      self.rightImage
-        .asDriver(onErrorDriveWith: .empty())
-        .drive(viewController.imageView.rx.image)
-        .disposed(by: self.disposeBag)
-    }
+    Observable.zip(self.leftImage, self.rightImage)
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { (images) in
+        let leftPageViewController = self.splitViewItems[0].viewController as! PageViewController
+        leftPageViewController.imageView.image = images.0
+        let rightPageViewController = self.splitViewItems[1].viewController as! PageViewController
+        rightPageViewController.imageView.image = images.1
+      })
+      .disposed(by: self.disposeBag)
   }
 
   override var representedObject: Any? {
@@ -70,6 +66,8 @@ class BookViewController: NSSplitViewController {
                 }
               }
             }
+          } else {
+            self.rightImage.onNext(nil)
           }
           // preload before increment page
           let preloadIndex = pageIndex > 0 && pageIndex + 1 < self.pageCount ? 2 : 1

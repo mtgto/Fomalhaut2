@@ -23,11 +23,18 @@ class BookViewController: NSSplitViewController {
 
     Observable.zip(self.leftImage, self.rightImage)
       .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { (images) in
+      .subscribe(onNext: { images in
+        let leftImage: NSImage = images.0
+        let rightImage: NSImage? = images.1
         let leftPageViewController = self.splitViewItems[0].viewController as! PageViewController
-        leftPageViewController.imageView.image = images.0
+        leftPageViewController.imageView.image = leftImage
         let rightPageViewController = self.splitViewItems[1].viewController as! PageViewController
-        rightPageViewController.imageView.image = images.1
+        rightPageViewController.imageView.image = rightImage
+        let contentWidth =
+          max(leftImage.size.width, (rightImage?.size.width ?? 0)) * (rightImage != nil ? 2 : 1)
+        let contentHeight = max(leftImage.size.height, (rightImage?.size.height ?? 0))
+        // log.debug("Content size = \(contentWidth) x \(contentHeight)")
+        self.view.window?.contentAspectRatio = NSSize(width: contentWidth, height: contentHeight)
       })
       .disposed(by: self.disposeBag)
   }
@@ -40,6 +47,7 @@ class BookViewController: NSSplitViewController {
 
         self.currentPageIndex.asObservable().subscribe(onNext: { (pageIndex) in
           log.info("start to load at \(pageIndex)")
+          // TODO: Try to obtain image from cache not to use OperationQueue
           pageLoadingOperationQueue.addOperation {
             document.image(at: pageIndex) { (result) in
               switch result {

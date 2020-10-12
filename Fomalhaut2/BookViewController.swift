@@ -48,30 +48,26 @@ class BookViewController: NSSplitViewController {
         self.currentPageIndex.asObservable().subscribe(onNext: { (pageIndex) in
           log.info("start to load at \(pageIndex)")
           // TODO: Try to obtain image from cache not to use OperationQueue
-          pageLoadingOperationQueue.addOperation {
-            document.image(at: pageIndex) { (result) in
-              switch result {
-              case .success(let image):
-                self.leftImage.onNext(image)
-                log.debug("success to load image at \(pageIndex)")
-              case .failure(let error):
-                log.info("fail to laod image at \(pageIndex): \(error)")
-                self.leftImage.onError(error)
-              }
+          document.image(at: pageIndex) { (result) in
+            switch result {
+            case .success(let image):
+              self.leftImage.onNext(image)
+              log.debug("success to load image at \(pageIndex)")
+            case .failure(let error):
+              log.info("fail to laod image at \(pageIndex): \(error)")
+              self.leftImage.onError(error)
             }
           }
           if pageIndex > 0 && pageIndex + 1 < self.pageCount {
             log.info("start to load at \(pageIndex + 1)")
-            pageLoadingOperationQueue.addOperation {
-              document.image(at: pageIndex + 1) { (result) in
-                switch result {
-                case .success(let image):
-                  self.rightImage.onNext(image)
-                  log.debug("success to load image at \(pageIndex + 1)")
-                case .failure(let error):
-                  log.info("fail to laod image at \(pageIndex + 1): \(error)")
-                  self.rightImage.onError(error)
-                }
+            document.image(at: pageIndex + 1) { (result) in
+              switch result {
+              case .success(let image):
+                self.rightImage.onNext(image)
+                log.debug("success to load image at \(pageIndex + 1)")
+              case .failure(let error):
+                log.info("fail to laod image at \(pageIndex + 1): \(error)")
+                self.rightImage.onError(error)
               }
             }
           } else {
@@ -83,10 +79,8 @@ class BookViewController: NSSplitViewController {
           (0..<preloadCount).forEach { (index) in
             if pageIndex + preloadIndex + index < self.pageCount {
               log.debug("start to preload at \(pageIndex + preloadIndex + index)")
-              pageLoadingOperationQueue.addOperation {
-                document.image(at: pageIndex + preloadIndex + index) { (_) in
-                  // do nothing
-                }
+              document.image(at: pageIndex + preloadIndex + index) { (_) in
+                // do nothing
               }
             }
           }

@@ -11,6 +11,11 @@ class ZipDocument: NSDocument {
       || path.hasSuffix(".gif")
       || path.hasSuffix(".bmp")
   }
+  private let operationQueue: OperationQueue = {
+    let queue = OperationQueue()
+    queue.maxConcurrentOperationCount = 1
+    return queue
+  }()
 
   override func read(from url: URL, ofType typeName: String) throws {
     guard let archive = Archive(url: url, accessMode: .read, preferredEncoding: .shiftJIS) else {
@@ -52,25 +57,27 @@ extension ZipDocument: BookAccessible {
       completion(.success(image))
       return
     }
-    let entry = self.entries[page]
-    var rawData = Data()
-    do {
-      // Set bufferSize as uncomressed size to reduce the number of calls closure.
-      // TODO: assert max bufferSize
-      _ = try self.archive!.extract(entry, bufferSize: UInt32(entry.uncompressedSize)) { (data) in
-        // log.debug("size of data = \(data.count)")
-        rawData.append(data)
-        if rawData.count >= entry.uncompressedSize {
-          guard let image = NSImage(data: rawData) else {
-            completion(.failure(BookAccessibleError.brokenFile))
-            return
+    self.operationQueue.addOperation {
+      let entry = self.entries[page]
+      var rawData = Data()
+      do {
+        // Set bufferSize as uncomressed size to reduce the number of calls closure.
+        // TODO: assert max bufferSize
+        _ = try self.archive!.extract(entry, bufferSize: UInt32(entry.uncompressedSize)) { (data) in
+          // log.debug("size of data = \(data.count)")
+          rawData.append(data)
+          if rawData.count >= entry.uncompressedSize {
+            guard let image = NSImage(data: rawData) else {
+              completion(.failure(BookAccessibleError.brokenFile))
+              return
+            }
+            imageCache.setObject(image, forKey: imageCacheKey, cost: rawData.count)
+            completion(.success(image))
           }
-          imageCache.setObject(image, forKey: imageCacheKey, cost: rawData.count)
-          completion(.success(image))
         }
+      } catch {
+        completion(.failure(error))
       }
-    } catch {
-      completion(.failure(error))
     }
   }
 }

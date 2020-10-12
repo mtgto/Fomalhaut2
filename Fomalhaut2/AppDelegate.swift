@@ -3,12 +3,6 @@ import XCGLogger
 
 let log = XCGLogger.default
 
-let pageLoadingOperationQueue: OperationQueue = {
-  let queue = OperationQueue()
-  queue.maxConcurrentOperationCount = 1
-  return queue
-}()
-
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 

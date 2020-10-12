@@ -11,11 +11,11 @@ class BookWindowController: NSWindowController {
   override func keyDown(with event: NSEvent) {
     if event.keyCode == 49 {  // space
       if event.modifierFlags.contains(.shift) {
-        if let bookViewController = self.contentViewController as? BookViewController {
+        if let bookViewController = self.contentViewController as? SpreadPageViewController {
           bookViewController.decrementPage()
         }
       } else {
-        if let bookViewController = self.contentViewController as? BookViewController {
+        if let bookViewController = self.contentViewController as? SpreadPageViewController {
           bookViewController.incrementPage()
         }
       }

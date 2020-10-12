@@ -19,10 +19,10 @@
 		CE30281325305AA200986C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30281125305AA200986C9A /* Main.storyboard */; };
 		CE30281F25305AA200986C9A /* Fomalhaut2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30281E25305AA200986C9A /* Fomalhaut2Tests.swift */; };
 		CE30282A25305AA200986C9A /* Fomalhaut2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */; };
-		CE30284D25305D3E00986C9A /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30284C25305D3E00986C9A /* BookViewController.swift */; };
 		CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */; };
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
+		CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,9 +59,9 @@
 		CE30282525305AA200986C9A /* Fomalhaut2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Fomalhaut2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fomalhaut2UITests.swift; sourceTree = "<group>"; };
 		CE30282B25305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE30284C25305D3E00986C9A /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWindowController.swift; sourceTree = "<group>"; };
 		CE9EE62725330EE100B5AF5C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,7 @@
 			children = (
 				CE30280925305AA000986C9A /* AppDelegate.swift */,
 				CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */,
-				CE30284C25305D3E00986C9A /* BookViewController.swift */,
+				CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */,
 				CE296BE325306C8900674C99 /* PageViewController.swift */,
 				CE296BBA253063BA00674C99 /* ZipDocument.swift */,
 				CE9EE62725330EE100B5AF5C /* ImageCache.swift */,
@@ -294,7 +294,7 @@
 				CE296BEC2530722A00674C99 /* BookAccessible.swift in Sources */,
 				CE296BE425306C8900674C99 /* PageViewController.swift in Sources */,
 				CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */,
-				CE30284D25305D3E00986C9A /* BookViewController.swift in Sources */,
+				CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,

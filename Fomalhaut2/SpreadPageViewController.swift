@@ -1,35 +1,27 @@
 import Cocoa
-import RxCocoa
 import RxRelay
 import RxSwift
 
-class BookViewController: NSSplitViewController {
+class SpreadPageViewController: NSViewController {
   private var pageCount: Int = 0
   private var currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   private var leftImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
   private var rightImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()
   private let disposeBag = DisposeBag()
 
+  @IBOutlet weak var leftImageView: NSImageView!
+  @IBOutlet weak var rightImageView: NSImageView!
+
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    // Do any additional setup after loading the view.
-    if let viewController = self.splitViewItems[0].viewController as? PageViewController {
-      viewController.imageView.imageAlignment = .alignRight
-    }
-    if let viewController = self.splitViewItems[1].viewController as? PageViewController {
-      viewController.imageView.imageAlignment = .alignLeft
-    }
-
+    // Do view setup here.
     Observable.zip(self.leftImage, self.rightImage)
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { images in
         let leftImage: NSImage = images.0
         let rightImage: NSImage? = images.1
-        let leftPageViewController = self.splitViewItems[0].viewController as! PageViewController
-        leftPageViewController.imageView.image = leftImage
-        let rightPageViewController = self.splitViewItems[1].viewController as! PageViewController
-        rightPageViewController.imageView.image = rightImage
+        self.leftImageView.image = leftImage
+        self.rightImageView.image = rightImage
         let contentWidth =
           max(leftImage.size.width, (rightImage?.size.width ?? 0)) * (rightImage != nil ? 2 : 1)
         let contentHeight = max(leftImage.size.height, (rightImage?.size.height ?? 0))
@@ -86,11 +78,11 @@ class BookViewController: NSSplitViewController {
           }
 
           // hide right page if pageIndex == 0
-          if pageIndex == 0 {
-            self.splitViewItems[1].animator().isCollapsed = true
-          } else {
-            self.splitViewItems[1].animator().isCollapsed = false
-          }
+          //          if pageIndex == 0 {
+          //            self.splitViewItems[1].animator().isCollapsed = true
+          //          } else {
+          //            self.splitViewItems[1].animator().isCollapsed = false
+          //          }
         }).disposed(by: self.disposeBag)
       }
     }
@@ -115,11 +107,4 @@ class BookViewController: NSSplitViewController {
       self.currentPageIndex.accept(self.currentPageIndex.value - decremental)
     }
   }
-}
-
-extension BookViewController {
-  //  override func splitView(_ splitView: NSSplitView, shouldAdjustSizeOfSubview view: NSView) -> Bool {
-  //    log.info("XXXXX shouldAdjustSizeOfSubview")
-  //    return view != self.splitViewItems[0].viewController
-  //  }
 }

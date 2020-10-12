@@ -695,53 +695,65 @@
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="iRN-Vq-4xS" kind="relationship" relationship="window.shadowedContentViewController" id="hds-2s-NFq"/>
+                        <segue destination="tuV-Jq-4ua" kind="relationship" relationship="window.shadowedContentViewController" id="pI5-r0-bSI"/>
                     </connections>
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--Book View Controller-->
-        <scene sceneID="Vnz-sL-BO0">
+        <!--Spread Page View Controller-->
+        <scene sceneID="r1N-n7-y7r">
             <objects>
-                <splitViewController id="iRN-Vq-4xS" customClass="BookViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
-                    <splitViewItems>
-                        <splitViewItem id="oh0-ks-P4O"/>
-                        <splitViewItem id="uCv-yT-Nna"/>
-                    </splitViewItems>
-                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="Ak2-S8-2ut">
-                        <rect key="frame" x="-5" y="0.0" width="488" height="300"/>
+                <viewController id="tuV-Jq-4ua" customClass="SpreadPageViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="ruz-a8-RCe">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <outlet property="delegate" destination="iRN-Vq-4xS" id="dF2-jz-Vum"/>
-                        </connections>
-                    </splitView>
+                        <subviews>
+                            <stackView distribution="fillProportionally" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KRM-6U-jFb">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y3B-8C-FXq" userLabel="Left Image View">
+                                        <rect key="frame" x="0.0" y="0.0" width="225" height="300"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="QVM-83-0te"/>
+                                    </imageView>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="35s-eR-h7V" userLabel="Right Image View">
+                                        <rect key="frame" x="225" y="0.0" width="225" height="300"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="ntd-M5-DbD"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Y3B-8C-FXq" firstAttribute="width" secondItem="35s-eR-h7V" secondAttribute="width" id="1Zp-Tv-NU1"/>
+                                    <constraint firstItem="Y3B-8C-FXq" firstAttribute="top" secondItem="KRM-6U-jFb" secondAttribute="top" id="JqQ-gt-v4t"/>
+                                    <constraint firstAttribute="bottom" secondItem="35s-eR-h7V" secondAttribute="bottom" id="LbA-rS-CD9"/>
+                                    <constraint firstItem="35s-eR-h7V" firstAttribute="top" secondItem="KRM-6U-jFb" secondAttribute="top" id="dnz-s5-r7W"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y3B-8C-FXq" secondAttribute="bottom" id="zn1-gH-u6E"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="KRM-6U-jFb" firstAttribute="top" secondItem="ruz-a8-RCe" secondAttribute="top" id="l5s-18-fLC"/>
+                            <constraint firstAttribute="bottom" secondItem="KRM-6U-jFb" secondAttribute="bottom" id="sgJ-uW-16q"/>
+                            <constraint firstItem="KRM-6U-jFb" firstAttribute="leading" secondItem="ruz-a8-RCe" secondAttribute="leading" id="ucn-Xj-z8Z"/>
+                            <constraint firstAttribute="trailing" secondItem="KRM-6U-jFb" secondAttribute="trailing" id="y1r-WG-wt3"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <outlet property="splitView" destination="Ak2-S8-2ut" id="X4V-jk-cAQ"/>
-                        <segue destination="SbD-BH-qcw" kind="relationship" relationship="splitItems" id="m4i-DK-vnr"/>
-                        <segue destination="xmg-8x-2lV" kind="relationship" relationship="splitItems" id="SwR-to-r8V"/>
+                        <outlet property="leftImageView" destination="Y3B-8C-FXq" id="Z4H-Nd-dK5"/>
+                        <outlet property="rightImageView" destination="35s-eR-h7V" id="W1F-hn-Nn2"/>
                     </connections>
-                </splitViewController>
-                <customObject id="FBO-wc-xma" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <customObject id="4UF-Xd-hXM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="71" y="595"/>
-        </scene>
-        <!--PageView-->
-        <scene sceneID="PLb-9U-fZa">
-            <objects>
-                <controllerPlaceholder storyboardName="PageView" id="SbD-BH-qcw" sceneMemberID="viewController"/>
-                <customObject id="ufg-ei-yYD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="74" y="939"/>
-        </scene>
-        <!--PageView-->
-        <scene sceneID="b05-hA-tXI">
-            <objects>
-                <controllerPlaceholder storyboardName="PageView" id="xmg-8x-2lV" sceneMemberID="viewController"/>
-                <customObject id="6T8-9l-F8M" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="251" y="939"/>
+            <point key="canvasLocation" x="60" y="598"/>
         </scene>
     </scenes>
 </document>

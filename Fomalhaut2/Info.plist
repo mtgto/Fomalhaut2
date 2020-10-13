@@ -10,6 +10,7 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>zip</string>
+				<string>cbz</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Zip</string>
@@ -18,7 +19,9 @@
 			<key>LSHandlerRank</key>
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
-			<array/>
+			<array>
+				<string>com.pkware.zip-archive</string>
+			</array>
 			<key>NSDocumentClass</key>
 			<string>$(PRODUCT_MODULE_NAME).ZipDocument</string>
 		</dict>

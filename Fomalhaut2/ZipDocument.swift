@@ -75,6 +75,7 @@ extension ZipDocument: BookAccessible {
           }
         }
       } catch {
+        log.info("Error while extracting at \(page): \(error)")
         completion(.failure(error))
       }
     }

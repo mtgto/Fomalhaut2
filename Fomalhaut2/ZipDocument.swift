@@ -4,12 +4,11 @@ import ZIPFoundation
 class ZipDocument: NSDocument {
   private var archive: Archive?
   private lazy var entries: [Entry] = self.archive!.sorted { (lhs, rhs) -> Bool in
-    lhs.path < rhs.path
+    lhs.path.localizedStandardCompare(rhs.path) == .orderedAscending
   }.filter { (entry) -> Bool in
     let path = entry.path.lowercased()
     return path.hasSuffix(".jpg") || path.hasSuffix(".jpeg") || path.hasSuffix(".png")
-      || path.hasSuffix(".gif")
-      || path.hasSuffix(".bmp")
+      || path.hasSuffix(".gif") || path.hasSuffix(".bmp")
   }
   private let operationQueue: OperationQueue = {
     let queue = OperationQueue()

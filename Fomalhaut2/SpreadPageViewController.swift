@@ -28,7 +28,12 @@ class SpreadPageViewController: NSViewController {
           max(firstImageWidth, (secondImageWidth ?? 0)) * (secondImage != nil ? 2 : 1)
         let contentHeight = max(firstImageHeight, (secondImageHeight ?? 0))
         self.leftImageView.image = firstImage
-        self.rightImageView.image = secondImage
+        if secondImage != nil {
+          self.rightImageView.image = secondImage
+          self.rightImageView.isHidden = false
+        } else {
+          self.rightImageView.isHidden = true
+        }
         log.debug("Content size = \(contentWidth) x \(contentHeight)")
         guard let window = self.view.window else {
           log.error("window is nil")
@@ -36,7 +41,10 @@ class SpreadPageViewController: NSViewController {
         }
         window.contentAspectRatio = NSSize(width: contentWidth, height: contentHeight)
         // Set window size as screen size
-        let rect = window.constrainFrameRect(NSRect(x: window.frame.origin.x, y: window.frame.origin.y, width: CGFloat(contentWidth), height: CGFloat(contentHeight)), to: NSScreen.main)
+        let rect = window.constrainFrameRect(
+          NSRect(
+            x: window.frame.origin.x, y: window.frame.origin.y, width: CGFloat(contentWidth),
+            height: CGFloat(contentHeight)), to: NSScreen.main)
         window.setContentSize(NSSize(width: rect.size.width, height: rect.size.height))
       })
       .disposed(by: self.disposeBag)
@@ -111,7 +119,7 @@ class SpreadPageViewController: NSViewController {
       self.currentPageIndex.accept(self.currentPageIndex.value + incremental)
     }
   }
-  
+
   func incrementSinglePage() {
     if self.currentPageIndex.value + 1 < self.pageCount {
       self.currentPageIndex.accept(self.currentPageIndex.value + 1)
@@ -125,7 +133,7 @@ class SpreadPageViewController: NSViewController {
       self.currentPageIndex.accept(self.currentPageIndex.value - decremental)
     }
   }
-  
+
   func decrementSinglePage() {
     if self.currentPageIndex.value - 1 >= 0 {
       self.currentPageIndex.accept(self.currentPageIndex.value - 1)

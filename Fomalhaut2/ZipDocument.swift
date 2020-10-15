@@ -27,7 +27,7 @@ class ZipDocument: NSDocument {
 
   override func makeWindowControllers() {
     // Returns the Storyboard that contains your Document window.
-    let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
+    let storyboard = NSStoryboard(name: NSStoryboard.Name("Book"), bundle: nil)
     let windowController =
       storyboard.instantiateController(
         withIdentifier: NSStoryboard.SceneIdentifier("Document Window Controller"))
@@ -81,5 +81,15 @@ extension ZipDocument: BookAccessible {
         completion(.failure(error))
       }
     }
+  }
+  
+  override func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
+    log.debug("validateUserInterfaceItem \(item)")
+    return true
+  }
+  
+  override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    log.debug("validateMenuItem: \(menuItem.title)")
+    return true
   }
 }

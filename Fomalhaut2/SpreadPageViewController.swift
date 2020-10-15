@@ -115,34 +115,42 @@ class SpreadPageViewController: NSViewController {
 
   override func mouseUp(with event: NSEvent) {
     log.info("mouseUp")
-    self.incrementPage()
+    self.forwardPage()
   }
 
   // increment page (two page increment)
-  func incrementPage() {
+  func forwardPage() {
     let incremental = self.currentPageIndex.value == 0 ? 1 : 2
     if self.currentPageIndex.value + incremental < self.pageCount {
       self.currentPageIndex.accept(self.currentPageIndex.value + incremental)
     }
   }
 
-  func incrementSinglePage() {
-    if self.currentPageIndex.value + 1 < self.pageCount {
+  func forwardSinglePage() {
+    if self.canForwardPage() {
       self.currentPageIndex.accept(self.currentPageIndex.value + 1)
     }
   }
 
   // decrement page (two page decrement)
-  func decrementPage() {
+  func backwardPage() {
     let decremental = self.currentPageIndex.value == 1 ? 1 : 2
     if self.currentPageIndex.value - decremental >= 0 {
       self.currentPageIndex.accept(self.currentPageIndex.value - decremental)
     }
   }
 
-  func decrementSinglePage() {
-    if self.currentPageIndex.value - 1 >= 0 {
+  func backwardSinglePage() {
+    if self.canBackwardPage() {
       self.currentPageIndex.accept(self.currentPageIndex.value - 1)
     }
+  }
+  
+  func canForwardPage() -> Bool {
+    return self.currentPageIndex.value + 1 < self.pageCount
+  }
+  
+  func canBackwardPage() -> Bool {
+    return self.currentPageIndex.value - 1 >= 0
   }
 }

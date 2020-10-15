@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="I31-ld-zmx">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Spread Page View Controller-->
+        <scene sceneID="A7f-2p-0Ye">
+            <objects>
+                <customObject id="CoH-jk-Z7n" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController id="T99-gd-Ov7" customClass="SpreadPageViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Lp6-be-l1E">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fillProportionally" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UYl-6I-vbB">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7FC-xx-Ash" userLabel="Left Image View">
+                                        <rect key="frame" x="0.0" y="0.0" width="225" height="300"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="ywb-Xi-d9o"/>
+                                    </imageView>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2i5-YN-Rub" userLabel="Right Image View">
+                                        <rect key="frame" x="225" y="0.0" width="225" height="300"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="c4K-HE-zpo"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="7FC-xx-Ash" firstAttribute="width" secondItem="2i5-YN-Rub" secondAttribute="width" id="0fW-i2-QCp"/>
+                                    <constraint firstItem="7FC-xx-Ash" firstAttribute="top" secondItem="UYl-6I-vbB" secondAttribute="top" id="6jS-aq-h7t"/>
+                                    <constraint firstAttribute="bottom" secondItem="2i5-YN-Rub" secondAttribute="bottom" id="G66-zN-hww"/>
+                                    <constraint firstAttribute="bottom" secondItem="7FC-xx-Ash" secondAttribute="bottom" id="J04-W2-lJH"/>
+                                    <constraint firstItem="2i5-YN-Rub" firstAttribute="top" secondItem="UYl-6I-vbB" secondAttribute="top" id="t5s-iu-omy"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="UYl-6I-vbB" secondAttribute="bottom" id="2X0-jq-0B0"/>
+                            <constraint firstItem="UYl-6I-vbB" firstAttribute="top" secondItem="Lp6-be-l1E" secondAttribute="top" id="gh4-Sh-KEB"/>
+                            <constraint firstItem="UYl-6I-vbB" firstAttribute="leading" secondItem="Lp6-be-l1E" secondAttribute="leading" id="meH-r4-WCj"/>
+                            <constraint firstAttribute="trailing" secondItem="UYl-6I-vbB" secondAttribute="trailing" id="wLf-dv-ic9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="leftImageView" destination="7FC-xx-Ash" id="hNh-CS-WsB"/>
+                        <outlet property="rightImageView" destination="2i5-YN-Rub" id="6lN-x5-ogt"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="60" y="598"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="nFg-Bi-JF4">
+            <objects>
+                <windowController storyboardIdentifier="Document Window Controller" id="I31-ld-zmx" customClass="BookWindowController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="Oyj-62-mGG">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2880" height="1597"/>
+                        <view key="contentView" id="zJK-LY-Y2f">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="I31-ld-zmx" id="d6t-ps-Bhn"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="T99-gd-Ov7" kind="relationship" relationship="window.shadowedContentViewController" id="b4T-I6-yJI"/>
+                    </connections>
+                </windowController>
+                <customObject id="XvW-kF-F1q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="60" y="142"/>
+        </scene>
+    </scenes>
+</document>

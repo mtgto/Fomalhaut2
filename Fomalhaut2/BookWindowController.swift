@@ -2,7 +2,7 @@
 
 import Cocoa
 
-class BookWindowController: NSWindowController {
+class BookWindowController: NSWindowController, NSMenuItemValidation {
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -13,12 +13,50 @@ class BookWindowController: NSWindowController {
     if event.keyCode == 49 {  // space
       let bookViewController = self.contentViewController as! SpreadPageViewController
       if event.modifierFlags.contains(.shift) {
-        bookViewController.decrementPage()
+        bookViewController.backwardPage()
       } else {
-        bookViewController.incrementPage()
+        bookViewController.forwardPage()
       }
     } else {
       log.info("keyDown: \(event.keyCode)")
     }
+  }
+  
+  // MARK: - MenuItem
+  @IBAction func forwardPage(_ sender: Any) {
+    let bookViewController = self.contentViewController as! SpreadPageViewController
+    bookViewController.forwardPage()
+  }
+  
+  @IBAction func backwardPage(_ sender: Any) {
+    let bookViewController = self.contentViewController as! SpreadPageViewController
+    bookViewController.backwardPage()
+  }
+  
+  @IBAction func forwardSinglePage(_ sender: Any) {
+    let bookViewController = self.contentViewController as! SpreadPageViewController
+    bookViewController.forwardSinglePage()
+  }
+  
+  @IBAction func backwardSinglePage(_ sender: Any) {
+    let bookViewController = self.contentViewController as! SpreadPageViewController
+    bookViewController.backwardPage()
+  }
+  
+  func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    let bookViewController = self.contentViewController as! SpreadPageViewController
+    guard let selector = menuItem.action else {
+      return false
+    }
+    if selector == #selector(forwardPage(_:)) {
+      return bookViewController.canForwardPage()
+    } else if selector == #selector(backwardPage(_:)) {
+      return bookViewController.canBackwardPage()
+    } else if selector == #selector(forwardSinglePage(_:)) {
+      return bookViewController.canForwardPage()
+    } else if selector == #selector(backwardSinglePage(_:)) {
+      return bookViewController.canBackwardPage()
+    }
+    return false
   }
 }

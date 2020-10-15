@@ -1,9 +1,4 @@
-//
-//  Fomalhaut2UITests.swift
-//  Fomalhaut2UITests
-//
-//  Created by User on 2020/10/09.
-//
+// SPDX-License-Identifier: GPL-3.0-only
 
 import XCTest
 

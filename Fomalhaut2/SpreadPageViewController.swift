@@ -5,8 +5,8 @@ import RxSwift
 class SpreadPageViewController: NSViewController {
   private var pageCount: Int = 0
   private var currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
-  private var leftImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
-  private var rightImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()
+  private var firstImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
+  private var secondImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()
   private let disposeBag = DisposeBag()
 
   @IBOutlet weak var leftImageView: NSImageView!
@@ -15,16 +15,16 @@ class SpreadPageViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do view setup here.
-    Observable.zip(self.leftImage, self.rightImage)
+    Observable.zip(self.firstImage, self.secondImage)
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { images in
-        let leftImage: NSImage = images.0
-        let rightImage: NSImage? = images.1
-        self.leftImageView.image = leftImage
-        self.rightImageView.image = rightImage
+        let firstImage: NSImage = images.0
+        let secondImage: NSImage? = images.1
+        self.leftImageView.image = firstImage
+        self.rightImageView.image = secondImage
         let contentWidth =
-          max(leftImage.size.width, (rightImage?.size.width ?? 0)) * (rightImage != nil ? 2 : 1)
-        let contentHeight = max(leftImage.size.height, (rightImage?.size.height ?? 0))
+          max(firstImage.size.width, (secondImage?.size.width ?? 0)) * (secondImage != nil ? 2 : 1)
+        let contentHeight = max(firstImage.size.height, (secondImage?.size.height ?? 0))
         // log.debug("Content size = \(contentWidth) x \(contentHeight)")
         self.view.window?.contentAspectRatio = NSSize(width: contentWidth, height: contentHeight)
       })
@@ -43,11 +43,11 @@ class SpreadPageViewController: NSViewController {
           document.image(at: pageIndex) { (result) in
             switch result {
             case .success(let image):
-              self.leftImage.onNext(image)
+              self.firstImage.onNext(image)
               log.debug("success to load image at \(pageIndex)")
             case .failure(let error):
               log.info("fail to laod image at \(pageIndex): \(error)")
-              self.leftImage.onError(error)
+              self.firstImage.onError(error)
             }
           }
           if pageIndex > 0 && pageIndex + 1 < self.pageCount {
@@ -55,15 +55,15 @@ class SpreadPageViewController: NSViewController {
             document.image(at: pageIndex + 1) { (result) in
               switch result {
               case .success(let image):
-                self.rightImage.onNext(image)
+                self.secondImage.onNext(image)
                 log.debug("success to load image at \(pageIndex + 1)")
               case .failure(let error):
                 log.info("fail to laod image at \(pageIndex + 1): \(error)")
-                self.rightImage.onError(error)
+                self.secondImage.onError(error)
               }
             }
           } else {
-            self.rightImage.onNext(nil)
+            self.secondImage.onNext(nil)
           }
           // preload before increment page
           let preloadIndex = pageIndex > 0 && pageIndex + 1 < self.pageCount ? 2 : 1

@@ -1,5 +1,4 @@
 import Cocoa
-import RxSwift
 
 class BookWindowController: NSWindowController {
 
@@ -10,14 +9,11 @@ class BookWindowController: NSWindowController {
 
   override func keyDown(with event: NSEvent) {
     if event.keyCode == 49 {  // space
+      let bookViewController = self.contentViewController as! SpreadPageViewController
       if event.modifierFlags.contains(.shift) {
-        if let bookViewController = self.contentViewController as? SpreadPageViewController {
-          bookViewController.decrementPage()
-        }
+        bookViewController.decrementPage()
       } else {
-        if let bookViewController = self.contentViewController as? SpreadPageViewController {
-          bookViewController.incrementPage()
-        }
+        bookViewController.incrementPage()
       }
     } else {
       log.info("keyDown: \(event.keyCode)")

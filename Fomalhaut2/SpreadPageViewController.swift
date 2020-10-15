@@ -20,13 +20,24 @@ class SpreadPageViewController: NSViewController {
       .subscribe(onNext: { images in
         let firstImage: NSImage = images.0
         let secondImage: NSImage? = images.1
+        let firstImageWidth = firstImage.representations.first!.pixelsWide
+        let firstImageHeight = firstImage.representations.first!.pixelsHigh
+        let secondImageWidth = secondImage?.representations.first!.pixelsWide
+        let secondImageHeight = secondImage?.representations.first!.pixelsHigh
+        let contentWidth =
+          max(firstImageWidth, (secondImageWidth ?? 0)) * (secondImage != nil ? 2 : 1)
+        let contentHeight = max(firstImageHeight, (secondImageHeight ?? 0))
         self.leftImageView.image = firstImage
         self.rightImageView.image = secondImage
-        let contentWidth =
-          max(firstImage.size.width, (secondImage?.size.width ?? 0)) * (secondImage != nil ? 2 : 1)
-        let contentHeight = max(firstImage.size.height, (secondImage?.size.height ?? 0))
-        // log.debug("Content size = \(contentWidth) x \(contentHeight)")
-        self.view.window?.contentAspectRatio = NSSize(width: contentWidth, height: contentHeight)
+        log.debug("Content size = \(contentWidth) x \(contentHeight)")
+        guard let window = self.view.window else {
+          log.error("window is nil")
+          return
+        }
+        window.contentAspectRatio = NSSize(width: contentWidth, height: contentHeight)
+        // Set window size as screen size
+        let rect = window.constrainFrameRect(NSRect(x: window.frame.origin.x, y: window.frame.origin.y, width: CGFloat(contentWidth), height: CGFloat(contentHeight)), to: NSScreen.main)
+        window.setContentSize(NSSize(width: rect.size.width, height: rect.size.height))
       })
       .disposed(by: self.disposeBag)
   }
@@ -100,11 +111,24 @@ class SpreadPageViewController: NSViewController {
       self.currentPageIndex.accept(self.currentPageIndex.value + incremental)
     }
   }
+  
+  func incrementSinglePage() {
+    if self.currentPageIndex.value + 1 < self.pageCount {
+      self.currentPageIndex.accept(self.currentPageIndex.value + 1)
+    }
+  }
 
+  // decrement page (two page decrement)
   func decrementPage() {
     let decremental = self.currentPageIndex.value == 1 ? 1 : 2
     if self.currentPageIndex.value - decremental >= 0 {
       self.currentPageIndex.accept(self.currentPageIndex.value - decremental)
+    }
+  }
+  
+  func decrementSinglePage() {
+    if self.currentPageIndex.value - 1 >= 0 {
+      self.currentPageIndex.accept(self.currentPageIndex.value - 1)
     }
   }
 }

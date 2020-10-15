@@ -2,8 +2,13 @@ import Cocoa
 import RxRelay
 import RxSwift
 
+enum PageOrder {
+  case ltr, rtl
+}
+
 class SpreadPageViewController: NSViewController {
   private var pageCount: Int = 0
+  private var pageOrder: PageOrder = .rtl
   private var currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   private var firstImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
   private var secondImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()
@@ -27,12 +32,18 @@ class SpreadPageViewController: NSViewController {
         let contentWidth =
           max(firstImageWidth, (secondImageWidth ?? 0)) * (secondImage != nil ? 2 : 1)
         let contentHeight = max(firstImageHeight, (secondImageHeight ?? 0))
-        self.leftImageView.image = firstImage
+
+        let firstImageView: NSImageView =
+          self.pageOrder == .rtl ? self.rightImageView : self.leftImageView
+        let secondImageView: NSImageView =
+          self.pageOrder == .rtl ? self.leftImageView : self.rightImageView
+
+        firstImageView.image = firstImage
         if secondImage != nil {
-          self.rightImageView.image = secondImage
-          self.rightImageView.isHidden = false
+          secondImageView.image = secondImage
+          secondImageView.isHidden = false
         } else {
-          self.rightImageView.isHidden = true
+          secondImageView.isHidden = true
         }
         log.debug("Content size = \(contentWidth) x \(contentHeight)")
         guard let window = self.view.window else {

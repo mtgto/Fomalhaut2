@@ -108,13 +108,6 @@ class SpreadPageViewController: NSViewController {
               }
             }
           }
-
-          // hide right page if pageIndex == 0
-          //          if pageIndex == 0 {
-          //            self.splitViewItems[1].animator().isCollapsed = true
-          //          } else {
-          //            self.splitViewItems[1].animator().isCollapsed = false
-          //          }
         }).disposed(by: self.disposeBag)
       }
     }

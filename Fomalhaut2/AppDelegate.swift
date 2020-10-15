@@ -13,10 +13,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationWillTerminate(_ aNotification: Notification) {
     // Insert code here to tear down your application
   }
-  
+
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-    NSDocumentController.shared.openDocument(withContentsOf: URL(fileURLWithPath: filename), display: true) { (document, documentWasAlreadyOpen, error) in
-      
+    NSDocumentController.shared.openDocument(
+      withContentsOf: URL(fileURLWithPath: filename), display: true
+    ) { (document, documentWasAlreadyOpen, error) in
+
     }
     return true
   }

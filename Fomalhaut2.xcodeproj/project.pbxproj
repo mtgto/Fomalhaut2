@@ -17,6 +17,7 @@
 		CE30281325305AA200986C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30281125305AA200986C9A /* Main.storyboard */; };
 		CE30281F25305AA200986C9A /* Fomalhaut2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30281E25305AA200986C9A /* Fomalhaut2Tests.swift */; };
 		CE30282A25305AA200986C9A /* Fomalhaut2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */; };
+		CE654D762537E9530051D575 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE654D752537E9520051D575 /* Credits.rtf */; };
 		CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */; };
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
@@ -55,6 +56,7 @@
 		CE30282525305AA200986C9A /* Fomalhaut2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Fomalhaut2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fomalhaut2UITests.swift; sourceTree = "<group>"; };
 		CE30282B25305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE654D752537E9520051D575 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWindowController.swift; sourceTree = "<group>"; };
 		CE9EE62725330EE100B5AF5C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				CE30281125305AA200986C9A /* Main.storyboard */,
 				CE30281425305AA200986C9A /* Info.plist */,
 				CE30281525305AA200986C9A /* Fomalhaut2.entitlements */,
+				CE654D752537E9520051D575 /* Credits.rtf */,
 			);
 			path = Fomalhaut2;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE30281025305AA200986C9A /* Assets.xcassets in Resources */,
+				CE654D762537E9530051D575 /* Credits.rtf in Resources */,
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

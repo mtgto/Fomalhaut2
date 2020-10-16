@@ -10,7 +10,7 @@ enum PageOrder {
 
 class SpreadPageViewController: NSViewController {
   private(set) var pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
-  private(set) var pageOrder: PageOrder = .rtl
+  private var pageOrder: PageOrder = .rtl
   private(set) var currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   private var firstImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
   private var secondImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()

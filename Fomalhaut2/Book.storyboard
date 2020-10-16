@@ -52,8 +52,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="leftImageView" destination="7FC-xx-Ash" id="hNh-CS-WsB"/>
-                        <outlet property="rightImageView" destination="2i5-YN-Rub" id="6lN-x5-ogt"/>
+                        <outlet property="firstImageView" destination="7FC-xx-Ash" id="Dd6-ob-BHa"/>
+                        <outlet property="imageStackView" destination="UYl-6I-vbB" id="nUE-kv-OtO"/>
+                        <outlet property="secondImageView" destination="2i5-YN-Rub" id="IoT-5v-cxw"/>
                     </connections>
                 </viewController>
             </objects>
@@ -74,12 +75,7 @@
                         </view>
                         <toolbar key="toolbar" implicitIdentifier="DD9C1FAD-4AD1-4BE3-9FCF-7756D305A592" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Wzc-1i-JVd">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="9QH-lF-iau"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="yio-p2-3CK"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="7Y7-9r-j3O"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="j9D-dA-3KM"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="elp-kS-fEt"/>
-                                <toolbarItem implicitItemIdentifier="5E181740-D0A5-4591-9098-99CABC2409DF" label="Control" paletteLabel="Control" sizingBehavior="auto" id="fuc-9u-iU4">
+                                <toolbarItem implicitItemIdentifier="48B39D7A-0CDD-4127-B978-D89050CE6037" label="Control" paletteLabel="Control" sizingBehavior="auto" id="fuc-9u-iU4">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="grQ-q3-Ia3">
                                         <rect key="frame" x="0.0" y="14" width="75" height="27"/>
@@ -96,7 +92,7 @@
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="3C3E5CAA-C4CE-48E9-8D2D-52B9E6E8C725" label="Page Order" paletteLabel="Page Order" sizingBehavior="auto" id="MNP-GK-6ey">
+                                <toolbarItem implicitItemIdentifier="8AEFB3A0-E185-4140-B993-564EFAF0099A" label="Page Order" paletteLabel="Page Order" sizingBehavior="auto" id="MNP-GK-6ey">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="WvN-Nn-JeU">
                                         <rect key="frame" x="0.0" y="14" width="71" height="24"/>
@@ -104,7 +100,7 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="1Rl-bO-XaM">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="R" width="32"/>
+                                                <segment label="R" width="32" selected="YES"/>
                                                 <segment label="L" width="32" tag="1"/>
                                             </segments>
                                         </segmentedCell>
@@ -113,6 +109,8 @@
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="j9D-dA-3KM"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="elp-kS-fEt"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="fuc-9u-iU4"/>

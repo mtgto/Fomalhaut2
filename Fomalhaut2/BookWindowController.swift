@@ -12,8 +12,8 @@ class BookWindowController: NSWindowController, NSMenuItemValidation {
     super.windowDidLoad()
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     let bookViewController = self.contentViewController as! SpreadPageViewController
-    bookViewController.currentPageIndex
-      .asObservable()
+    Observable.of(bookViewController.currentPageIndex, bookViewController.pageCount)
+      .merge()
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { (_) in
         self.pageControl.setEnabled(bookViewController.canBackwardPage(), forSegment: 0)
@@ -86,5 +86,13 @@ class BookWindowController: NSWindowController, NSMenuItemValidation {
   }
 
   @IBAction func updatePageOrder(_ sender: Any) {
+    let bookViewController = self.contentViewController as! SpreadPageViewController
+    if let segmentedControl = sender as? NSSegmentedControl {
+      if segmentedControl.selectedSegment == 0 {  // right to left
+        bookViewController.setPageOrder(PageOrder.rtl)
+      } else {  // left to right
+        bookViewController.setPageOrder(PageOrder.ltr)
+      }
+    }
   }
 }

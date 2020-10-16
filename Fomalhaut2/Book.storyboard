@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="I31-ld-zmx">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="I31-ld-zmx">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -72,11 +72,61 @@
                             <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
+                        <toolbar key="toolbar" implicitIdentifier="DD9C1FAD-4AD1-4BE3-9FCF-7756D305A592" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Wzc-1i-JVd">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="9QH-lF-iau"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="yio-p2-3CK"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="7Y7-9r-j3O"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="j9D-dA-3KM"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="elp-kS-fEt"/>
+                                <toolbarItem implicitItemIdentifier="5E181740-D0A5-4591-9098-99CABC2409DF" label="Control" paletteLabel="Control" sizingBehavior="auto" id="fuc-9u-iU4">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="grQ-q3-Ia3">
+                                        <rect key="frame" x="0.0" y="14" width="75" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="2OF-NQ-M4L">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment image="NSTouchBarGoUpTemplate" width="32"/>
+                                                <segment image="NSTouchBarGoDownTemplate" width="32" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="updatePageControl:" target="I31-ld-zmx" id="ofl-fb-DzF"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="3C3E5CAA-C4CE-48E9-8D2D-52B9E6E8C725" label="Page Order" paletteLabel="Page Order" sizingBehavior="auto" id="MNP-GK-6ey">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="WvN-Nn-JeU">
+                                        <rect key="frame" x="0.0" y="14" width="71" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="1Rl-bO-XaM">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="R" width="32"/>
+                                                <segment label="L" width="32" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="updatePageOrder:" target="I31-ld-zmx" id="Ild-BD-GIl"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="fuc-9u-iU4"/>
+                                <toolbarItem reference="MNP-GK-6ey"/>
+                                <toolbarItem reference="elp-kS-fEt"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="I31-ld-zmx" id="d6t-ps-Bhn"/>
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="pageControl" destination="grQ-q3-Ia3" id="2pJ-y1-Rao"/>
+                        <outlet property="pageOrderControl" destination="WvN-Nn-JeU" id="n6V-fi-KXC"/>
                         <segue destination="T99-gd-Ov7" kind="relationship" relationship="window.shadowedContentViewController" id="b4T-I6-yJI"/>
                     </connections>
                 </windowController>
@@ -85,4 +135,8 @@
             <point key="canvasLocation" x="60" y="142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSTouchBarGoDownTemplate" width="16" height="30"/>
+        <image name="NSTouchBarGoUpTemplate" width="16" height="30"/>
+    </resources>
 </document>

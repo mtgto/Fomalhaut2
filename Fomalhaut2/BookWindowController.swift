@@ -1,12 +1,25 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Cocoa
+import RxSwift
 
 class BookWindowController: NSWindowController, NSMenuItemValidation {
+  private let disposeBag = DisposeBag()
+  @IBOutlet weak var pageControl: NSSegmentedControl!
+  @IBOutlet weak var pageOrderControl: NSSegmentedControl!
 
   override func windowDidLoad() {
     super.windowDidLoad()
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    let bookViewController = self.contentViewController as! SpreadPageViewController
+    bookViewController.currentPageIndex
+      .asObservable()
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { (_) in
+        self.pageControl.setEnabled(bookViewController.canBackwardPage(), forSegment: 0)
+        self.pageControl.setEnabled(bookViewController.canForwardPage(), forSegment: 1)
+      })
+      .disposed(by: self.disposeBag)
   }
 
   override func keyDown(with event: NSEvent) {
@@ -58,5 +71,20 @@ class BookWindowController: NSWindowController, NSMenuItemValidation {
       return bookViewController.canBackwardPage()
     }
     return false
+  }
+
+  // MARK: - Toolbar
+  @IBAction func updatePageControl(_ sender: Any) {
+    let bookViewController = self.contentViewController as! SpreadPageViewController
+    if let segmentedControl = sender as? NSSegmentedControl {
+      if segmentedControl.selectedSegment == 0 {
+        bookViewController.backwardPage()
+      } else {
+        bookViewController.forwardPage()
+      }
+    }
+  }
+
+  @IBAction func updatePageOrder(_ sender: Any) {
   }
 }

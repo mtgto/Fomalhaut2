@@ -11,7 +11,7 @@ enum PageOrder {
 class SpreadPageViewController: NSViewController {
   private var pageCount: Int = 0
   private var pageOrder: PageOrder = .rtl
-  private var currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+  private(set) var currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   private var firstImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
   private var secondImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()
   private let disposeBag = DisposeBag()
@@ -109,6 +109,8 @@ class SpreadPageViewController: NSViewController {
             }
           }
         }).disposed(by: self.disposeBag)
+
+        self.currentPageIndex.accept(0)
       }
     }
   }

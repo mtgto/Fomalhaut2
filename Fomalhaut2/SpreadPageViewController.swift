@@ -145,11 +145,11 @@ class SpreadPageViewController: NSViewController {
       self.currentPageIndex.accept(self.currentPageIndex.value - 1)
     }
   }
-  
+
   func canForwardPage() -> Bool {
     return self.currentPageIndex.value + 1 < self.pageCount
   }
-  
+
   func canBackwardPage() -> Bool {
     return self.currentPageIndex.value - 1 >= 0
   }

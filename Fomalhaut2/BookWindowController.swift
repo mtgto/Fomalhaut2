@@ -21,28 +21,28 @@ class BookWindowController: NSWindowController, NSMenuItemValidation {
       log.info("keyDown: \(event.keyCode)")
     }
   }
-  
+
   // MARK: - MenuItem
   @IBAction func forwardPage(_ sender: Any) {
     let bookViewController = self.contentViewController as! SpreadPageViewController
     bookViewController.forwardPage()
   }
-  
+
   @IBAction func backwardPage(_ sender: Any) {
     let bookViewController = self.contentViewController as! SpreadPageViewController
     bookViewController.backwardPage()
   }
-  
+
   @IBAction func forwardSinglePage(_ sender: Any) {
     let bookViewController = self.contentViewController as! SpreadPageViewController
     bookViewController.forwardSinglePage()
   }
-  
+
   @IBAction func backwardSinglePage(_ sender: Any) {
     let bookViewController = self.contentViewController as! SpreadPageViewController
     bookViewController.backwardPage()
   }
-  
+
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     let bookViewController = self.contentViewController as! SpreadPageViewController
     guard let selector = menuItem.action else {

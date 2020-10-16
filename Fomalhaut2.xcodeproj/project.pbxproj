@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE275AD625389E0200BEACB7 /* FolderDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE275AD525389E0200BEACB7 /* FolderDocument.swift */; };
 		CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE296BBA253063BA00674C99 /* ZipDocument.swift */; };
 		CE296BCD2530671700674C99 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = CE296BCC2530671700674C99 /* ZIPFoundation */; };
 		CE296BEC2530722A00674C99 /* BookAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE296BEB2530722A00674C99 /* BookAccessible.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE275AD525389E0200BEACB7 /* FolderDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDocument.swift; sourceTree = "<group>"; };
 		CE296BBA253063BA00674C99 /* ZipDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipDocument.swift; sourceTree = "<group>"; };
 		CE296BEB2530722A00674C99 /* BookAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAccessible.swift; sourceTree = "<group>"; };
 		CE30280625305AA000986C9A /* Fomalhaut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fomalhaut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 				CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */,
 				CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */,
 				CE296BBA253063BA00674C99 /* ZipDocument.swift */,
+				CE275AD525389E0200BEACB7 /* FolderDocument.swift */,
 				CE9EE62725330EE100B5AF5C /* ImageCache.swift */,
 				CE296BEB2530722A00674C99 /* BookAccessible.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
@@ -297,6 +300,7 @@
 				CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
+				CE275AD625389E0200BEACB7 /* FolderDocument.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,6 +469,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Fomalhaut2/Fomalhaut2.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W3A6B7FDC7;
@@ -487,6 +492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Fomalhaut2/Fomalhaut2.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W3A6B7FDC7;

@@ -82,12 +82,12 @@ extension ZipDocument: BookAccessible {
       }
     }
   }
-  
+
   override func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
     log.debug("validateUserInterfaceItem \(item)")
     return true
   }
-  
+
   override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     log.debug("validateMenuItem: \(menuItem.title)")
     return true

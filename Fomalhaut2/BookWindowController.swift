@@ -53,7 +53,7 @@ class BookWindowController: NSWindowController, NSMenuItemValidation {
 
   @IBAction func backwardSinglePage(_ sender: Any) {
     let spreadPageViewController = self.contentViewController as! SpreadPageViewController
-    spreadPageViewController.backwardPage()
+    spreadPageViewController.backwardSinglePage()
   }
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {

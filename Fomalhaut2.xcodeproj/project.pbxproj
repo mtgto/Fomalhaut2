@@ -24,6 +24,9 @@
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
 		CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */; };
+		CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = CEB2D9F625399375002C3F7E /* RxRealm */; };
+		CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2D9FB2539946D002C3F7E /* MainViewController.swift */; };
+		CEB2DA0425399693002C3F7E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA0325399693002C3F7E /* Book.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,8 @@
 		CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWindowController.swift; sourceTree = "<group>"; };
 		CE9EE62725330EE100B5AF5C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
+		CEB2D9FB2539946D002C3F7E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CEB2DA0325399693002C3F7E /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +80,7 @@
 				CE296C312530A4E400674C99 /* RxCocoa in Frameworks */,
 				CE296BCD2530671700674C99 /* ZIPFoundation in Frameworks */,
 				CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */,
+				CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +131,8 @@
 				CE275AD525389E0200BEACB7 /* FolderDocument.swift */,
 				CE9EE62725330EE100B5AF5C /* ImageCache.swift */,
 				CE296BEB2530722A00674C99 /* BookAccessible.swift */,
+				CEB2D9FB2539946D002C3F7E /* MainViewController.swift */,
+				CEB2DA0325399693002C3F7E /* Book.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
 				CE654D82253846050051D575 /* Book.storyboard */,
@@ -174,6 +182,7 @@
 				CE296C302530A4E400674C99 /* RxCocoa */,
 				CE296C322530A4E400674C99 /* RxSwift */,
 				CE9EE5EA2532C53100B5AF5C /* XCGLogger */,
+				CEB2D9F625399375002C3F7E /* RxRealm */,
 			);
 			productName = Fomalhaut2;
 			productReference = CE30280625305AA000986C9A /* Fomalhaut2.app */;
@@ -250,6 +259,7 @@
 				CE296BCB2530671700674C99 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */,
+				CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */,
 			);
 			productRefGroup = CE30280725305AA000986C9A /* Products */;
 			projectDirPath = "";
@@ -300,8 +310,10 @@
 				CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
+				CEB2DA0425399693002C3F7E /* Book.swift in Sources */,
 				CE275AD625389E0200BEACB7 /* FolderDocument.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
+				CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,6 +671,14 @@
 				minimumVersion = 7.0.1;
 			};
 		};
+		CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxRealm.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -681,6 +701,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */;
 			productName = XCGLogger;
+		};
+		CEB2D9F625399375002C3F7E /* RxRealm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */;
+			productName = RxRealm;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

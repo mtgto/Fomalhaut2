@@ -3,6 +3,7 @@
 import Cocoa
 
 class FolderDocument: NSDocument {
+  static let UTI: String = "public.folder"
   private var entries: [URL] = []
 
   override func read(from url: URL, ofType typeName: String) throws {

@@ -4,6 +4,7 @@ import Cocoa
 import ZIPFoundation
 
 class ZipDocument: NSDocument {
+  static let UTI: String = "com.pkware.zip-archive"
   private var archive: Archive?
   private lazy var entries: [Entry] = self.archive!.sorted { (lhs, rhs) -> Bool in
     lhs.path.localizedStandardCompare(rhs.path) == .orderedAscending

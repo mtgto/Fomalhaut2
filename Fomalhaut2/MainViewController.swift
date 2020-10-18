@@ -34,14 +34,6 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
     var bookmarkDataIsStale: Bool = false
     do {
       let url = try book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale)
-      if bookmarkDataIsStale {
-        log.info("Regenerate book.bookmark of \(url.path)")
-        // regenerate bookmark
-        let realm = try Realm()
-        try realm.write {
-          book.bookmark = try url.bookmarkData(options: [.suitableForBookmarkFile])
-        }
-      }
       NSDocumentController.shared.openDocument(withContentsOf: url, display: true) {
         (document, documentWasAlreadyOpen, error) in
         if let error = error {
@@ -49,6 +41,18 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
           log.error("Error while open a book: \(error)")
         } else {
           // TODO: update book information
+          do {
+            let realm = try Realm()
+            try realm.write {
+              book.readCount = book.readCount + 1
+              if bookmarkDataIsStale {
+                log.info("Regenerate book.bookmark of \(url.path)")
+                book.bookmark = try url.bookmarkData(options: [.suitableForBookmarkFile])
+              }
+            }
+          } catch {
+            log.error("error while update book: \(error)")
+          }
         }
       }
     } catch {

@@ -8,8 +8,11 @@ class Book: Object {
   @objc dynamic var filename: String = ""
   @objc dynamic var bookmark: Data = Data()
   @objc dynamic var readCount: Int = 0
-  @objc dynamic var lastPageIndex: Int = 0
   @objc dynamic var createdAt: Date = Date()
+  // for viewer information
+  @objc dynamic var isRightToLeft: Bool = true
+  @objc dynamic var lastPageIndex: Int = 0
+  @objc dynamic var shiftedSignlePage: Bool = false
 
   override static func primaryKey() -> String? {
     return "id"

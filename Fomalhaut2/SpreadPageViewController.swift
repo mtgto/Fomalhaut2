@@ -45,7 +45,6 @@ class SpreadPageViewController: NSViewController {
         } else {
           self.secondImageView.isHidden = true
         }
-        log.debug("Content size = \(contentWidth) x \(contentHeight)")
         guard let window = self.view.window else {
           log.error("window is nil")
           return
@@ -67,8 +66,11 @@ class SpreadPageViewController: NSViewController {
       if let document = representedObject as? BookAccessible {
         self.pageCount.accept(document.pageCount())
 
-        self.currentPageIndex.asObservable().subscribe(onNext: { (pageIndex) in
+        self.currentPageIndex.subscribe(onNext: { (pageIndex) in
           log.info("start to load at \(pageIndex)")
+          if pageIndex > 0 {
+            self.invalidateRestorableState()
+          }
           // TODO: Try to obtain image from cache not to use OperationQueue
           document.image(at: pageIndex) { (result) in
             switch result {
@@ -114,6 +116,19 @@ class SpreadPageViewController: NSViewController {
   override func mouseUp(with event: NSEvent) {
     log.info("mouseUp")
     self.forwardPage()
+  }
+
+  override func encodeRestorableState(with coder: NSCoder) {
+    super.encodeRestorableState(with: coder)
+    coder.encode(self.currentPageIndex.value, forKey: "currentPageIndex")
+    log.info("encodeRestorableState")
+  }
+
+  override func restoreState(with coder: NSCoder) {
+    super.restoreState(with: coder)
+    let lastCurrentPageIndex = coder.decodeInteger(forKey: "currentPageIndex")
+    self.currentPageIndex.accept(lastCurrentPageIndex)
+    log.info("restoreState: lastCurrentPageIndex = \(lastCurrentPageIndex)")
   }
 
   // increment page (two page increment)

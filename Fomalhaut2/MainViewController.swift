@@ -34,6 +34,14 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
     var bookmarkDataIsStale: Bool = false
     do {
       let url = try book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale)
+      if bookmarkDataIsStale {
+        log.info("Regenerate book.bookmark of \(url.path)")
+        // regenerate bookmark
+        let realm = try Realm()
+        try realm.write {
+          book.bookmark = try url.bookmarkData(options: [.suitableForBookmarkFile])
+        }
+      }
       NSDocumentController.shared.openDocument(withContentsOf: url, display: true) {
         (document, documentWasAlreadyOpen, error) in
         if let error = error {
@@ -47,6 +55,14 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
       // TODO: show error dialog
       log.error("Error while resolve URL from a book: \(error)")
     }
+  }
+
+  func showModalDialog(message: String, information: String) {
+    let alert = NSAlert()
+    alert.alertStyle = .warning
+    alert.messageText = message
+    alert.informativeText = information
+    alert.runModal()
   }
 
   // Double click the row of TableView
@@ -76,6 +92,7 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         NSWorkspace.shared.activateFileViewerSelecting([url])
       } else {
         // TODO: show error dialog
+        self.showModalDialog(message: "", information: "")
       }
     }
   }
@@ -84,20 +101,10 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
     let index = self.tableView.clickedRow
     if index >= 0 {
       let book = self.books[index]
-      guard let realm = try? Realm() else {
-        // TODO: show error dialog
-        log.error("Error while open realm")
-        return
-      }
-      do {
-        try realm.write {
-          realm.delete(book)
-        }
-      } catch {
-        // TODO: show error dialog
-        log.error("Error while writing added books: \(error)")
-        return
-      }
+      // TODO: show error dialog
+      Observable.from([book])
+        .subscribe(Realm.rx.delete())
+        .disposed(by: self.disposeBag)
     }
   }
 
@@ -121,7 +128,19 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int)
     -> Any?
   {
-    return self.books[row]
+    let book = self.books[row]
+    if let columnIdentifier = tableColumn?.identifier {
+      switch columnIdentifier {
+      case NSUserInterfaceItemIdentifier("file"):
+        return book.filename
+      case NSUserInterfaceItemIdentifier("view"):
+        return book.readCount
+      default:
+        return nil
+      }
+    }
+    log.error("Unset table column identifier!")
+    return nil
   }
 
   func tableView(
@@ -164,18 +183,9 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         //return
         //}
       }
-      guard let realm = try? Realm() else {
-        log.error("Error while open realm")
-        return false
-      }
-      do {
-        try realm.write {
-          realm.add(books)
-        }
-      } catch {
-        log.error("Error while writing added books: \(error)")
-        return false
-      }
+      Observable.of(books)
+        .subscribe(Realm.rx.add())
+        .disposed(by: self.disposeBag)
     }
     return false
   }
@@ -183,13 +193,21 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
   // MARK: NSTableViewDelegate
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
   {
-    if let cellView = tableView.makeView(
-      withIdentifier: NSUserInterfaceItemIdentifier("file"), owner: self) as? NSTableCellView
-    {
-      cellView.textField?.stringValue = self.books[row].filename
-      return cellView
+    guard let identifier = tableColumn?.identifier,
+      let cellView = tableView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView
+    else {
+      return nil
     }
-    return nil
+    switch identifier.rawValue {
+    case "file":
+      cellView.textField?.stringValue = self.books[row].filename
+    case "view":
+      cellView.textField?.stringValue = String(self.books[row].readCount)
+    default:
+      break
+    }
+
+    return cellView
   }
 }
 
@@ -198,7 +216,7 @@ extension NSTableView {
     beginUpdates()
     removeRows(at: IndexSet(changes.deleted))
     insertRows(at: IndexSet(changes.inserted))
-    reloadData(forRowIndexes: IndexSet(changes.updated), columnIndexes: [0])
+    reloadData(forRowIndexes: IndexSet(changes.updated), columnIndexes: [0, 1])
     endUpdates()
   }
 }

@@ -680,6 +680,12 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
+                                        <menuItem title="Book Library" keyEquivalent="0" id="AbO-IH-oCB">
+                                            <connections>
+                                                <action selector="showLibraryWindow:" target="Voe-Tx-rLC" id="jnF-d6-0v6"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Dhn-ME-fM1"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>

@@ -6,6 +6,10 @@ class FolderDocument: NSDocument {
   static let UTI: String = "public.folder"
   private var entries: [URL] = []
 
+  override class func canConcurrentlyReadDocuments(ofType typeName: String) -> Bool {
+    return true
+  }
+
   override func read(from url: URL, ofType typeName: String) throws {
     do {
       let contentUrls = try FileManager.default.contentsOfDirectory(

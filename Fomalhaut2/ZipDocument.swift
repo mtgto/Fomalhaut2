@@ -19,6 +19,10 @@ class ZipDocument: NSDocument {
     return queue
   }()
 
+  override class func canConcurrentlyReadDocuments(ofType typeName: String) -> Bool {
+    return true
+  }
+
   override func read(from url: URL, ofType typeName: String) throws {
     guard let archive = Archive(url: url, accessMode: .read, preferredEncoding: .shiftJIS) else {
       throw NSError(domain: "net.mtgto.Fomalhaut2", code: 0, userInfo: nil)

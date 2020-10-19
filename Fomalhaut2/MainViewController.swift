@@ -186,12 +186,10 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
 
       let books: [Book] = dropFileURLs.compactMap { (fileURL) in
         let book = Book()
-        book.filePath = fileURL.path
-        guard let bookmark = try? fileURL.bookmarkData(options: [.suitableForBookmarkFile]) else {
+        guard let _ = try? book.setURL(fileURL) else {
           log.error("Error while create bookmarkData from \(fileURL.path)")
           return nil
         }
-        book.bookmark = bookmark
         return book
         // TODO: Validate whether file contains one or more images? for example get thumbnail
         //guard let document = try? NSDocumentController.shared.makeDocument(withContentsOf: fileURL, ofType: ZipDocument.UTI) else {

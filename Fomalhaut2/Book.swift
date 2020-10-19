@@ -31,4 +31,10 @@ class Book: Object {
       resolvingBookmarkData: self.bookmark, options: [.withoutMounting, .withoutUI],
       bookmarkDataIsStale: &bookmarkDataIsStale)
   }
+
+  func setURL(_ url: URL) throws {
+    self.filePath = url.path
+    let bookmark = try url.bookmarkData(options: [.suitableForBookmarkFile])
+    self.bookmark = bookmark
+  }
 }

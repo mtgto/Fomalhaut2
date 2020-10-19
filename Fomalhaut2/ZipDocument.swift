@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Cocoa
+import RealmSwift
 import ZIPFoundation
 
 class ZipDocument: NSDocument {
@@ -32,6 +33,27 @@ class ZipDocument: NSDocument {
   }
 
   override func makeWindowControllers() {
+    // Setup Book instance before create a window
+    if let fileURL = self.fileURL {
+      if self.book == nil {
+        if let realm = try? Realm() {
+          if let book = realm.objects(Book.self).filter("filePath = %@", self.fileURL!.path).first {
+            try? realm.write {
+              book.readCount = book.readCount + 1
+            }
+            self.book = book
+          } else {
+            let book = Book()
+            book.readCount = 1
+            try? book.setURL(fileURL)
+            try? realm.write {
+              realm.add(book)
+            }
+            self.book = book
+          }
+        }
+      }
+    }
     // Returns the Storyboard that contains your Document window.
     let storyboard = NSStoryboard(name: NSStoryboard.Name("Book"), bundle: nil)
     let windowController =

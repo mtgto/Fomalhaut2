@@ -174,7 +174,7 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
 
       let books: [Book] = dropFileURLs.compactMap { (fileURL) in
         let book = Book()
-        book.filename = fileURL.lastPathComponent
+        book.filePath = fileURL.path
         guard let bookmark = try? fileURL.bookmarkData(options: [.suitableForBookmarkFile]) else {
           log.error("Error while create bookmarkData from \(fileURL.path)")
           return nil

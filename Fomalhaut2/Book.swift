@@ -5,7 +5,7 @@ import RealmSwift
 
 class Book: Object {
   @objc dynamic var id: String = UUID().uuidString
-  @objc dynamic var filename: String = ""
+  @objc dynamic var filePath: String = ""
   @objc dynamic var bookmark: Data = Data()
   @objc dynamic var readCount: Int = 0
   @objc dynamic var createdAt: Date = Date()
@@ -14,8 +14,16 @@ class Book: Object {
   @objc dynamic var lastPageIndex: Int = 0
   @objc dynamic var shiftedSignlePage: Bool = false
 
+  var filename: String {
+    return URL(fileURLWithPath: self.filePath).lastPathComponent
+  }
+
   override static func primaryKey() -> String? {
     return "id"
+  }
+
+  override static func indexedProperties() -> [String] {
+    return ["filePath"]
   }
 
   func resolveURL(bookmarkDataIsStale: inout Bool) throws -> URL {

@@ -1,16 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Cocoa
+import RealmSwift
 import RxRelay
 import RxSwift
 
-enum PageOrder {
-  case ltr, rtl
-}
-
 class SpreadPageViewController: NSViewController {
   private(set) var pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
-  private var pageOrder: PageOrder = .rtl
+  private(set) var pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
   private(set) var currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   private var firstImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
   private var secondImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()
@@ -60,11 +57,33 @@ class SpreadPageViewController: NSViewController {
       .disposed(by: self.disposeBag)
   }
 
+  override func viewWillDisappear() {
+    super.viewWillDisappear()
+    // Update book
+    if let document = self.representedObject as? ZipDocument, let book = document.book {
+      guard let realm = try? Realm() else {
+        log.error("Failed to create realm instance")
+        return
+      }
+      try? realm.write {
+        book.lastPageIndex = self.currentPageIndex.value
+        book.isRightToLeft = self.pageOrder.value == .rtl
+      }
+    }
+  }
+
   override var representedObject: Any? {
     didSet {
       // Update the view, if already loaded.
       if let document = representedObject as? BookAccessible {
         self.pageCount.accept(document.pageCount())
+        if let lastPageIndex = document.lastPageIndex() {
+          self.currentPageIndex.accept(lastPageIndex)
+        }
+        if let lastPageOrder = document.lastPageOrder() {
+          self.pageOrder.accept(lastPageOrder)
+          // TODO: set state of PageOrder segmented control
+        }
 
         self.currentPageIndex.subscribe(onNext: { (pageIndex) in
           log.info("start to load at \(pageIndex)")
@@ -170,5 +189,6 @@ class SpreadPageViewController: NSViewController {
   func setPageOrder(_ pageOrder: PageOrder) {
     self.imageStackView.userInterfaceLayoutDirection =
       pageOrder == .rtl ? .rightToLeft : .leftToRight
+    self.pageOrder.accept(pageOrder)
   }
 }

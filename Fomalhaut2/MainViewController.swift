@@ -34,24 +34,36 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
     var bookmarkDataIsStale: Bool = false
     do {
       let url = try book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale)
-      NSDocumentController.shared.openDocument(withContentsOf: url, display: true) {
+      NSDocumentController.shared.openDocument(withContentsOf: url, display: false) {
         (document, documentWasAlreadyOpen, error) in
         if let error = error {
           // TODO: show error dialog
-          log.error("Error while open a book: \(error)")
+          log.error("Error while open a book at \(url.path): \(error)")
         } else {
-          // TODO: update book information
-          do {
-            let realm = try Realm()
-            try realm.write {
-              book.readCount = book.readCount + 1
-              if bookmarkDataIsStale {
-                log.info("Regenerate book.bookmark of \(url.path)")
-                book.bookmark = try url.bookmarkData(options: [.suitableForBookmarkFile])
-              }
+          guard let document = document else {
+            log.error("Failed to open a document: \(url.path)")
+            return
+          }
+          if documentWasAlreadyOpen {
+            document.showWindows()
+          } else {
+            if let document = document as? ZipDocument {
+              document.book = book
             }
-          } catch {
-            log.error("error while update book: \(error)")
+            do {
+              let realm = try Realm()
+              try realm.write {
+                book.readCount = book.readCount + 1
+                if bookmarkDataIsStale {
+                  log.info("Regenerate book.bookmark of \(url.path)")
+                  book.bookmark = try url.bookmarkData(options: [.suitableForBookmarkFile])
+                }
+              }
+            } catch {
+              log.error("error while update book: \(error)")
+            }
+            document.makeWindowControllers()
+            document.showWindows()
           }
         }
       }

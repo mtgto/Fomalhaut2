@@ -20,6 +20,12 @@ class BookWindowController: NSWindowController, NSMenuItemValidation {
         self.pageControl.setEnabled(spreadPageViewController.canForwardPage(), forSegment: 1)
       })
       .disposed(by: self.disposeBag)
+    spreadPageViewController.pageOrder
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { (pageOrder) in
+        self.pageOrderControl.selectSegment(withTag: pageOrder == .rtl ? 0 : 1)
+      })
+      .disposed(by: self.disposeBag)
   }
 
   override func keyDown(with event: NSEvent) {
@@ -89,9 +95,9 @@ class BookWindowController: NSWindowController, NSMenuItemValidation {
     let spreadPageViewController = self.contentViewController as! SpreadPageViewController
     if let segmentedControl = sender as? NSSegmentedControl {
       if segmentedControl.selectedSegment == 0 {  // right to left
-        spreadPageViewController.setPageOrder(PageOrder.rtl)
+        spreadPageViewController.setPageOrder(.rtl)
       } else {  // left to right
-        spreadPageViewController.setPageOrder(PageOrder.ltr)
+        spreadPageViewController.setPageOrder(.ltr)
       }
     }
   }

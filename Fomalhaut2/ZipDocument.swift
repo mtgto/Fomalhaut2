@@ -5,6 +5,7 @@ import ZIPFoundation
 
 class ZipDocument: NSDocument {
   static let UTI: String = "com.pkware.zip-archive"
+  var book: Book?
   private var archive: Archive?
   private lazy var entries: [Entry] = self.archive!.sorted { (lhs, rhs) -> Bool in
     lhs.path.localizedStandardCompare(rhs.path) == .orderedAscending
@@ -86,5 +87,16 @@ extension ZipDocument: BookAccessible {
         completion(.failure(error))
       }
     }
+  }
+
+  func lastPageIndex() -> Int? {
+    return self.book?.lastPageIndex
+  }
+
+  func lastPageOrder() -> PageOrder? {
+    guard let book = self.book else {
+      return nil
+    }
+    return book.isRightToLeft ? .rtl : .ltr
   }
 }

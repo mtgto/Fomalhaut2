@@ -57,4 +57,14 @@ extension FolderDocument: BookAccessible {
       completion(.failure(BookAccessibleError.brokenFile))
     }
   }
+
+  func lastPageIndex() -> Int? {
+    // unsupported
+    return nil
+  }
+
+  func lastPageOrder() -> PageOrder? {
+    // unsupported
+    return nil
+  }
 }

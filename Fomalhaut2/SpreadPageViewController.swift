@@ -60,7 +60,6 @@ class SpreadPageViewController: NSViewController {
   override func viewWillDisappear() {
     super.viewWillDisappear()
     // Update book
-    let hoge = self.representedObject
     if let document = self.representedObject as? ZipDocument, let book = document.book {
       guard let realm = try? Realm() else {
         log.error("Failed to create realm instance")

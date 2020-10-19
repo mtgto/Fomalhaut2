@@ -50,17 +50,16 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
             if let document = document as? ZipDocument {
               document.book = book
             }
-            do {
-              let realm = try Realm()
-              try realm.write {
-                book.readCount = book.readCount + 1
-                if bookmarkDataIsStale {
+            if bookmarkDataIsStale {
+              do {
+                let realm = try Realm()
+                try realm.write {
                   log.info("Regenerate book.bookmark of \(url.path)")
                   book.bookmark = try url.bookmarkData(options: [.suitableForBookmarkFile])
                 }
+              } catch {
+                log.error("error while update book: \(error)")
               }
-            } catch {
-              log.error("error while update book: \(error)")
             }
             document.makeWindowControllers()
             document.showWindows()

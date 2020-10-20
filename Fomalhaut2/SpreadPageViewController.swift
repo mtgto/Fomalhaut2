@@ -82,7 +82,6 @@ class SpreadPageViewController: NSViewController {
         }
         if let lastPageOrder = document.lastPageOrder() {
           self.pageOrder.accept(lastPageOrder)
-          // TODO: set state of PageOrder segmented control
         }
 
         self.currentPageIndex.subscribe(onNext: { (pageIndex) in

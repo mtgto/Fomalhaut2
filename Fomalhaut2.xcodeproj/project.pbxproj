@@ -27,6 +27,8 @@
 		CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = CEB2D9F625399375002C3F7E /* RxRealm */; };
 		CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2D9FB2539946D002C3F7E /* MainViewController.swift */; };
 		CEB2DA0425399693002C3F7E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA0325399693002C3F7E /* Book.swift */; };
+		CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */; };
+		CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA51253E9384002C3F7E /* Filter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
 		CEB2D9FB2539946D002C3F7E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CEB2DA0325399693002C3F7E /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
+		CEB2DA51253E9384002C3F7E /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,8 @@
 				CE9EE62725330EE100B5AF5C /* ImageCache.swift */,
 				CE296BEB2530722A00674C99 /* BookAccessible.swift */,
 				CEB2D9FB2539946D002C3F7E /* MainViewController.swift */,
+				CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */,
+				CEB2DA51253E9384002C3F7E /* Filter.swift */,
 				CEB2DA0325399693002C3F7E /* Book.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
@@ -307,12 +313,14 @@
 			files = (
 				CE296BEC2530722A00674C99 /* BookAccessible.swift in Sources */,
 				CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */,
+				CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */,
 				CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
 				CEB2DA0425399693002C3F7E /* Book.swift in Sources */,
 				CE275AD625389E0200BEACB7 /* FolderDocument.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
+				CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */,
 				CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

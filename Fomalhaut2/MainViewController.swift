@@ -5,7 +5,7 @@ import RealmSwift
 import RxRealm
 import RxSwift
 
-class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate,
+class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableViewDelegate,
   NSMenuItemValidation
 {
 
@@ -14,7 +14,6 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
   @IBOutlet weak var tableView: NSTableView!
 
   override func viewDidLoad() {
-    super.viewDidLoad()
     // Do view setup here.
     self.tableView.registerForDraggedTypes([.fileURL])
     let realm = try! Realm()
@@ -28,6 +27,7 @@ class MainViewController: NSViewController, NSTableViewDataSource, NSTableViewDe
         }
       })
       .disposed(by: self.disposeBag)
+    super.viewDidLoad()
   }
 
   func open(_ book: Book) {

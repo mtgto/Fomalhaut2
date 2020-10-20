@@ -2,14 +2,16 @@
 
 import Cocoa
 import RealmSwift
+import RxCocoa
 import RxRealm
+import RxRelay
 import RxSwift
 
 class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableViewDelegate,
   NSMenuItemValidation
 {
 
-  private var books: Results<Book>!
+  private var books: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(value: nil)
   private let disposeBag = DisposeBag()
   @IBOutlet weak var tableView: NSTableView!
 
@@ -17,13 +19,29 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     // Do view setup here.
     self.tableView.registerForDraggedTypes([.fileURL])
     let realm = try! Realm()
-    self.books = realm.objects(Book.self).sorted(byKeyPath: "createdAt")
-    Observable.changeset(from: self.books)
-      .subscribe(onNext: { [unowned self] _, changes in
-        if let changes = changes {
-          self.tableView.applyChangeset(changes)
+    // NOTE: This query will be changed by filter which user choose
+    self.books.accept(realm.objects(Book.self).sorted(byKeyPath: "createdAt"))
+    self.books
+      .subscribe(onNext: { books in
+        return Observable.changeset(from: books!)
+          .subscribe(onNext: { [unowned self] _, changes in
+            if let changes = changes {
+              self.tableView.applyChangeset(changes)
+            } else {
+              self.tableView.reloadData()
+            }
+          })
+          .disposed(by: self.disposeBag)
+      })
+      .disposed(by: self.disposeBag)
+    NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)
+      .subscribe(onNext: { notification in
+        if let filter = notification.userInfo?["filter"] as? Filter {
+          log.info("Filter selected: \(filter.name), \(filter.predicate)")
+          self.books.accept(
+            realm.objects(Book.self).filter(filter.predicate).sorted(byKeyPath: "createdAt"))
         } else {
-          self.tableView.reloadData()
+          log.error("Unsupported userInfo from filterChangedNotification")
         }
       })
       .disposed(by: self.disposeBag)
@@ -84,7 +102,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   @IBAction func openBook(_ sender: Any) {
     let index = self.tableView.clickedRow
     if index >= 0 {
-      let book = self.books[index]
+      let book = self.books.value![index]
       self.open(book)
     }
   }
@@ -93,7 +111,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   @IBAction func openViewer(_ sender: Any) {
     let index = self.tableView.clickedRow
     if index >= 0 {
-      let book = self.books[index]
+      let book = self.books.value![index]
       self.open(book)
     }
   }
@@ -101,7 +119,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   @IBAction func showFileInFinder(_ sender: Any) {
     let index = self.tableView.clickedRow
     if index >= 0 {
-      let book = self.books[index]
+      let book = self.books.value![index]
       var bookmarkDataIsStale = false
       if let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) {
         NSWorkspace.shared.activateFileViewerSelecting([url])
@@ -115,7 +133,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   @IBAction func deleteFromLibrary(_ sender: Any) {
     let index = self.tableView.clickedRow
     if index >= 0 {
-      let book = self.books[index]
+      let book = self.books.value![index]
       // TODO: show error dialog
       Observable.from([book])
         .subscribe(Realm.rx.delete())
@@ -137,13 +155,13 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
 
   // MARK: - NSTableViewDataSource
   func numberOfRows(in: NSTableView) -> Int {
-    return self.books.count
+    return self.books.value!.count
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int)
     -> Any?
   {
-    let book = self.books[row]
+    let book = self.books.value![row]
     if let columnIdentifier = tableColumn?.identifier {
       switch columnIdentifier {
       case NSUserInterfaceItemIdentifier("file"):
@@ -213,9 +231,9 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     }
     switch identifier.rawValue {
     case "file":
-      cellView.textField?.stringValue = self.books[row].filename
+      cellView.textField?.stringValue = self.books.value![row].filename
     case "view":
-      cellView.textField?.stringValue = String(self.books[row].readCount)
+      cellView.textField?.stringValue = String(self.books.value![row].readCount)
     default:
       break
     }

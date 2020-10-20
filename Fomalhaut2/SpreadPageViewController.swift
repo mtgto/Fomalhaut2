@@ -65,9 +65,12 @@ class SpreadPageViewController: NSViewController {
         log.error("Failed to create realm instance")
         return
       }
-      try? realm.write {
-        book.lastPageIndex = self.currentPageIndex.value
-        book.isRightToLeft = self.pageOrder.value == .rtl
+      // If book is already deleted from realm, updating is ignored.
+      if let book = realm.object(ofType: Book.self, forPrimaryKey: book.id) {
+        try? realm.write {
+          book.lastPageIndex = self.currentPageIndex.value
+          book.isRightToLeft = self.pageOrder.value == .rtl
+        }
       }
     }
   }

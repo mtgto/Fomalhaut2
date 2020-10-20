@@ -2,10 +2,11 @@
 
 import Cocoa
 
+let filterChangedNotificationName = Notification.Name("bookFilterChanged")
+
 struct Filter: Equatable {
   let name: String
-  // TODO: Add Observable, like PublishSubject, to subscribe filtered books
-  let books: [Book]
+  let predicate: String
 
   static func == (lhs: Filter, rhs: Filter) -> Bool {
     return lhs.name == rhs.name

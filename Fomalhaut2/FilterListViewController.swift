@@ -6,7 +6,8 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
   private let rootItem = "Library"
   // TODO: Use PublishSubject to add/remove filter by user
   private let filters: [Filter] = [
-    Filter(name: "All", books: []), Filter(name: "Unread", books: []),
+    Filter(name: "All", predicate: "readCount >= 0"),
+    Filter(name: "Unread", predicate: "readCount = 0"),
   ]
   @IBOutlet weak var filterListView: NSOutlineView!
 
@@ -86,7 +87,15 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
       cell.textField?.stringValue = label
       return cell
     }
-    log.error("Unexpected tableColumn \(tableColumn), item: \(item)")
+    log.error("Unexpected tableColumn. item: \(item)")
     return nil
+  }
+
+  func outlineViewSelectionDidChange(_ notification: Notification) {
+    //log.info("selectedRow = \(self.filterListView.selectedRow)")
+    if let filter = self.filterListView.item(atRow: self.filterListView.selectedRow) as? Filter {
+      NotificationCenter.default.post(
+        name: filterChangedNotificationName, object: nil, userInfo: ["filter": filter])
+    }
   }
 }

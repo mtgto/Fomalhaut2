@@ -19,7 +19,6 @@
 		CE30281F25305AA200986C9A /* Fomalhaut2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30281E25305AA200986C9A /* Fomalhaut2Tests.swift */; };
 		CE30282A25305AA200986C9A /* Fomalhaut2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */; };
 		CE654D762537E9530051D575 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE654D752537E9520051D575 /* Credits.rtf */; };
-		CE654D83253846050051D575 /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE654D82253846050051D575 /* Book.storyboard */; };
 		CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */; };
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
@@ -29,6 +28,7 @@
 		CEB2DA0425399693002C3F7E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA0325399693002C3F7E /* Book.swift */; };
 		CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */; };
 		CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA51253E9384002C3F7E /* Filter.swift */; };
+		CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB2DA64253EF85D002C3F7E /* Book.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +65,6 @@
 		CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fomalhaut2UITests.swift; sourceTree = "<group>"; };
 		CE30282B25305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE654D752537E9520051D575 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
-		CE654D82253846050051D575 /* Book.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Book.storyboard; sourceTree = "<group>"; };
 		CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWindowController.swift; sourceTree = "<group>"; };
 		CE9EE62725330EE100B5AF5C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +72,7 @@
 		CEB2DA0325399693002C3F7E /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
 		CEB2DA51253E9384002C3F7E /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		CEB2DA63253EF85D002C3F7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Book.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +141,7 @@
 				CEB2DA0325399693002C3F7E /* Book.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
-				CE654D82253846050051D575 /* Book.storyboard */,
+				CEB2DA64253EF85D002C3F7E /* Book.storyboard */,
 				CE30281425305AA200986C9A /* Info.plist */,
 				CE30281525305AA200986C9A /* Fomalhaut2.entitlements */,
 				CE654D752537E9520051D575 /* Credits.rtf */,
@@ -284,7 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE30281025305AA200986C9A /* Assets.xcassets in Resources */,
-				CE654D83253846050051D575 /* Book.storyboard in Resources */,
+				CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */,
 				CE654D762537E9530051D575 /* Credits.rtf in Resources */,
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,
 			);
@@ -363,6 +363,14 @@
 				CE30281225305AA200986C9A /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CEB2DA64253EF85D002C3F7E /* Book.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEB2DA63253EF85D002C3F7E /* Base */,
+			);
+			name = Book.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -7,13 +7,19 @@ import RxRealm
 import RxRelay
 import RxSwift
 
-class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableViewDelegate,
-  NSMenuItemValidation
-{
+enum CollectionViewStyle {
+  case collection, list
+}
 
+class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableViewDelegate,
+  NSMenuItemValidation, NSCollectionViewDataSource, NSCollectionViewDelegate,
+  NSCollectionViewDelegateFlowLayout
+{
   private var books: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(value: nil)
   private let disposeBag = DisposeBag()
+  @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
+  private var collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
 
   override func viewDidLoad() {
     // Do view setup here.
@@ -95,6 +101,11 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     alert.messageText = message
     alert.informativeText = information
     alert.runModal()
+  }
+
+  func setCollectionViewStyle(_ collectionViewStyle: CollectionViewStyle) {
+    self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
+    self.collectionViewStyle.accept(collectionViewStyle)
   }
 
   // Double click the row of TableView
@@ -238,6 +249,33 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     }
 
     return cellView
+  }
+
+  // MARK: - NSCollectionViewDataSource
+  func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int)
+    -> Int
+  {
+    return self.books.value!.count
+  }
+
+  func collectionView(
+    _ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath
+  ) -> NSCollectionViewItem {
+    let item: BookCollectionViewItem =
+      collectionView.makeItem(
+        withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BookCollectionViewItem"),
+        for: indexPath) as? BookCollectionViewItem ?? BookCollectionViewItem()
+    item.textField?.stringValue = self.books.value![indexPath.item].filename
+    item.imageView?.image = NSImage(named: NSImage.actionTemplateName)
+    return item
+  }
+
+  // MARK: NSCollectionViewDelegateFlowLayout
+  func collectionView(
+    _ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout,
+    sizeForItemAt indexPath: IndexPath
+  ) -> NSSize {
+    return NSSize(width: 178, height: 272)
   }
 }
 

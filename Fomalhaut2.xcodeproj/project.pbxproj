@@ -30,6 +30,9 @@
 		CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA51253E9384002C3F7E /* Filter.swift */; };
 		CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB2DA64253EF85D002C3F7E /* Book.storyboard */; };
 		CEB2DA69253FE6DB002C3F7E /* FilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */; };
+		CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */; };
+		CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */; };
+		CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793C25403AD500A35C39 /* MainWindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,9 @@
 		CEB2DA51253E9384002C3F7E /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		CEB2DA63253EF85D002C3F7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Book.storyboard; sourceTree = "<group>"; };
 		CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListView.swift; sourceTree = "<group>"; };
+		CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewItem.swift; sourceTree = "<group>"; };
+		CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookCollectionViewItem.xib; sourceTree = "<group>"; };
+		CEE9793C25403AD500A35C39 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,11 +143,14 @@
 				CE275AD525389E0200BEACB7 /* FolderDocument.swift */,
 				CE9EE62725330EE100B5AF5C /* ImageCache.swift */,
 				CE296BEB2530722A00674C99 /* BookAccessible.swift */,
+				CEE9793C25403AD500A35C39 /* MainWindowController.swift */,
 				CEB2D9FB2539946D002C3F7E /* MainViewController.swift */,
 				CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */,
 				CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */,
 				CEB2DA51253E9384002C3F7E /* Filter.swift */,
 				CEB2DA0325399693002C3F7E /* Book.swift */,
+				CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */,
+				CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
 				CEB2DA64253EF85D002C3F7E /* Book.storyboard */,
@@ -289,6 +298,7 @@
 				CE30281025305AA200986C9A /* Assets.xcassets in Resources */,
 				CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */,
 				CE654D762537E9530051D575 /* Credits.rtf in Resources */,
+				CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */,
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,11 +326,13 @@
 			files = (
 				CE296BEC2530722A00674C99 /* BookAccessible.swift in Sources */,
 				CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */,
+				CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */,
 				CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */,
 				CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
 				CEB2DA0425399693002C3F7E /* Book.swift in Sources */,
+				CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */,
 				CE275AD625389E0200BEACB7 /* FolderDocument.swift in Sources */,
 				CEB2DA69253FE6DB002C3F7E /* FilterListView.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,

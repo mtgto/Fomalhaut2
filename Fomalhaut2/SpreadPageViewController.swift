@@ -71,6 +71,8 @@ class SpreadPageViewController: NSViewController {
           book.lastPageIndex = self.currentPageIndex.value
           book.isRightToLeft = self.pageOrder.value == .rtl
         }
+      } else {
+        log.info("Closing book \(book.filePath) is already deleted from realm")
       }
     }
   }

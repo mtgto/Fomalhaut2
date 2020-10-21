@@ -2,11 +2,14 @@
 
 import Cocoa
 import RealmSwift
+import RxRealm
+import RxSwift
 import ZIPFoundation
 
 class ZipDocument: NSDocument {
   static let UTI: String = "com.pkware.zip-archive"
   var book: Book?
+  private let disposeBag = DisposeBag()
   private var archive: Archive?
   private lazy var entries: [Entry] = self.archive!.sorted { (lhs, rhs) -> Bool in
     lhs.path.localizedStandardCompare(rhs.path) == .orderedAscending
@@ -37,6 +40,14 @@ class ZipDocument: NSDocument {
         }
         self.book = book
       }
+      Observable.from(object: self.book!, emitInitialValue: false)
+        .subscribe(onError: { error in
+          if error == RxRealmError.objectDeleted {
+            log.info("Book is deleted.")
+            self.book = nil
+          }
+        })
+        .disposed(by: self.disposeBag)
     }
     guard let archive = Archive(url: url, accessMode: .read, preferredEncoding: .shiftJIS) else {
       throw NSError(domain: "net.mtgto.Fomalhaut2", code: 0, userInfo: nil)

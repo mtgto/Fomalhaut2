@@ -22,16 +22,15 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     // NOTE: This query will be changed by filter which user choose
     self.books.accept(realm.objects(Book.self).sorted(byKeyPath: "createdAt"))
     self.books
-      .subscribe(onNext: { books in
+      .flatMapLatest { books in
         return Observable.changeset(from: books!)
-          .subscribe(onNext: { [unowned self] _, changes in
-            if let changes = changes {
-              self.tableView.applyChangeset(changes)
-            } else {
-              self.tableView.reloadData()
-            }
-          })
-          .disposed(by: self.disposeBag)
+      }
+      .subscribe(onNext: { [unowned self] _, changes in
+        if let changes = changes {
+          self.tableView.applyChangeset(changes)
+        } else {
+          self.tableView.reloadData()
+        }
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)

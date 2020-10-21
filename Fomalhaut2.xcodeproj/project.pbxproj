@@ -29,6 +29,7 @@
 		CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */; };
 		CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA51253E9384002C3F7E /* Filter.swift */; };
 		CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB2DA64253EF85D002C3F7E /* Book.storyboard */; };
+		CEB2DA69253FE6DB002C3F7E /* FilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
 		CEB2DA51253E9384002C3F7E /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		CEB2DA63253EF85D002C3F7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Book.storyboard; sourceTree = "<group>"; };
+		CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				CE296BEB2530722A00674C99 /* BookAccessible.swift */,
 				CEB2D9FB2539946D002C3F7E /* MainViewController.swift */,
 				CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */,
+				CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */,
 				CEB2DA51253E9384002C3F7E /* Filter.swift */,
 				CEB2DA0325399693002C3F7E /* Book.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
@@ -319,6 +322,7 @@
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
 				CEB2DA0425399693002C3F7E /* Book.swift in Sources */,
 				CE275AD625389E0200BEACB7 /* FolderDocument.swift in Sources */,
+				CEB2DA69253FE6DB002C3F7E /* FilterListView.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
 				CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */,
 				CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */,

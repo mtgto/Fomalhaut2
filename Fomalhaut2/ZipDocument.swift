@@ -107,7 +107,19 @@ extension ZipDocument: BookAccessible {
             }
             if let selfBook = self.book {
               if page == 0 && selfBook.thumbnailData == nil {
-                let thumbnail = image.resize(to: CGSize(width: 100, height: 200))
+                let maxWidth: CGFloat = 220.0
+                let maxHeight: CGFloat = 340.0
+                let width: CGFloat
+                let height: CGFloat
+                let aspectRatio = image.size.height / image.size.width
+                if image.size.height / image.size.width > maxHeight / maxWidth {
+                  width = maxHeight / aspectRatio
+                  height = maxHeight
+                } else {
+                  width = maxWidth
+                  height = maxWidth * aspectRatio
+                }
+                let thumbnail = image.resize(to: CGSize(width: width, height: height))
                 if let tiff = thumbnail.tiffRepresentation,
                   let data = NSBitmapImageRep(data: tiff)?.representation(
                     using: .png, properties: [:])

@@ -289,8 +289,9 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
         for: indexPath) as? BookCollectionViewItem ?? BookCollectionViewItem()
     let book = self.books.value![indexPath.item]
     item.textField?.stringValue = book.filename
-    if let data = book.thumbnailData {
-      item.imageView?.image = NSImage(data: data)
+    if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
+      //log.debug("THUMBNAIL SIZE \(thumbnail.representations.first!.pixelsWide) x \(thumbnail.representations.first!.pixelsHigh)")
+      item.imageView?.image = thumbnail
     } else {
       item.imageView?.image = NSImage(named: NSImage.stopProgressTemplateName)
     }

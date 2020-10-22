@@ -925,12 +925,13 @@
                                                         <rect key="frame" x="1" y="1" width="268" height="298"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <collectionView id="dAn-bS-ccr">
+                                                            <collectionView selectable="YES" id="dAn-bS-ccr">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="158"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                                                <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="JhV-tB-u5q">
-                                                                    <size key="itemSize" width="50" height="50"/>
-                                                                </collectionViewFlowLayout>
+                                                                <collectionViewGridLayout key="collectionViewLayout" id="vzh-ZJ-NkJ">
+                                                                    <size key="minimumItemSize" width="178" height="272"/>
+                                                                    <size key="maximumItemSize" width="178" height="272"/>
+                                                                </collectionViewGridLayout>
                                                                 <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <connections>
                                                                     <outlet property="dataSource" destination="ZB3-hi-shs" id="bwK-4J-JkE"/>
@@ -966,7 +967,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
                                                     <clipView key="contentView" id="BBK-wR-7a6">
                                                         <rect key="frame" x="1" y="0.0" width="268" height="299"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="FileListView" rowSizeStyle="automatic" headerView="aUv-0U-ndW" viewBased="YES" id="rLV-3v-YTc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="274"/>
@@ -1082,6 +1083,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionViewGridLayout" destination="vzh-ZJ-NkJ" id="x15-Ro-k04"/>
                         <outlet property="tabView" destination="vrY-YN-MxK" id="9Jc-Bt-AjT"/>
                         <outlet property="tableView" destination="rLV-3v-YTc" id="5I8-pG-ecn"/>
                     </connections>

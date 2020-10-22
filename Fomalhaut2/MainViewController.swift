@@ -12,18 +12,20 @@ enum CollectionViewStyle {
 }
 
 class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableViewDelegate,
-  NSMenuItemValidation, NSCollectionViewDataSource, NSCollectionViewDelegate,
-  NSCollectionViewDelegateFlowLayout
+  NSMenuItemValidation, NSCollectionViewDataSource, NSCollectionViewDelegate
 {
   private let books: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(value: nil)
   let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
   private let disposeBag = DisposeBag()
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
+  @IBOutlet weak var collectionViewGridLayout: NSCollectionViewGridLayout!
 
   override func viewDidLoad() {
     // Do view setup here.
     self.tableView.registerForDraggedTypes([.fileURL])
+    self.collectionViewGridLayout.minimumInteritemSpacing = 5.0
+    self.collectionViewGridLayout.minimumLineSpacing = 3.0
     let realm = try! Realm()
     // NOTE: This query will be changed by filter which user choose
     self.books.accept(realm.objects(Book.self).sorted(byKeyPath: "createdAt"))
@@ -273,14 +275,6 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     item.textField?.stringValue = self.books.value![indexPath.item].filename
     item.imageView?.image = NSImage(named: NSImage.actionTemplateName)
     return item
-  }
-
-  // MARK: NSCollectionViewDelegateFlowLayout
-  func collectionView(
-    _ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath
-  ) -> NSSize {
-    return NSSize(width: 178, height: 272)
   }
 }
 

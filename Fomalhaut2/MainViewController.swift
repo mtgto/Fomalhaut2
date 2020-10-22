@@ -37,10 +37,11 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
       .subscribe(onNext: { [unowned self] _, changes in
         if let changes = changes {
           self.tableView.applyChangeset(changes)
+          self.collectionView.applyChangeset(changes)
         } else {
           self.tableView.reloadData()
+          self.collectionView.reloadData()
         }
-        self.collectionView.reloadData()
       })
       .disposed(by: self.disposeBag)
     self.collectionViewStyle
@@ -299,5 +300,18 @@ extension NSTableView {
     insertRows(at: IndexSet(changes.inserted))
     reloadData(forRowIndexes: IndexSet(changes.updated), columnIndexes: [0, 1])
     endUpdates()
+  }
+}
+
+extension NSCollectionView {
+  func applyChangeset(_ changes: RealmChangeset) {
+    performBatchUpdates {
+      deleteItems(at: Set(changes.deleted.map { IndexPath(item: $0, section: 0) }))
+      insertItems(at: Set(changes.inserted.map { IndexPath(item: $0, section: 0) }))
+      reloadItems(at: Set(changes.updated.map { IndexPath(item: $0, section: 0) }))
+    } completionHandler: { (finished) in
+
+    }
+
   }
 }

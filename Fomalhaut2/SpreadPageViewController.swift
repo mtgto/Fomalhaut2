@@ -6,11 +6,11 @@ import RxRelay
 import RxSwift
 
 class SpreadPageViewController: NSViewController {
-  private(set) var pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
-  private(set) var pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
-  private(set) var currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
-  private var firstImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
-  private var secondImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()
+  let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+  let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
+  let currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+  private let firstImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
+  private let secondImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()
   private let disposeBag = DisposeBag()
 
   @IBOutlet weak var imageStackView: NSStackView!

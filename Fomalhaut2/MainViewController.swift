@@ -15,11 +15,11 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   NSMenuItemValidation, NSCollectionViewDataSource, NSCollectionViewDelegate,
   NSCollectionViewDelegateFlowLayout
 {
-  private var books: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(value: nil)
+  private let books: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(value: nil)
+  let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
   private let disposeBag = DisposeBag()
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
-  private var collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
 
   override func viewDidLoad() {
     // Do view setup here.
@@ -37,6 +37,12 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
         } else {
           self.tableView.reloadData()
         }
+      })
+      .disposed(by: self.disposeBag)
+    self.collectionViewStyle
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { collectionViewStyle in
+        self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)
@@ -104,7 +110,6 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   }
 
   func setCollectionViewStyle(_ collectionViewStyle: CollectionViewStyle) {
-    self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
     self.collectionViewStyle.accept(collectionViewStyle)
   }
 

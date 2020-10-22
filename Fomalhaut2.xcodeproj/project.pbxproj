@@ -33,6 +33,7 @@
 		CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */; };
 		CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */; };
 		CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793C25403AD500A35C39 /* MainWindowController.swift */; };
+		CEE979452541618D00A35C39 /* BookCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE979442541618D00A35C39 /* BookCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewItem.swift; sourceTree = "<group>"; };
 		CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookCollectionViewItem.xib; sourceTree = "<group>"; };
 		CEE9793C25403AD500A35C39 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		CEE979442541618D00A35C39 /* BookCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */,
 				CEB2DA51253E9384002C3F7E /* Filter.swift */,
 				CEB2DA0325399693002C3F7E /* Book.swift */,
+				CEE979442541618D00A35C39 /* BookCollectionView.swift */,
 				CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */,
 				CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
@@ -330,6 +333,7 @@
 				CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */,
 				CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
+				CEE979452541618D00A35C39 /* BookCollectionView.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
 				CEB2DA0425399693002C3F7E /* Book.swift in Sources */,
 				CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */,

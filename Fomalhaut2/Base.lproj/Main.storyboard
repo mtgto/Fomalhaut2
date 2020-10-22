@@ -925,7 +925,7 @@
                                                         <rect key="frame" x="1" y="1" width="268" height="298"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <collectionView selectable="YES" id="dAn-bS-ccr">
+                                                            <collectionView selectable="YES" id="dAn-bS-ccr" customClass="BookCollectionView" customModule="Fomalhaut2" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="158"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                 <collectionViewGridLayout key="collectionViewLayout" id="vzh-ZJ-NkJ">
@@ -936,6 +936,7 @@
                                                                 <connections>
                                                                     <outlet property="dataSource" destination="ZB3-hi-shs" id="bwK-4J-JkE"/>
                                                                     <outlet property="delegate" destination="ZB3-hi-shs" id="YLr-Pb-aM5"/>
+                                                                    <outlet property="menu" destination="D4X-CC-i7j" id="B34-2X-REB"/>
                                                                 </connections>
                                                             </collectionView>
                                                         </subviews>
@@ -1083,6 +1084,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="dAn-bS-ccr" id="7f2-Sc-7Gs"/>
                         <outlet property="collectionViewGridLayout" destination="vzh-ZJ-NkJ" id="x15-Ro-k04"/>
                         <outlet property="tabView" destination="vrY-YN-MxK" id="9Jc-Bt-AjT"/>
                         <outlet property="tableView" destination="rLV-3v-YTc" id="5I8-pG-ecn"/>

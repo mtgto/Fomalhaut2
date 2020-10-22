@@ -19,6 +19,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   private let disposeBag = DisposeBag()
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
+  @IBOutlet weak var collectionView: NSCollectionView!
   @IBOutlet weak var collectionViewGridLayout: NSCollectionViewGridLayout!
 
   override func viewDidLoad() {
@@ -39,6 +40,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
         } else {
           self.tableView.reloadData()
         }
+        self.collectionView.reloadData()
       })
       .disposed(by: self.disposeBag)
     self.collectionViewStyle
@@ -126,17 +128,13 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
 
   // MARK: - NSMenu for NSTableView
   @IBAction func openViewer(_ sender: Any) {
-    let index = self.tableView.clickedRow
-    if index >= 0 {
-      let book = self.books.value![index]
+    if let book = self.selectedBook() {
       self.open(book)
     }
   }
 
   @IBAction func showFileInFinder(_ sender: Any) {
-    let index = self.tableView.clickedRow
-    if index >= 0 {
-      let book = self.books.value![index]
+    if let book = self.selectedBook() {
       var bookmarkDataIsStale = false
       if let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) {
         NSWorkspace.shared.activateFileViewerSelecting([url])
@@ -148,9 +146,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   }
 
   @IBAction func deleteFromLibrary(_ sender: Any) {
-    let index = self.tableView.clickedRow
-    if index >= 0 {
-      let book = self.books.value![index]
+    if let book = self.selectedBook() {
       // TODO: show error dialog
       Observable.from([book])
         .subscribe(Realm.rx.delete())
@@ -165,9 +161,27 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     if selector == #selector(openViewer(_:)) || selector == #selector(showFileInFinder(_:))
       || selector == #selector(deleteFromLibrary(_:))
     {
-      return self.tableView.clickedRow >= 0
+      if self.collectionViewStyle.value == .list {
+        return self.tableView.clickedRow >= 0
+      } else {
+        return !self.collectionView.selectionIndexes.isEmpty
+      }
     }
     return false
+  }
+
+  func selectedBook() -> Book? {
+    if self.collectionViewStyle.value == .collection {
+      if let indexPath = self.collectionView.selectionIndexPaths.first {
+        return self.books.value![indexPath.item]
+      }
+    } else {
+      let index = self.tableView.clickedRow
+      if index >= 0 {
+        return self.books.value![index]
+      }
+    }
+    return nil
   }
 
   // MARK: - NSTableViewDataSource

@@ -82,7 +82,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
             document.showWindows()
           } else {
             if let document = document as? ZipDocument {
-              document.book = book
+              document.book = book.freeze()
             }
             if bookmarkDataIsStale {
               do {
@@ -287,8 +287,13 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
       collectionView.makeItem(
         withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BookCollectionViewItem"),
         for: indexPath) as? BookCollectionViewItem ?? BookCollectionViewItem()
-    item.textField?.stringValue = self.books.value![indexPath.item].filename
-    item.imageView?.image = NSImage(named: NSImage.actionTemplateName)
+    let book = self.books.value![indexPath.item]
+    item.textField?.stringValue = book.filename
+    if let data = book.thumbnailData {
+      item.imageView?.image = NSImage(data: data)
+    } else {
+      item.imageView?.image = NSImage(named: NSImage.stopProgressTemplateName)
+    }
     return item
   }
 }

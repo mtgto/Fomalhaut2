@@ -34,6 +34,7 @@
 		CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */; };
 		CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793C25403AD500A35C39 /* MainWindowController.swift */; };
 		CEE979452541618D00A35C39 /* BookCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE979442541618D00A35C39 /* BookCollectionView.swift */; };
+		CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookCollectionViewItem.xib; sourceTree = "<group>"; };
 		CEE9793C25403AD500A35C39 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CEE979442541618D00A35C39 /* BookCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionView.swift; sourceTree = "<group>"; };
+		CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Resize.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				CEE979442541618D00A35C39 /* BookCollectionView.swift */,
 				CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */,
 				CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */,
+				CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
 				CEB2DA64253EF85D002C3F7E /* Book.storyboard */,
@@ -339,6 +342,7 @@
 				CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */,
 				CE275AD625389E0200BEACB7 /* FolderDocument.swift in Sources */,
 				CEB2DA69253FE6DB002C3F7E /* FilterListView.swift in Sources */,
+				CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
 				CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */,
 				CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */,

@@ -60,20 +60,22 @@ class SpreadPageViewController: NSViewController {
   override func viewWillDisappear() {
     super.viewWillDisappear()
     // Update book
-    if let document = self.representedObject as? ZipDocument, let book = document.book {
-      guard let realm = try? Realm() else {
-        log.error("Failed to create realm instance")
-        return
-      }
-      // If book is already deleted from realm, updating is ignored.
-      if let book = realm.object(ofType: Book.self, forPrimaryKey: book.id) {
-        try? realm.write {
-          book.lastPageIndex = self.currentPageIndex.value
-          book.isRightToLeft = self.pageOrder.value == .rtl
-        }
-      } else {
-        log.info("Closing book \(book.filePath) is already deleted from realm")
-      }
+    if let document = self.representedObject as? ZipDocument {
+      try? document.storeViewerStatus(
+        lastPageIndex: self.currentPageIndex.value, isRightToLeft: self.pageOrder.value == .rtl)
+      //      guard let realm = try? Realm() else {
+      //        log.error("Failed to create realm instance")
+      //        return
+      //      }
+      //      // If book is already deleted from realm, updating is ignored.
+      //      if let book = realm.object(ofType: Book.self, forPrimaryKey: book.id) {
+      //        try? realm.write {
+      //          book.lastPageIndex = self.currentPageIndex.value
+      //          book.isRightToLeft = self.pageOrder.value == .rtl
+      //        }
+      //      } else {
+      //        log.info("Closing book \(book.filePath) is already deleted from realm")
+      //      }
     }
   }
 

@@ -2,13 +2,12 @@
 
 import Cocoa
 import RealmSwift
-import RxRealm
 import RxSwift
 import ZIPFoundation
 
 class ZipDocument: NSDocument {
   static let UTI: String = "com.pkware.zip-archive"
-  var book: Book?
+  var book: Book?  // should be frozen
   private let disposeBag = DisposeBag()
   private var archive: Archive?
   private lazy var entries: [Entry] = self.archive!.sorted { (lhs, rhs) -> Bool in
@@ -30,7 +29,7 @@ class ZipDocument: NSDocument {
         try? realm.write {
           book.readCount = book.readCount + 1
         }
-        self.book = book
+        self.book = book.freeze()
       } else {
         let book = Book()
         book.readCount = 1
@@ -38,16 +37,8 @@ class ZipDocument: NSDocument {
         try? realm.write {
           realm.add(book)
         }
-        self.book = book
+        self.book = book.freeze()
       }
-      Observable.from(object: self.book!, emitInitialValue: false)
-        .subscribe(onError: { error in
-          if error == RxRealmError.objectDeleted {
-            log.info("Book is deleted.")
-            self.book = nil
-          }
-        })
-        .disposed(by: self.disposeBag)
     }
     guard let archive = Archive(url: url, accessMode: .read, preferredEncoding: .shiftJIS) else {
       throw NSError(domain: "net.mtgto.Fomalhaut2", code: 0, userInfo: nil)
@@ -70,6 +61,18 @@ class ZipDocument: NSDocument {
   override func windowControllerDidLoadNib(_ aController: NSWindowController) {
     super.windowControllerDidLoadNib(aController)
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
+  }
+
+  func storeViewerStatus(lastPageIndex: Int, isRightToLeft: Bool) throws {
+    if let selfBook = self.book {
+      let realm = try Realm()
+      if let book = realm.object(ofType: Book.self, forPrimaryKey: selfBook.id) {
+        try realm.write {
+          book.lastPageIndex = lastPageIndex
+          book.isRightToLeft = isRightToLeft
+        }
+      }
+    }
   }
 }
 
@@ -101,6 +104,24 @@ extension ZipDocument: BookAccessible {
             guard let image = NSImage(data: rawData) else {
               completion(.failure(BookAccessibleError.brokenFile))
               return
+            }
+            if let selfBook = self.book {
+              if page == 0 && selfBook.thumbnailData == nil {
+                let thumbnail = image.resize(to: CGSize(width: 100, height: 200))
+                if let tiff = thumbnail.tiffRepresentation,
+                  let data = NSBitmapImageRep(data: tiff)?.representation(
+                    using: .png, properties: [:])
+                {
+                  //                  self.thumbnailData.accept(data)
+                  if let realm = try? Realm() {
+                    if let book = realm.object(ofType: Book.self, forPrimaryKey: selfBook.id) {
+                      try? realm.write {
+                        book.thumbnailData = data
+                      }
+                    }
+                  }
+                }
+              }
             }
             imageCache.setObject(image, forKey: imageCacheKey, cost: rawData.count)
             completion(.success(image))

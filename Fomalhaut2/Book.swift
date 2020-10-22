@@ -13,6 +13,8 @@ class Book: Object {
   @objc dynamic var isRightToLeft: Bool = true
   @objc dynamic var lastPageIndex: Int = 0
   @objc dynamic var shiftedSignlePage: Bool = false
+  // PNG data
+  @objc dynamic var thumbnailData: Data? = nil
 
   var filename: String {
     return URL(fileURLWithPath: self.filePath).lastPathComponent

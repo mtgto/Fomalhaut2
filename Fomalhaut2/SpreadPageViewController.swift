@@ -24,7 +24,7 @@ class SpreadPageViewController: NSViewController {
 
   override func viewWillDisappear() {
     super.viewWillDisappear()
-    // Update book
+    // Update book state
     if let document = self.representedObject as? ZipDocument {
       try? document.storeViewerStatus(
         lastPageIndex: self.currentPageIndex.value, isRightToLeft: self.pageOrder.value == .rtl)
@@ -48,23 +48,7 @@ class SpreadPageViewController: NSViewController {
           count: self.pageCount.value - self.currentPageIndex.value
         )
         .flatMap { pageIndex in
-          Observable<NSImage>.create { observer in
-            document.image(at: pageIndex) { (result) in
-              switch result {
-              case .success(let image):
-                observer.onNext(image)
-                observer.onCompleted()
-                log.debug("success to load image at \(pageIndex)")
-              case .failure(let error):
-                log.info("fail to load image at \(pageIndex): \(error)")
-                observer.onCompleted()
-              // do nothing (= skip broken page)
-              // TODO: Remember error index in ZipDocument not to reload same error page
-              // observer.onError(error)
-              }
-            }
-            return Disposables.create()
-          }
+          self.loadImage(pageIndex: pageIndex, document: document)
         }
         .take(currentPageIndex == 0 ? 1 : 2)
         .toArray()
@@ -120,6 +104,26 @@ class SpreadPageViewController: NSViewController {
     let lastCurrentPageIndex = coder.decodeInteger(forKey: "currentPageIndex")
     self.currentPageIndex.accept(lastCurrentPageIndex)
     log.info("restoreState: lastCurrentPageIndex = \(lastCurrentPageIndex)")
+  }
+
+  func loadImage(pageIndex: Int, document: BookAccessible) -> Observable<NSImage> {
+    return Observable<NSImage>.create { observer in
+      document.image(at: pageIndex) { (result) in
+        switch result {
+        case .success(let image):
+          observer.onNext(image)
+          observer.onCompleted()
+          log.debug("success to load image at \(pageIndex)")
+        case .failure(let error):
+          // do nothing (= skip broken page)
+          // TODO: Remember error index in ZipDocument not to reload same error page
+          // observer.onError(error)
+          log.info("fail to load image at \(pageIndex): \(error)")
+          observer.onCompleted()
+        }
+      }
+      return Disposables.create()
+    }
   }
 
   // increment page (two page increment)

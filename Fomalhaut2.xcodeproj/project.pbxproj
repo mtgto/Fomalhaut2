@@ -125,7 +125,10 @@
 				CE30282825305AA200986C9A /* Fomalhaut2UITests */,
 				CE30280725305AA000986C9A /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
 		};
 		CE30280725305AA000986C9A /* Products */ = {
 			isa = PBXGroup;

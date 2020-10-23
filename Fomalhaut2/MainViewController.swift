@@ -118,6 +118,11 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     self.collectionViewStyle.accept(collectionViewStyle)
   }
 
+  // called when the item of NSCollectionView is double-clicked
+  func openCollectionViewBook(_ indexPath: IndexPath) {
+    self.open(self.books.value![indexPath.item])
+  }
+
   // Double click the row of TableView
   @IBAction func openBook(_ sender: Any) {
     let index = self.tableView.clickedRow
@@ -318,6 +323,5 @@ extension NSCollectionView {
     } completionHandler: { (finished) in
 
     }
-
   }
 }

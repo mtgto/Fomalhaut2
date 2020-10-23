@@ -15,4 +15,17 @@ class BookCollectionView: NSCollectionView {
     self.selectItems(at: [path], scrollPosition: .nearestVerticalEdge)
     return super.menu(for: event)
   }
+
+  override func mouseDown(with event: NSEvent) {
+    if event.clickCount == 2 {
+      let locationInView = convert(event.locationInWindow, from: nil)
+      guard let path = indexPathForItem(at: locationInView) else {
+        return
+      }
+      if let mainViewController = self.delegate as? MainViewController {
+        mainViewController.openCollectionViewBook(path)
+      }
+    }
+    super.mouseDown(with: event)
+  }
 }

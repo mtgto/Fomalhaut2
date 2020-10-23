@@ -19,7 +19,7 @@
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="URe-sz-Srt">
                     <rect key="frame" x="0.0" y="44" width="178" height="228"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSStopProgressFreestandingTemplate" id="mYJ-uC-V2S"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSBookmarksTemplate" id="mYJ-uC-V2S"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h4P-We-Kpz">
                     <rect key="frame" x="-2" y="0.0" width="182" height="36"/>
@@ -27,7 +27,7 @@
                         <constraint firstAttribute="height" constant="36" id="3wJ-65-WEO"/>
                     </constraints>
                     <textFieldCell key="cell" title="Label" id="Psd-ut-jZ5">
-                        <font key="font" metaFont="system" size="12"/>
+                        <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -53,6 +53,6 @@
         </collectionViewItem>
     </objects>
     <resources>
-        <image name="NSStopProgressFreestandingTemplate" width="14" height="14"/>
+        <image name="NSBookmarksTemplate" width="17" height="18"/>
     </resources>
 </document>

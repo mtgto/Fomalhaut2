@@ -25,6 +25,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   override func viewDidLoad() {
     // Do view setup here.
     self.tableView.registerForDraggedTypes([.fileURL])
+    self.collectionView.registerForDraggedTypes([.fileURL])
     self.collectionViewGridLayout.minimumInteritemSpacing = 5.0
     self.collectionViewGridLayout.minimumLineSpacing = 3.0
     let realm = try! Realm()
@@ -298,9 +299,60 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
       //log.debug("THUMBNAIL SIZE \(thumbnail.representations.first!.pixelsWide) x \(thumbnail.representations.first!.pixelsHigh)")
       item.imageView?.image = thumbnail
     } else {
-      item.imageView?.image = NSImage(named: NSImage.stopProgressTemplateName)
+      // TODO: Use more user friendly image
+      item.imageView?.image = NSImage(named: NSImage.bookmarksTemplateName)
     }
     return item
+  }
+
+  // MARK: NSCollectionViewDelegate
+  func collectionView(
+    _ collectionView: NSCollectionView,
+    validateDrop draggingInfo: NSDraggingInfo,
+    proposedIndexPath proposedDropIndexPath: AutoreleasingUnsafeMutablePointer<NSIndexPath>,
+    dropOperation proposedDropOperation: UnsafeMutablePointer<NSCollectionView.DropOperation>
+  ) -> NSDragOperation {
+    let dropFileCount =
+      draggingInfo.draggingPasteboard.readObjects(
+        forClasses: [NSURL.self],
+        options: [.urlReadingFileURLsOnly: 1, .urlReadingContentsConformToTypes: [ZipDocument.UTI]])?
+      .count ?? 0
+    if dropFileCount == 0 {
+      return []
+    }
+    return .copy
+  }
+
+  func collectionView(
+    _ collectionView: NSCollectionView,
+    acceptDrop draggingInfo: NSDraggingInfo,
+    indexPath: IndexPath,
+    dropOperation: NSCollectionView.DropOperation
+  ) -> Bool {
+    if let dropFileURLs = draggingInfo.draggingPasteboard.readObjects(
+      forClasses: [NSURL.self],
+      options: [.urlReadingFileURLsOnly: 1, .urlReadingContentsConformToTypes: [ZipDocument.UTI]])
+      as? [URL]
+    {
+
+      let books: [Book] = dropFileURLs.compactMap { (fileURL) in
+        let book = Book()
+        guard let _ = try? book.setURL(fileURL) else {
+          log.error("Error while create bookmarkData from \(fileURL.path)")
+          return nil
+        }
+        return book
+        // TODO: Validate whether file contains one or more images? for example get thumbnail
+        //guard let document = try? NSDocumentController.shared.makeDocument(withContentsOf: fileURL, ofType: ZipDocument.UTI) else {
+        //log.info("Can not open with ZipDocument")
+        //return
+        //}
+      }
+      Observable.of(books)
+        .subscribe(Realm.rx.add())
+        .disposed(by: self.disposeBag)
+    }
+    return false
   }
 }
 

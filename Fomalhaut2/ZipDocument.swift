@@ -13,6 +13,9 @@ class ZipDocument: NSDocument {
   private lazy var entries: [Entry] = self.archive!.sorted { (lhs, rhs) -> Bool in
     lhs.path.localizedStandardCompare(rhs.path) == .orderedAscending
   }.filter { (entry) -> Bool in
+    if entry.path.contains("__MACOSX/") {
+      return false
+    }
     let path = entry.path.lowercased()
     return path.hasSuffix(".jpg") || path.hasSuffix(".jpeg") || path.hasSuffix(".png")
       || path.hasSuffix(".gif") || path.hasSuffix(".bmp")
@@ -97,7 +100,7 @@ extension ZipDocument: BookAccessible {
       do {
         // Set bufferSize as uncomressed size to reduce the number of calls closure.
         // TODO: assert max bufferSize
-        _ = try self.archive!.extract(entry, bufferSize: UInt32(entry.uncompressedSize)) { (data) in
+        _ = try self.archive!.extract(entry, bufferSize: UInt32(max(entry.uncompressedSize, 1))) { (data) in
           // log.debug("size of data = \(data.count)")
           rawData.append(data)
           if rawData.count >= entry.uncompressedSize {

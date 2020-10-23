@@ -23,7 +23,7 @@ class SpreadPageViewController: NSViewController {
     // TODO: Use NSStackView#setViews instead of use userInterfaceLayoutDirection for page order?
     self.imageStackView.userInterfaceLayoutDirection = .rightToLeft
     Observable.zip(self.firstImage, self.secondImage)
-      .observeOn(MainScheduler.instance)
+      .subscribeOn(MainScheduler.instance)
       .subscribe(onNext: { images in
         let firstImage: NSImage = images.0
         let secondImage: NSImage? = images.1

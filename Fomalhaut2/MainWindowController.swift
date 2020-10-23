@@ -15,7 +15,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     let mainViewController =
       splitViewController.splitViewItems[1].viewController as! MainViewController
     mainViewController.collectionViewStyle
-      .observeOn(MainScheduler.instance)
+      .subscribeOn(MainScheduler.instance)
       .subscribe(onNext: { collectionViewStyle in
         self.collectionViewStyleSegmentedControl.selectSegment(
           withTag: collectionViewStyle == .collection ? 0 : 1)

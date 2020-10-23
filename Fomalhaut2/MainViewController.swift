@@ -46,7 +46,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
       })
       .disposed(by: self.disposeBag)
     self.collectionViewStyle
-      .subscribeOn(MainScheduler.instance)
+      .observeOn(MainScheduler.instance)
       .subscribe(onNext: { collectionViewStyle in
         self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
       })

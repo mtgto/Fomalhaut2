@@ -9,8 +9,6 @@ class SpreadPageViewController: NSViewController {
   let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
   let currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
-  private let firstImage: PublishSubject<NSImage> = PublishSubject<NSImage>()
-  private let secondImage: PublishSubject<NSImage?> = PublishSubject<NSImage?>()
   private let disposeBag = DisposeBag()
 
   @IBOutlet weak var imageStackView: NSStackView!
@@ -22,11 +20,59 @@ class SpreadPageViewController: NSViewController {
     // Do view setup here.
     // TODO: Use NSStackView#setViews instead of use userInterfaceLayoutDirection for page order?
     self.imageStackView.userInterfaceLayoutDirection = .rightToLeft
-    Observable.zip(self.firstImage, self.secondImage)
-      .subscribeOn(MainScheduler.instance)
-      .subscribe(onNext: { images in
-        let firstImage: NSImage = images.0
-        let secondImage: NSImage? = images.1
+  }
+
+  override func viewWillDisappear() {
+    super.viewWillDisappear()
+    // Update book
+    if let document = self.representedObject as? ZipDocument {
+      try? document.storeViewerStatus(
+        lastPageIndex: self.currentPageIndex.value, isRightToLeft: self.pageOrder.value == .rtl)
+    }
+  }
+
+  override var representedObject: Any? {
+    didSet {
+      guard let document = representedObject as? BookAccessible else { return }
+      self.pageCount.accept(document.pageCount())
+      if let lastPageIndex = document.lastPageIndex() {
+        self.currentPageIndex.accept(lastPageIndex)
+      }
+      if let lastPageOrder = document.lastPageOrder() {
+        self.pageOrder.accept(lastPageOrder)
+      }
+
+      self.currentPageIndex.flatMapLatest { (currentPageIndex) in
+        Observable.range(
+          start: self.currentPageIndex.value,
+          count: self.pageCount.value - self.currentPageIndex.value
+        )
+        .flatMap { pageIndex in
+          Observable<NSImage>.create { observer in
+            document.image(at: pageIndex) { (result) in
+              switch result {
+              case .success(let image):
+                observer.onNext(image)
+                observer.onCompleted()
+                log.debug("success to load image at \(pageIndex)")
+              case .failure(let error):
+                log.info("fail to load image at \(pageIndex): \(error)")
+                observer.onCompleted()
+              // do nothing (= skip broken page)
+              // TODO: Remember error index in ZipDocument not to reload same error page
+              // observer.onError(error)
+              }
+            }
+            return Disposables.create()
+          }
+        }
+        .take(currentPageIndex == 0 ? 1 : 2)
+        .toArray()
+      }
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { (images) in
+        let firstImage: NSImage = images.first!  // TODO: It might be nil if all files are broken
+        let secondImage: NSImage? = images.count >= 2 ? images.last : nil
         let firstImageWidth = firstImage.representations.first!.pixelsWide
         let firstImageHeight = firstImage.representations.first!.pixelsHigh
         let secondImageWidth = secondImage?.representations.first!.pixelsWide
@@ -55,73 +101,6 @@ class SpreadPageViewController: NSViewController {
         window.setContentSize(NSSize(width: rect.size.width, height: rect.size.height))
       })
       .disposed(by: self.disposeBag)
-  }
-
-  override func viewWillDisappear() {
-    super.viewWillDisappear()
-    // Update book
-    if let document = self.representedObject as? ZipDocument {
-      try? document.storeViewerStatus(
-        lastPageIndex: self.currentPageIndex.value, isRightToLeft: self.pageOrder.value == .rtl)
-    }
-  }
-
-  override var representedObject: Any? {
-    didSet {
-      // Update the view, if already loaded.
-      if let document = representedObject as? BookAccessible {
-        self.pageCount.accept(document.pageCount())
-        if let lastPageIndex = document.lastPageIndex() {
-          self.currentPageIndex.accept(lastPageIndex)
-        }
-        if let lastPageOrder = document.lastPageOrder() {
-          self.pageOrder.accept(lastPageOrder)
-        }
-
-        self.currentPageIndex.subscribe(onNext: { (pageIndex) in
-          log.info("start to load at \(pageIndex)")
-          if pageIndex > 0 {
-            self.invalidateRestorableState()
-          }
-          // TODO: Try to obtain image from cache not to use OperationQueue
-          document.image(at: pageIndex) { (result) in
-            switch result {
-            case .success(let image):
-              self.firstImage.onNext(image)
-              log.debug("success to load image at \(pageIndex)")
-            case .failure(let error):
-              log.info("fail to load image at \(pageIndex): \(error)")
-              self.firstImage.onError(error)
-            }
-          }
-          if pageIndex > 0 && pageIndex + 1 < self.pageCount.value {
-            log.info("start to load at \(pageIndex + 1)")
-            document.image(at: pageIndex + 1) { (result) in
-              switch result {
-              case .success(let image):
-                self.secondImage.onNext(image)
-                log.debug("success to load image at \(pageIndex + 1)")
-              case .failure(let error):
-                log.info("fail to laod image at \(pageIndex + 1): \(error)")
-                self.secondImage.onError(error)
-              }
-            }
-          } else {
-            self.secondImage.onNext(nil)
-          }
-          // preload before increment page
-          let preloadIndex = pageIndex > 0 && pageIndex + 1 < self.pageCount.value ? 2 : 1
-          let preloadCount = 2
-          (0..<preloadCount).forEach { (index) in
-            if pageIndex + preloadIndex + index < self.pageCount.value {
-              log.debug("start to preload at \(pageIndex + preloadIndex + index)")
-              document.image(at: pageIndex + preloadIndex + index) { (_) in
-                // do nothing
-              }
-            }
-          }
-        }).disposed(by: self.disposeBag)
-      }
     }
   }
 

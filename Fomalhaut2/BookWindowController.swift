@@ -14,14 +14,14 @@ class BookWindowController: NSWindowController, NSMenuItemValidation {
     let spreadPageViewController = self.contentViewController as! SpreadPageViewController
     Observable.of(spreadPageViewController.currentPageIndex, spreadPageViewController.pageCount)
       .merge()
-      .subscribeOn(MainScheduler.instance)
+      .observeOn(MainScheduler.instance)
       .subscribe(onNext: { (_) in
         self.pageControl.setEnabled(spreadPageViewController.canBackwardPage(), forSegment: 0)
         self.pageControl.setEnabled(spreadPageViewController.canForwardPage(), forSegment: 1)
       })
       .disposed(by: self.disposeBag)
     spreadPageViewController.pageOrder
-      .subscribeOn(MainScheduler.instance)
+      .observeOn(MainScheduler.instance)
       .subscribe(onNext: { (pageOrder) in
         self.pageOrderControl.selectSegment(withTag: pageOrder == .rtl ? 0 : 1)
       })

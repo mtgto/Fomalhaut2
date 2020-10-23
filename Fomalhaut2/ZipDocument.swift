@@ -100,7 +100,8 @@ extension ZipDocument: BookAccessible {
       do {
         // Set bufferSize as uncomressed size to reduce the number of calls closure.
         // TODO: assert max bufferSize
-        _ = try self.archive!.extract(entry, bufferSize: UInt32(max(entry.uncompressedSize, 1))) { (data) in
+        _ = try self.archive!.extract(entry, bufferSize: UInt32(max(entry.uncompressedSize, 1))) {
+          (data) in
           // log.debug("size of data = \(data.count)")
           rawData.append(data)
           if rawData.count >= entry.uncompressedSize {
@@ -127,7 +128,6 @@ extension ZipDocument: BookAccessible {
                   let data = NSBitmapImageRep(data: tiff)?.representation(
                     using: .png, properties: [:])
                 {
-                  //                  self.thumbnailData.accept(data)
                   if let realm = try? Realm() {
                     if let book = realm.object(ofType: Book.self, forPrimaryKey: selfBook.id) {
                       try? realm.write {

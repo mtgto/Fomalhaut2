@@ -30,4 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBAction func showLibraryWindow(_ sender: Any) {
     NSApp.windows.first?.makeKeyAndOrderFront(sender)
   }
+
+  @IBAction func openWebsite(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: "https://github.com/mtgto/Fomalhaut2")!)
+  }
 }

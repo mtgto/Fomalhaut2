@@ -62,5 +62,7 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright (c) 2020 mtgto</string>
 </dict>
 </plist>

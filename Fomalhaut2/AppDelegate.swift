@@ -5,7 +5,7 @@ import XCGLogger
 
 let log = XCGLogger.default
 
-@main
+@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {

@@ -5,6 +5,11 @@ import RealmSwift
 import RxRelay
 import RxSwift
 
+struct LoadedImage {
+  let preload: Bool
+  let images: [NSImage]
+}
+
 class SpreadPageViewController: NSViewController {
   let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
@@ -31,6 +36,20 @@ class SpreadPageViewController: NSViewController {
     }
   }
 
+  func fetchImages(pageIndex: Int, document: BookAccessible) -> Observable<LoadedImage> {
+    return Observable.range(
+      start: self.currentPageIndex.value,
+      count: self.pageCount.value - self.currentPageIndex.value
+    )
+    .map { pageIndex in
+      self.loadImage(pageIndex: pageIndex, document: document)
+    }
+    .concat()
+    .buffer(timeSpan: .never, count: pageIndex == 0 ? 1 : 2, scheduler: MainScheduler.instance)
+    .enumerated()
+    .map { LoadedImage(preload: $0.index > 0, images: $0.element) }
+  }
+
   override var representedObject: Any? {
     didSet {
       guard let document = representedObject as? BookAccessible else { return }
@@ -41,49 +60,50 @@ class SpreadPageViewController: NSViewController {
       if let lastPageOrder = document.lastPageOrder() {
         self.pageOrder.accept(lastPageOrder)
       }
-
       self.currentPageIndex.flatMapLatest { (currentPageIndex) in
-        Observable.range(
-          start: self.currentPageIndex.value,
-          count: self.pageCount.value - self.currentPageIndex.value
-        )
-        .flatMap { pageIndex in
-          self.loadImage(pageIndex: pageIndex, document: document)
-        }
-        .take(currentPageIndex == 0 ? 1 : 2)
-        .toArray()
+        self.fetchImages(pageIndex: currentPageIndex, document: document)
       }
       .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { (images) in
-        let firstImage: NSImage = images.first!  // TODO: It might be nil if all files are broken
-        let secondImage: NSImage? = images.count >= 2 ? images.last : nil
-        let firstImageWidth = firstImage.representations.first!.pixelsWide
-        let firstImageHeight = firstImage.representations.first!.pixelsHigh
-        let secondImageWidth = secondImage?.representations.first!.pixelsWide
-        let secondImageHeight = secondImage?.representations.first!.pixelsHigh
-        let contentWidth =
-          max(firstImageWidth, (secondImageWidth ?? 0)) * (secondImage != nil ? 2 : 1)
-        let contentHeight = max(firstImageHeight, (secondImageHeight ?? 0))
+      .subscribe(
+        onNext: { (loadedImage) in
+          //log.debug("image = \(loadedImage.images.count), prefetch = \(loadedImage.preload)")
+          if loadedImage.preload || loadedImage.images.count == 0 {
+            return
+          }
+          let images = loadedImage.images
+          let firstImage: NSImage = images.first!  // TODO: It might be nil if all files are broken
+          let secondImage: NSImage? = images.count >= 2 ? images.last : nil
+          let firstImageWidth = firstImage.representations.first!.pixelsWide
+          let firstImageHeight = firstImage.representations.first!.pixelsHigh
+          let secondImageWidth = secondImage?.representations.first!.pixelsWide
+          let secondImageHeight = secondImage?.representations.first!.pixelsHigh
+          let contentWidth =
+            max(firstImageWidth, (secondImageWidth ?? 0)) * (secondImage != nil ? 2 : 1)
+          let contentHeight = max(firstImageHeight, (secondImageHeight ?? 0))
 
-        self.firstImageView.image = firstImage
-        if secondImage != nil {
-          self.secondImageView.image = secondImage
-          self.secondImageView.isHidden = false
-        } else {
-          self.secondImageView.isHidden = true
+          self.firstImageView.image = firstImage
+          if secondImage != nil {
+            self.secondImageView.image = secondImage
+            self.secondImageView.isHidden = false
+          } else {
+            self.secondImageView.isHidden = true
+          }
+          guard let window = self.view.window else {
+            log.error("window is nil")
+            return
+          }
+          window.contentAspectRatio = NSSize(width: contentWidth, height: contentHeight)
+          // Set window size as screen size
+          let rect = window.constrainFrameRect(
+            NSRect(
+              x: window.frame.origin.x, y: window.frame.origin.y, width: CGFloat(contentWidth),
+              height: CGFloat(contentHeight)), to: NSScreen.main)
+          window.setContentSize(NSSize(width: rect.size.width, height: rect.size.height))
+        },
+        onCompleted: {
+          log.debug("onCompleted")
         }
-        guard let window = self.view.window else {
-          log.error("window is nil")
-          return
-        }
-        window.contentAspectRatio = NSSize(width: contentWidth, height: contentHeight)
-        // Set window size as screen size
-        let rect = window.constrainFrameRect(
-          NSRect(
-            x: window.frame.origin.x, y: window.frame.origin.y, width: CGFloat(contentWidth),
-            height: CGFloat(contentHeight)), to: NSScreen.main)
-        window.setContentSize(NSSize(width: rect.size.width, height: rect.size.height))
-      })
+      )
       .disposed(by: self.disposeBag)
     }
   }

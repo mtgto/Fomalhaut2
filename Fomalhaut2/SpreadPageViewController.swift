@@ -14,6 +14,8 @@ class SpreadPageViewController: NSViewController {
   let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
   let currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+  // manualViewHeight has non-nil view height after user resized window
+  private var manualViewHeight: CGFloat? = nil
   private let disposeBag = DisposeBag()
 
   @IBOutlet weak var imageStackView: NSStackView!
@@ -92,10 +94,18 @@ class SpreadPageViewController: NSViewController {
           }
           window.contentAspectRatio = NSSize(width: contentWidth, height: contentHeight)
           // Set window size as screen size
+          let resizeRatio: CGFloat
+          if let manualViewHeight = self.manualViewHeight {
+            resizeRatio = manualViewHeight / contentHeight
+          } else {
+            resizeRatio = 1.0
+          }
           let rect = window.constrainFrameRect(
             NSRect(
-              x: window.frame.origin.x, y: window.frame.origin.y, width: CGFloat(contentWidth),
-              height: CGFloat(contentHeight)), to: NSScreen.main)
+              x: window.frame.origin.x,
+              y: window.frame.origin.y,
+              width: CGFloat(contentWidth * resizeRatio),
+              height: CGFloat(contentHeight * resizeRatio)), to: NSScreen.main)
           window.setContentSize(NSSize(width: rect.size.width, height: rect.size.height))
           log.debug("window.setContentSize(\(rect.size.width), \(rect.size.height))")
         },
@@ -125,7 +135,7 @@ class SpreadPageViewController: NSViewController {
     log.info("restoreState: lastCurrentPageIndex = \(lastCurrentPageIndex)")
   }
 
-  func imageSize(_ image: NSImage) -> NSSize {
+  private func imageSize(_ image: NSImage) -> NSSize {
     let width = image.representations.first!.pixelsWide
     let height = image.representations.first!.pixelsHigh
     if width == 0 && height == 0 {
@@ -195,5 +205,9 @@ class SpreadPageViewController: NSViewController {
     self.imageStackView.userInterfaceLayoutDirection =
       pageOrder == .rtl ? .rightToLeft : .leftToRight
     self.pageOrder.accept(pageOrder)
+  }
+
+  func resizedWindowByManual() {
+    self.manualViewHeight = self.view.frame.size.height
   }
 }

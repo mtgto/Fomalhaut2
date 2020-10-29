@@ -3,7 +3,7 @@
 import Cocoa
 import RxSwift
 
-class BookWindowController: NSWindowController, NSMenuItemValidation {
+class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDelegate {
   private let disposeBag = DisposeBag()
   @IBOutlet weak var pageControl: NSSegmentedControl!
   @IBOutlet weak var pageOrderControl: NSSegmentedControl!
@@ -39,6 +39,13 @@ class BookWindowController: NSWindowController, NSMenuItemValidation {
     } else {
       log.info("keyDown: \(event.keyCode)")
     }
+  }
+
+  // MARK: - NSWindowDelegate
+  func windowDidEndLiveResize(_ notification: Notification) {
+    // Called after user did resize by yourself
+    let spreadPageViewController = self.contentViewController as! SpreadPageViewController
+    spreadPageViewController.resizedWindowByManual()
   }
 
   // MARK: - MenuItem

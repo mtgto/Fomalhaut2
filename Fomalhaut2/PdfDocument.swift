@@ -4,6 +4,7 @@ import Cocoa
 import PDFKit
 
 enum PdfError: Error {
+  case invalidFile
   case unknown
 }
 
@@ -21,7 +22,7 @@ class PdfDocument: BookDocument {
       self.pdfDocument = pdf
       self.url = url
     } else {
-      throw NSError(domain: "net.mtgto.Fomalhaut2", code: 0, userInfo: nil)
+      throw PdfError.invalidFile
     }
   }
 }
@@ -40,8 +41,12 @@ extension PdfDocument: BookAccessible {
     }
     self.operationQueue.addOperation {
       if let pdfPage = self.pdfDocument!.page(at: page), let data = pdfPage.dataRepresentation,
-        let image = NSImage(data: data)
+        let imageRep = NSPDFImageRep(data: data)
       {
+        let image = NSImage(size: imageRep.size)
+        image.lockFocus()
+        imageRep.draw(at: .zero)
+        image.unlockFocus()
         //log.debug("pdf image size \(image.size.width)x\(image.size.height)")
         if page == 0 && self.book!.thumbnailData == nil {
           do {

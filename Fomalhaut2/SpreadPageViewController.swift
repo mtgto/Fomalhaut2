@@ -30,7 +30,7 @@ class SpreadPageViewController: NSViewController {
   override func viewWillDisappear() {
     super.viewWillDisappear()
     // Update book state
-    if let document = self.representedObject as? ZipDocument {
+    if let document = self.representedObject as? BookDocument {
       try? document.storeViewerStatus(
         lastPageIndex: self.currentPageIndex.value, isRightToLeft: self.pageOrder.value == .rtl)
     }
@@ -73,13 +73,11 @@ class SpreadPageViewController: NSViewController {
           let images = loadedImage.images
           let firstImage: NSImage = images.first!  // TODO: It might be nil if all files are broken
           let secondImage: NSImage? = images.count >= 2 ? images.last : nil
-          let firstImageWidth = firstImage.representations.first!.pixelsWide
-          let firstImageHeight = firstImage.representations.first!.pixelsHigh
-          let secondImageWidth = secondImage?.representations.first!.pixelsWide
-          let secondImageHeight = secondImage?.representations.first!.pixelsHigh
+          let firstImageSize = self.imageSize(firstImage)
+          let secondImageSize = secondImage != nil ? self.imageSize(secondImage!) : nil
           let contentWidth =
-            max(firstImageWidth, (secondImageWidth ?? 0)) * (secondImage != nil ? 2 : 1)
-          let contentHeight = max(firstImageHeight, (secondImageHeight ?? 0))
+            max(firstImageSize.width, (secondImageSize?.width ?? 0)) * (secondImage != nil ? 2 : 1)
+          let contentHeight = max(firstImageSize.height, (secondImageSize?.height ?? 0))
 
           self.firstImageView.image = firstImage
           if secondImage != nil {
@@ -99,6 +97,7 @@ class SpreadPageViewController: NSViewController {
               x: window.frame.origin.x, y: window.frame.origin.y, width: CGFloat(contentWidth),
               height: CGFloat(contentHeight)), to: NSScreen.main)
           window.setContentSize(NSSize(width: rect.size.width, height: rect.size.height))
+          log.debug("window.setContentSize(\(rect.size.width), \(rect.size.height))")
         },
         onCompleted: {
           log.debug("onCompleted")
@@ -124,6 +123,16 @@ class SpreadPageViewController: NSViewController {
     let lastCurrentPageIndex = coder.decodeInteger(forKey: "currentPageIndex")
     self.currentPageIndex.accept(lastCurrentPageIndex)
     log.info("restoreState: lastCurrentPageIndex = \(lastCurrentPageIndex)")
+  }
+
+  func imageSize(_ image: NSImage) -> NSSize {
+    let width = image.representations.first!.pixelsWide
+    let height = image.representations.first!.pixelsHigh
+    if width == 0 && height == 0 {
+      return image.size
+    } else {
+      return NSSize(width: width, height: height)
+    }
   }
 
   func loadImage(pageIndex: Int, document: BookAccessible) -> Observable<NSImage> {

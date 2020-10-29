@@ -30,6 +30,9 @@
 		CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA51253E9384002C3F7E /* Filter.swift */; };
 		CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB2DA64253EF85D002C3F7E /* Book.storyboard */; };
 		CEB2DA69253FE6DB002C3F7E /* FilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */; };
+		CECC070A2549C48B00CF56FA /* PdfDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC07092549C48B00CF56FA /* PdfDocument.swift */; };
+		CECC07192549C6C700CF56FA /* BookDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC07172549C6C700CF56FA /* BookDocument.swift */; };
+		CECC072C2549CAFD00CF56FA /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECC072B2549CAFD00CF56FA /* PDFKit.framework */; };
 		CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */; };
 		CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */; };
 		CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793C25403AD500A35C39 /* MainWindowController.swift */; };
@@ -80,6 +83,9 @@
 		CEB2DA51253E9384002C3F7E /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		CEB2DA63253EF85D002C3F7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Book.storyboard; sourceTree = "<group>"; };
 		CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListView.swift; sourceTree = "<group>"; };
+		CECC07092549C48B00CF56FA /* PdfDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfDocument.swift; sourceTree = "<group>"; };
+		CECC07172549C6C700CF56FA /* BookDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDocument.swift; sourceTree = "<group>"; };
+		CECC072B2549CAFD00CF56FA /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewItem.swift; sourceTree = "<group>"; };
 		CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookCollectionViewItem.xib; sourceTree = "<group>"; };
 		CEE9793C25403AD500A35C39 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
@@ -96,6 +102,7 @@
 				CE296C312530A4E400674C99 /* RxCocoa in Frameworks */,
 				CE296BCD2530671700674C99 /* ZIPFoundation in Frameworks */,
 				CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */,
+				CECC072C2549CAFD00CF56FA /* PDFKit.framework in Frameworks */,
 				CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +131,7 @@
 				CE30281D25305AA200986C9A /* Fomalhaut2Tests */,
 				CE30282825305AA200986C9A /* Fomalhaut2UITests */,
 				CE30280725305AA000986C9A /* Products */,
+				CECC072A2549CAFD00CF56FA /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -146,7 +154,9 @@
 				CE30280925305AA000986C9A /* AppDelegate.swift */,
 				CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */,
 				CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */,
+				CECC07172549C6C700CF56FA /* BookDocument.swift */,
 				CE296BBA253063BA00674C99 /* ZipDocument.swift */,
+				CECC07092549C48B00CF56FA /* PdfDocument.swift */,
 				CE275AD525389E0200BEACB7 /* FolderDocument.swift */,
 				CE9EE62725330EE100B5AF5C /* ImageCache.swift */,
 				CE296BEB2530722A00674C99 /* BookAccessible.swift */,
@@ -186,6 +196,14 @@
 				CE30282B25305AA200986C9A /* Info.plist */,
 			);
 			path = Fomalhaut2UITests;
+			sourceTree = "<group>";
+		};
+		CECC072A2549CAFD00CF56FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CECC072B2549CAFD00CF56FA /* PDFKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +358,8 @@
 				CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
 				CEE979452541618D00A35C39 /* BookCollectionView.swift in Sources */,
+				CECC07192549C6C700CF56FA /* BookDocument.swift in Sources */,
+				CECC070A2549C48B00CF56FA /* PdfDocument.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
 				CEB2DA0425399693002C3F7E /* Book.swift in Sources */,
 				CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */,
@@ -524,10 +544,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Fomalhaut2/Fomalhaut2.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = W3A6B7FDC7;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Fomalhaut2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -547,10 +567,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Fomalhaut2/Fomalhaut2.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = W3A6B7FDC7;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Fomalhaut2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

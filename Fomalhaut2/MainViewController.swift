@@ -82,7 +82,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
           if documentWasAlreadyOpen {
             document.showWindows()
           } else {
-            if let document = document as? ZipDocument {
+            if let document = document as? BookDocument {
               document.book = book.freeze()
             }
             if bookmarkDataIsStale {
@@ -221,7 +221,10 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     let dropFileCount =
       info.draggingPasteboard.readObjects(
         forClasses: [NSURL.self],
-        options: [.urlReadingFileURLsOnly: 1, .urlReadingContentsConformToTypes: [ZipDocument.UTI]])?
+        options: [
+          .urlReadingFileURLsOnly: 1,
+          .urlReadingContentsConformToTypes: [ZipDocument.UTI, PdfDocument.UTI],
+        ])?
       .count ?? 0
     if dropFileCount == 0 {
       return []
@@ -235,7 +238,10 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   ) -> Bool {
     if let dropFileURLs = info.draggingPasteboard.readObjects(
       forClasses: [NSURL.self],
-      options: [.urlReadingFileURLsOnly: 1, .urlReadingContentsConformToTypes: [ZipDocument.UTI]])
+      options: [
+        .urlReadingFileURLsOnly: 1,
+        .urlReadingContentsConformToTypes: [ZipDocument.UTI, PdfDocument.UTI],
+      ])
       as? [URL]
     {
 
@@ -315,7 +321,10 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     let dropFileCount =
       draggingInfo.draggingPasteboard.readObjects(
         forClasses: [NSURL.self],
-        options: [.urlReadingFileURLsOnly: 1, .urlReadingContentsConformToTypes: [ZipDocument.UTI]])?
+        options: [
+          .urlReadingFileURLsOnly: 1,
+          .urlReadingContentsConformToTypes: [ZipDocument.UTI, PdfDocument.UTI],
+        ])?
       .count ?? 0
     if dropFileCount == 0 {
       return []
@@ -331,7 +340,10 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   ) -> Bool {
     if let dropFileURLs = draggingInfo.draggingPasteboard.readObjects(
       forClasses: [NSURL.self],
-      options: [.urlReadingFileURLsOnly: 1, .urlReadingContentsConformToTypes: [ZipDocument.UTI]])
+      options: [
+        .urlReadingFileURLsOnly: 1,
+        .urlReadingContentsConformToTypes: [ZipDocument.UTI, PdfDocument.UTI],
+      ])
       as? [URL]
     {
 

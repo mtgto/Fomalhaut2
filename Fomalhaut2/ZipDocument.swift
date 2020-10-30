@@ -70,7 +70,7 @@ extension ZipDocument: BookAccessible {
       do {
         // Set bufferSize as uncomressed size to reduce the number of calls closure.
         // TODO: assert max bufferSize
-        _ = try self.archive!.extract(entry, bufferSize: UInt32(max(entry.uncompressedSize, 1))) {
+        _ = try self.archive!.extract(entry, bufferSize: UInt32(max(entry.uncompressedSize, 1)), skipCRC32: true) {
           (data) in
           // log.debug("size of data = \(data.count)")
           rawData.append(data)

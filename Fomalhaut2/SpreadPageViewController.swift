@@ -107,6 +107,7 @@ class SpreadPageViewController: NSViewController {
               width: CGFloat(contentWidth * resizeRatio),
               height: CGFloat(contentHeight * resizeRatio)), to: NSScreen.main)
           window.setContentSize(NSSize(width: rect.size.width, height: rect.size.height))
+          window.setFrameOrigin(rect.origin)
           log.debug("window.setContentSize(\(rect.size.width), \(rect.size.height))")
         },
         onCompleted: {

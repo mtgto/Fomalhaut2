@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -481,6 +481,7 @@
                     </window>
                     <connections>
                         <outlet property="collectionViewStyleSegmentedControl" destination="WnA-DQ-KgP" id="JBc-KN-nlO"/>
+                        <outlet property="searchField" destination="3G3-IO-GLY" id="pVp-Bv-RXY"/>
                         <segue destination="dWR-Bt-6X7" kind="relationship" relationship="window.shadowedContentViewController" id="cO4-nr-9Bh"/>
                     </connections>
                 </windowController>

@@ -16,6 +16,8 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
 {
   private let books: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(value: nil)
   let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
+  let searchText = BehaviorRelay<String?>(value: nil)
+  let filter = BehaviorRelay<Filter?>(value: nil)
   private let disposeBag = DisposeBag()
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
@@ -51,12 +53,32 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
         self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
       })
       .disposed(by: self.disposeBag)
+    Observable.combineLatest(self.filter, self.searchText)
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { (filter, searchText) in
+        log.debug("New query: filter=\(filter?.name ?? "N/A"), search=\(searchText ?? "N/A")")
+        let filterPredicate: NSPredicate?
+        if let filter = filter {
+          filterPredicate = NSPredicate(format: filter.predicate)
+        } else {
+          filterPredicate = nil
+        }
+        let searchPredicate: NSPredicate?
+        if let searchText = searchText, !searchText.isEmpty {
+          searchPredicate = NSPredicate(format: "filePath CONTAINS[c] %@", searchText)
+        } else {
+          searchPredicate = nil
+        }
+        let predicate: NSPredicate = NSCompoundPredicate(
+          andPredicateWithSubpredicates: [filterPredicate, searchPredicate].compactMap { $0 })
+        self.books.accept(realm.objects(Book.self).filter(predicate).sorted(byKeyPath: "createdAt"))
+      })
+      .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)
       .subscribe(onNext: { notification in
         if let filter = notification.userInfo?["filter"] as? Filter {
           log.info("Filter selected: \(filter.name), \(filter.predicate)")
-          self.books.accept(
-            realm.objects(Book.self).filter(filter.predicate).sorted(byKeyPath: "createdAt"))
+          self.filter.accept(filter)
         } else {
           log.error("Unsupported userInfo from filterChangedNotification")
         }

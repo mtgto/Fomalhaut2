@@ -6,6 +6,7 @@ import RxSwift
 class MainWindowController: NSWindowController, NSWindowDelegate {
   private let disposeBag = DisposeBag()
   @IBOutlet weak var collectionViewStyleSegmentedControl: NSSegmentedControl!
+  @IBOutlet weak var searchField: NSSearchField!
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -19,6 +20,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
       .subscribe(onNext: { collectionViewStyle in
         self.collectionViewStyleSegmentedControl.selectSegment(
           withTag: collectionViewStyle == .collection ? 0 : 1)
+      })
+      .disposed(by: self.disposeBag)
+    self.searchField.rx.text.asDriver()
+      .drive(onNext: { text in
+        mainViewController.searchText.accept(text)
       })
       .disposed(by: self.disposeBag)
     // NOTE: windowFrameAutosaveName should be different from NSWindow's autosave name

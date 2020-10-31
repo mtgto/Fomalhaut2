@@ -24,6 +24,7 @@ A comic viewer for macOS.
 - [ ] Web server
    - [ ] Access comics via web browser (PC / smartphone)
 - [ ] Support more file types
+   - [x] PDF
    - [ ] rar/cbr
    - [ ] 7z/cb7
 

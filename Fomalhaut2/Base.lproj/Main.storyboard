@@ -690,7 +690,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
                                                     <clipView key="contentView" id="BBK-wR-7a6">
                                                         <rect key="frame" x="1" y="0.0" width="268" height="299"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="FileListView" rowSizeStyle="automatic" headerView="aUv-0U-ndW" viewBased="YES" id="rLV-3v-YTc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="274"/>
@@ -709,6 +709,7 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
+                                                                        <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="filename"/>
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView id="ZnV-kg-rWT">
@@ -741,6 +742,7 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
+                                                                        <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="readCount"/>
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView id="aTR-os-6mL">

@@ -14,10 +14,14 @@ enum CollectionViewStyle {
 class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableViewDelegate,
   NSMenuItemValidation, NSCollectionViewDataSource, NSCollectionViewDelegate
 {
-  private let books: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(value: nil)
+  private let tableViewBooks: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(
+    value: nil)
+  private let collectionViewBooks: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(
+    value: nil)
   let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
   let searchText = BehaviorRelay<String?>(value: nil)
   let filter = BehaviorRelay<Filter?>(value: nil)
+  let tableViewSortDescriptors = BehaviorRelay<[NSSortDescriptor]>(value: [])
   private let disposeBag = DisposeBag()
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
@@ -32,18 +36,25 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     self.collectionViewGridLayout.minimumLineSpacing = 3.0
     let realm = try! Realm()
     // NOTE: This query will be changed by filter which user choose
-    self.books.accept(realm.objects(Book.self).sorted(byKeyPath: "createdAt"))
-    self.books
-      .flatMapLatest { books in
-        return Observable.changeset(from: books!)
-      }
+    self.collectionViewBooks.accept(realm.objects(Book.self).sorted(byKeyPath: "createdAt"))
+    self.tableViewBooks.accept(realm.objects(Book.self))
+    self.collectionViewBooks
+      .flatMapLatest { Observable.changeset(from: $0!) }
+      .subscribe(onNext: { [unowned self] _, changes in
+        if let changes = changes {
+          self.collectionView.applyChangeset(changes)
+        } else {
+          self.collectionView.reloadData()
+        }
+      })
+      .disposed(by: self.disposeBag)
+    self.tableViewBooks
+      .flatMapLatest { Observable.changeset(from: $0!) }
       .subscribe(onNext: { [unowned self] _, changes in
         if let changes = changes {
           self.tableView.applyChangeset(changes)
-          self.collectionView.applyChangeset(changes)
         } else {
           self.tableView.reloadData()
-          self.collectionView.reloadData()
         }
       })
       .disposed(by: self.disposeBag)
@@ -53,25 +64,37 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
         self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
       })
       .disposed(by: self.disposeBag)
-    Observable.combineLatest(self.filter, self.searchText)
+    Observable.combineLatest(self.filter, self.searchText, self.tableViewSortDescriptors)
       .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { (filter, searchText) in
-        log.debug("New query: filter=\(filter?.name ?? "N/A"), search=\(searchText ?? "N/A")")
+      .subscribe(onNext: { (filter, searchText, sortDescriptors) in
         let filterPredicate: NSPredicate?
         if let filter = filter {
           filterPredicate = NSPredicate(format: filter.predicate)
         } else {
           filterPredicate = nil
         }
-        let searchPredicate: NSPredicate?
-        if let searchText = searchText, !searchText.isEmpty {
-          searchPredicate = NSPredicate(format: "filePath CONTAINS[c] %@", searchText)
-        } else {
-          searchPredicate = nil
+        let predicate: NSPredicate = self.predicateFrom(
+          searchText: searchText, filterPredicate: filterPredicate)
+        let sorted = sortDescriptors.map {
+          SortDescriptor(
+            keyPath: $0.key == "filename" ? "filePath" : $0.key!, ascending: $0.ascending)
         }
-        let predicate: NSPredicate = NSCompoundPredicate(
-          andPredicateWithSubpredicates: [filterPredicate, searchPredicate].compactMap { $0 })
-        self.books.accept(realm.objects(Book.self).filter(predicate).sorted(byKeyPath: "createdAt"))
+        self.tableViewBooks.accept(realm.objects(Book.self).filter(predicate).sorted(by: sorted))
+      })
+      .disposed(by: self.disposeBag)
+    Observable.combineLatest(self.filter, self.searchText)
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { (filter, searchText) in
+        let filterPredicate: NSPredicate?
+        if let filter = filter {
+          filterPredicate = NSPredicate(format: filter.predicate)
+        } else {
+          filterPredicate = nil
+        }
+        let predicate: NSPredicate = self.predicateFrom(
+          searchText: searchText, filterPredicate: filterPredicate)
+        self.collectionViewBooks.accept(
+          realm.objects(Book.self).filter(predicate).sorted(byKeyPath: "createdAt"))
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)
@@ -85,6 +108,17 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
       })
       .disposed(by: self.disposeBag)
     super.viewDidLoad()
+  }
+
+  func predicateFrom(searchText: String?, filterPredicate: NSPredicate?) -> NSPredicate {
+    let searchPredicate: NSPredicate?
+    if let searchText = searchText, !searchText.isEmpty {
+      searchPredicate = NSPredicate(format: "filePath CONTAINS[c] %@", searchText)
+    } else {
+      searchPredicate = nil
+    }
+    return NSCompoundPredicate(
+      andPredicateWithSubpredicates: [filterPredicate, searchPredicate].compactMap { $0 })
   }
 
   func open(_ book: Book) {
@@ -143,14 +177,14 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
 
   // called when the item of NSCollectionView is double-clicked
   func openCollectionViewBook(_ indexPath: IndexPath) {
-    self.open(self.books.value![indexPath.item])
+    self.open(self.collectionViewBooks.value![indexPath.item])
   }
 
   // Double click the row of TableView
   @IBAction func openBook(_ sender: Any) {
     let index = self.tableView.clickedRow
     if index >= 0 {
-      let book = self.books.value![index]
+      let book = self.tableViewBooks.value![index]
       self.open(book)
     }
   }
@@ -202,12 +236,12 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   func selectedBook() -> Book? {
     if self.collectionViewStyle.value == .collection {
       if let indexPath = self.collectionView.selectionIndexPaths.first {
-        return self.books.value![indexPath.item]
+        return self.collectionViewBooks.value![indexPath.item]
       }
     } else {
       let index = self.tableView.clickedRow
       if index >= 0 {
-        return self.books.value![index]
+        return self.tableViewBooks.value![index]
       }
     }
     return nil
@@ -215,13 +249,13 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
 
   // MARK: - NSTableViewDataSource
   func numberOfRows(in: NSTableView) -> Int {
-    return self.books.value!.count
+    return self.tableViewBooks.value!.count
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int)
     -> Any?
   {
-    let book = self.books.value![row]
+    let book = self.tableViewBooks.value![row]
     if let columnIdentifier = tableColumn?.identifier {
       switch columnIdentifier {
       case NSUserInterfaceItemIdentifier("file"):
@@ -297,9 +331,9 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     }
     switch identifier.rawValue {
     case "file":
-      cellView.textField?.stringValue = self.books.value![row].filename
+      cellView.textField?.stringValue = self.tableViewBooks.value![row].filename
     case "view":
-      cellView.textField?.stringValue = String(self.books.value![row].readCount)
+      cellView.textField?.stringValue = String(self.tableViewBooks.value![row].readCount)
     default:
       break
     }
@@ -307,11 +341,18 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     return cellView
   }
 
+  func tableView(
+    _ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]
+  ) {
+    log.debug("sortDescriptorsDidChange: \(tableView.sortDescriptors)")
+    self.tableViewSortDescriptors.accept(tableView.sortDescriptors)
+  }
+
   // MARK: - NSCollectionViewDataSource
   func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int)
     -> Int
   {
-    return self.books.value!.count
+    return self.collectionViewBooks.value!.count
   }
 
   func collectionView(
@@ -321,7 +362,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
       collectionView.makeItem(
         withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BookCollectionViewItem"),
         for: indexPath) as? BookCollectionViewItem ?? BookCollectionViewItem()
-    let book = self.books.value![indexPath.item]
+    let book = self.collectionViewBooks.value![indexPath.item]
     item.textField?.stringValue = book.filename
     if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
       //log.debug("THUMBNAIL SIZE \(thumbnail.representations.first!.pixelsWide) x \(thumbnail.representations.first!.pixelsHigh)")

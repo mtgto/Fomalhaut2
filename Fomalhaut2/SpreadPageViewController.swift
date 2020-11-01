@@ -65,6 +65,13 @@ class SpreadPageViewController: NSViewController {
       if let lastPageOrder = document.lastPageOrder() {
         self.pageOrder.accept(lastPageOrder)
       }
+      self.pageOrder
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { [unowned self] pageOrder in
+          self.imageStackView.userInterfaceLayoutDirection =
+            pageOrder == PageOrder.rtl ? .rightToLeft : .leftToRight
+        })
+        .disposed(by: self.disposeBag)
       self.currentPageIndex.flatMapLatest { (currentPageIndex) in
         self.fetchImages(pageIndex: currentPageIndex, document: document)
       }
@@ -122,21 +129,18 @@ class SpreadPageViewController: NSViewController {
   }
 
   override func mouseUp(with event: NSEvent) {
-    log.info("mouseUp")
     self.forwardPage()
   }
 
   override func encodeRestorableState(with coder: NSCoder) {
     super.encodeRestorableState(with: coder)
     coder.encode(self.currentPageIndex.value, forKey: "currentPageIndex")
-    log.info("encodeRestorableState")
   }
 
   override func restoreState(with coder: NSCoder) {
     super.restoreState(with: coder)
     let lastCurrentPageIndex = coder.decodeInteger(forKey: "currentPageIndex")
     self.currentPageIndex.accept(lastCurrentPageIndex)
-    log.info("restoreState: lastCurrentPageIndex = \(lastCurrentPageIndex)")
   }
 
   private func imageSize(_ image: NSImage) -> NSSize {

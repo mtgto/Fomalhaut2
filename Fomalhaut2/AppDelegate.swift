@@ -1,17 +1,21 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Cocoa
+import RealmSwift
+import RxSwift
 import XCGLogger
 
 let log = XCGLogger.default
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+  private let disposeBag = DisposeBag()
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     // Remove main window from window list of Window menu
     // Setting isExcludedFromWindowsMenu in BookWindowController#viewDidLoad is ignored...
     NSApp.windows.first?.isExcludedFromWindowsMenu = true
+    Schema.shared.migrate()
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -19,11 +23,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-    NSDocumentController.shared.openDocument(
-      withContentsOf: URL(fileURLWithPath: filename), display: true
-    ) { (document, documentWasAlreadyOpen, error) in
-
-    }
+    // wait until schema migration is completed
+    Schema.shared.migrated
+      .subscribe(onNext: { _ in
+        NSDocumentController.shared.openDocument(
+          withContentsOf: URL(fileURLWithPath: filename), display: true
+        ) { (document, documentWasAlreadyOpen, error) in
+          // do nothing
+        }
+      })
+      .disposed(by: self.disposeBag)
     return true
   }
 

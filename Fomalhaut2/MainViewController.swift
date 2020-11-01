@@ -14,10 +14,8 @@ enum CollectionViewStyle {
 class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableViewDelegate,
   NSMenuItemValidation, NSCollectionViewDataSource, NSCollectionViewDelegate
 {
-  private let tableViewBooks: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(
-    value: nil)
-  private let collectionViewBooks: BehaviorRelay<Results<Book>?> = BehaviorRelay<Results<Book>?>(
-    value: nil)
+  private let tableViewBooks = BehaviorRelay<Results<Book>?>(value: nil)
+  private let collectionViewBooks = BehaviorRelay<Results<Book>?>(value: nil)
   let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
   let searchText = BehaviorRelay<String?>(value: nil)
   let filter = BehaviorRelay<Filter?>(value: nil)
@@ -35,36 +33,10 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     self.collectionViewGridLayout.minimumInteritemSpacing = 5.0
     self.collectionViewGridLayout.minimumLineSpacing = 3.0
     let realm = try! Realm()
-    // NOTE: This query will be changed by filter which user choose
-    self.collectionViewBooks.accept(realm.objects(Book.self).sorted(byKeyPath: "createdAt"))
-    self.tableViewBooks.accept(realm.objects(Book.self))
-    self.collectionViewBooks
-      .flatMapLatest { Observable.changeset(from: $0!) }
-      .subscribe(onNext: { [unowned self] _, changes in
-        if let changes = changes {
-          self.collectionView.applyChangeset(changes)
-        } else {
-          self.collectionView.reloadData()
-        }
-      })
-      .disposed(by: self.disposeBag)
-    self.tableViewBooks
-      .flatMapLatest { Observable.changeset(from: $0!) }
-      .subscribe(onNext: { [unowned self] _, changes in
-        if let changes = changes {
-          self.tableView.applyChangeset(changes)
-        } else {
-          self.tableView.reloadData()
-        }
-      })
-      .disposed(by: self.disposeBag)
-    self.collectionViewStyle
-      .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { collectionViewStyle in
-        self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
-      })
-      .disposed(by: self.disposeBag)
-    Observable.combineLatest(self.filter, self.searchText, self.tableViewSortDescriptors)
+    Schema.shared.migrated
+      .flatMap { _ in
+        Observable.combineLatest(self.filter, self.searchText, self.tableViewSortDescriptors)
+      }
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { (filter, searchText, sortDescriptors) in
         let filterPredicate: NSPredicate?
@@ -82,7 +54,8 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
         self.tableViewBooks.accept(realm.objects(Book.self).filter(predicate).sorted(by: sorted))
       })
       .disposed(by: self.disposeBag)
-    Observable.combineLatest(self.filter, self.searchText)
+    Schema.shared.migrated
+      .flatMap { _ in Observable.combineLatest(self.filter, self.searchText) }
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { (filter, searchText) in
         let filterPredicate: NSPredicate?
@@ -95,6 +68,32 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
           searchText: searchText, filterPredicate: filterPredicate)
         self.collectionViewBooks.accept(
           realm.objects(Book.self).filter(predicate).sorted(byKeyPath: "createdAt"))
+      })
+      .disposed(by: self.disposeBag)
+    self.collectionViewBooks
+      .flatMapLatest { $0.flatMap { Observable.changeset(from: $0) } ?? Observable.empty() }
+      .subscribe(onNext: { [unowned self] _, changes in
+        if let changes = changes {
+          self.collectionView.applyChangeset(changes)
+        } else {
+          self.collectionView.reloadData()
+        }
+      })
+      .disposed(by: self.disposeBag)
+    self.tableViewBooks
+      .flatMapLatest { $0.flatMap { Observable.changeset(from: $0) } ?? Observable.empty() }
+      .subscribe(onNext: { [unowned self] _, changes in
+        if let changes = changes {
+          self.tableView.applyChangeset(changes)
+        } else {
+          self.tableView.reloadData()
+        }
+      })
+      .disposed(by: self.disposeBag)
+    self.collectionViewStyle
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { collectionViewStyle in
+        self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)
@@ -249,7 +248,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
 
   // MARK: - NSTableViewDataSource
   func numberOfRows(in: NSTableView) -> Int {
-    return self.tableViewBooks.value!.count
+    return self.tableViewBooks.value?.count ?? 0
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int)
@@ -352,7 +351,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
   func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int)
     -> Int
   {
-    return self.collectionViewBooks.value!.count
+    return self.collectionViewBooks.value?.count ?? 0
   }
 
   func collectionView(

@@ -12,10 +12,12 @@ class Schema {
   // only one event is streamed after anyone subscribe
   let migrated: Observable<Void>
   private let _migrated: PublishSubject<Void>
+  private(set) var needMigrate: Bool
 
   init() {
     self._migrated = PublishSubject()
     self.migrated = self._migrated.share(replay: 1).single()
+    self.needMigrate = Schema.schemaVersion > Realm.Configuration.defaultConfiguration.schemaVersion
   }
 
   func migrate() {

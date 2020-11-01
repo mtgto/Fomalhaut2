@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ProgressViewController" customModule="Fomalhaut2" customModuleProvider="target">
+            <connections>
+                <outlet property="progressIndicator" destination="0fx-dv-0rk" id="bfd-Ww-nLy"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="111"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K0C-UT-CMn">
+                    <rect key="frame" x="18" y="49" width="444" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="6NT-eJ-hMP"/>
+                        <constraint firstAttribute="width" constant="440" id="TUn-0d-L0x"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Wait a few minutes for updating database..." id="2L7-dX-b59">
+                        <font key="font" usesAppearanceFont="YES"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="0fx-dv-0rk">
+                    <rect key="frame" x="20" y="19" width="440" height="20"/>
+                </progressIndicator>
+            </subviews>
+            <constraints>
+                <constraint firstItem="0fx-dv-0rk" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="EYf-Uv-vHz"/>
+                <constraint firstAttribute="trailing" secondItem="K0C-UT-CMn" secondAttribute="trailing" constant="20" symbolic="YES" id="K3T-5U-4CJ"/>
+                <constraint firstItem="0fx-dv-0rk" firstAttribute="top" secondItem="K0C-UT-CMn" secondAttribute="bottom" constant="11" id="V4k-C1-qzO"/>
+                <constraint firstItem="K0C-UT-CMn" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="cT0-nm-A1Y"/>
+                <constraint firstAttribute="bottom" secondItem="0fx-dv-0rk" secondAttribute="bottom" constant="20" symbolic="YES" id="f8C-d1-tRU"/>
+                <constraint firstAttribute="trailing" secondItem="0fx-dv-0rk" secondAttribute="trailing" constant="20" symbolic="YES" id="wz2-t8-a4Y"/>
+                <constraint firstItem="K0C-UT-CMn" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" symbolic="YES" id="yA7-1P-BXQ"/>
+            </constraints>
+            <point key="canvasLocation" x="46" y="73.5"/>
+        </customView>
+    </objects>
+</document>

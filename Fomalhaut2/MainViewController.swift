@@ -109,6 +109,20 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     super.viewDidLoad()
   }
 
+  override func viewDidAppear() {
+    if Schema.shared.needMigrate {
+      let progressViewController = ProgressViewController(
+        nibName: ProgressViewController.className(), bundle: nil)
+      self.presentAsSheet(progressViewController)
+      Schema.shared.migrated
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { _ in
+          self.dismiss(progressViewController)
+        })
+        .disposed(by: self.disposeBag)
+    }
+  }
+
   func predicateFrom(searchText: String?, filterPredicate: NSPredicate?) -> NSPredicate {
     let searchPredicate: NSPredicate?
     if let searchText = searchText, !searchText.isEmpty {

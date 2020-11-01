@@ -27,6 +27,9 @@ class SpreadPageViewController: NSViewController {
     // Do view setup here.
     // TODO: Use NSStackView#setViews instead of use userInterfaceLayoutDirection for page order?
     self.imageStackView.userInterfaceLayoutDirection = .rightToLeft
+    // Set background color for transparent PDF
+    self.view.wantsLayer = true
+    self.view.layer?.backgroundColor = NSColor.white.cgColor
   }
 
   override func viewWillDisappear() {

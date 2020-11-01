@@ -2,7 +2,6 @@
 
 import Cocoa
 import PDFKit
-import RealmSwift
 
 enum PdfError: Error {
   case invalidFile
@@ -19,22 +18,7 @@ class PdfDocument: BookDocument {
   }()
 
   override func read(from url: URL, ofType typeName: String) throws {
-    if let realm = try? Realm() {
-      if let book = realm.objects(Book.self).filter("filePath = %@", url.path).first {
-        try? realm.write {
-          book.readCount = book.readCount + 1
-        }
-        self.book = book.freeze()
-      } else {
-        let book = Book()
-        book.readCount = 1
-        try? book.setURL(url)
-        try? realm.write {
-          realm.add(book)
-        }
-        self.book = book.freeze()
-      }
-    }
+    try super.read(from: url, ofType: typeName)
     if let pdf = PDFDocument(url: url) {
       self.pdfDocument = pdf
       self.url = url

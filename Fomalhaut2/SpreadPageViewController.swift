@@ -37,7 +37,10 @@ class SpreadPageViewController: NSViewController {
     // Update book state
     if let document = self.representedObject as? BookDocument {
       try? document.storeViewerStatus(
-        lastPageIndex: self.currentPageIndex.value, isRightToLeft: self.pageOrder.value == .rtl)
+        lastPageIndex: self.currentPageIndex.value,
+        isRightToLeft: self.pageOrder.value == .rtl,
+        manualViewHeight: self.manualViewHeight
+      )
     }
   }
 

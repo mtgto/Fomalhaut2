@@ -19,13 +19,15 @@ class BookDocument: NSDocument {
     self.addWindowController(windowController)
   }
 
-  func storeViewerStatus(lastPageIndex: Int, isRightToLeft: Bool) throws {
+  func storeViewerStatus(lastPageIndex: Int, isRightToLeft: Bool, manualViewHeight: CGFloat?) throws
+  {
     if let selfBook = self.book {
       let realm = try Realm()
       if let book = realm.object(ofType: Book.self, forPrimaryKey: selfBook.id) {
         try realm.write {
           book.lastPageIndex = lastPageIndex
           book.isRightToLeft = isRightToLeft
+          book.manualViewHeight.value = manualViewHeight.flatMap(Double.init)
         }
       }
     }

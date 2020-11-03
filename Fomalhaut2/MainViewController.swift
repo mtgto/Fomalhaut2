@@ -30,14 +30,14 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     self.collectionView.registerForDraggedTypes([.fileURL])
     self.collectionViewGridLayout.minimumInteritemSpacing = 5.0
     self.collectionViewGridLayout.minimumLineSpacing = 3.0
-    let realm = try! Realm()
-    Schema.shared.migrated
-      .asObservable()
+    Schema.shared.state
+      .skipWhile { $0 != .finish }
       .flatMap { _ in
         Observable.combineLatest(self.filter, self.searchText, self.tableViewSortDescriptors)
       }
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { (filter, searchText, sortDescriptors) in
+        let realm = try! Realm()
         let filterPredicate: NSPredicate?
         if let filter = filter {
           filterPredicate = NSPredicate(format: filter.predicate)
@@ -48,16 +48,17 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
           searchText: searchText, filterPredicate: filterPredicate)
         let sorted = sortDescriptors.map {
           SortDescriptor(
-            keyPath: $0.key == "filename" ? "filePath" : $0.key!, ascending: $0.ascending)
+            keyPath: $0.key!, ascending: $0.ascending)
         }
         self.tableViewBooks.accept(realm.objects(Book.self).filter(predicate).sorted(by: sorted))
       })
       .disposed(by: self.disposeBag)
-    Schema.shared.migrated
-      .asObservable()
+    Schema.shared.state
+      .skipWhile { $0 != .finish }
       .flatMap { _ in Observable.combineLatest(self.filter, self.searchText) }
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { (filter, searchText) in
+        let realm = try! Realm()
         let filterPredicate: NSPredicate?
         if let filter = filter {
           filterPredicate = NSPredicate(format: filter.predicate)
@@ -112,18 +113,22 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
   }
 
   override func viewDidAppear() {
-    if Schema.shared.needMigrate {
-      let progressViewController = ProgressViewController(
-        nibName: ProgressViewController.className(), bundle: nil)
-      self.presentAsSheet(progressViewController)
-      Schema.shared.migrated
-        .asObservable()
-        .observeOn(MainScheduler.instance)
-        .subscribe(onNext: { _ in
-          self.dismiss(progressViewController)
-        })
-        .disposed(by: self.disposeBag)
-    }
+    var progressViewController: ProgressViewController? = nil
+    Schema.shared.state
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { [unowned self] state in
+        switch state {
+        case .start:
+          progressViewController = ProgressViewController(
+            nibName: ProgressViewController.className(), bundle: nil)
+          self.presentAsSheet(progressViewController!)
+        case .finish:
+          if let progressViewController = progressViewController {
+            self.dismiss(progressViewController)
+          }
+        }
+      })
+      .disposed(by: self.disposeBag)
   }
 
   func predicateFrom(searchText: String?, filterPredicate: NSPredicate?) -> NSPredicate {
@@ -277,8 +282,8 @@ extension MainViewController: NSTableViewDataSource {
     let book = self.tableViewBooks.value![row]
     if let columnIdentifier = tableColumn?.identifier {
       switch columnIdentifier {
-      case NSUserInterfaceItemIdentifier("file"):
-        return book.filename
+      case NSUserInterfaceItemIdentifier("name"):
+        return book.name
       case NSUserInterfaceItemIdentifier("view"):
         return book.readCount
       default:
@@ -351,8 +356,8 @@ extension MainViewController: NSTableViewDelegate {
       return nil
     }
     switch identifier.rawValue {
-    case "file":
-      cellView.textField?.stringValue = self.tableViewBooks.value![row].filename
+    case "name":
+      cellView.textField?.stringValue = self.tableViewBooks.value![row].name
     case "view":
       cellView.textField?.stringValue = String(self.tableViewBooks.value![row].readCount)
     default:
@@ -386,7 +391,7 @@ extension MainViewController: NSCollectionViewDataSource {
         withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BookCollectionViewItem"),
         for: indexPath) as? BookCollectionViewItem ?? BookCollectionViewItem()
     let book = self.collectionViewBooks.value![indexPath.item]
-    item.textField?.stringValue = book.filename
+    item.textField?.stringValue = book.name
     if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
       //log.debug("THUMBNAIL SIZE \(thumbnail.representations.first!.pixelsWide) x \(thumbnail.representations.first!.pixelsHigh)")
       item.imageView?.image = thumbnail

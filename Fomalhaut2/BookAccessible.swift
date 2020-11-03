@@ -18,4 +18,6 @@ protocol BookAccessible where Self: NSDocument {
   func lastPageIndex() -> Int?
 
   func lastPageOrder() -> PageOrder?
+
+  func halfPageShifted() -> Bool?
 }

@@ -14,6 +14,7 @@ class SpreadPageViewController: NSViewController {
   let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
   let currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+  private var halfPageShifted: Bool = false
   // manualViewHeight has non-nil view height after user resized window
   private var manualViewHeight: CGFloat? = nil
   private let disposeBag = DisposeBag()
@@ -39,6 +40,7 @@ class SpreadPageViewController: NSViewController {
       try? document.storeViewerStatus(
         lastPageIndex: self.currentPageIndex.value,
         isRightToLeft: self.pageOrder.value == .rtl,
+        halfPageShifted: self.halfPageShifted,
         manualViewHeight: self.manualViewHeight
       )
     }
@@ -53,7 +55,10 @@ class SpreadPageViewController: NSViewController {
       self.loadImage(pageIndex: pageIndex, document: document)
     }
     .concat()
-    .buffer(timeSpan: .never, count: pageIndex == 0 ? 1 : 2, scheduler: MainScheduler.instance)
+    .buffer(
+      timeSpan: .never, count: pageIndex == 0 && !self.halfPageShifted ? 1 : 2,
+      scheduler: MainScheduler.instance
+    )
     .enumerated()
     .map { LoadedImage(preload: $0.index > 0, images: $0.element) }
   }
@@ -62,6 +67,7 @@ class SpreadPageViewController: NSViewController {
     didSet {
       guard let document = representedObject as? BookAccessible else { return }
       self.pageCount.accept(document.pageCount())
+      self.halfPageShifted = document.halfPageShifted() ?? false
       if let lastPageIndex = document.lastPageIndex() {
         self.currentPageIndex.accept(lastPageIndex)
       }
@@ -178,7 +184,7 @@ class SpreadPageViewController: NSViewController {
 
   // increment page (two page increment)
   func forwardPage() {
-    let incremental = self.currentPageIndex.value == 0 ? 1 : 2
+    let incremental = self.currentPageIndex.value == 0 && !self.halfPageShifted ? 1 : 2
     if self.currentPageIndex.value + incremental < self.pageCount.value {
       self.currentPageIndex.accept(self.currentPageIndex.value + incremental)
     }
@@ -187,6 +193,7 @@ class SpreadPageViewController: NSViewController {
   func forwardSinglePage() {
     if self.canForwardPage() {
       self.currentPageIndex.accept(self.currentPageIndex.value + 1)
+      self.halfPageShifted = !self.halfPageShifted
     }
   }
 
@@ -201,6 +208,7 @@ class SpreadPageViewController: NSViewController {
   func backwardSinglePage() {
     if self.canBackwardPage() {
       self.currentPageIndex.accept(self.currentPageIndex.value - 1)
+      self.halfPageShifted = !self.halfPageShifted
     }
   }
 

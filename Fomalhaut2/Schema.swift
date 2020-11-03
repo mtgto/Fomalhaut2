@@ -44,6 +44,7 @@ class Schema {
               newObject!["like"] = false
               newObject!["pageCount"] = 0
               newObject!["manualViewHeight"] = RealmOptional<Double>()
+              newObject!["halfPageShifted"] = false
             }
           }
         }

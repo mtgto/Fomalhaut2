@@ -43,6 +43,5 @@ class Schema {
     // start migration if need
     _ = try! Realm()
     self._state.onNext(.finish)
-    self._state.onCompleted()
   }
 }

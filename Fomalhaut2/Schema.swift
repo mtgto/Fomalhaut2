@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-import Foundation
+import Cocoa
 import RealmSwift
 import RxRelay
 import RxSwift
@@ -33,6 +33,14 @@ class Schema {
             migration.enumerateObjects(ofType: Book.className()) { oldObject, newObject in
               let filePath = oldObject!["filePath"] as! String
               newObject!["name"] = URL(fileURLWithPath: filePath).lastPathComponent
+              if let thumbnail = oldObject!["thumbnailData"] as? Data,
+                let image = NSImage(data: thumbnail),
+                let regeneratedThumbnail = image.resizedImageFixedAspectRatio(
+                  maxPixelsWide: BookDocument.thumbnailMaxWidth,
+                  maxPixelsHigh: BookDocument.thumbnailMaxHeight)
+              {
+                newObject!["thumbnailData"] = regeneratedThumbnail
+              }
               newObject!["like"] = false
               newObject!["pageCount"] = 0
               newObject!["manualViewHeight"] = RealmOptional<Double>()

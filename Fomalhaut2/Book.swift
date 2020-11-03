@@ -17,7 +17,7 @@ class Book: Object {
   @objc dynamic var lastPageIndex: Int = 0
   @objc dynamic var shiftedSignlePage: Bool = false
   let manualViewHeight = RealmOptional<Double>()
-  // PNG data
+  // jpeg data
   @objc dynamic var thumbnailData: Data? = nil
 
   override static func primaryKey() -> String? {

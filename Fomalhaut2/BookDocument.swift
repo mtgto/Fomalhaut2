@@ -6,6 +6,8 @@ import RealmSwift
 // Base Document class
 class BookDocument: NSDocument {
   var book: Book?  // should be frozen
+  static let thumbnailMaxWidth: Int = 220  // size of pixel
+  static let thumbnailMaxHeight: Int = 340
 
   override func makeWindowControllers() {
     // Returns the Storyboard that contains your Document window.
@@ -52,22 +54,8 @@ class BookDocument: NSDocument {
   }
 
   func setBookThumbnail(_ image: NSImage) throws {
-    let maxWidth: CGFloat = 220.0
-    let maxHeight: CGFloat = 340.0
-    let width: CGFloat
-    let height: CGFloat
-    let aspectRatio = image.size.height / image.size.width
-    if image.size.height / image.size.width > maxHeight / maxWidth {
-      width = maxHeight / aspectRatio
-      height = maxHeight
-    } else {
-      width = maxWidth
-      height = maxWidth * aspectRatio
-    }
-    let thumbnail = image.resize(to: CGSize(width: width, height: height))
-    if let tiff = thumbnail.tiffRepresentation,
-      let data = NSBitmapImageRep(data: tiff)?.representation(
-        using: .png, properties: [:])
+    if let data = image.resizedImageFixedAspectRatio(
+      maxPixelsWide: BookDocument.thumbnailMaxWidth, maxPixelsHigh: BookDocument.thumbnailMaxHeight)
     {
       let realm = try Realm()
       if let book = realm.object(ofType: Book.self, forPrimaryKey: self.book!.id) {

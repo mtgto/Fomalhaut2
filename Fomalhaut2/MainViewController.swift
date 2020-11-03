@@ -73,7 +73,8 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
       })
       .disposed(by: self.disposeBag)
     self.collectionViewBooks
-      .flatMapLatest { $0.flatMap { Observable.changeset(from: $0) } ?? Observable.empty() }
+      .compactMap { $0 }
+      .flatMapLatest { Observable.changeset(from: $0) }
       .subscribe(onNext: { [unowned self] _, changes in
         if let changes = changes {
           self.collectionView.applyChangeset(changes)
@@ -83,7 +84,8 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
       })
       .disposed(by: self.disposeBag)
     self.tableViewBooks
-      .flatMapLatest { $0.flatMap { Observable.changeset(from: $0) } ?? Observable.empty() }
+      .compactMap { $0 }
+      .flatMapLatest { Observable.changeset(from: $0) }
       .subscribe(onNext: { [unowned self] _, changes in
         if let changes = changes {
           self.tableView.applyChangeset(changes)

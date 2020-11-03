@@ -25,6 +25,8 @@
 		CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */; };
 		CEA6F695254EEFD800C50318 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F693254EEFD800C50318 /* ProgressViewController.swift */; };
 		CEA6F696254EEFD800C50318 /* ProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA6F694254EEFD800C50318 /* ProgressViewController.xib */; };
+		CEA6F69E2550FA1300C50318 /* NSTableView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */; };
+		CEA6F6A32550FA4700C50318 /* NSCollectionView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F6A22550FA4700C50318 /* NSCollectionView+Realm.swift */; };
 		CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = CEB2D9F625399375002C3F7E /* RxRealm */; };
 		CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2D9FB2539946D002C3F7E /* MainViewController.swift */; };
 		CEB2DA0425399693002C3F7E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA0325399693002C3F7E /* Book.swift */; };
@@ -82,6 +84,8 @@
 		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
 		CEA6F693254EEFD800C50318 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		CEA6F694254EEFD800C50318 /* ProgressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressViewController.xib; sourceTree = "<group>"; };
+		CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTableView+Realm.swift"; sourceTree = "<group>"; };
+		CEA6F6A22550FA4700C50318 /* NSCollectionView+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Realm.swift"; sourceTree = "<group>"; };
 		CEB2D9FB2539946D002C3F7E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CEB2DA0325399693002C3F7E /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 				CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */,
 				CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */,
 				CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */,
+				CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */,
+				CEA6F6A22550FA4700C50318 /* NSCollectionView+Realm.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
 				CEB2DA64253EF85D002C3F7E /* Book.storyboard */,
@@ -370,6 +376,7 @@
 				CEE979452541618D00A35C39 /* BookCollectionView.swift in Sources */,
 				CECC07192549C6C700CF56FA /* BookDocument.swift in Sources */,
 				CECC070A2549C48B00CF56FA /* PdfDocument.swift in Sources */,
+				CEA6F6A32550FA4700C50318 /* NSCollectionView+Realm.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
 				CEB2DA0425399693002C3F7E /* Book.swift in Sources */,
 				CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */,
@@ -378,6 +385,7 @@
 				CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */,
 				CEA6F695254EEFD800C50318 /* ProgressViewController.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
+				CEA6F69E2550FA1300C50318 /* NSTableView+Realm.swift in Sources */,
 				CECC0740254E8D6200CF56FA /* Schema.swift in Sources */,
 				CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */,
 				CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */,

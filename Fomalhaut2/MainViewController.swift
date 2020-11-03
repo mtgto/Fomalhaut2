@@ -11,9 +11,7 @@ enum CollectionViewStyle {
   case collection, list
 }
 
-class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableViewDelegate,
-  NSMenuItemValidation, NSCollectionViewDataSource, NSCollectionViewDelegate
-{
+class MainViewController: NSSplitViewController, NSMenuItemValidation {
   private let tableViewBooks = BehaviorRelay<Results<Book>?>(value: nil)
   private let collectionViewBooks = BehaviorRelay<Results<Book>?>(value: nil)
   let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
@@ -235,6 +233,21 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     }
   }
 
+  func selectedBook() -> Book? {
+    if self.collectionViewStyle.value == .collection {
+      if let indexPath = self.collectionView.selectionIndexPaths.first {
+        return self.collectionViewBooks.value![indexPath.item]
+      }
+    } else {
+      let index = self.tableView.clickedRow
+      if index >= 0 {
+        return self.tableViewBooks.value![index]
+      }
+    }
+    return nil
+  }
+
+  // MARK: NSMenuItemValidation
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     guard let selector = menuItem.action else {
       return false
@@ -250,22 +263,10 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     }
     return false
   }
+}
 
-  func selectedBook() -> Book? {
-    if self.collectionViewStyle.value == .collection {
-      if let indexPath = self.collectionView.selectionIndexPaths.first {
-        return self.collectionViewBooks.value![indexPath.item]
-      }
-    } else {
-      let index = self.tableView.clickedRow
-      if index >= 0 {
-        return self.tableViewBooks.value![index]
-      }
-    }
-    return nil
-  }
-
-  // MARK: - NSTableViewDataSource
+// MARK: - NSTableViewDataSource
+extension MainViewController: NSTableViewDataSource {
   func numberOfRows(in: NSTableView) -> Int {
     return self.tableViewBooks.value?.count ?? 0
   }
@@ -338,8 +339,10 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     }
     return false
   }
+}
 
-  // MARK: NSTableViewDelegate
+// MARK: NSTableViewDelegate
+extension MainViewController: NSTableViewDelegate {
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
   {
     guard let identifier = tableColumn?.identifier,
@@ -365,8 +368,10 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     log.debug("sortDescriptorsDidChange: \(tableView.sortDescriptors)")
     self.tableViewSortDescriptors.accept(tableView.sortDescriptors)
   }
+}
 
-  // MARK: - NSCollectionViewDataSource
+// MARK: - NSCollectionViewDataSource
+extension MainViewController: NSCollectionViewDataSource {
   func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int)
     -> Int
   {
@@ -391,8 +396,10 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     }
     return item
   }
+}
 
-  // MARK: NSCollectionViewDelegate
+// MARK: NSCollectionViewDelegate
+extension MainViewController: NSCollectionViewDelegate {
   func collectionView(
     _ collectionView: NSCollectionView,
     validateDrop draggingInfo: NSDraggingInfo,
@@ -446,27 +453,5 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
         .disposed(by: self.disposeBag)
     }
     return false
-  }
-}
-
-extension NSTableView {
-  func applyChangeset(_ changes: RealmChangeset) {
-    beginUpdates()
-    removeRows(at: IndexSet(changes.deleted))
-    insertRows(at: IndexSet(changes.inserted))
-    reloadData(forRowIndexes: IndexSet(changes.updated), columnIndexes: [0, 1])
-    endUpdates()
-  }
-}
-
-extension NSCollectionView {
-  func applyChangeset(_ changes: RealmChangeset) {
-    performBatchUpdates {
-      deleteItems(at: Set(changes.deleted.map { IndexPath(item: $0, section: 0) }))
-      insertItems(at: Set(changes.inserted.map { IndexPath(item: $0, section: 0) }))
-      reloadItems(at: Set(changes.updated.map { IndexPath(item: $0, section: 0) }))
-    } completionHandler: { (finished) in
-
-    }
   }
 }

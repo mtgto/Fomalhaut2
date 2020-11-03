@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
     // wait until schema migration is completed
     Schema.shared.migrated
+      .asObservable()
       .subscribe(onNext: { _ in
         NSDocumentController.shared.openDocument(
           withContentsOf: URL(fileURLWithPath: filename), display: true

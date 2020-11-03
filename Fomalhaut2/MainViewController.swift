@@ -34,6 +34,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
     self.collectionViewGridLayout.minimumLineSpacing = 3.0
     let realm = try! Realm()
     Schema.shared.migrated
+      .asObservable()
       .flatMap { _ in
         Observable.combineLatest(self.filter, self.searchText, self.tableViewSortDescriptors)
       }
@@ -55,6 +56,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
       })
       .disposed(by: self.disposeBag)
     Schema.shared.migrated
+      .asObservable()
       .flatMap { _ in Observable.combineLatest(self.filter, self.searchText) }
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { (filter, searchText) in
@@ -115,6 +117,7 @@ class MainViewController: NSSplitViewController, NSTableViewDataSource, NSTableV
         nibName: ProgressViewController.className(), bundle: nil)
       self.presentAsSheet(progressViewController)
       Schema.shared.migrated
+        .asObservable()
         .observeOn(MainScheduler.instance)
         .subscribe(onNext: { _ in
           self.dismiss(progressViewController)

@@ -23,6 +23,7 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var collectionView: NSCollectionView!
   @IBOutlet weak var collectionViewGridLayout: NSCollectionViewGridLayout!
+  @IBOutlet weak var thumbnailViewMenuItem: NSMenuItem!
 
   override func viewDidLoad() {
     // Do view setup here.
@@ -97,6 +98,9 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { collectionViewStyle in
         self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
+        if let thumbnailViewMenuItem = self.thumbnailViewMenuItem {
+          thumbnailViewMenuItem.state = collectionViewStyle == .collection ? .on : .off
+        }
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)

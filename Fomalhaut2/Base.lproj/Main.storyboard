@@ -310,6 +310,26 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
+                                        <menuItem title="View As" id="bt3-tT-Vcq">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="View As" id="fTm-Bv-lvD">
+                                                <items>
+                                                    <menuItem title="Thumbnail" id="PJj-ae-hgP">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="useThumbnailView:" target="Ady-hI-5gd" id="eqw-3j-onA"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="List" id="xv8-nE-sHo">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="useListView:" target="Ady-hI-5gd" id="EcE-3T-5XD"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="OnA-dZ-Sks"/>
                                         <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>

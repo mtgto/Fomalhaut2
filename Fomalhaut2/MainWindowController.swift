@@ -3,7 +3,7 @@
 import Cocoa
 import RxSwift
 
-class MainWindowController: NSWindowController, NSWindowDelegate {
+class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemValidation {
   private let disposeBag = DisposeBag()
   @IBOutlet weak var collectionViewStyleSegmentedControl: NSSegmentedControl!
   @IBOutlet weak var searchField: NSSearchField!
@@ -44,4 +44,36 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  // MARK: - MenuItem
+  @IBAction func useThumbnailView(_ sender: Any) {
+    let splitViewController = self.contentViewController as! NSSplitViewController
+    let mainViewController =
+      splitViewController.splitViewItems[1].viewController as! MainViewController
+    mainViewController.setCollectionViewStyle(.collection)
+  }
+
+  @IBAction func useListView(_ sender: Any) {
+    let splitViewController = self.contentViewController as! NSSplitViewController
+    let mainViewController =
+      splitViewController.splitViewItems[1].viewController as! MainViewController
+    mainViewController.setCollectionViewStyle(.list)
+  }
+
+  // MARK: - NSMenuItemValidation
+  func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    let splitViewController = self.contentViewController as! NSSplitViewController
+    let mainViewController =
+      splitViewController.splitViewItems[1].viewController as! MainViewController
+    guard let selector = menuItem.action else {
+      return false
+    }
+    if selector == #selector(useThumbnailView(_:)) {
+      menuItem.state = mainViewController.collectionViewStyle.value == .collection ? .on : .off
+      return true
+    } else if selector == #selector(useListView(_:)) {
+      menuItem.state = mainViewController.collectionViewStyle.value == .list ? .on : .off
+      return true
+    }
+    return false
+  }
 }

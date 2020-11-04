@@ -18,6 +18,9 @@ class BookDocument: NSDocument {
       as! NSWindowController
     //windowController.document = self
     windowController.contentViewController?.representedObject = self
+    if let book = self.book {
+      windowController.windowFrameAutosaveName = "Book\(book.id)"
+    }
     self.addWindowController(windowController)
   }
 

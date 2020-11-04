@@ -361,6 +361,13 @@
                                                 <action selector="backwardSinglePage:" target="Ady-hI-5gd" id="131-sS-Jab"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="vFa-Gq-siG"/>
+                                        <menuItem title="Go First" keyEquivalent="" id="hza-uj-PFX">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="firstPage:" target="Ady-hI-5gd" id="osM-ON-RlA"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

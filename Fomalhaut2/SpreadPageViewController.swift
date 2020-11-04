@@ -220,6 +220,10 @@ class SpreadPageViewController: NSViewController {
     return self.currentPageIndex.value - 1 >= 0
   }
 
+  func firstPage() {
+    self.currentPageIndex.accept(0)
+  }
+
   func setPageOrder(_ pageOrder: PageOrder) {
     self.imageStackView.userInterfaceLayoutDirection =
       pageOrder == .rtl ? .rightToLeft : .leftToRight

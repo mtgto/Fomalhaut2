@@ -69,6 +69,11 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
     spreadPageViewController.backwardSinglePage()
   }
 
+  @IBAction func firstPage(_ sender: Any) {
+    let spreadPageViewController = self.contentViewController as! SpreadPageViewController
+    spreadPageViewController.firstPage()
+  }
+
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     let spreadPageViewController = self.contentViewController as! SpreadPageViewController
     guard let selector = menuItem.action else {
@@ -82,6 +87,8 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
       return spreadPageViewController.canForwardPage()
     } else if selector == #selector(backwardSinglePage(_:)) {
       return spreadPageViewController.canBackwardPage()
+    } else if selector == #selector(firstPage(_:)) {
+      return true
     }
     return false
   }

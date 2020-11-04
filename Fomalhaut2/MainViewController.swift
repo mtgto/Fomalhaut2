@@ -134,7 +134,7 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
   func predicateFrom(searchText: String?, filterPredicate: NSPredicate?) -> NSPredicate {
     let searchPredicate: NSPredicate?
     if let searchText = searchText, !searchText.isEmpty {
-      searchPredicate = NSPredicate(format: "filePath CONTAINS[c] %@", searchText)
+      searchPredicate = NSPredicate(format: "name CONTAINS[c] %@", searchText)
     } else {
       searchPredicate = nil
     }

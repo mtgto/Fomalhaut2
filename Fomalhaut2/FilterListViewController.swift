@@ -35,9 +35,10 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
 
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
     if item == nil {
+      // root
       return 1
     } else if item is String {
-      return 2
+      return self.filters.count
     } else {
       return 0
     }

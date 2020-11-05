@@ -30,10 +30,10 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
 
   override func keyDown(with event: NSEvent) {
     let spreadPageViewController = self.contentViewController as! SpreadPageViewController
-    if event.keyCode == 126 {  // ↑
-      spreadPageViewController.backwardPage()
-    } else if event.keyCode == 125 {  // ↓
+    if event.keyCode == 125 || event.keyCode == 38 {  // ↓ or j
       spreadPageViewController.forwardPage()
+    } else if event.keyCode == 126 || event.keyCode == 40 {  // ↑ or k
+      spreadPageViewController.backwardPage()
     } else if event.keyCode == 49 {  // space
       if event.modifierFlags.contains(.shift) {
         spreadPageViewController.backwardPage()

@@ -509,37 +509,73 @@
                     <connections>
                         <outlet property="collectionViewStyleSegmentedControl" destination="WnA-DQ-KgP" id="JBc-KN-nlO"/>
                         <outlet property="searchField" destination="3G3-IO-GLY" id="pVp-Bv-RXY"/>
-                        <segue destination="dWR-Bt-6X7" kind="relationship" relationship="window.shadowedContentViewController" id="cO4-nr-9Bh"/>
+                        <segue destination="mTF-4H-rG1" kind="relationship" relationship="window.shadowedContentViewController" id="gBX-sP-150"/>
                     </connections>
                 </windowController>
                 <customObject id="cLr-Fc-1uG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="64" y="227"/>
         </scene>
-        <!--Split View Controller-->
-        <scene sceneID="BaI-fH-6x7">
+        <!--Main Stack View Controller-->
+        <scene sceneID="p57-vm-Vho">
             <objects>
-                <splitViewController id="dWR-Bt-6X7" sceneMemberID="viewController">
-                    <splitViewItems>
-                        <splitViewItem holdingPriority="750" id="JOu-Oe-aRX"/>
-                        <splitViewItem id="TK3-Ba-y3d"/>
-                    </splitViewItems>
-                    <splitView key="splitView" autosaveName="MainSplitView" dividerStyle="thin" vertical="YES" id="E8A-sm-bos">
-                        <rect key="frame" x="0.0" y="0.0" width="488" height="300"/>
+                <viewController id="mTF-4H-rG1" customClass="MainStackViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="v2r-uj-Tln">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <outlet property="delegate" destination="dWR-Bt-6X7" id="uFN-SI-uQS"/>
-                        </connections>
-                    </splitView>
+                        <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iFf-Cs-ch1">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="300"/>
+                                <subviews>
+                                    <containerView translatesAutoresizingMaskIntoConstraints="NO" id="8fd-ft-6hY">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="300"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="b1Z-Xi-hoc"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="9Hh-1Z-vTn" kind="embed" id="YSv-XL-hxX"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView translatesAutoresizingMaskIntoConstraints="NO" id="w6T-EY-I3d">
+                                        <rect key="frame" x="180" y="0.0" width="300" height="300"/>
+                                        <connections>
+                                            <segue destination="ZB3-hi-shs" kind="embed" id="o2b-2t-sIy"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="8fd-ft-6hY" firstAttribute="leading" secondItem="iFf-Cs-ch1" secondAttribute="leading" id="3xj-jU-BFY"/>
+                                    <constraint firstAttribute="bottom" secondItem="8fd-ft-6hY" secondAttribute="bottom" id="6eQ-dE-KM2"/>
+                                    <constraint firstAttribute="trailing" secondItem="w6T-EY-I3d" secondAttribute="trailing" id="SUt-D4-hv1"/>
+                                    <constraint firstItem="8fd-ft-6hY" firstAttribute="top" secondItem="iFf-Cs-ch1" secondAttribute="top" id="fo8-dE-8aU"/>
+                                    <constraint firstItem="w6T-EY-I3d" firstAttribute="top" secondItem="iFf-Cs-ch1" secondAttribute="top" id="oR5-aX-OJJ"/>
+                                    <constraint firstItem="w6T-EY-I3d" firstAttribute="leading" secondItem="8fd-ft-6hY" secondAttribute="trailing" id="qCA-Li-AN7"/>
+                                    <constraint firstAttribute="bottom" secondItem="w6T-EY-I3d" secondAttribute="bottom" id="v2O-gB-7xz"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="iFf-Cs-ch1" firstAttribute="leading" secondItem="v2r-uj-Tln" secondAttribute="leading" id="FDD-cT-Jma"/>
+                            <constraint firstItem="iFf-Cs-ch1" firstAttribute="top" secondItem="v2r-uj-Tln" secondAttribute="top" id="GK8-pE-v49"/>
+                            <constraint firstAttribute="trailing" secondItem="iFf-Cs-ch1" secondAttribute="trailing" id="grt-1m-tZB"/>
+                            <constraint firstAttribute="bottom" secondItem="iFf-Cs-ch1" secondAttribute="bottom" id="o0f-wd-28J"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <outlet property="splitView" destination="E8A-sm-bos" id="W5H-5w-cu9"/>
-                        <segue destination="9Hh-1Z-vTn" kind="relationship" relationship="splitItems" id="FU8-FL-Ea1"/>
-                        <segue destination="ZB3-hi-shs" kind="relationship" relationship="splitItems" id="Sfu-3A-nkV"/>
+                        <outlet property="stackView" destination="iFf-Cs-ch1" id="bhR-yZ-fzm"/>
                     </connections>
-                </splitViewController>
-                <customObject id="eHR-cx-E1R" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <customObject id="dna-WE-hxx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="68" y="586"/>
+            <point key="canvasLocation" x="64" y="580"/>
         </scene>
         <!--Filter List View Controller-->
         <scene sceneID="2df-lm-l8R">
@@ -724,7 +760,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
                                                     <clipView key="contentView" id="BBK-wR-7a6">
                                                         <rect key="frame" x="1" y="0.0" width="268" height="299"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="FileListView" rowSizeStyle="automatic" headerView="aUv-0U-ndW" viewBased="YES" id="rLV-3v-YTc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="274"/>

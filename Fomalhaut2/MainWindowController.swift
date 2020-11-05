@@ -12,9 +12,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
     super.windowDidLoad()
 
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    let splitViewController = self.contentViewController as! NSSplitViewController
-    let mainViewController =
-      splitViewController.splitViewItems[1].viewController as! MainViewController
+    let mainStackViewController = self.contentViewController as! MainStackViewController
+    let mainViewController = mainStackViewController.mainViewController!
     mainViewController.collectionViewStyle
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { collectionViewStyle in
@@ -32,9 +31,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
   }
 
   @IBAction func updateCollectionViewStyle(_ sender: Any) {
-    let splitViewController = self.contentViewController as! NSSplitViewController
-    let mainViewController =
-      splitViewController.splitViewItems[1].viewController as! MainViewController
+    let mainStackViewController = self.contentViewController as! MainStackViewController
+    let mainViewController = mainStackViewController.mainViewController!
     if let segmentedControl = sender as? NSSegmentedControl {
       if segmentedControl.selectedSegment == 0 {  // Use CollectionView
         mainViewController.setCollectionViewStyle(.collection)
@@ -46,24 +44,21 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
 
   // MARK: - MenuItem
   @IBAction func useThumbnailView(_ sender: Any) {
-    let splitViewController = self.contentViewController as! NSSplitViewController
-    let mainViewController =
-      splitViewController.splitViewItems[1].viewController as! MainViewController
+    let mainStackViewController = self.contentViewController as! MainStackViewController
+    let mainViewController = mainStackViewController.mainViewController!
     mainViewController.setCollectionViewStyle(.collection)
   }
 
   @IBAction func useListView(_ sender: Any) {
-    let splitViewController = self.contentViewController as! NSSplitViewController
-    let mainViewController =
-      splitViewController.splitViewItems[1].viewController as! MainViewController
+    let mainStackViewController = self.contentViewController as! MainStackViewController
+    let mainViewController = mainStackViewController.mainViewController!
     mainViewController.setCollectionViewStyle(.list)
   }
 
   // MARK: - NSMenuItemValidation
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-    let splitViewController = self.contentViewController as! NSSplitViewController
-    let mainViewController =
-      splitViewController.splitViewItems[1].viewController as! MainViewController
+    let mainStackViewController = self.contentViewController as! MainStackViewController
+    let mainViewController = mainStackViewController.mainViewController!
     guard let selector = menuItem.action else {
       return false
     }

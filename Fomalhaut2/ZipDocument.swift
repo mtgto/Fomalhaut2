@@ -5,7 +5,7 @@ import RxSwift
 import ZIPFoundation
 
 class ZipDocument: BookDocument {
-  static let UTI: String = "com.pkware.zip-archive"
+  static let UTIs: [String] = ["com.pkware.zip-archive", "net.mtgto.Fomalhaut2.cbz"]
   private let disposeBag = DisposeBag()
   private var archive: Archive?
   private lazy var entries: [Entry] = self.archive!.sorted { (lhs, rhs) -> Bool in

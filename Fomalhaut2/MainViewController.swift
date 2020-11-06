@@ -303,7 +303,7 @@ extension MainViewController: NSTableViewDataSource {
         forClasses: [NSURL.self],
         options: [
           .urlReadingFileURLsOnly: 1,
-          .urlReadingContentsConformToTypes: [ZipDocument.UTI, PdfDocument.UTI],
+          .urlReadingContentsConformToTypes: ZipDocument.UTIs + PdfDocument.UTIs,
         ])?
       .count ?? 0
     if dropFileCount == 0 {
@@ -322,7 +322,7 @@ extension MainViewController: NSTableViewDataSource {
       forClasses: [NSURL.self],
       options: [
         .urlReadingFileURLsOnly: 1,
-        .urlReadingContentsConformToTypes: [ZipDocument.UTI, PdfDocument.UTI],
+        .urlReadingContentsConformToTypes: ZipDocument.UTIs + PdfDocument.UTIs,
       ])
       as? [URL]
     {
@@ -419,7 +419,7 @@ extension MainViewController: NSCollectionViewDelegate {
         forClasses: [NSURL.self],
         options: [
           .urlReadingFileURLsOnly: 1,
-          .urlReadingContentsConformToTypes: [ZipDocument.UTI, PdfDocument.UTI],
+          .urlReadingContentsConformToTypes: ZipDocument.UTIs + PdfDocument.UTIs,
         ])?
       .count ?? 0
     if dropFileCount == 0 {
@@ -438,7 +438,7 @@ extension MainViewController: NSCollectionViewDelegate {
       forClasses: [NSURL.self],
       options: [
         .urlReadingFileURLsOnly: 1,
-        .urlReadingContentsConformToTypes: [ZipDocument.UTI, PdfDocument.UTI],
+        .urlReadingContentsConformToTypes: ZipDocument.UTIs + PdfDocument.UTIs,
       ])
       as? [URL]
     {

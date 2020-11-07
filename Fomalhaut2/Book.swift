@@ -16,7 +16,6 @@ class Book: Object {
   @objc dynamic var isRightToLeft: Bool = true
   @objc dynamic var lastPageIndex: Int = 0
   @objc dynamic var shiftedSignlePage: Bool = false
-  @objc dynamic var halfPageShifted: Bool = false
   let manualViewHeight = RealmOptional<Double>()
   // jpeg data
   @objc dynamic var thumbnailData: Data? = nil

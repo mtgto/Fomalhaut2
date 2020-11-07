@@ -68,7 +68,7 @@ extension FolderDocument: BookAccessible {
     return nil
   }
 
-  func halfPageShifted() -> Bool? {
+  func shiftedSignlePage() -> Bool? {
     // unsupported
     return nil
   }

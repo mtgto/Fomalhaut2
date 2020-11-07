@@ -75,7 +75,7 @@ extension PdfDocument: BookAccessible {
     return book.isRightToLeft ? .rtl : .ltr
   }
 
-  func halfPageShifted() -> Bool? {
-    return book?.halfPageShifted
+  func shiftedSignlePage() -> Bool? {
+    return book?.shiftedSignlePage
   }
 }

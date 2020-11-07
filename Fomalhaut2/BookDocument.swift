@@ -25,7 +25,7 @@ class BookDocument: NSDocument {
   }
 
   func storeViewerStatus(
-    lastPageIndex: Int, isRightToLeft: Bool, halfPageShifted: Bool, manualViewHeight: CGFloat?
+    lastPageIndex: Int, isRightToLeft: Bool, shiftedSignlePage: Bool, manualViewHeight: CGFloat?
   ) throws {
     if let selfBook = self.book {
       let realm = try Realm()
@@ -33,7 +33,7 @@ class BookDocument: NSDocument {
         try realm.write {
           book.lastPageIndex = lastPageIndex
           book.isRightToLeft = isRightToLeft
-          book.halfPageShifted = halfPageShifted
+          book.shiftedSignlePage = shiftedSignlePage
           book.manualViewHeight.value = manualViewHeight.flatMap(Double.init)
         }
       }

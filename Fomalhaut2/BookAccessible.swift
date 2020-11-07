@@ -19,5 +19,5 @@ protocol BookAccessible where Self: NSDocument {
 
   func lastPageOrder() -> PageOrder?
 
-  func halfPageShifted() -> Bool?
+  func shiftedSignlePage() -> Bool?
 }

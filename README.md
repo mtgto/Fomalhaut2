@@ -3,7 +3,7 @@ Fomalhaut2
 A comic viewer for macOS.
 
 - A native macOS GUI application
-- Collect your own comics (zip/cbz)
+- Collect your own comics (zip/cbz, PDF)
 
 ## Screenshots
 
@@ -24,9 +24,11 @@ A comic viewer for macOS.
 - [ ] Web server
    - [ ] Access comics via web browser (PC / smartphone)
 - [ ] Support more file types
+   - [x] zip/cbz
    - [x] PDF
    - [ ] rar/cbr
    - [ ] 7z/cb7
+- [ ] QuickLook Thumbnail Extension
 
 ## Contributing
 

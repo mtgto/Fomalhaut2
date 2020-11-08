@@ -44,6 +44,25 @@ class Schema {
               newObject!["like"] = false
               newObject!["pageCount"] = 0
               newObject!["manualViewHeight"] = RealmOptional<Double>()
+              // Update bookmark because v0.2.0 or prior version did not create bookmark for sandbox
+              let bookmarkData = oldObject!["bookmark"] as! Data
+              do {
+                var bookarmDataIsStale = false
+                let url = try URL(
+                  resolvingBookmarkData: bookmarkData, options: [.withoutMounting, .withoutUI],
+                  bookmarkDataIsStale: &bookarmDataIsStale)
+                let newBookmarkData = try url.bookmarkData(options: [
+                  .withSecurityScope, .securityScopeAllowOnlyReadAccess,
+                ])
+                let newUrl = try URL(
+                  resolvingBookmarkData: newBookmarkData, options: [.withoutMounting, .withoutUI],
+                  bookmarkDataIsStale: &bookarmDataIsStale)
+                newObject!["bookmark"] = newBookmarkData
+                newObject!["filePath"] = newUrl.path
+              } catch {
+                log.warning("Error occurs while regenerating bookmark from \(filePath): \(error)")
+                migration.delete(newObject!)
+              }
             }
           }
         }

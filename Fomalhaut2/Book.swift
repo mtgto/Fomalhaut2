@@ -37,7 +37,9 @@ class Book: Object {
   func setURL(_ url: URL) throws {
     self.filePath = url.path
     self.name = url.lastPathComponent
-    let bookmark = try url.bookmarkData(options: [.suitableForBookmarkFile])
+    let bookmark = try url.bookmarkData(options: [
+      .withSecurityScope, .securityScopeAllowOnlyReadAccess,
+    ])
     self.bookmark = bookmark
   }
 }

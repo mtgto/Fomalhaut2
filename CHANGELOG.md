@@ -18,6 +18,7 @@ CHANGELOG
 - Fix thumbnail size changes whether display is retina or not
 - Use NSStackView for main view instead of NSSplitView
 - Bugfix can't open cbz files
+- Create [Security-Scoped bookmark](https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AppSandboxInDepth/AppSandboxInDepth.html#//apple_ref/doc/uid/TP40011183-CH3-SW1) for comic files. Old data might be deleted if app can not migrate.
 
 ## v0.2.0 (2020-11-01)
 

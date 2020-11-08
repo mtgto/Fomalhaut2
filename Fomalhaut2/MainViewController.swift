@@ -146,6 +146,8 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     var bookmarkDataIsStale: Bool = false
     do {
       let url = try book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale)
+      _ = url.startAccessingSecurityScopedResource()
+      // TODO: Call url.stopAccessingSecurityScopedResource() after document is closed
       NSDocumentController.shared.openDocument(withContentsOf: url, display: false) {
         (document, documentWasAlreadyOpen, error) in
         if let error = error {
@@ -167,7 +169,9 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
                 let realm = try Realm()
                 try realm.write {
                   log.info("Regenerate book.bookmark of \(url.path)")
-                  book.bookmark = try url.bookmarkData(options: [.suitableForBookmarkFile])
+                  book.bookmark = try url.bookmarkData(options: [
+                    .withSecurityScope, .securityScopeAllowOnlyReadAccess,
+                  ])
                 }
               } catch {
                 log.error("error while update book: \(error)")
@@ -221,7 +225,9 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     if let book = self.selectedBook() {
       var bookmarkDataIsStale = false
       if let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) {
+        _ = url.startAccessingSecurityScopedResource()
         NSWorkspace.shared.activateFileViewerSelecting([url])
+        url.stopAccessingSecurityScopedResource()
       } else {
         // TODO: show error dialog
         self.showModalDialog(message: "", information: "")
@@ -445,8 +451,10 @@ extension MainViewController: NSCollectionViewDelegate {
 
       let books: [Book] = dropFileURLs.compactMap { (fileURL) in
         let book = Book()
-        guard let _ = try? book.setURL(fileURL) else {
-          log.error("Error while create bookmarkData from \(fileURL.path)")
+        do {
+          try book.setURL(fileURL)
+        } catch {
+          log.error("Error while create bookmarkData from \(fileURL.path): \(error)")
           return nil
         }
         return book

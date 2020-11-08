@@ -1,6 +1,12 @@
 CHANGELOG
 ====
 
+## v0.3.1 (2020-11-08)
+
+### Changed
+
+- Fix to generate Security-Scoped bookmark on creating new comic book data
+
 ## v0.3.0 (2020-11-08)
 
 ### Added

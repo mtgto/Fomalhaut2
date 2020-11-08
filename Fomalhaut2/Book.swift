@@ -35,11 +35,20 @@ class Book: Object {
   }
 
   func setURL(_ url: URL) throws {
-    self.filePath = url.path
     self.name = url.lastPathComponent
     let bookmark = try url.bookmarkData(options: [
       .withSecurityScope, .securityScopeAllowOnlyReadAccess,
     ])
+    var bookmarkDataIsStale = false
+    do {
+      let securityScopedURL = try URL(
+        resolvingBookmarkData: bookmark, options: [.withoutMounting, .withoutUI],
+        bookmarkDataIsStale: &bookmarkDataIsStale)
+      self.filePath = securityScopedURL.path
+    } catch {
+      log.error("Error while converting Security-Scoped URL: \(error)")
+      self.filePath = url.path
+    }
     self.bookmark = bookmark
   }
 }

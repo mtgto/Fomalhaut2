@@ -179,6 +179,7 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
             }
             document.makeWindowControllers()
             document.showWindows()
+            //url.stopAccessingSecurityScopedResource()
           }
         }
       }

@@ -29,8 +29,8 @@ class Schema {
       migrationBlock: { migration, oldSchemaVersion in
         if oldSchemaVersion < Schema.schemaVersion {
           self._state.onNext(.start)
-          if oldSchemaVersion < 1 {
-            migration.enumerateObjects(ofType: Book.className()) { oldObject, newObject in
+          migration.enumerateObjects(ofType: Book.className()) { oldObject, newObject in
+            if oldSchemaVersion < 1 {
               let filePath = oldObject!["filePath"] as! String
               newObject!["name"] = URL(fileURLWithPath: filePath).lastPathComponent
               if let thumbnail = oldObject!["thumbnailData"] as? Data,

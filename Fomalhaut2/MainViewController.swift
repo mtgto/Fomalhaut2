@@ -325,34 +325,7 @@ extension MainViewController: NSTableViewDataSource {
     _ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int,
     dropOperation: NSTableView.DropOperation
   ) -> Bool {
-    if let dropFileURLs = info.draggingPasteboard.readObjects(
-      forClasses: [NSURL.self],
-      options: [
-        .urlReadingFileURLsOnly: 1,
-        .urlReadingContentsConformToTypes: ZipDocument.UTIs + PdfDocument.UTIs,
-      ])
-      as? [URL]
-    {
-
-      let books: [Book] = dropFileURLs.compactMap { (fileURL) in
-        let book = Book()
-        guard let _ = try? book.setURL(fileURL) else {
-          log.error("Error while create bookmarkData from \(fileURL.path)")
-          return nil
-        }
-        return book
-        // TODO: Validate whether file contains one or more images? for example get thumbnail
-        //guard let document = try? NSDocumentController.shared.makeDocument(withContentsOf: fileURL, ofType: ZipDocument.UTI) else {
-        //log.info("Can not open with ZipDocument")
-        //return
-        //}
-      }
-      Observable.of(books)
-        .subscribe(Realm.rx.add())
-        .disposed(by: self.disposeBag)
-      return true
-    }
-    return false
+    return self.validateDraggingInfo(info)
   }
 }
 
@@ -441,34 +414,74 @@ extension MainViewController: NSCollectionViewDelegate {
     indexPath: IndexPath,
     dropOperation: NSCollectionView.DropOperation
   ) -> Bool {
-    if let dropFileURLs = draggingInfo.draggingPasteboard.readObjects(
-      forClasses: [NSURL.self],
-      options: [
-        .urlReadingFileURLsOnly: 1,
-        .urlReadingContentsConformToTypes: ZipDocument.UTIs + PdfDocument.UTIs,
-      ])
-      as? [URL]
-    {
+    return self.validateDraggingInfo(draggingInfo)
+  }
 
-      let books: [Book] = dropFileURLs.compactMap { (fileURL) in
-        let book = Book()
-        do {
-          try book.setURL(fileURL)
-        } catch {
-          log.error("Error while create bookmarkData from \(fileURL.path): \(error)")
-          return nil
-        }
-        return book
-        // TODO: Validate whether file contains one or more images? for example get thumbnail
-        //guard let document = try? NSDocumentController.shared.makeDocument(withContentsOf: fileURL, ofType: ZipDocument.UTI) else {
-        //log.info("Can not open with ZipDocument")
-        //return
-        //}
-      }
-      Observable.of(books)
-        .subscribe(Realm.rx.add())
-        .disposed(by: self.disposeBag)
+  func validateDraggingInfo(_ info: NSDraggingInfo) -> Bool {
+    guard
+      let dropFileURLs = info.draggingPasteboard.readObjects(
+        forClasses: [NSURL.self],
+        options: [
+          .urlReadingFileURLsOnly: 1,
+          .urlReadingContentsConformToTypes: ZipDocument.UTIs + PdfDocument.UTIs,
+        ])
+        as? [URL]
+    else {
+      return false
     }
-    return false
+    guard let realm = try? Realm() else {
+      log.error("Failed to initialize Realm")
+      return true
+    }
+    dropFileURLs.forEach { (fileURL) in
+      let book = Book()
+      do {
+        try book.setURL(fileURL)
+      } catch {
+        log.error("Error while create bookmarkData from \(fileURL.path): \(error)")
+        return
+      }
+      // Write before open a NSDocument
+      try? realm.write {
+        realm.add(book)
+      }
+      // TODO: Validate whether file contains one or more images? for example get thumbnail
+      var bookmarkDataIsStale = false
+      if let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) {
+        _ = url.startAccessingSecurityScopedResource()
+        do {
+          let document: BookAccessible
+          if url.pathExtension.lowercased() == "zip" {
+            document =
+              try NSDocumentController.shared.makeDocument(
+                withContentsOf: url, ofType: ZipDocument.UTIs[0]) as! ZipDocument
+          } else if url.pathExtension.lowercased() == "pdf" {
+            document =
+              try NSDocumentController.shared.makeDocument(
+                withContentsOf: url, ofType: PdfDocument.UTIs[0]) as! PdfDocument
+          } else {
+            return
+          }
+          if let realm = try? Realm() {
+            try? realm.write {
+              book.pageCount = document.pageCount()
+            }
+          }
+          // Generate thumbnail
+          Observable<Result<NSImage, Error>>.create { observer in
+            document.image(at: 0) { (result) in
+              observer.onNext(result)
+            }
+            return Disposables.create()
+          }.subscribe(onNext: { (result) in
+            url.stopAccessingSecurityScopedResource()
+          }).disposed(by: self.disposeBag)
+        } catch {
+          log.error("Failed to open a document: \(error)")
+        }
+      }
+    }
+
+    return true
   }
 }

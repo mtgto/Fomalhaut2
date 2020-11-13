@@ -7,7 +7,7 @@ import XCGLogger
 
 let log = XCGLogger.default
 
-@NSApplicationMain
+@main
 class AppDelegate: NSObject, NSApplicationDelegate {
   private let disposeBag = DisposeBag()
 

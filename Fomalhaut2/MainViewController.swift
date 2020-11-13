@@ -312,7 +312,6 @@ extension MainViewController: NSTableViewDataSource {
         forClasses: [NSURL.self],
         options: [
           .urlReadingFileURLsOnly: 1,
-          .urlReadingContentsConformToTypes: ZipDocument.UTIs + PdfDocument.UTIs,
         ])?
       .count ?? 0
     if dropFileCount == 0 {
@@ -401,7 +400,6 @@ extension MainViewController: NSCollectionViewDelegate {
         forClasses: [NSURL.self],
         options: [
           .urlReadingFileURLsOnly: 1,
-          .urlReadingContentsConformToTypes: ZipDocument.UTIs + PdfDocument.UTIs,
         ])?
       .count ?? 0
     if dropFileCount == 0 {
@@ -419,13 +417,13 @@ extension MainViewController: NSCollectionViewDelegate {
     return self.validateDraggingInfo(draggingInfo)
   }
 
+  // Verify dragged files are suitable for
   func validateDraggingInfo(_ info: NSDraggingInfo) -> Bool {
     guard
       let dropFileURLs = info.draggingPasteboard.readObjects(
         forClasses: [NSURL.self],
         options: [
           .urlReadingFileURLsOnly: 1,
-          .urlReadingContentsConformToTypes: ZipDocument.UTIs + PdfDocument.UTIs,
         ])
         as? [URL]
     else {
@@ -449,40 +447,44 @@ extension MainViewController: NSCollectionViewDelegate {
       }
       // TODO: Validate whether file contains one or more images? for example get thumbnail
       var bookmarkDataIsStale = false
-      if let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) {
-        _ = url.startAccessingSecurityScopedResource()
-        do {
-          let document: BookAccessible
-          if url.pathExtension.lowercased() == "zip" {
-            document =
-              try NSDocumentController.shared.makeDocument(
-                withContentsOf: url, ofType: ZipDocument.UTIs[0]) as! ZipDocument
-          } else if url.pathExtension.lowercased() == "pdf" {
-            document =
-              try NSDocumentController.shared.makeDocument(
-                withContentsOf: url, ofType: PdfDocument.UTIs[0]) as! PdfDocument
-          } else {
-            return
-          }
-          if let realm = try? Realm() {
-            try? realm.write {
-              book.pageCount = document.pageCount()
-            }
-          }
-          // Generate thumbnail
-          Observable<Result<NSImage, Error>>.create { observer in
-            document.image(at: 0) { (result) in
-              observer.onNext(result)
-              observer.onCompleted()
-            }
-            return Disposables.create()
-          }.subscribe(onNext: { (result) in
-            url.stopAccessingSecurityScopedResource()
-            document.close()
-          }).disposed(by: self.disposeBag)
-        } catch {
-          log.error("Failed to open a document: \(error)")
+      guard let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) else {
+        log.warning("Unresolved file is dropped")
+        return
+      }
+      _ = url.startAccessingSecurityScopedResource()
+      do {
+        let document: BookAccessible
+        if url.pathExtension.lowercased() == "zip" {
+          document =
+            try NSDocumentController.shared.makeDocument(
+              withContentsOf: url, ofType: ZipDocument.UTIs[0]) as! ZipDocument
+        } else if url.pathExtension.lowercased() == "cbz" {
+          document =
+            try NSDocumentController.shared.makeDocument(
+              withContentsOf: url, ofType: ZipDocument.UTIs[1]) as! ZipDocument
+        } else if url.pathExtension.lowercased() == "pdf" {
+          document =
+            try NSDocumentController.shared.makeDocument(
+              withContentsOf: url, ofType: PdfDocument.UTIs[0]) as! PdfDocument
+        } else {
+          return
         }
+        try? realm.write {
+          book.pageCount = document.pageCount()
+        }
+        // Generate thumbnail
+        Observable<Result<NSImage, Error>>.create { observer in
+          document.image(at: 0) { (result) in
+            observer.onNext(result)
+            observer.onCompleted()
+          }
+          return Disposables.create()
+        }.subscribe(onNext: { (result) in
+          url.stopAccessingSecurityScopedResource()
+          document.close()
+        }).disposed(by: self.disposeBag)
+      } catch {
+        log.error("Failed to open a document: \(error)")
       }
     }
 

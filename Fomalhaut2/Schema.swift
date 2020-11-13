@@ -11,8 +11,9 @@ enum SchemaMigrationState {
 
 class Schema {
   // 0: v0.1.0 - v0.2.0
-  // 1: v0.3.0 -
-  static let schemaVersion: UInt64 = 1
+  // 1: v0.3.0 - v0.3.1
+  // 2: v0.3.2 -
+  static let schemaVersion: UInt64 = 2
   static let shared = Schema()
   // only one event is streamed after anyone subscribe
   let state: Observable<SchemaMigrationState>
@@ -44,23 +45,24 @@ class Schema {
               newObject!["like"] = false
               newObject!["pageCount"] = 0
               newObject!["manualViewHeight"] = RealmOptional<Double>()
-              // Update bookmark because v0.2.0 or prior version did not create bookmark for sandbox
+            }
+            if oldSchemaVersion < 2 {
               let bookmarkData = oldObject!["bookmark"] as! Data
               do {
                 var bookarmDataIsStale = false
                 let url = try URL(
-                  resolvingBookmarkData: bookmarkData, options: [.withoutMounting, .withoutUI],
+                  resolvingBookmarkData: bookmarkData, options: [.withoutMounting],
                   bookmarkDataIsStale: &bookarmDataIsStale)
                 let newBookmarkData = try url.bookmarkData(options: [
                   .withSecurityScope, .securityScopeAllowOnlyReadAccess,
                 ])
                 let newUrl = try URL(
-                  resolvingBookmarkData: newBookmarkData, options: [.withoutMounting, .withoutUI],
+                  resolvingBookmarkData: newBookmarkData, options: [.withoutMounting, .withSecurityScope],
                   bookmarkDataIsStale: &bookarmDataIsStale)
                 newObject!["bookmark"] = newBookmarkData
                 newObject!["filePath"] = newUrl.path
               } catch {
-                log.warning("Error occurs while regenerating bookmark from \(filePath): \(error)")
+                log.warning("Error occurs while regenerating bookmark: \(error)")
                 migration.delete(newObject!)
               }
             }

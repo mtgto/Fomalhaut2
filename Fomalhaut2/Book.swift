@@ -30,7 +30,7 @@ class Book: Object {
 
   func resolveURL(bookmarkDataIsStale: inout Bool) throws -> URL {
     return try URL(
-      resolvingBookmarkData: self.bookmark, options: [.withoutMounting, .withoutUI],
+      resolvingBookmarkData: self.bookmark, options: [.withoutMounting, .withSecurityScope],
       bookmarkDataIsStale: &bookmarkDataIsStale)
   }
 
@@ -42,7 +42,7 @@ class Book: Object {
     var bookmarkDataIsStale = false
     do {
       let securityScopedURL = try URL(
-        resolvingBookmarkData: bookmark, options: [.withoutMounting, .withoutUI],
+        resolvingBookmarkData: bookmark, options: [.withoutMounting, .withSecurityScope],
         bookmarkDataIsStale: &bookmarkDataIsStale)
       self.filePath = securityScopedURL.path
     } catch {

@@ -146,7 +146,9 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     var bookmarkDataIsStale: Bool = false
     do {
       let url = try book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale)
-      _ = url.startAccessingSecurityScopedResource()
+      log.debug("bookmarkDataIsStale = \(bookmarkDataIsStale)")
+      let success = url.startAccessingSecurityScopedResource()
+      log.debug("success = \(success)")
       // TODO: Call url.stopAccessingSecurityScopedResource() after document is closed
       NSDocumentController.shared.openDocument(withContentsOf: url, display: false) {
         (document, documentWasAlreadyOpen, error) in
@@ -471,10 +473,12 @@ extension MainViewController: NSCollectionViewDelegate {
           Observable<Result<NSImage, Error>>.create { observer in
             document.image(at: 0) { (result) in
               observer.onNext(result)
+              observer.onCompleted()
             }
             return Disposables.create()
           }.subscribe(onNext: { (result) in
             url.stopAccessingSecurityScopedResource()
+            document.close()
           }).disposed(by: self.disposeBag)
         } catch {
           log.error("Failed to open a document: \(error)")

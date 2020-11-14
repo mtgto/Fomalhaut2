@@ -22,14 +22,15 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var collectionView: NSCollectionView!
-  @IBOutlet weak var collectionViewGridLayout: NSCollectionViewGridLayout!
 
   override func viewDidLoad() {
     // Do view setup here.
     self.tableView.registerForDraggedTypes([.fileURL])
     self.collectionView.registerForDraggedTypes([.fileURL])
-    self.collectionViewGridLayout.minimumInteritemSpacing = 5.0
-    self.collectionViewGridLayout.minimumLineSpacing = 3.0
+    self.collectionView.register(
+      NSNib(nibNamed: "CollectionViewHeaderView", bundle: .main),
+      forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader,
+      withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionViewHeaderView.className()))
     Schema.shared.state
       .skipWhile { $0 != .finish }
       .flatMap { _ in
@@ -261,6 +262,80 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     return nil
   }
 
+  // Verify dragged files are suitable for
+  func validateDraggingInfo(_ info: NSDraggingInfo) -> Bool {
+    guard
+      let dropFileURLs = info.draggingPasteboard.readObjects(
+        forClasses: [NSURL.self],
+        options: [
+          .urlReadingFileURLsOnly: 1
+        ])
+        as? [URL]
+    else {
+      return false
+    }
+    guard let realm = try? Realm() else {
+      log.error("Failed to initialize Realm")
+      return true
+    }
+    dropFileURLs.forEach { (fileURL) in
+      let book = Book()
+      do {
+        try book.setURL(fileURL)
+      } catch {
+        log.error("Error while create bookmarkData from \(fileURL.path): \(error)")
+        return
+      }
+      // Write before open a NSDocument
+      try? realm.write {
+        realm.add(book)
+      }
+      // TODO: Validate whether file contains one or more images? for example get thumbnail
+      var bookmarkDataIsStale = false
+      guard let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) else {
+        log.warning("Unresolved file is dropped")
+        return
+      }
+      _ = url.startAccessingSecurityScopedResource()
+      do {
+        let document: BookAccessible
+        if url.pathExtension.lowercased() == "zip" {
+          document =
+            try NSDocumentController.shared.makeDocument(
+              withContentsOf: url, ofType: ZipDocument.UTIs[0]) as! ZipDocument
+        } else if url.pathExtension.lowercased() == "cbz" {
+          document =
+            try NSDocumentController.shared.makeDocument(
+              withContentsOf: url, ofType: ZipDocument.UTIs[1]) as! ZipDocument
+        } else if url.pathExtension.lowercased() == "pdf" {
+          document =
+            try NSDocumentController.shared.makeDocument(
+              withContentsOf: url, ofType: PdfDocument.UTIs[0]) as! PdfDocument
+        } else {
+          return
+        }
+        try? realm.write {
+          book.pageCount = document.pageCount()
+        }
+        // Generate thumbnail
+        Observable<Result<NSImage, Error>>.create { observer in
+          document.image(at: 0) { (result) in
+            observer.onNext(result)
+            observer.onCompleted()
+          }
+          return Disposables.create()
+        }.subscribe(onNext: { (result) in
+          url.stopAccessingSecurityScopedResource()
+          document.close()
+        }).disposed(by: self.disposeBag)
+      } catch {
+        log.error("Failed to open a document: \(error)")
+      }
+    }
+
+    return true
+  }
+
   // MARK: NSMenuItemValidation
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     guard let selector = menuItem.action else {
@@ -311,7 +386,7 @@ extension MainViewController: NSTableViewDataSource {
       info.draggingPasteboard.readObjects(
         forClasses: [NSURL.self],
         options: [
-          .urlReadingFileURLsOnly: 1,
+          .urlReadingFileURLsOnly: 1
         ])?
       .count ?? 0
     if dropFileCount == 0 {
@@ -385,10 +460,25 @@ extension MainViewController: NSCollectionViewDataSource {
     }
     return item
   }
+
+  func collectionView(
+    _ collectionView: NSCollectionView,
+    viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind,
+    at indexPath: IndexPath
+  ) -> NSView {
+    let view = collectionView.makeSupplementaryView(
+      ofKind: kind,
+      withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionViewHeaderView.className()),
+      for: indexPath)
+    if let view = view as? CollectionViewHeaderView {
+      log.debug("label = \(view.orderButton.stringValue)")
+    }
+    return view
+  }
 }
 
 // MARK: NSCollectionViewDelegate
-extension MainViewController: NSCollectionViewDelegate {
+extension MainViewController: NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
   func collectionView(
     _ collectionView: NSCollectionView,
     validateDrop draggingInfo: NSDraggingInfo,
@@ -399,7 +489,7 @@ extension MainViewController: NSCollectionViewDelegate {
       draggingInfo.draggingPasteboard.readObjects(
         forClasses: [NSURL.self],
         options: [
-          .urlReadingFileURLsOnly: 1,
+          .urlReadingFileURLsOnly: 1
         ])?
       .count ?? 0
     if dropFileCount == 0 {
@@ -415,79 +505,5 @@ extension MainViewController: NSCollectionViewDelegate {
     dropOperation: NSCollectionView.DropOperation
   ) -> Bool {
     return self.validateDraggingInfo(draggingInfo)
-  }
-
-  // Verify dragged files are suitable for
-  func validateDraggingInfo(_ info: NSDraggingInfo) -> Bool {
-    guard
-      let dropFileURLs = info.draggingPasteboard.readObjects(
-        forClasses: [NSURL.self],
-        options: [
-          .urlReadingFileURLsOnly: 1,
-        ])
-        as? [URL]
-    else {
-      return false
-    }
-    guard let realm = try? Realm() else {
-      log.error("Failed to initialize Realm")
-      return true
-    }
-    dropFileURLs.forEach { (fileURL) in
-      let book = Book()
-      do {
-        try book.setURL(fileURL)
-      } catch {
-        log.error("Error while create bookmarkData from \(fileURL.path): \(error)")
-        return
-      }
-      // Write before open a NSDocument
-      try? realm.write {
-        realm.add(book)
-      }
-      // TODO: Validate whether file contains one or more images? for example get thumbnail
-      var bookmarkDataIsStale = false
-      guard let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) else {
-        log.warning("Unresolved file is dropped")
-        return
-      }
-      _ = url.startAccessingSecurityScopedResource()
-      do {
-        let document: BookAccessible
-        if url.pathExtension.lowercased() == "zip" {
-          document =
-            try NSDocumentController.shared.makeDocument(
-              withContentsOf: url, ofType: ZipDocument.UTIs[0]) as! ZipDocument
-        } else if url.pathExtension.lowercased() == "cbz" {
-          document =
-            try NSDocumentController.shared.makeDocument(
-              withContentsOf: url, ofType: ZipDocument.UTIs[1]) as! ZipDocument
-        } else if url.pathExtension.lowercased() == "pdf" {
-          document =
-            try NSDocumentController.shared.makeDocument(
-              withContentsOf: url, ofType: PdfDocument.UTIs[0]) as! PdfDocument
-        } else {
-          return
-        }
-        try? realm.write {
-          book.pageCount = document.pageCount()
-        }
-        // Generate thumbnail
-        Observable<Result<NSImage, Error>>.create { observer in
-          document.image(at: 0) { (result) in
-            observer.onNext(result)
-            observer.onCompleted()
-          }
-          return Disposables.create()
-        }.subscribe(onNext: { (result) in
-          url.stopAccessingSecurityScopedResource()
-          document.close()
-        }).disposed(by: self.disposeBag)
-      } catch {
-        log.error("Failed to open a document: \(error)")
-      }
-    }
-
-    return true
   }
 }

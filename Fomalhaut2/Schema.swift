@@ -57,7 +57,8 @@ class Schema {
                   .withSecurityScope, .securityScopeAllowOnlyReadAccess,
                 ])
                 let newUrl = try URL(
-                  resolvingBookmarkData: newBookmarkData, options: [.withoutMounting, .withSecurityScope],
+                  resolvingBookmarkData: newBookmarkData,
+                  options: [.withoutMounting, .withSecurityScope],
                   bookmarkDataIsStale: &bookarmDataIsStale)
                 newObject!["bookmark"] = newBookmarkData
                 newObject!["filePath"] = newUrl.path

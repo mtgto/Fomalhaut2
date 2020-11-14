@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -718,12 +718,9 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <collectionView selectable="YES" id="dAn-bS-ccr" customClass="BookCollectionView" customModule="Fomalhaut2" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="268" height="158"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="268" height="298"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                                                <collectionViewGridLayout key="collectionViewLayout" id="vzh-ZJ-NkJ">
-                                                                    <size key="minimumItemSize" width="178" height="272"/>
-                                                                    <size key="maximumItemSize" width="178" height="272"/>
-                                                                </collectionViewGridLayout>
+                                                                <collectionViewLayout key="collectionViewLayout" id="lRD-d4-gGp" customClass="CollectionViewLayout" customModule="Fomalhaut2" customModuleProvider="target"/>
                                                                 <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <connections>
                                                                     <outlet property="dataSource" destination="ZB3-hi-shs" id="bwK-4J-JkE"/>
@@ -760,7 +757,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
                                                     <clipView key="contentView" id="BBK-wR-7a6">
                                                         <rect key="frame" x="1" y="0.0" width="268" height="299"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="FileListView" rowSizeStyle="automatic" headerView="aUv-0U-ndW" viewBased="YES" id="rLV-3v-YTc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="274"/>
@@ -879,7 +876,6 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="dAn-bS-ccr" id="7f2-Sc-7Gs"/>
-                        <outlet property="collectionViewGridLayout" destination="vzh-ZJ-NkJ" id="x15-Ro-k04"/>
                         <outlet property="tabView" destination="vrY-YN-MxK" id="9Jc-Bt-AjT"/>
                         <outlet property="tableView" destination="rLV-3v-YTc" id="5I8-pG-ecn"/>
                     </connections>

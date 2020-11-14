@@ -14,17 +14,19 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qC7-cL-L4h">
-                    <rect key="frame" x="398" y="10" width="62" height="19"/>
-                    <popUpButtonCell key="cell" type="roundRect" title="Item 1" bezelStyle="roundedRect" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="65E-dg-611" id="fHE-9s-bPO">
+                    <rect key="frame" x="389" y="10" width="71" height="19"/>
+                    <popUpButtonCell key="cell" type="roundRect" title="Created" bezelStyle="roundedRect" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="65E-dg-611" id="fHE-9s-bPO">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="cellTitle"/>
                         <menu key="menu" id="xNX-ZS-gK2">
                             <items>
-                                <menuItem title="Item 1" state="on" id="65E-dg-611"/>
-                                <menuItem title="Item 2" id="koA-px-bNE"/>
-                                <menuItem title="Item 3" id="Jj3-gW-i4W"/>
+                                <menuItem title="Created" state="on" hidden="YES" id="65E-dg-611"/>
+                                <menuItem title="View count" id="koA-px-bNE"/>
                             </items>
                         </menu>
+                        <connections>
+                            <action selector="setOrder:" target="c22-O7-iKe" id="mzB-Xi-Sar"/>
+                        </connections>
                     </popUpButtonCell>
                 </popUpButton>
             </subviews>

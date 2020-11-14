@@ -1,6 +1,17 @@
 CHANGELOG
 ====
 
+## v0.3.2 (2020-XX-XX)
+
+### Added
+
+- Add popup button to switch order of collection view
+
+### Changed
+
+- Fix wrong restoring Security-Scoped bookmark
+- Fix cbz file support
+
 ## v0.3.1 (2020-11-08)
 
 ### Changed

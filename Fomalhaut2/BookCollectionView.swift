@@ -2,6 +2,8 @@
 
 import Cocoa
 
+let collectionOrderChangedNotificationName = Notification.Name("collectionOrderChanged")
+
 class BookCollectionView: NSCollectionView {
   private(set) var selectedIndexPath: IndexPath?
 

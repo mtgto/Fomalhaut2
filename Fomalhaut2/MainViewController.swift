@@ -11,6 +11,11 @@ enum CollectionViewStyle {
   case collection, list
 }
 
+enum CollectionOrder: String {
+  case createdAt = "createdAt"
+  case readCount = "readCount"
+}
+
 class MainViewController: NSSplitViewController, NSMenuItemValidation {
   private let tableViewBooks = BehaviorRelay<Results<Book>?>(value: nil)
   private let collectionViewBooks = BehaviorRelay<Results<Book>?>(value: nil)
@@ -18,6 +23,7 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
   let searchText = BehaviorRelay<String?>(value: nil)
   let filter = BehaviorRelay<Filter?>(value: nil)
   let tableViewSortDescriptors = BehaviorRelay<[NSSortDescriptor]>(value: [])
+  private let collectionOrder = BehaviorRelay<CollectionOrder>(value: .createdAt)
   private let disposeBag = DisposeBag()
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
@@ -56,9 +62,9 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
       .disposed(by: self.disposeBag)
     Schema.shared.state
       .skipWhile { $0 != .finish }
-      .flatMap { _ in Observable.combineLatest(self.filter, self.searchText) }
+      .flatMap { _ in Observable.combineLatest(self.filter, self.searchText, self.collectionOrder) }
       .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { (filter, searchText) in
+      .subscribe(onNext: { (filter, searchText, order) in
         let realm = try! Realm()
         let filterPredicate: NSPredicate?
         if let filter = filter {
@@ -69,7 +75,7 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
         let predicate: NSPredicate = self.predicateFrom(
           searchText: searchText, filterPredicate: filterPredicate)
         self.collectionViewBooks.accept(
-          realm.objects(Book.self).filter(predicate).sorted(byKeyPath: "createdAt"))
+          realm.objects(Book.self).filter(predicate).sorted(byKeyPath: order.rawValue))
       })
       .disposed(by: self.disposeBag)
     self.collectionViewBooks
@@ -107,6 +113,16 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
           self.filter.accept(filter)
         } else {
           log.error("Unsupported userInfo from filterChangedNotification")
+        }
+      })
+      .disposed(by: self.disposeBag)
+    NotificationCenter.default.rx.notification(collectionOrderChangedNotificationName, object: nil)
+      .subscribe(onNext: { notification in
+        if let order = notification.userInfo?["order"] as? CollectionOrder {
+          log.info("Collection order selected: \(order)")
+          self.collectionOrder.accept(order)
+        } else {
+          log.error("Unsupported userInfo from collectionOrderChangedNotification")
         }
       })
       .disposed(by: self.disposeBag)

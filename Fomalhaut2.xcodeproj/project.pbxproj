@@ -24,7 +24,6 @@
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
 		CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */; };
 		CEA6F695254EEFD800C50318 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F693254EEFD800C50318 /* ProgressViewController.swift */; };
-		CEA6F696254EEFD800C50318 /* ProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA6F694254EEFD800C50318 /* ProgressViewController.xib */; };
 		CEA6F69E2550FA1300C50318 /* NSTableView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */; };
 		CEA6F6A32550FA4700C50318 /* NSCollectionView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F6A22550FA4700C50318 /* NSCollectionView+Realm.swift */; };
 		CEA6F6B625543B3400C50318 /* MainStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F6B525543B3400C50318 /* MainStackViewController.swift */; };
@@ -32,6 +31,7 @@
 		CEA99445255FD6DF00B8BCC6 /* CollectionViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA99444255FD6DF00B8BCC6 /* CollectionViewHeaderView.xib */; };
 		CEA9944A255FE32800B8BCC6 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA99449255FE32800B8BCC6 /* CollectionViewLayout.swift */; };
 		CEA994552560CD6500B8BCC6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEA994542560CD6500B8BCC6 /* Localizable.strings */; };
+		CEA994592560D9A500B8BCC6 /* ProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA9945B2560D9A500B8BCC6 /* ProgressViewController.xib */; };
 		CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = CEB2D9F625399375002C3F7E /* RxRealm */; };
 		CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2D9FB2539946D002C3F7E /* MainViewController.swift */; };
 		CEB2DA0425399693002C3F7E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA0325399693002C3F7E /* Book.swift */; };
@@ -88,7 +88,6 @@
 		CE9EE62725330EE100B5AF5C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
 		CEA6F693254EEFD800C50318 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
-		CEA6F694254EEFD800C50318 /* ProgressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressViewController.xib; sourceTree = "<group>"; };
 		CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTableView+Realm.swift"; sourceTree = "<group>"; };
 		CEA6F6A22550FA4700C50318 /* NSCollectionView+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Realm.swift"; sourceTree = "<group>"; };
 		CEA6F6B525543B3400C50318 /* MainStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStackViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +95,7 @@
 		CEA99444255FD6DF00B8BCC6 /* CollectionViewHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderView.xib; sourceTree = "<group>"; };
 		CEA99449255FE32800B8BCC6 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
 		CEA994542560CD6500B8BCC6 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		CEA9945A2560D9A500B8BCC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProgressViewController.xib; sourceTree = "<group>"; };
 		CEB2D9FB2539946D002C3F7E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CEB2DA0325399693002C3F7E /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 				CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */,
 				CEB2DA51253E9384002C3F7E /* Filter.swift */,
 				CEA6F693254EEFD800C50318 /* ProgressViewController.swift */,
-				CEA6F694254EEFD800C50318 /* ProgressViewController.xib */,
+				CEA9945B2560D9A500B8BCC6 /* ProgressViewController.xib */,
 				CEA9943F255FD6D000B8BCC6 /* CollectionViewHeaderView.swift */,
 				CEA99444255FD6DF00B8BCC6 /* CollectionViewHeaderView.xib */,
 				CEA99449255FE32800B8BCC6 /* CollectionViewLayout.swift */,
@@ -359,7 +359,7 @@
 				CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */,
 				CEA994552560CD6500B8BCC6 /* Localizable.strings in Resources */,
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,
-				CEA6F696254EEFD800C50318 /* ProgressViewController.xib in Resources */,
+				CEA994592560D9A500B8BCC6 /* ProgressViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +450,14 @@
 				CE30281225305AA200986C9A /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CEA9945B2560D9A500B8BCC6 /* ProgressViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEA9945A2560D9A500B8BCC6 /* Base */,
+			);
+			name = ProgressViewController.xib;
 			sourceTree = "<group>";
 		};
 		CEB2DA64253EF85D002C3F7E /* Book.storyboard */ = {

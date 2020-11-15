@@ -3,11 +3,11 @@
 import Cocoa
 
 class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
-  private let rootItem = "Library"
+  private let rootItem = NSLocalizedString("LibraryHeader", comment: "Library")
   // TODO: Use PublishSubject to add/remove filter by user
   private let filters: [Filter] = [
-    Filter(name: "All", predicate: "readCount >= 0"),
-    Filter(name: "Unread", predicate: "readCount = 0"),
+    Filter(name: NSLocalizedString("AllFilter", comment: "All"), predicate: "readCount >= 0"),
+    Filter(name: NSLocalizedString("UnreadFilter", comment: "Unread"), predicate: "readCount = 0"),
   ]
   @IBOutlet weak var filterListView: NSOutlineView!
 

@@ -358,12 +358,18 @@
                                     <items>
                                         <menuItem title="Forward" keyEquivalent=" " id="e8Q-9B-UHb">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <attributedString key="userComments">
+                                                <fragment content="ForwardMenuItem"/>
+                                            </attributedString>
                                             <connections>
                                                 <action selector="forwardPage:" target="Ady-hI-5gd" id="Ni2-H5-Hlk"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Back" keyEquivalent=" " id="wlJ-Aw-yaP">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                            <attributedString key="userComments">
+                                                <fragment content="BackMenuItem"/>
+                                            </attributedString>
                                             <connections>
                                                 <action selector="backwardPage:" target="Ady-hI-5gd" id="9LU-Pm-I9x"/>
                                             </connections>
@@ -371,12 +377,18 @@
                                         <menuItem isSeparatorItem="YES" id="xuq-NI-5um"/>
                                         <menuItem title="Forward One Page" id="xGb-Mg-P4o">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <attributedString key="userComments">
+                                                <fragment content="ForwardOneMenuItem"/>
+                                            </attributedString>
                                             <connections>
                                                 <action selector="forwardSinglePage:" target="Ady-hI-5gd" id="Ffy-I7-RZW"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Backward One Page" id="g9T-PR-SEJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <attributedString key="userComments">
+                                                <fragment content="BackMenuItem"/>
+                                            </attributedString>
                                             <connections>
                                                 <action selector="backwardSinglePage:" target="Ady-hI-5gd" id="131-sS-Jab"/>
                                             </connections>
@@ -384,11 +396,17 @@
                                         <menuItem isSeparatorItem="YES" id="vFa-Gq-siG"/>
                                         <menuItem title="Go First" keyEquivalent="" id="hza-uj-PFX">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <attributedString key="userComments">
+                                                <fragment content="GoFirstMenuItem"/>
+                                            </attributedString>
                                             <connections>
                                                 <action selector="firstPage:" target="Ady-hI-5gd" id="osM-ON-RlA"/>
                                             </connections>
                                         </menuItem>
                                     </items>
+                                    <attributedString key="userComments">
+                                        <fragment content="ControlMenu"/>
+                                    </attributedString>
                                 </menu>
                             </menuItem>
                             <menuItem title="Window" id="aUF-d1-5bR">
@@ -408,6 +426,9 @@
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                                         <menuItem title="Book Library" keyEquivalent="0" id="AbO-IH-oCB">
+                                            <attributedString key="userComments">
+                                                <fragment content="BookLibraryMenuItem"/>
+                                            </attributedString>
                                             <connections>
                                                 <action selector="showLibraryWindow:" target="Voe-Tx-rLC" id="jnF-d6-0v6"/>
                                             </connections>
@@ -428,6 +449,9 @@
                                     <items>
                                         <menuItem title="Fomalhaut2 Website" id="ofe-pw-NVJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <attributedString key="userComments">
+                                                <fragment content="WebsiteMenuItem"/>
+                                            </attributedString>
                                             <connections>
                                                 <action selector="openWebsite:" target="Voe-Tx-rLC" id="xEf-52-vnx"/>
                                             </connections>
@@ -465,7 +489,7 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="SES-dh-uwI"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="2KD-x0-8Cs"/>
-                                <toolbarItem implicitItemIdentifier="54797C88-085B-4568-841F-3FB0096A4512" label="Custom View" paletteLabel="Custom View" sizingBehavior="auto" id="KFH-pN-hGY">
+                                <toolbarItem implicitItemIdentifier="54797C88-085B-4568-841F-3FB0096A4512" label="Search" paletteLabel="Search" sizingBehavior="auto" id="KFH-pN-hGY">
                                     <nil key="toolTip"/>
                                     <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="3G3-IO-GLY">
                                         <rect key="frame" x="0.0" y="14" width="96" height="22"/>
@@ -475,9 +499,15 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <attributedString key="userComments">
+                                            <fragment content="SearchField"/>
+                                        </attributedString>
                                     </searchField>
+                                    <attributedString key="userComments">
+                                        <fragment content="SearchItem"/>
+                                    </attributedString>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="2FAA3AD0-B186-4709-A2EB-E96DD5C4D06E" label="Custom View" paletteLabel="Custom View" sizingBehavior="auto" id="KLM-uf-9of">
+                                <toolbarItem implicitItemIdentifier="2FAA3AD0-B186-4709-A2EB-E96DD5C4D06E" label="View Style" paletteLabel="View Style" sizingBehavior="auto" id="KLM-uf-9of">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="WnA-DQ-KgP">
                                         <rect key="frame" x="0.0" y="14" width="183" height="23"/>
@@ -488,11 +518,20 @@
                                                 <segment label="Thumbnail" width="88" selected="YES"/>
                                                 <segment label="List" width="88" tag="1"/>
                                             </segments>
+                                            <attributedString key="userComments">
+                                                <fragment content="CollectionStyleSegmentCell"/>
+                                            </attributedString>
                                             <connections>
                                                 <action selector="updateCollectionViewStyle:" target="89S-Z6-qTv" id="7HY-2g-bzZ"/>
                                             </connections>
                                         </segmentedCell>
+                                        <attributedString key="userComments">
+                                            <fragment content="CollectionStyleSegment"/>
+                                        </attributedString>
                                     </segmentedControl>
+                                    <attributedString key="userComments">
+                                        <fragment content="CollectionStyleItem"/>
+                                    </attributedString>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>

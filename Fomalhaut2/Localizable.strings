@@ -2,3 +2,7 @@
 "SortPopupTitle" = "Sort by";
 "CreatedAtCaption" = "Created";
 "ViewCountCaption" = "View count";
+
+"AllFilter" = "All";
+"UnreadFilter" = "Unread";
+"LibraryHeader" = "Library";

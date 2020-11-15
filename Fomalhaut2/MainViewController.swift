@@ -485,7 +485,8 @@ extension MainViewController: NSCollectionViewDataSource {
     if kind == NSCollectionView.elementKindSectionHeader {
       let view = collectionView.makeSupplementaryView(
         ofKind: kind,
-        withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionViewHeaderView.className()),
+        withIdentifier: NSUserInterfaceItemIdentifier(
+          rawValue: CollectionViewHeaderView.className()),
         for: indexPath)
       return view
     } else {

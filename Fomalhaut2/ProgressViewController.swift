@@ -9,7 +9,6 @@ class ProgressViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do view setup here.
-    self.title = "Updating Database"
     self.progressIndicator.startAnimation(nil)
   }
 

@@ -164,6 +164,19 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     do {
       let url = try book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale)
       log.debug("bookmarkDataIsStale = \(bookmarkDataIsStale)")
+      if bookmarkDataIsStale {
+        log.info("Regenerate book.bookmark of \(url.path)")
+        do {
+          let realm = try Realm()
+          try realm.write {
+            book.bookmark = try url.bookmarkData(options: [
+              .withSecurityScope, .securityScopeAllowOnlyReadAccess,
+            ])
+          }
+        } catch {
+          log.error("error while update bookmark of book \(url.path): \(error)")
+        }
+      }
       let success = url.startAccessingSecurityScopedResource()
       log.debug("success = \(success)")
       // TODO: Call url.stopAccessingSecurityScopedResource() after document is closed
@@ -172,6 +185,7 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
         if let error = error {
           // TODO: show error dialog
           log.error("Error while open a book at \(url.path): \(error)")
+          NSAlert(error: error).runModal()
         } else {
           guard let document = document else {
             log.error("Failed to open a document: \(url.path)")
@@ -182,19 +196,6 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
           } else {
             if let document = document as? BookDocument {
               document.book = book.freeze()
-            }
-            if bookmarkDataIsStale {
-              do {
-                let realm = try Realm()
-                try realm.write {
-                  log.info("Regenerate book.bookmark of \(url.path)")
-                  book.bookmark = try url.bookmarkData(options: [
-                    .withSecurityScope, .securityScopeAllowOnlyReadAccess,
-                  ])
-                }
-              } catch {
-                log.error("error while update book: \(error)")
-              }
             }
             document.makeWindowControllers()
             document.showWindows()

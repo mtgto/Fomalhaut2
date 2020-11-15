@@ -8,7 +8,11 @@ class CollectionViewHeaderView: NSView, NSCollectionViewElement {
 
   override func awakeFromNib() {
     self.orderButton.removeAllItems()
-    self.orderButton.addItems(withTitles: ["Sort By", "Created", "View count"])
+    self.orderButton.addItems(withTitles: [
+      NSLocalizedString("SortPopupTitle", comment: "Sort by"),
+      NSLocalizedString("CreatedAtCaption", comment: "Created"),
+      NSLocalizedString("ViewCountCaption", comment: "View count"),
+    ])
     // TODO: Restore last selected item
     self.orderButton.item(at: 1)?.state = .on
   }

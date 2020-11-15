@@ -31,6 +31,7 @@
 		CEA99440255FD6D000B8BCC6 /* CollectionViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9943F255FD6D000B8BCC6 /* CollectionViewHeaderView.swift */; };
 		CEA99445255FD6DF00B8BCC6 /* CollectionViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA99444255FD6DF00B8BCC6 /* CollectionViewHeaderView.xib */; };
 		CEA9944A255FE32800B8BCC6 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA99449255FE32800B8BCC6 /* CollectionViewLayout.swift */; };
+		CEA994552560CD6500B8BCC6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEA994542560CD6500B8BCC6 /* Localizable.strings */; };
 		CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = CEB2D9F625399375002C3F7E /* RxRealm */; };
 		CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2D9FB2539946D002C3F7E /* MainViewController.swift */; };
 		CEB2DA0425399693002C3F7E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA0325399693002C3F7E /* Book.swift */; };
@@ -94,6 +95,7 @@
 		CEA9943F255FD6D000B8BCC6 /* CollectionViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeaderView.swift; sourceTree = "<group>"; };
 		CEA99444255FD6DF00B8BCC6 /* CollectionViewHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderView.xib; sourceTree = "<group>"; };
 		CEA99449255FE32800B8BCC6 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
+		CEA994542560CD6500B8BCC6 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CEB2D9FB2539946D002C3F7E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CEB2DA0325399693002C3F7E /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				CE30281425305AA200986C9A /* Info.plist */,
 				CE30281525305AA200986C9A /* Fomalhaut2.entitlements */,
 				CE654D752537E9520051D575 /* Credits.rtf */,
+				CEA994542560CD6500B8BCC6 /* Localizable.strings */,
 			);
 			path = Fomalhaut2;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */,
 				CE654D762537E9530051D575 /* Credits.rtf in Resources */,
 				CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */,
+				CEA994552560CD6500B8BCC6 /* Localizable.strings in Resources */,
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,
 				CEA6F696254EEFD800C50318 /* ProgressViewController.xib in Resources */,
 			);

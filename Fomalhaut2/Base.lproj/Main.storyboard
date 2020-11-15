@@ -316,17 +316,26 @@
                                                 <items>
                                                     <menuItem title="Thumbnail" id="PJj-ae-hgP">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <attributedString key="userComments">
+                                                            <fragment content="ThumbnailMenuItem"/>
+                                                        </attributedString>
                                                         <connections>
                                                             <action selector="useThumbnailView:" target="Ady-hI-5gd" id="eqw-3j-onA"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="List" id="xv8-nE-sHo">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <attributedString key="userComments">
+                                                            <fragment content="ListMenuItem"/>
+                                                        </attributedString>
                                                         <connections>
                                                             <action selector="useListView:" target="Ady-hI-5gd" id="EcE-3T-5XD"/>
                                                         </connections>
                                                     </menuItem>
                                                 </items>
+                                                <attributedString key="userComments">
+                                                    <fragment content="ViewAsMenuItem"/>
+                                                </attributedString>
                                             </menu>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="OnA-dZ-Sks"/>
@@ -796,7 +805,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
                                                     <clipView key="contentView" id="BBK-wR-7a6">
                                                         <rect key="frame" x="1" y="0.0" width="268" height="299"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="FileListView" rowSizeStyle="automatic" headerView="aUv-0U-ndW" viewBased="YES" id="rLV-3v-YTc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="274"/>
@@ -837,6 +846,9 @@
                                                                                 </connections>
                                                                             </tableCellView>
                                                                         </prototypeCellViews>
+                                                                        <attributedString key="userComments">
+                                                                            <fragment content="ListFileHeader"/>
+                                                                        </attributedString>
                                                                     </tableColumn>
                                                                     <tableColumn identifier="view" width="146" minWidth="10" maxWidth="3.4028234663852886e+38" id="neH-7i-wKL">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="View">
@@ -870,6 +882,9 @@
                                                                                 </connections>
                                                                             </tableCellView>
                                                                         </prototypeCellViews>
+                                                                        <attributedString key="userComments">
+                                                                            <fragment content="ListViewHeader"/>
+                                                                        </attributedString>
                                                                     </tableColumn>
                                                                 </tableColumns>
                                                                 <connections>
@@ -923,12 +938,18 @@
                     <items>
                         <menuItem title="Open" id="2M2-qJ-wjk">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <attributedString key="userComments">
+                                <fragment content="OpenMenuItem"/>
+                            </attributedString>
                             <connections>
                                 <action selector="openViewer:" target="ZB3-hi-shs" id="qvE-vY-cGl"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Show in Filder" id="ppy-Ma-54C">
+                        <menuItem title="Show in Finder" id="ppy-Ma-54C">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <attributedString key="userComments">
+                                <fragment content="ShowInFinderMenuItem"/>
+                            </attributedString>
                             <connections>
                                 <action selector="showFileInFinder:" target="ZB3-hi-shs" id="lFt-pv-tP0"/>
                             </connections>
@@ -936,6 +957,9 @@
                         <menuItem isSeparatorItem="YES" id="8Um-0T-NXU"/>
                         <menuItem title="Delete from library" id="oIh-8F-n4E">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <attributedString key="userComments">
+                                <fragment content="DeleteFromLibraryMenuItem"/>
+                            </attributedString>
                             <connections>
                                 <action selector="deleteFromLibrary:" target="ZB3-hi-shs" id="G1D-jK-Skf"/>
                             </connections>

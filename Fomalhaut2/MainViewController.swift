@@ -482,14 +482,15 @@ extension MainViewController: NSCollectionViewDataSource {
     viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind,
     at indexPath: IndexPath
   ) -> NSView {
-    let view = collectionView.makeSupplementaryView(
-      ofKind: kind,
-      withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionViewHeaderView.className()),
-      for: indexPath)
-    if let view = view as? CollectionViewHeaderView {
-      log.debug("label = \(view.orderButton.stringValue)")
+    if kind == NSCollectionView.elementKindSectionHeader {
+      let view = collectionView.makeSupplementaryView(
+        ofKind: kind,
+        withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionViewHeaderView.className()),
+        for: indexPath)
+      return view
+    } else {
+      return NSView()
     }
-    return view
   }
 }
 

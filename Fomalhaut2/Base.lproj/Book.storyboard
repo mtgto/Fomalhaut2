@@ -100,8 +100,8 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="1Rl-bO-XaM">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="R" width="32" selected="YES"/>
-                                                <segment label="L" width="32" tag="1"/>
+                                                <segment label="R" image="right.to.left" width="32" selected="YES"/>
+                                                <segment label="L" image="left.to.right" width="32" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -136,5 +136,7 @@
     <resources>
         <image name="NSTouchBarGoDownTemplate" width="16" height="30"/>
         <image name="NSTouchBarGoUpTemplate" width="16" height="30"/>
+        <image name="left.to.right" width="17" height="17"/>
+        <image name="right.to.left" width="17" height="17"/>
     </resources>
 </document>

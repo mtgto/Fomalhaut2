@@ -6,6 +6,7 @@ CHANGELOG
 ### Added
 
 - Add popup button to switch order of collection view
+- Universal Binary for Apple Silicon (Not tested)
 
 ### Changed
 

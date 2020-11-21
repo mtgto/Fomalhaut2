@@ -75,7 +75,7 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
         let predicate: NSPredicate = self.predicateFrom(
           searchText: searchText, filterPredicate: filterPredicate)
         self.collectionViewBooks.accept(
-          realm.objects(Book.self).filter(predicate).sorted(byKeyPath: order.rawValue))
+          realm.objects(Book.self).filter(predicate).sorted(byKeyPath: order.rawValue, ascending: false))
       })
       .disposed(by: self.disposeBag)
     self.collectionViewBooks

@@ -1,6 +1,19 @@
 CHANGELOG
 ====
 
+## v0.3.3
+
+### Added
+
+- Add Japanese language
+- Set toolbar icon to control page order
+- Show alert when app fails to open a book
+- Show alert when app fails database migration
+
+### Changed
+
+- Fix app crash when user click file header of list view
+
 ## v0.3.2 (2020-11-15)
 
 ### Added

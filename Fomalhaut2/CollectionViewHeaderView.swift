@@ -26,6 +26,7 @@ class CollectionViewHeaderView: NSView, NSCollectionViewElement {
     case 2:
       collectionOrder = .readCount
     default:
+      log.error("Unknown collection order selected: \(selectedIndex)")
       collectionOrder = .createdAt
     }
     self.orderButton.itemArray.enumerated().forEach { (item) in

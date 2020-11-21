@@ -38,6 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func showLibraryWindow(_ sender: Any) {
+    // TODO: Search by identifier?
     NSApp.windows.first?.makeKeyAndOrderFront(sender)
   }
 

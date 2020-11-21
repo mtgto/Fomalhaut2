@@ -15,7 +15,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // Remove main window from window list of Window menu
     // Setting isExcludedFromWindowsMenu in BookWindowController#viewDidLoad is ignored...
     NSApp.windows.first?.isExcludedFromWindowsMenu = true
-    Schema.shared.migrate()
+    do {
+      try Schema.shared.migrate()
+    } catch {
+      let alert = NSAlert()
+      alert.messageText = NSLocalizedString("DatabaseBrokenErrorMessageText", comment: "Database is broken")
+      alert.informativeText = String(format: NSLocalizedString("DatabaseBrokenInformativeText", comment: "Confirm your app is latest"), error.localizedDescription)
+      alert.alertStyle = .critical
+      alert.runModal()
+      NSApp.terminate(nil)
+    }
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {

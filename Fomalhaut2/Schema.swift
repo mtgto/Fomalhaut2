@@ -24,7 +24,7 @@ class Schema {
     self.state = self._state.share(replay: 1)
   }
 
-  func migrate() {
+  func migrate() throws {
     Realm.Configuration.defaultConfiguration = Realm.Configuration(
       schemaVersion: Schema.schemaVersion,
       migrationBlock: { migration, oldSchemaVersion in
@@ -70,8 +70,10 @@ class Schema {
           }
         }
       })
-    // start migration if need
-    _ = try! Realm()
+    // start migration if need.
+    // Be raised an exception if database version is newer than schemaVersion:
+    // ex. "Provided schema version 1 is less than last set version 2."
+    _ = try Realm()
     self._state.onNext(.finish)
   }
 }

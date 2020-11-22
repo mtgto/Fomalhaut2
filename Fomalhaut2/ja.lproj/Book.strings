@@ -10,10 +10,10 @@
 /* Class = "NSToolbarItem"; paletteLabel = "Control"; ObjectID = "fuc-9u-iU4"; */
 "fuc-9u-iU4.paletteLabel" = "Control";
 
-/* Class = "NSToolbarItem"; label = "Page Order"; ObjectID = "MNP-GK-6ey"; */
+/* Class = "NSToolbarItem"; label = "Page Order"; ObjectID = "MNP-GK-6ey"; Note = "PageOrder"; */
 "MNP-GK-6ey.label" = "Page Order";
 
-/* Class = "NSToolbarItem"; paletteLabel = "Page Order"; ObjectID = "MNP-GK-6ey"; */
+/* Class = "NSToolbarItem"; paletteLabel = "Page Order"; ObjectID = "MNP-GK-6ey"; Note = "PageOrder"; */
 "MNP-GK-6ey.paletteLabel" = "Page Order";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "Oyj-62-mGG"; */

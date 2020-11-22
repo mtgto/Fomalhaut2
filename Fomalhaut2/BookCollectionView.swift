@@ -8,13 +8,13 @@ class BookCollectionView: NSCollectionView {
   private(set) var selectedIndexPath: IndexPath?
 
   override func menu(for event: NSEvent) -> NSMenu? {
-    let locationInView = convert(event.locationInWindow, from: nil)
-    guard let path = indexPathForItem(at: locationInView) else {
+    let point = self.convert(event.locationInWindow, from: nil)
+    guard let indexPath = self.indexPathForItem(at: point) else {
       return nil
     }
-    self.selectedIndexPath = path
+    self.selectedIndexPath = indexPath
     self.deselectAll(nil)
-    self.selectItems(at: [path], scrollPosition: .nearestVerticalEdge)
+    self.selectItems(at: [indexPath], scrollPosition: .nearestVerticalEdge)
     return super.menu(for: event)
   }
 

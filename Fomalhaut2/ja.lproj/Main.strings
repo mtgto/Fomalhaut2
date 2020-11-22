@@ -7,9 +7,6 @@
 /* Class = "NSMenuItem"; title = "Fomalhaut2"; ObjectID = "1Xt-HY-uBw"; */
 "1Xt-HY-uBw.title" = "Fomalhaut2";
 
-/* Class = "NSMenuItem"; title = "Open"; ObjectID = "2M2-qJ-wjk"; */
-"2M2-qJ-wjk.title" = "開く";
-
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "2oI-Rn-ZJC"; */
 "2oI-Rn-ZJC.title" = "変換";
 
@@ -58,16 +55,13 @@
 /* Class = "NSMenuItem"; title = "Book Library"; ObjectID = "AbO-IH-oCB"; Note = "BookLibraryMenuItem"; */
 "AbO-IH-oCB.title" = "ライブラリウィンドウ";
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "AlB-aY-PJl"; */
-"AlB-aY-PJl.title" = "Table View Cell";
-
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "Window";
 
 /* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "Main Menu";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "bdj-nH-2eD"; */
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "bdj-nH-2eD"; Note = "ListViewHeader"; */
 "bdj-nH-2eD.title" = "Text Cell";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
@@ -121,10 +115,10 @@
 /* Class = "NSSegmentedCell"; fhf-YH-hap.ibShadowedLabels[1] = "List"; ObjectID = "fhf-YH-hap"; Note = "CollectionStyleSegmentCell"; */
 "fhf-YH-hap.ibShadowedLabels[1]" = "リスト";
 
-/* Class = "NSMenu"; title = "View As"; ObjectID = "fTm-Bv-lvD"; */
+/* Class = "NSMenu"; title = "View As"; ObjectID = "fTm-Bv-lvD"; Note = "ViewAsMenuItem"; */
 "fTm-Bv-lvD.title" = "表示形式";
 
-/* Class = "NSTableColumn"; headerCell.title = "File"; ObjectID = "fTx-cq-TM8"; */
+/* Class = "NSTableColumn"; headerCell.title = "File"; ObjectID = "fTx-cq-TM8"; Note = "ListFileHeader"; */
 "fTx-cq-TM8.headerCell.title" = "ファイル";
 
 /* Class = "NSMenuItem"; title = "Backward One Page"; ObjectID = "g9T-PR-SEJ"; Note = "BackMenuItem"; */
@@ -163,9 +157,6 @@
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
 "IAo-SY-fd9.title" = "開く…";
 
-/* Class = "NSTextFieldCell"; title = "HEADER CELL"; ObjectID = "Jcs-R0-XaN"; */
-"Jcs-R0-XaN.title" = "HEADER CELL";
-
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
 "Kd2-mp-pUS.title" = "すべてを表示";
 
@@ -181,7 +172,7 @@
 /* Class = "NSToolbarItem"; paletteLabel = "View Style"; ObjectID = "KLM-uf-9of"; Note = "CollectionStyleItem"; */
 "KLM-uf-9of.paletteLabel" = "表示形式";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "kyu-Ce-HWM"; */
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "kyu-Ce-HWM"; Note = "ListFileHeader"; */
 "kyu-Ce-HWM.title" = "Text Cell";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
@@ -190,7 +181,7 @@
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "mK6-2p-4JG"; */
 "mK6-2p-4JG.title" = "スペルと一緒に文法をチェック";
 
-/* Class = "NSTableColumn"; headerCell.title = "View"; ObjectID = "neH-7i-wKL"; */
+/* Class = "NSTableColumn"; headerCell.title = "View"; ObjectID = "neH-7i-wKL"; Note = "ListViewHeader"; */
 "neH-7i-wKL.headerCell.title" = "読んだ回数";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
@@ -201,9 +192,6 @@
 
 /* Class = "NSMenuItem"; title = "Fomalhaut2 Website"; ObjectID = "ofe-pw-NVJ"; Note = "WebsiteMenuItem"; */
 "ofe-pw-NVJ.title" = "Fomalhaut2のウェブサイト";
-
-/* Class = "NSMenuItem"; title = "Delete from library"; ObjectID = "oIh-8F-n4E"; */
-"oIh-8F-n4E.title" = "ライブラリから削除する";
 
 /* Class = "NSMenuItem"; title = "Hide Fomalhaut2"; ObjectID = "Olw-nP-bQN"; */
 "Olw-nP-bQN.title" = "Fomalhaut2を隠す";
@@ -223,14 +211,14 @@
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "pa3-QI-u2k"; */
 "pa3-QI-u2k.title" = "削除";
 
-/* Class = "NSMenuItem"; title = "Thumbnail"; ObjectID = "PJj-ae-hgP"; */
+/* Class = "NSMenuItem"; title = "Thumbnail"; ObjectID = "PJj-ae-hgP"; Note = "ThumbnailMenuItem"; */
 "PJj-ae-hgP.title" = "サムネイル";
-
-/* Class = "NSMenuItem"; title = "Show in Filder"; ObjectID = "ppy-Ma-54C"; */
-"ppy-Ma-54C.title" = "Finderで表示";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "q09-fT-Sye"; */
 "q09-fT-Sye.title" = "次を検索";
+
+/* Class = "NSMenuItem"; title = "New Collection"; ObjectID = "QWS-0S-hqf"; Note = "AddNewCollection"; */
+"QWS-0S-hqf.title" = "新規コレクション";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
 "R4o-n2-Eq4.title" = "拡大/縮小";
@@ -244,11 +232,14 @@
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "Ruw-6m-B2m"; */
 "Ruw-6m-B2m.title" = "すべてを選択";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Rxg-5Z-lln"; */
-"Rxg-5Z-lln.title" = "Text Cell";
-
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "S0p-oC-mLd"; */
 "S0p-oC-mLd.title" = "選択部分へジャンプ";
+
+/* Class = "NSToolbarItem"; label = "New collection"; ObjectID = "s7q-6j-XVy"; Note = "NewCollection"; */
+"s7q-6j-XVy.label" = "新規コレクション";
+
+/* Class = "NSToolbarItem"; paletteLabel = "New collection"; ObjectID = "s7q-6j-XVy"; Note = "NewCollection"; */
+"s7q-6j-XVy.paletteLabel" = "新規コレクション";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "snW-S8-Cw5"; */
 "snW-S8-Cw5.title" = "ツールバーを表示";
@@ -304,7 +295,7 @@
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "xrE-MZ-jX0"; */
 "xrE-MZ-jX0.title" = "読み上げ";
 
-/* Class = "NSMenuItem"; title = "List"; ObjectID = "xv8-nE-sHo"; */
+/* Class = "NSMenuItem"; title = "List"; ObjectID = "xv8-nE-sHo"; Note = "ListMenuItem"; */
 "xv8-nE-sHo.title" = "リスト";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "Xz5-n4-O0W"; */

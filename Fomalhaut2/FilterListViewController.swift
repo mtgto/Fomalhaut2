@@ -6,7 +6,9 @@ import RxRealm
 import RxRelay
 import RxSwift
 
-class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
+class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate,
+  NSControlTextEditingDelegate
+{
   private let rootItems = [
     NSLocalizedString("LibraryHeader", comment: "Library"),
     NSLocalizedString("CollectionHeader", comment: "Collection"),
@@ -22,26 +24,49 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    // Accept from Collection View or List View
+    self.filterListView.registerForDraggedTypes([.fileURL])
     Schema.shared.state
       .skipWhile { $0 != .finish }
+      .observeOn(MainScheduler.instance)
       .subscribe(onNext: { _ in
         let realm = try! Realm()
         self.collections.accept(realm.objects(Collection.self).sorted(byKeyPath: "createdAt"))
       })
       .disposed(by: self.disposeBag)
+    // TODO: MUST remove items from NSOutlineView before delete from Realm.
+    // https://github.com/realm/realm-cocoa/issues/6169
+    NotificationCenter.default.rx.notification(collectionDeletedNotificationName, object: nil)
+      .subscribe(onNext: { notification in
+        if let collection = notification.userInfo?["collection"] as? Collection {
+          if let index = self.collections.value?.index(of: collection) {
+            self.filterListView.removeItems(at: IndexSet([index]), inParent: self.rootItems[1])
+          }
+        }
+      })
+      .disposed(by: self.disposeBag)
     self.collections
       .compactMap { $0 }
       .flatMapLatest { Observable.changeset(from: $0) }
-      .subscribe(onNext: { [unowned self] _, changes in
-        if let changes = changes {
-          self.filterListView.applyChangeset(changes)
-        } else {
-          self.filterListView.reloadData()
-        }
+      .subscribe(onNext: { [unowned self] results, changes in
+        self.filterListView.reloadItem(self.rootItems[1], reloadChildren: true)
       })
       .disposed(by: self.disposeBag)
     self.rootItems.forEach { (rootItem) in
       self.filterListView.expandItem(rootItem)
+    }
+  }
+
+  func addNewCollection() {
+    let collection = Collection()
+    collection.name = "New Collection"
+    do {
+      let realm = try Realm()
+      try realm.write {
+        realm.add(collection)
+      }
+    } catch {
+      log.error("Error while adding new collection: \(error)")
     }
   }
 
@@ -52,8 +77,8 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     } else if let rootItem = item as? String {
       if rootItem == self.rootItems[0] {
         return self.filters[index]
-      } else {
-        // Not Implemented
+      } else if rootItem == self.rootItems[1] {
+        return self.collections.value![index]
       }
     }
     // Not Implemented
@@ -61,7 +86,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
   }
 
   func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-    if item is Filter {
+    if item is Filter || item is Collection {
       return false
     }
     return true
@@ -73,7 +98,10 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     } else if let rootItem = item as? String {
       if rootItem == self.rootItems[0] {
         return self.filters.count
+      } else if rootItem == self.rootItems[1] {
+        return self.collections.value?.count ?? 0
       } else {
+        log.error("Unexpected item for numberOfChildrenOfItem. item: \(item ?? "nil")")
         return 0
       }
     } else {
@@ -85,6 +113,53 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     _ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?
   ) -> Any? {
     return item
+  }
+
+  func outlineView(
+    _ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?,
+    proposedChildIndex index: Int
+  ) -> NSDragOperation {
+    if let collection = item as? Collection {
+      if info.draggingSource is NSCollectionView || info.draggingSource is NSTableView {
+        let dropFiles = info.draggingPasteboard.readObjects(
+          forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: 1])
+        return .copy
+      }
+    }
+    return []
+  }
+
+  func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int)
+    -> Bool
+  {
+    guard let realm = try? Realm() else {
+      // TODO: Show alert
+      log.error("Failed to initialize Realm")
+      return false
+    }
+    if let collection = item as? Collection {
+      guard
+        let dropFileURLs = info.draggingPasteboard.readObjects(
+          forClasses: [NSURL.self],
+          options: [
+            .urlReadingFileURLsOnly: 1
+          ])
+          as? [URL]
+      else {
+        return false
+      }
+
+      let fileURLs = dropFileURLs.filter { fileURL in
+        !collection.books.contains(where: { $0.filePath == fileURL.path })
+      }
+      let books = realm.objects(Book.self).filter("filePath IN %@", fileURLs.map { $0.path })
+      try? realm.write {
+        collection.books.append(objectsIn: books)
+      }
+      return true
+    }
+
+    return false
   }
 
   // MARK: NSOutlineViewDelegate
@@ -107,33 +182,69 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     return false
   }
 
+  func outlineView(_ outlineView: NSOutlineView, shouldEdit tableColumn: NSTableColumn?, item: Any) -> Bool {
+    return item is Collection
+  }
+
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any)
     -> NSView?
   {
-    if let filter = item as? Filter {
-      let cell =
-        outlineView.makeView(
-          withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DataCell"), owner: outlineView)
-        as! NSTableCellView
-      cell.textField?.stringValue = filter.name
-      return cell
-    } else if let label = item as? String {
+    if let label = item as? String {
       let cell =
         outlineView.makeView(
           withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HeaderCell"), owner: outlineView)
         as! NSTableCellView
       cell.textField?.stringValue = label
       return cell
+    } else {
+      let cell =
+        outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DataCell"), owner: outlineView)
+        as! NSTableCellView
+      if let filter = item as? Filter {
+        cell.textField?.stringValue = filter.name
+        cell.textField?.isEditable = false
+      } else if let collection = item as? Collection {
+        cell.textField?.stringValue = collection.name
+        cell.textField?.isEditable = true
+      } else {
+        log.error("Unexpected tableColumn. item: \(item)")
+        return nil
+      }
+      return cell
     }
-    log.error("Unexpected tableColumn. item: \(item)")
-    return nil
   }
 
   func outlineViewSelectionDidChange(_ notification: Notification) {
     //log.info("selectedRow = \(self.filterListView.selectedRow)")
-    if let filter = self.filterListView.item(atRow: self.filterListView.selectedRow) as? Filter {
+    let item = self.filterListView.item(atRow: self.filterListView.selectedRow)
+    if let filter = item as? Filter {
       NotificationCenter.default.post(
         name: filterChangedNotificationName, object: nil, userInfo: ["filter": filter])
+    } else if let collection = item as? Collection {
+      NotificationCenter.default.post(
+        name: collectionChangedNotificationName, object: nil, userInfo: ["collection": collection])
+    }
+  }
+
+  // MARK: NSControlTextEditingDelegate
+  func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
+    // Collection name should not be empty
+    return !fieldEditor.string.isEmpty
+  }
+
+  func controlTextDidEndEditing(_ obj: Notification) {
+    log.debug("controlTextDidEndEditing. \(self.filterListView.clickedRow) \(self.filterListView.selectedRow)")
+    if let textField = obj.object as? NSTextField,
+      let collection = self.filterListView.item(atRow: self.filterListView.selectedRow) as? Collection
+    {
+      do {
+        try Realm().write {
+          collection.name = textField.stringValue
+        }
+      } catch {
+        // TODO: Show alert
+        log.error("Error while updating collection name to \(textField.stringValue)")
+      }
     }
   }
 }

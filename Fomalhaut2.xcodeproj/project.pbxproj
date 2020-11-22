@@ -20,6 +20,9 @@
 		CE30282A25305AA200986C9A /* Fomalhaut2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */; };
 		CE654D762537E9530051D575 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE654D752537E9520051D575 /* Credits.rtf */; };
 		CE7CD508256A0B7B00C97167 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CD507256A0B7B00C97167 /* Collection.swift */; };
+		CE9DCB7E256A94C90024FB1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE9DCB7C256A94C90024FB1B /* InfoPlist.strings */; };
+		CE9DCB83256AA9EC0024FB1B /* FilterList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE9DCB82256AA9EC0024FB1B /* FilterList.storyboard */; };
+		CE9DCB8B256B610D0024FB1B /* NSOutlineView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */; };
 		CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */; };
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
@@ -86,6 +89,9 @@
 		CE30282B25305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE654D752537E9520051D575 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		CE7CD507256A0B7B00C97167 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		CE9DCB7D256A94C90024FB1B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE9DCB82256AA9EC0024FB1B /* FilterList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FilterList.storyboard; sourceTree = "<group>"; };
+		CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSOutlineView+Realm.swift"; sourceTree = "<group>"; };
 		CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWindowController.swift; sourceTree = "<group>"; };
 		CE9EE62725330EE100B5AF5C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +197,7 @@
 				CEB2D9FB2539946D002C3F7E /* MainViewController.swift */,
 				CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */,
 				CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */,
+				CE9DCB82256AA9EC0024FB1B /* FilterList.storyboard */,
 				CEB2DA51253E9384002C3F7E /* Filter.swift */,
 				CEA6F693254EEFD800C50318 /* ProgressViewController.swift */,
 				CEA9945B2560D9A500B8BCC6 /* ProgressViewController.xib */,
@@ -205,11 +212,13 @@
 				CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */,
 				CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */,
 				CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */,
+				CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */,
 				CEA6F6A22550FA4700C50318 /* NSCollectionView+Realm.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
 				CEB2DA64253EF85D002C3F7E /* Book.storyboard */,
 				CE30281425305AA200986C9A /* Info.plist */,
+				CE9DCB7C256A94C90024FB1B /* InfoPlist.strings */,
 				CE30281525305AA200986C9A /* Fomalhaut2.entitlements */,
 				CE654D752537E9520051D575 /* Credits.rtf */,
 				CEA994842560E06400B8BCC6 /* Localizable.strings */,
@@ -366,7 +375,9 @@
 				CE654D762537E9530051D575 /* Credits.rtf in Resources */,
 				CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */,
 				CEA994862560E06400B8BCC6 /* Localizable.strings in Resources */,
+				CE9DCB83256AA9EC0024FB1B /* FilterList.storyboard in Resources */,
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,
+				CE9DCB7E256A94C90024FB1B /* InfoPlist.strings in Resources */,
 				CEA994592560D9A500B8BCC6 /* ProgressViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,6 +411,7 @@
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,
 				CEE979452541618D00A35C39 /* BookCollectionView.swift in Sources */,
 				CECC07192549C6C700CF56FA /* BookDocument.swift in Sources */,
+				CE9DCB8B256B610D0024FB1B /* NSOutlineView+Realm.swift in Sources */,
 				CECC070A2549C48B00CF56FA /* PdfDocument.swift in Sources */,
 				CEA6F6A32550FA4700C50318 /* NSCollectionView+Realm.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
@@ -460,6 +472,14 @@
 				CEA994632560D9F100B8BCC6 /* ja */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CE9DCB7C256A94C90024FB1B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE9DCB7D256A94C90024FB1B /* ja */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		CEA9945B2560D9A500B8BCC6 /* ProgressViewController.xib */ = {

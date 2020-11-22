@@ -108,6 +108,9 @@
                                             <action selector="updatePageOrder:" target="I31-ld-zmx" id="Ild-BD-GIl"/>
                                         </connections>
                                     </segmentedControl>
+                                    <attributedString key="userComments">
+                                        <fragment content="PageOrder"/>
+                                    </attributedString>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="j9D-dA-3KM"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="elp-kS-fEt"/>
@@ -136,7 +139,7 @@
     <resources>
         <image name="NSTouchBarGoDownTemplate" width="16" height="30"/>
         <image name="NSTouchBarGoUpTemplate" width="16" height="30"/>
-        <image name="left.to.right" width="17" height="17"/>
-        <image name="right.to.left" width="17" height="17"/>
+        <image name="left.to.right" width="19" height="19"/>
+        <image name="right.to.left" width="19" height="19"/>
     </resources>
 </document>

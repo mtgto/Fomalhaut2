@@ -1,11 +1,42 @@
-"SortPopupTitle" = "順序";
-"CreatedAtCaption" = "作成順";
-"ViewCountCaption" = "読んだ回数";
-
+/* All */
 "AllFilter" = "すべての本";
-"UnreadFilter" = "未読";
-"LibraryHeader" = "ライブラリ";
+
+/* Delete from collection */
+"CollectionBookMenuDeleteFromCollection" = "コレクションから削除";
+
+/* Delete from library */
+"CollectionBookMenuDeleteFromLibrary" = "ライブラリから削除";
+
+/* Open */
+"CollectionBookMenuOpen" = "開く";
+
+/* Show in Finder */
+"CollectionBookMenuShowInFinder" = "Finderで表示";
+
+/* Collection */
 "CollectionHeader" = "コレクション";
 
+/* Created */
+"CreatedAtCaption" = "作成順";
+
+/* Database is broken */
 "DatabaseBrokenErrorMessageText" = "データベースが破損しています";
+
+/* Confirm your app is latest */
 "DatabaseBrokenInformativeText" = "最新のバージョンを使用しているか確認してください。\nError(\"%@\")";
+
+/* Delete %@ */
+"FilterListMenuDelete" = "%@ を削除";
+
+/* Library */
+"LibraryHeader" = "ライブラリ";
+
+/* Sort by */
+"SortPopupTitle" = "順序";
+
+/* Unread */
+"UnreadFilter" = "未読";
+
+/* View count */
+"ViewCountCaption" = "読んだ回数";
+

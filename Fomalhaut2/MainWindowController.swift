@@ -56,7 +56,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
   }
 
   @IBAction func addNewCollection(_ sender: Any) {
-
+    let mainStackViewController = self.contentViewController as! MainStackViewController
+    let filterListViewController = mainStackViewController.filterListViewController!
+    filterListViewController.addNewCollection()
   }
 
   // MARK: - NSMenuItemValidation

@@ -13,4 +13,13 @@ class MainStackViewController: NSViewController {
     }
     return nil
   }
+
+  var filterListViewController: FilterListViewController? {
+    for child in self.children {
+      if let vc = child as? FilterListViewController {
+        return vc
+      }
+    }
+    return nil
+  }
 }

@@ -16,12 +16,18 @@ enum CollectionOrder: String {
   case readCount = "readCount"
 }
 
+// Selected content in sidebar
+enum CollectionContent {
+  case collection(Collection)
+  case filter(Filter)
+}
+
 class MainViewController: NSSplitViewController, NSMenuItemValidation {
-  private let tableViewBooks = BehaviorRelay<Results<Book>?>(value: nil)
-  private let collectionViewBooks = BehaviorRelay<Results<Book>?>(value: nil)
+  private let tableViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
+  private let collectionViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
   let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
   let searchText = BehaviorRelay<String?>(value: nil)
-  let filter = BehaviorRelay<Filter?>(value: nil)
+  let collectionContent = BehaviorRelay<CollectionContent?>(value: nil)
   let tableViewSortDescriptors = BehaviorRelay<[NSSortDescriptor]>(value: [])
   private let collectionOrder = BehaviorRelay<CollectionOrder>(value: .createdAt)
   private let disposeBag = DisposeBag()
@@ -40,43 +46,47 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     Schema.shared.state
       .skipWhile { $0 != .finish }
       .flatMap { _ in
-        Observable.combineLatest(self.filter, self.searchText, self.tableViewSortDescriptors)
+        Observable.combineLatest(self.collectionContent, self.searchText, self.tableViewSortDescriptors)
       }
       .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { (filter, searchText, sortDescriptors) in
-        let realm = try! Realm()
-        let filterPredicate: NSPredicate?
-        if let filter = filter {
-          filterPredicate = NSPredicate(format: filter.predicate)
-        } else {
-          filterPredicate = nil
-        }
-        let predicate: NSPredicate = self.predicateFrom(
-          searchText: searchText, filterPredicate: filterPredicate)
+      .subscribe(onNext: { (collectionContent, searchText, sortDescriptors) in
         let sorted = sortDescriptors.map {
           SortDescriptor(
             keyPath: $0.key!, ascending: $0.ascending)
         }
-        self.tableViewBooks.accept(realm.objects(Book.self).filter(predicate).sorted(by: sorted))
+        let realm = try! Realm()
+        if let collectionContent = collectionContent {
+          switch collectionContent {
+          case .filter(let filter):
+            let filterPredicate: NSPredicate = NSPredicate(format: filter.predicate)
+            let predicate: NSPredicate = self.predicateFrom(searchText: searchText, filterPredicate: filterPredicate)
+            self.tableViewBooks.accept(
+              AnyRealmCollection(realm.objects(Book.self).filter(predicate).sorted(by: sorted)))
+          case .collection(let collection):
+            self.tableViewBooks.accept(AnyRealmCollection(collection.books.sorted(by: sorted)))
+          }
+        }
       })
       .disposed(by: self.disposeBag)
     Schema.shared.state
       .skipWhile { $0 != .finish }
-      .flatMap { _ in Observable.combineLatest(self.filter, self.searchText, self.collectionOrder) }
+      .flatMap { _ in Observable.combineLatest(self.collectionContent, self.searchText, self.collectionOrder) }
       .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { (filter, searchText, order) in
+      .subscribe(onNext: { (collectionContent, searchText, order) in
         let realm = try! Realm()
-        let filterPredicate: NSPredicate?
-        if let filter = filter {
-          filterPredicate = NSPredicate(format: filter.predicate)
-        } else {
-          filterPredicate = nil
+        if let collectionContent = collectionContent {
+          switch collectionContent {
+          case .filter(let filter):
+            let filterPredicate: NSPredicate = NSPredicate(format: filter.predicate)
+            let predicate: NSPredicate = self.predicateFrom(searchText: searchText, filterPredicate: filterPredicate)
+            self.collectionViewBooks.accept(
+              AnyRealmCollection(
+                realm.objects(Book.self).filter(predicate).sorted(byKeyPath: order.rawValue, ascending: false)))
+          case .collection(let collection):
+            self.collectionViewBooks.accept(
+              AnyRealmCollection(collection.books.sorted(byKeyPath: order.rawValue, ascending: false)))
+          }
         }
-        let predicate: NSPredicate = self.predicateFrom(
-          searchText: searchText, filterPredicate: filterPredicate)
-        self.collectionViewBooks.accept(
-          realm.objects(Book.self).filter(predicate).sorted(
-            byKeyPath: order.rawValue, ascending: false))
       })
       .disposed(by: self.disposeBag)
     self.collectionViewBooks
@@ -110,10 +120,20 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)
       .subscribe(onNext: { notification in
         if let filter = notification.userInfo?["filter"] as? Filter {
-          log.info("Filter selected: \(filter.name), \(filter.predicate)")
-          self.filter.accept(filter)
+          log.debug("Filter selected: \(filter.name), \(filter.predicate)")
+          self.collectionContent.accept(.filter(filter))
         } else {
           log.error("Unsupported userInfo from filterChangedNotification")
+        }
+      })
+      .disposed(by: self.disposeBag)
+    NotificationCenter.default.rx.notification(collectionChangedNotificationName, object: nil)
+      .subscribe(onNext: { notification in
+        if let collection = notification.userInfo?["collection"] as? Collection {
+          log.debug("Collection selected: \(collection.name)")
+          self.collectionContent.accept(.collection(collection))
+        } else {
+          log.error("Unsupported userInfo from collectionChangedNotification")
         }
       })
       .disposed(by: self.disposeBag)
@@ -497,13 +517,17 @@ extension MainViewController: NSCollectionViewDataSource {
 }
 
 // MARK: NSCollectionViewDelegate
-extension MainViewController: NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
+extension MainViewController: NSCollectionViewDelegate {
   func collectionView(
     _ collectionView: NSCollectionView,
     validateDrop draggingInfo: NSDraggingInfo,
     proposedIndexPath proposedDropIndexPath: AutoreleasingUnsafeMutablePointer<NSIndexPath>,
     dropOperation proposedDropOperation: UnsafeMutablePointer<NSCollectionView.DropOperation>
   ) -> NSDragOperation {
+    // Limitation: You can not reorder books for now
+    if let source = draggingInfo.draggingSource as? NSCollectionView, source == collectionView {
+      return []
+    }
     let dropFileCount =
       draggingInfo.draggingPasteboard.readObjects(
         forClasses: [NSURL.self],
@@ -524,5 +548,23 @@ extension MainViewController: NSCollectionViewDelegate, NSCollectionViewDelegate
     dropOperation: NSCollectionView.DropOperation
   ) -> Bool {
     return self.validateDraggingInfo(draggingInfo)
+  }
+
+  func collectionView(_ collectionView: NSCollectionView, pasteboardWriterForItemAt indexPath: IndexPath)
+    -> NSPasteboardWriting?
+  {
+    let book = self.collectionViewBooks.value![indexPath.item]
+    var isStale = false
+    return try? book.resolveURL(bookmarkDataIsStale: &isStale) as NSURL
+  }
+
+  // Hack to remain collection view cell during dragging: https://stackoverflow.com/a/59893170/6945346
+  func collectionView(
+    _ collectionView: NSCollectionView,
+    draggingSession session: NSDraggingSession,
+    willBeginAt screenPoint: NSPoint,
+    forItemsAt indexPaths: Set<IndexPath>
+  ) {
+    indexPaths.forEach { collectionView.item(at: $0)?.view.isHidden = false }
   }
 }

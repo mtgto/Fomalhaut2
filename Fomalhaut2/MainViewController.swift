@@ -75,7 +75,8 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
         let predicate: NSPredicate = self.predicateFrom(
           searchText: searchText, filterPredicate: filterPredicate)
         self.collectionViewBooks.accept(
-          realm.objects(Book.self).filter(predicate).sorted(byKeyPath: order.rawValue, ascending: false))
+          realm.objects(Book.self).filter(predicate).sorted(
+            byKeyPath: order.rawValue, ascending: false))
       })
       .disposed(by: self.disposeBag)
     self.collectionViewBooks
@@ -424,8 +425,7 @@ extension MainViewController: NSTableViewDataSource {
 
 // MARK: NSTableViewDelegate
 extension MainViewController: NSTableViewDelegate {
-  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
-  {
+  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let identifier = tableColumn?.identifier,
       let cellView = tableView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView
     else {

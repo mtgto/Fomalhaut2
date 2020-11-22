@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-import Cocoa
+import Foundation
 import RealmSwift
 
 class Book: Object {

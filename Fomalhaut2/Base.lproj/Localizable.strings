@@ -5,6 +5,7 @@
 "AllFilter" = "All";
 "UnreadFilter" = "Unread";
 "LibraryHeader" = "Library";
+"CollectionHeader" = "Collection";
 
 "DatabaseBrokenErrorMessageText" = "Database is broken.";
 "DatabaseBrokenInformativeText" = "Confirm your app is latest.\nError(\"%@\")";

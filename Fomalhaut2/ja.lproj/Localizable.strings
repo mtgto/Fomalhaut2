@@ -5,6 +5,7 @@
 "AllFilter" = "すべての本";
 "UnreadFilter" = "未読";
 "LibraryHeader" = "ライブラリ";
+"CollectionHeader" = "コレクション";
 
 "DatabaseBrokenErrorMessageText" = "データベースが破損しています";
 "DatabaseBrokenInformativeText" = "最新のバージョンを使用しているか確認してください。\nError(\"%@\")";

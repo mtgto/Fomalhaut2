@@ -55,6 +55,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
     mainViewController.setCollectionViewStyle(.list)
   }
 
+  @IBAction func addNewCollection(_ sender: Any) {
+
+  }
+
   // MARK: - NSMenuItemValidation
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     let mainStackViewController = self.contentViewController as! MainStackViewController
@@ -67,6 +71,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
       return true
     } else if selector == #selector(useListView(_:)) {
       menuItem.state = mainViewController.collectionViewStyle.value == .list ? .on : .off
+      return true
+    } else if selector == #selector(addNewCollection(_:)) {
       return true
     }
     return false

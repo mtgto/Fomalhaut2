@@ -19,8 +19,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       try Schema.shared.migrate()
     } catch {
       let alert = NSAlert()
-      alert.messageText = NSLocalizedString("DatabaseBrokenErrorMessageText", comment: "Database is broken")
-      alert.informativeText = String(format: NSLocalizedString("DatabaseBrokenInformativeText", comment: "Confirm your app is latest"), error.localizedDescription)
+      alert.messageText = NSLocalizedString(
+        "DatabaseBrokenErrorMessageText", comment: "Database is broken")
+      alert.informativeText = String(
+        format: NSLocalizedString(
+          "DatabaseBrokenInformativeText", comment: "Confirm your app is latest"),
+        error.localizedDescription)
       alert.alertStyle = .critical
       alert.runModal()
       NSApp.terminate(nil)

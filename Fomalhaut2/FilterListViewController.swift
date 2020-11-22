@@ -1,29 +1,63 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Cocoa
+import RealmSwift
+import RxRealm
+import RxRelay
+import RxSwift
 
 class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
-  private let rootItem = NSLocalizedString("LibraryHeader", comment: "Library")
+  private let rootItems = [
+    NSLocalizedString("LibraryHeader", comment: "Library"),
+    NSLocalizedString("CollectionHeader", comment: "Collection"),
+  ]
   // TODO: Use PublishSubject to add/remove filter by user
   private let filters: [Filter] = [
     Filter(name: NSLocalizedString("AllFilter", comment: "All"), predicate: "readCount >= 0"),
     Filter(name: NSLocalizedString("UnreadFilter", comment: "Unread"), predicate: "readCount = 0"),
   ]
+  private let collections = BehaviorRelay<Results<Collection>?>(value: nil)
+  private let disposeBag = DisposeBag()
   @IBOutlet weak var filterListView: NSOutlineView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
-    self.filterListView.expandItem(self.rootItem)
+    Schema.shared.state
+      .skipWhile { $0 != .finish }
+      .subscribe(onNext: { _ in
+        let realm = try! Realm()
+        self.collections.accept(realm.objects(Collection.self).sorted(byKeyPath: "createdAt"))
+      })
+      .disposed(by: self.disposeBag)
+    self.collections
+      .compactMap { $0 }
+      .flatMapLatest { Observable.changeset(from: $0) }
+      .subscribe(onNext: { [unowned self] _, changes in
+        if let changes = changes {
+          self.filterListView.applyChangeset(changes)
+        } else {
+          self.filterListView.reloadData()
+        }
+      })
+      .disposed(by: self.disposeBag)
+    self.rootItems.forEach { (rootItem) in
+      self.filterListView.expandItem(rootItem)
+    }
   }
 
   // MARK: - NSOutlineViewDataSource
   func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
     if item == nil {
-      // root
-      return self.rootItem
+      return self.rootItems[index]
+    } else if let rootItem = item as? String {
+      if rootItem == self.rootItems[0] {
+        return self.filters[index]
+      } else {
+        // Not Implemented
+      }
     }
-    return self.filters[index]
+    // Not Implemented
+    return "Not Implemented"
   }
 
   func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
@@ -35,10 +69,13 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
 
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
     if item == nil {
-      // root
-      return 1
-    } else if item is String {
-      return self.filters.count
+      return self.rootItems.count
+    } else if let rootItem = item as? String {
+      if rootItem == self.rootItems[0] {
+        return self.filters.count
+      } else {
+        return 0
+      }
     } else {
       return 0
     }

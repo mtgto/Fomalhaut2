@@ -19,6 +19,7 @@
 		CE30281F25305AA200986C9A /* Fomalhaut2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30281E25305AA200986C9A /* Fomalhaut2Tests.swift */; };
 		CE30282A25305AA200986C9A /* Fomalhaut2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */; };
 		CE654D762537E9530051D575 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE654D752537E9520051D575 /* Credits.rtf */; };
+		CE7CD508256A0B7B00C97167 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CD507256A0B7B00C97167 /* Collection.swift */; };
 		CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */; };
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
@@ -84,6 +85,7 @@
 		CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fomalhaut2UITests.swift; sourceTree = "<group>"; };
 		CE30282B25305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE654D752537E9520051D575 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		CE7CD507256A0B7B00C97167 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWindowController.swift; sourceTree = "<group>"; };
 		CE9EE62725330EE100B5AF5C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				CEA99449255FE32800B8BCC6 /* CollectionViewLayout.swift */,
 				CECC073F254E8D6200CF56FA /* Schema.swift */,
 				CEB2DA0325399693002C3F7E /* Book.swift */,
+				CE7CD507256A0B7B00C97167 /* Collection.swift */,
 				CEE979442541618D00A35C39 /* BookCollectionView.swift */,
 				CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */,
 				CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */,
@@ -408,6 +411,7 @@
 				CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */,
 				CEA6F695254EEFD800C50318 /* ProgressViewController.swift in Sources */,
 				CE296BBB253063BA00674C99 /* ZipDocument.swift in Sources */,
+				CE7CD508256A0B7B00C97167 /* Collection.swift in Sources */,
 				CEA6F69E2550FA1300C50318 /* NSTableView+Realm.swift in Sources */,
 				CECC0740254E8D6200CF56FA /* Schema.swift in Sources */,
 				CEA99440255FD6D000B8BCC6 /* CollectionViewHeaderView.swift in Sources */,

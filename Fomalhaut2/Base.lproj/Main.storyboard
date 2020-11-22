@@ -60,6 +60,15 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
+                                        <menuItem title="New Collection" keyEquivalent="n" id="QWS-0S-hqf">
+                                            <attributedString key="userComments">
+                                                <fragment content="AddNewCollection"/>
+                                            </attributedString>
+                                            <connections>
+                                                <action selector="addNewCollection:" target="Ady-hI-5gd" id="wkD-Xc-Ilb"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Fm2-Gx-kpW"/>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                             <connections>
                                                 <action selector="openDocument:" target="Ady-hI-5gd" id="bVn-NM-KNZ"/>
@@ -478,7 +487,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="50" y="-25"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="clz-W3-5Yg">
@@ -542,8 +551,26 @@
                                         <fragment content="CollectionStyleItem"/>
                                     </attributedString>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="32DC3CB0-4855-4781-AEAF-9D8A644BE98E" label="New collection" paletteLabel="New collection" image="add.bookmark" sizingBehavior="auto" id="s7q-6j-XVy">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="dbk-fa-WXN">
+                                        <rect key="frame" x="19" y="14" width="48" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="add.bookmark" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8lI-80-5aU">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="addNewCollection:" target="89S-Z6-qTv" id="jZd-dX-eMV"/>
+                                        </connections>
+                                    </button>
+                                    <attributedString key="userComments">
+                                        <fragment content="NewCollection"/>
+                                    </attributedString>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="s7q-6j-XVy"/>
                                 <toolbarItem reference="2KD-x0-8Cs"/>
                                 <toolbarItem reference="KLM-uf-9of"/>
                                 <toolbarItem reference="2KD-x0-8Cs"/>
@@ -805,7 +832,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
                                                     <clipView key="contentView" id="BBK-wR-7a6">
                                                         <rect key="frame" x="1" y="0.0" width="268" height="299"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="FileListView" rowSizeStyle="automatic" headerView="aUv-0U-ndW" viewBased="YES" id="rLV-3v-YTc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="274"/>
@@ -971,4 +998,7 @@
             <point key="canvasLocation" x="216" y="1044"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add.bookmark" width="19" height="19"/>
+    </resources>
 </document>

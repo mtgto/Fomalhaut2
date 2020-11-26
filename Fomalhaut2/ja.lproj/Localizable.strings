@@ -40,3 +40,8 @@
 /* View count */
 "ViewCountCaption" = "読んだ回数";
 
+"FilterListMenuDelete" = "%@ を削除";
+"CollectionBookMenuOpen" = "開く";
+"CollectionBookMenuShowInFinder" = "Finderで表示";
+"CollectionBookMenuDeleteFromCollection" = "コレクションから削除";
+"CollectionBookMenuDeleteFromLibrary" = "ライブラリから削除";

@@ -26,12 +26,14 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
     return super.becomeFirstResponder()
   }
 
+  // MAKR: NSMenuDelegate
   override func menu(for event: NSEvent) -> NSMenu? {
     let point = convert(event.locationInWindow, from: nil)
     let clickedRow = self.row(at: point)
     if let collection = self.item(atRow: clickedRow) as? Collection {
       self.selectedCollection = collection
-      self.collectionMenu.item(at: 0)?.title = "Delete \(collection.name)"
+      self.collectionMenu.item(at: 0)?.title = String(
+        format: NSLocalizedString("FilterListMenuDelete", comment: "Delete %@"), collection.name)
       return self.collectionMenu
     } else {
       self.selectedCollection = nil

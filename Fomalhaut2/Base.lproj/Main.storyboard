@@ -688,7 +688,6 @@
                                                                 <connections>
                                                                     <outlet property="dataSource" destination="ZB3-hi-shs" id="bwK-4J-JkE"/>
                                                                     <outlet property="delegate" destination="ZB3-hi-shs" id="YLr-Pb-aM5"/>
-                                                                    <outlet property="menu" destination="D4X-CC-i7j" id="B34-2X-REB"/>
                                                                 </connections>
                                                             </collectionView>
                                                         </subviews>
@@ -806,7 +805,6 @@
                                                                     <action trigger="doubleAction" selector="openBook:" target="ZB3-hi-shs" id="0p8-aC-QSY"/>
                                                                     <outlet property="dataSource" destination="ZB3-hi-shs" id="Y7r-zj-s6Z"/>
                                                                     <outlet property="delegate" destination="ZB3-hi-shs" id="Zv0-Ld-lhv"/>
-                                                                    <outlet property="menu" destination="D4X-CC-i7j" id="lNu-rS-Jub"/>
                                                                 </connections>
                                                             </tableView>
                                                         </subviews>
@@ -849,38 +847,6 @@
                         <outlet property="tableView" destination="rLV-3v-YTc" id="5I8-pG-ecn"/>
                     </connections>
                 </viewController>
-                <menu id="D4X-CC-i7j">
-                    <items>
-                        <menuItem title="Open" id="2M2-qJ-wjk">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <attributedString key="userComments">
-                                <fragment content="OpenMenuItem"/>
-                            </attributedString>
-                            <connections>
-                                <action selector="openViewer:" target="ZB3-hi-shs" id="qvE-vY-cGl"/>
-                            </connections>
-                        </menuItem>
-                        <menuItem title="Show in Finder" id="ppy-Ma-54C">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <attributedString key="userComments">
-                                <fragment content="ShowInFinderMenuItem"/>
-                            </attributedString>
-                            <connections>
-                                <action selector="showFileInFinder:" target="ZB3-hi-shs" id="lFt-pv-tP0"/>
-                            </connections>
-                        </menuItem>
-                        <menuItem isSeparatorItem="YES" id="8Um-0T-NXU"/>
-                        <menuItem title="Delete from library" id="oIh-8F-n4E">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <attributedString key="userComments">
-                                <fragment content="DeleteFromLibraryMenuItem"/>
-                            </attributedString>
-                            <connections>
-                                <action selector="deleteFromLibrary:" target="ZB3-hi-shs" id="G1D-jK-Skf"/>
-                            </connections>
-                        </menuItem>
-                    </items>
-                </menu>
                 <customObject id="25j-Xi-AhT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="216" y="1044"/>

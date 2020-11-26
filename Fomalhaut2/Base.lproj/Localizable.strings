@@ -9,3 +9,9 @@
 
 "DatabaseBrokenErrorMessageText" = "Database is broken.";
 "DatabaseBrokenInformativeText" = "Confirm your app is latest.\nError(\"%@\")";
+
+"CollectionBookMenuOpen" = "Open";
+"CollectionBookMenuShowInFinder" = "Show in Finder";
+"CollectionBookMenuDeleteFromCollection" = "Delete from collection";
+"CollectionBookMenuDeleteFromLibrary" = "Delete from library";
+"FilterListMenuDelete" = "Delete %@";

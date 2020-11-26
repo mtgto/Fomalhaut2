@@ -31,12 +31,16 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
   let tableViewSortDescriptors = BehaviorRelay<[NSSortDescriptor]>(value: [])
   private let collectionOrder = BehaviorRelay<CollectionOrder>(value: .createdAt)
   private let disposeBag = DisposeBag()
+  private var bookMenu: NSMenu!
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var collectionView: NSCollectionView!
 
   override func viewDidLoad() {
     // Do view setup here.
+    self.bookMenu = NSMenu(title: "Book")
+    self.collectionView.menu = self.bookMenu
+    self.tableView.menu = self.bookMenu
     self.tableView.registerForDraggedTypes([.fileURL])
     self.collectionView.registerForDraggedTypes([.fileURL])
     self.collectionView.register(
@@ -115,6 +119,13 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { collectionViewStyle in
         self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
+      })
+      .disposed(by: self.disposeBag)
+    self.collectionContent
+      .compactMap { $0 }
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { collectionContent in
+        self.updateBookMenu(collectionContent: collectionContent)
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)
@@ -256,14 +267,14 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     }
   }
 
-  // MARK: - NSMenu for NSTableView
-  @IBAction func openViewer(_ sender: Any) {
+  // MARK: - NSMenu for NSTableView and NSCollectionView
+  @objc func openViewer(_ sender: Any) {
     if let book = self.selectedBook() {
       self.open(book)
     }
   }
 
-  @IBAction func showFileInFinder(_ sender: Any) {
+  @objc func showFileInFinder(_ sender: Any) {
     if let book = self.selectedBook() {
       var bookmarkDataIsStale = false
       if let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) {
@@ -277,7 +288,23 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     }
   }
 
-  @IBAction func deleteFromLibrary(_ sender: Any) {
+  @objc func deleteFromCollection(_ sender: Any) {
+    if let book = self.selectedBook() {
+      if case .collection(let collection) = self.collectionContent.value, let index = collection.books.index(of: book) {
+        do {
+          let realm = try Realm()
+          try realm.write {
+            collection.books.remove(at: index)
+          }
+        } catch {
+          // TODO: Show alert
+          log.error("Error while deleting a book from collection \(collection.name)")
+        }
+      }
+    }
+  }
+
+  @objc func deleteFromLibrary(_ sender: Any) {
     if let book = self.selectedBook() {
       // TODO: show error dialog
       Observable.from([book])
@@ -374,13 +401,37 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
     return true
   }
 
+  func updateBookMenu(collectionContent: CollectionContent) {
+    self.bookMenu.removeAllItems()
+    self.bookMenu.addItem(
+      NSMenuItem(
+        title: NSLocalizedString("CollectionBookMenuOpen", comment: "Open"), action: #selector(openViewer(_:)),
+        keyEquivalent: ""))
+    self.bookMenu.addItem(
+      NSMenuItem(
+        title: NSLocalizedString("CollectionBookMenuShowInFinder", comment: "Show in Finder"),
+        action: #selector(showFileInFinder(_:)), keyEquivalent: ""))
+    self.bookMenu.addItem(NSMenuItem.separator())
+    if case .collection(_) = collectionContent {
+      self.bookMenu.addItem(
+        NSMenuItem(
+          title: NSLocalizedString("CollectionBookMenuDeleteFromCollection", comment: "Delete from collection"),
+          action: #selector(deleteFromCollection(_:)), keyEquivalent: ""))
+    } else {
+      self.bookMenu.addItem(
+        NSMenuItem(
+          title: NSLocalizedString("CollectionBookMenuDeleteFromLibrary", comment: "Delete from library"),
+          action: #selector(deleteFromLibrary(_:)), keyEquivalent: ""))
+    }
+  }
+
   // MARK: NSMenuItemValidation
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     guard let selector = menuItem.action else {
       return false
     }
     if selector == #selector(openViewer(_:)) || selector == #selector(showFileInFinder(_:))
-      || selector == #selector(deleteFromLibrary(_:))
+      || selector == #selector(deleteFromCollection(_:)) || selector == #selector(deleteFromLibrary(_:))
     {
       if self.collectionViewStyle.value == .list {
         return self.tableView.clickedRow >= 0

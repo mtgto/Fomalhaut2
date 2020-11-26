@@ -5,6 +5,16 @@ A comic viewer for macOS.
 - A native macOS GUI application
 - Collect your own comics (zip/cbz, PDF)
 
+## Install
+
+1. Download .dmg file from [Release page](https://github.com/mtgto/Fomalhaut2/releases).
+2. Copy `Fomalhaut2.app` to `/Applications` (or you want to).
+
+## Uninstall
+
+1. Move `Fomalhaut2.app` to Trash.
+2. Delete `~/Library/Containers/net.mtgto.Fomalhaut2`.
+
 ## Screenshots
 
 ![Collection screenshot](https://github.com/mtgto/Fomalhaut2/blob/gh-pages/screenshot1.png)

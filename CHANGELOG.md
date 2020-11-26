@@ -1,6 +1,12 @@
 CHANGELOG
 ====
 
+## v0.4.0 (2020-xx-xx)
+
+### Added
+
+- Book collections
+
 ## v0.3.3 (2020-11-22)
 
 ### Added

@@ -24,6 +24,7 @@
 		CE9DCB8B256B610D0024FB1B /* NSOutlineView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */; };
 		CE9DCB9625720C490024FB1B /* CollectionContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9DCB9525720C490024FB1B /* CollectionContent.swift */; };
 		CE9DCB9E25722DA80024FB1B /* CollectionContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9DCB9D25722DA80024FB1B /* CollectionContentTests.swift */; };
+		CE9DCC2425730EC30024FB1B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CE9DCC2325730EC30024FB1B /* LICENSE */; };
 		CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */; };
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
@@ -94,6 +95,7 @@
 		CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSOutlineView+Realm.swift"; sourceTree = "<group>"; };
 		CE9DCB9525720C490024FB1B /* CollectionContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionContent.swift; sourceTree = "<group>"; };
 		CE9DCB9D25722DA80024FB1B /* CollectionContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionContentTests.swift; sourceTree = "<group>"; };
+		CE9DCC2325730EC30024FB1B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWindowController.swift; sourceTree = "<group>"; };
 		CE9EE62725330EE100B5AF5C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				CE30282825305AA200986C9A /* Fomalhaut2UITests */,
 				CE30280725305AA000986C9A /* Products */,
 				CECC072A2549CAFD00CF56FA /* Frameworks */,
+				CE9DCC2325730EC30024FB1B /* LICENSE */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */,
 				CE654D762537E9530051D575 /* Credits.rtf in Resources */,
 				CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */,
+				CE9DCC2425730EC30024FB1B /* LICENSE in Resources */,
 				CEA994862560E06400B8BCC6 /* Localizable.strings in Resources */,
 				CE9DCB83256AA9EC0024FB1B /* FilterList.storyboard in Resources */,
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,

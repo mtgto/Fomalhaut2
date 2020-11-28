@@ -6,9 +6,7 @@ import RxRealm
 import RxRelay
 import RxSwift
 
-class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate,
-  NSControlTextEditingDelegate
-{
+class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
   private let rootItems = [
     NSLocalizedString("LibraryHeader", comment: "Library"),
     NSLocalizedString("CollectionHeader", comment: "Collection"),
@@ -19,6 +17,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     Filter(name: NSLocalizedString("UnreadFilter", comment: "Unread"), predicate: "readCount = 0"),
   ]
   private let collections = BehaviorRelay<Results<Collection>?>(value: nil)
+  private var selectedCollectionContent = BehaviorRelay<CollectionContent?>(value: nil)
   private let disposeBag = DisposeBag()
   @IBOutlet weak var filterListView: NSOutlineView!
 
@@ -36,7 +35,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
       .disposed(by: self.disposeBag)
     // TODO: MUST remove items from NSOutlineView before delete from Realm.
     // https://github.com/realm/realm-cocoa/issues/6169
-    NotificationCenter.default.rx.notification(collectionDeletedNotificationName, object: nil)
+    NotificationCenter.default.rx.notification(collectionWillDeleteNotificationName, object: nil)
       .subscribe(onNext: { notification in
         if let collection = notification.userInfo?["collection"] as? Collection {
           if let index = self.collections.value?.index(of: collection) {
@@ -49,12 +48,31 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
       .compactMap { $0 }
       .flatMapLatest { Observable.changeset(from: $0) }
       .subscribe(onNext: { [unowned self] results, changes in
+        let lastSelectedRow = self.filterListView.selectedRow
+        let lastSelectedItem = self.filterListView.item(atRow: lastSelectedRow) ?? self.filters[0]
         self.filterListView.reloadItem(self.rootItems[1], reloadChildren: true)
+        // If user delete selected row, selection is initialized (all books)
+        let row = self.filterListView.row(forItem: lastSelectedItem)
+        self.filterListView.selectRowIndexes(IndexSet([row < 0 ? 1 : row]), byExtendingSelection: false)
       })
       .disposed(by: self.disposeBag)
     self.rootItems.forEach { (rootItem) in
       self.filterListView.expandItem(rootItem)
     }
+    self.selectedCollectionContent
+      .distinctUntilChanged()
+      .compactMap { $0 }
+      .subscribe(onNext: { collectionContent in
+        switch collectionContent {
+        case .filter(let filter):
+          NotificationCenter.default.post(
+            name: filterChangedNotificationName, object: nil, userInfo: ["filter": filter])
+        case .collection(let collection):
+          NotificationCenter.default.post(
+            name: collectionChangedNotificationName, object: nil, userInfo: ["collection": collection])
+        }
+      })
+      .disposed(by: self.disposeBag)
   }
 
   func addNewCollection() {
@@ -218,15 +236,15 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     //log.info("selectedRow = \(self.filterListView.selectedRow)")
     let item = self.filterListView.item(atRow: self.filterListView.selectedRow)
     if let filter = item as? Filter {
-      NotificationCenter.default.post(
-        name: filterChangedNotificationName, object: nil, userInfo: ["filter": filter])
+      self.selectedCollectionContent.accept(.filter(filter))
     } else if let collection = item as? Collection {
-      NotificationCenter.default.post(
-        name: collectionChangedNotificationName, object: nil, userInfo: ["collection": collection])
+      self.selectedCollectionContent.accept(.collection(collection))
     }
   }
+}
 
-  // MARK: NSControlTextEditingDelegate
+// MARK: NSControlTextEditingDelegate
+extension FilterListViewController: NSControlTextEditingDelegate {
   func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
     // Collection name should not be empty
     return !fieldEditor.string.isEmpty

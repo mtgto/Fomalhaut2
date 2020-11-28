@@ -16,13 +16,14 @@
 		CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280925305AA000986C9A /* AppDelegate.swift */; };
 		CE30281025305AA200986C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE30280F25305AA200986C9A /* Assets.xcassets */; };
 		CE30281325305AA200986C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30281125305AA200986C9A /* Main.storyboard */; };
-		CE30281F25305AA200986C9A /* Fomalhaut2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30281E25305AA200986C9A /* Fomalhaut2Tests.swift */; };
 		CE30282A25305AA200986C9A /* Fomalhaut2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */; };
 		CE654D762537E9530051D575 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE654D752537E9520051D575 /* Credits.rtf */; };
 		CE7CD508256A0B7B00C97167 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CD507256A0B7B00C97167 /* Collection.swift */; };
 		CE9DCB7E256A94C90024FB1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE9DCB7C256A94C90024FB1B /* InfoPlist.strings */; };
 		CE9DCB83256AA9EC0024FB1B /* FilterList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE9DCB82256AA9EC0024FB1B /* FilterList.storyboard */; };
 		CE9DCB8B256B610D0024FB1B /* NSOutlineView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */; };
+		CE9DCB9625720C490024FB1B /* CollectionContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9DCB9525720C490024FB1B /* CollectionContent.swift */; };
+		CE9DCB9E25722DA80024FB1B /* CollectionContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9DCB9D25722DA80024FB1B /* CollectionContentTests.swift */; };
 		CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */; };
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
@@ -82,7 +83,6 @@
 		CE30281425305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE30281525305AA200986C9A /* Fomalhaut2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fomalhaut2.entitlements; sourceTree = "<group>"; };
 		CE30281A25305AA200986C9A /* Fomalhaut2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Fomalhaut2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE30281E25305AA200986C9A /* Fomalhaut2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fomalhaut2Tests.swift; sourceTree = "<group>"; };
 		CE30282025305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE30282525305AA200986C9A /* Fomalhaut2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Fomalhaut2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fomalhaut2UITests.swift; sourceTree = "<group>"; };
@@ -92,6 +92,8 @@
 		CE9DCB7D256A94C90024FB1B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE9DCB82256AA9EC0024FB1B /* FilterList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FilterList.storyboard; sourceTree = "<group>"; };
 		CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSOutlineView+Realm.swift"; sourceTree = "<group>"; };
+		CE9DCB9525720C490024FB1B /* CollectionContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionContent.swift; sourceTree = "<group>"; };
+		CE9DCB9D25722DA80024FB1B /* CollectionContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionContentTests.swift; sourceTree = "<group>"; };
 		CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWindowController.swift; sourceTree = "<group>"; };
 		CE9EE62725330EE100B5AF5C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadPageViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				CECC073F254E8D6200CF56FA /* Schema.swift */,
 				CEB2DA0325399693002C3F7E /* Book.swift */,
 				CE7CD507256A0B7B00C97167 /* Collection.swift */,
+				CE9DCB9525720C490024FB1B /* CollectionContent.swift */,
 				CEE979442541618D00A35C39 /* BookCollectionView.swift */,
 				CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */,
 				CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */,
@@ -229,7 +232,7 @@
 		CE30281D25305AA200986C9A /* Fomalhaut2Tests */ = {
 			isa = PBXGroup;
 			children = (
-				CE30281E25305AA200986C9A /* Fomalhaut2Tests.swift */,
+				CE9DCB9D25722DA80024FB1B /* CollectionContentTests.swift */,
 				CE30282025305AA200986C9A /* Info.plist */,
 			);
 			path = Fomalhaut2Tests;
@@ -412,6 +415,7 @@
 				CEE979452541618D00A35C39 /* BookCollectionView.swift in Sources */,
 				CECC07192549C6C700CF56FA /* BookDocument.swift in Sources */,
 				CE9DCB8B256B610D0024FB1B /* NSOutlineView+Realm.swift in Sources */,
+				CE9DCB9625720C490024FB1B /* CollectionContent.swift in Sources */,
 				CECC070A2549C48B00CF56FA /* PdfDocument.swift in Sources */,
 				CEA6F6A32550FA4700C50318 /* NSCollectionView+Realm.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
@@ -437,7 +441,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE30281F25305AA200986C9A /* Fomalhaut2Tests.swift in Sources */,
+				CE9DCB9E25722DA80024FB1B /* CollectionContentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,7 +729,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = W3A6B7FDC7;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Fomalhaut2UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -745,7 +749,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = W3A6B7FDC7;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Fomalhaut2UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

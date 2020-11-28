@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import XCTest
-
+/*
 class Fomalhaut2UITests: XCTestCase {
 
   override func setUpWithError() throws {
@@ -35,3 +35,4 @@ class Fomalhaut2UITests: XCTestCase {
     }
   }
 }
+*/

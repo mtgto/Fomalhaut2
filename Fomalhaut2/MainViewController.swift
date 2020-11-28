@@ -16,12 +16,6 @@ enum CollectionOrder: String {
   case readCount = "readCount"
 }
 
-// Selected content in sidebar
-enum CollectionContent {
-  case collection(Collection)
-  case filter(Filter)
-}
-
 class MainViewController: NSSplitViewController, NSMenuItemValidation {
   private let tableViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
   private let collectionViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
@@ -354,6 +348,9 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
       // Write before open a NSDocument
       try? realm.write {
         realm.add(book)
+        if case .collection(let collection) = self.collectionContent.value {
+          collection.books.append(book)
+        }
       }
       // TODO: Validate whether file contains one or more images? for example get thumbnail
       var bookmarkDataIsStale = false

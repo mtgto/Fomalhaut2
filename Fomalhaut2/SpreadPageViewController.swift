@@ -15,9 +15,11 @@ class SpreadPageViewController: NSViewController {
   let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
   let currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+  var isFullScreen: Bool = false
   private var shiftedSignlePage: Bool = false
   // manualViewHeight has non-nil view height after user resized window
   private var manualViewHeight: CGFloat? = nil
+  private(set) var contentSize: CGSize = .zero
   private let disposeBag = DisposeBag()
 
   @IBOutlet weak var imageStackView: NSStackView!
@@ -126,8 +128,12 @@ class SpreadPageViewController: NSViewController {
               y: window.frame.origin.y,
               width: CGFloat(contentWidth * resizeRatio),
               height: CGFloat(contentHeight * resizeRatio)), to: NSScreen.main)
-          window.setContentSize(NSSize(width: rect.size.width, height: rect.size.height))
+          self.contentSize = rect.size
+          window.setContentSize(self.contentSize)
           window.setFrameOrigin(rect.origin)
+          if self.isFullScreen {
+            window.center()
+          }
           log.debug("window.setContentSize(\(rect.size.width), \(rect.size.height))")
         },
         onCompleted: {

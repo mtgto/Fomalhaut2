@@ -53,6 +53,27 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
     spreadPageViewController.resizedWindowByManual()
   }
 
+  func window(
+    _ window: NSWindow, willUseFullScreenPresentationOptions proposedOptions: NSApplication.PresentationOptions = []
+  ) -> NSApplication.PresentationOptions {
+    return [.fullScreen, .autoHideToolbar, .autoHideMenuBar, .hideDock]
+  }
+
+  func window(_ window: NSWindow, willUseFullScreenContentSize proposedSize: NSSize) -> NSSize {
+    let spreadPageViewController = window.contentViewController as! SpreadPageViewController
+    return spreadPageViewController.contentSize
+  }
+
+  func windowDidEnterFullScreen(_ notification: Notification) {
+    let spreadPageViewController = self.contentViewController as! SpreadPageViewController
+    spreadPageViewController.isFullScreen = true
+  }
+
+  func windowDidExitFullScreen(_ notification: Notification) {
+    let spreadPageViewController = self.contentViewController as! SpreadPageViewController
+    spreadPageViewController.isFullScreen = false
+  }
+
   // MARK: - MenuItem
   @IBAction func forwardPage(_ sender: Any) {
     let spreadPageViewController = self.contentViewController as! SpreadPageViewController

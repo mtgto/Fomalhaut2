@@ -1,17 +1,24 @@
 CHANGELOG
 ====
 
-## v0.4.0 (2020-xx-xx)
+## v0.4.0 (2020-11-29)
 
 ### Added
 
 - Book collections
 
+### Changed
+
+- Hide toolbar in fullscreen mode
+- Fix wrong window position in fullscreen mode
+- Add copyright header to swift files
+- Add install/uninstall descriptions
+
 ## v0.3.3 (2020-11-22)
 
 ### Added
 
-- Add Japanese language
+- Add Japanese translation
 - Set toolbar icon to control page order
 - Show alert when app fails to open a book
 - Show alert when app fails database migration

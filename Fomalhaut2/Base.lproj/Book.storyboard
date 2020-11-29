@@ -101,8 +101,8 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="1Rl-bO-XaM">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="R" image="right.to.left" width="32" selected="YES"/>
-                                                <segment label="L" image="left.to.right" width="32" tag="1"/>
+                                                <segment image="right.to.left" width="32" selected="YES"/>
+                                                <segment image="left.to.right" width="32" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>

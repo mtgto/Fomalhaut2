@@ -39,7 +39,7 @@
 		CEA994592560D9A500B8BCC6 /* ProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA9945B2560D9A500B8BCC6 /* ProgressViewController.xib */; };
 		CEA994862560E06400B8BCC6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEA994842560E06400B8BCC6 /* Localizable.strings */; };
 		CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = CEB2D9F625399375002C3F7E /* RxRealm */; };
-		CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2D9FB2539946D002C3F7E /* MainViewController.swift */; };
+		CEB2D9FC2539946D002C3F7E /* BookCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2D9FB2539946D002C3F7E /* BookCollectionViewController.swift */; };
 		CEB2DA0425399693002C3F7E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA0325399693002C3F7E /* Book.swift */; };
 		CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */; };
 		CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA51253E9384002C3F7E /* Filter.swift */; };
@@ -113,7 +113,7 @@
 		CEA994642560D9F700B8BCC6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Book.strings; sourceTree = "<group>"; };
 		CEA994852560E06400B8BCC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEA9948A2560E07900B8BCC6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CEB2D9FB2539946D002C3F7E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CEB2D9FB2539946D002C3F7E /* BookCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewController.swift; sourceTree = "<group>"; };
 		CEB2DA0325399693002C3F7E /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
 		CEB2DA51253E9384002C3F7E /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				CE296BEB2530722A00674C99 /* BookAccessible.swift */,
 				CEE9793C25403AD500A35C39 /* MainWindowController.swift */,
 				CEA6F6B525543B3400C50318 /* MainStackViewController.swift */,
-				CEB2D9FB2539946D002C3F7E /* MainViewController.swift */,
+				CEB2D9FB2539946D002C3F7E /* BookCollectionViewController.swift */,
 				CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */,
 				CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */,
 				CE9DCB82256AA9EC0024FB1B /* FilterList.storyboard */,
@@ -441,7 +441,7 @@
 				CECC0740254E8D6200CF56FA /* Schema.swift in Sources */,
 				CEA99440255FD6D000B8BCC6 /* CollectionViewHeaderView.swift in Sources */,
 				CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */,
-				CEB2D9FC2539946D002C3F7E /* MainViewController.swift in Sources */,
+				CEB2D9FC2539946D002C3F7E /* BookCollectionViewController.swift in Sources */,
 				CEA6F6B625543B3400C50318 /* MainStackViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,9 +6,9 @@ import Cocoa
 class MainStackViewController: NSViewController {
   @IBOutlet weak var stackView: NSStackView!
 
-  var mainViewController: MainViewController? {
+  var bookCollectionViewController: BookCollectionViewController? {
     for child in self.children {
-      if let vc = child as? MainViewController {
+      if let vc = child as? BookCollectionViewController {
         return vc
       }
     }

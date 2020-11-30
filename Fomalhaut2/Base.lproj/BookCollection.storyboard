@@ -6,10 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Book Collection View Controller-->
         <scene sceneID="nb1-9E-W0Z">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="e60-p4-DRD" customClass="MainViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController showSeguePresentationStyle="single" id="e60-p4-DRD" customClass="BookCollectionViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="e91-vB-5qh">
                         <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

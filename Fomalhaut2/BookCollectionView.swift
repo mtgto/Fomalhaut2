@@ -25,8 +25,8 @@ class BookCollectionView: NSCollectionView {
       guard let path = indexPathForItem(at: locationInView) else {
         return
       }
-      if let mainViewController = self.delegate as? MainViewController {
-        mainViewController.openCollectionViewBook(path)
+      if let bookCollectionViewController = self.delegate as? BookCollectionViewController {
+        bookCollectionViewController.openCollectionViewBook(path)
       }
     }
     super.mouseDown(with: event)

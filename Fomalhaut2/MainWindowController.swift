@@ -14,8 +14,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
 
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     let mainStackViewController = self.contentViewController as! MainStackViewController
-    let mainViewController = mainStackViewController.mainViewController!
-    mainViewController.collectionViewStyle
+    let bookCollectionViewController = mainStackViewController.bookCollectionViewController!
+    bookCollectionViewController.collectionViewStyle
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { collectionViewStyle in
         self.collectionViewStyleSegmentedControl.selectSegment(
@@ -24,7 +24,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
       .disposed(by: self.disposeBag)
     self.searchField.rx.text.asDriver()
       .drive(onNext: { text in
-        mainViewController.searchText.accept(text)
+        bookCollectionViewController.searchText.accept(text)
       })
       .disposed(by: self.disposeBag)
     // NOTE: windowFrameAutosaveName should be different from NSWindow's autosave name
@@ -33,12 +33,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
 
   @IBAction func updateCollectionViewStyle(_ sender: Any) {
     let mainStackViewController = self.contentViewController as! MainStackViewController
-    let mainViewController = mainStackViewController.mainViewController!
+    let bookCollectionViewController = mainStackViewController.bookCollectionViewController!
     if let segmentedControl = sender as? NSSegmentedControl {
       if segmentedControl.selectedSegment == 0 {  // Use CollectionView
-        mainViewController.setCollectionViewStyle(.collection)
+        bookCollectionViewController.setCollectionViewStyle(.collection)
       } else {  // Use TableView
-        mainViewController.setCollectionViewStyle(.list)
+        bookCollectionViewController.setCollectionViewStyle(.list)
       }
     }
   }
@@ -46,14 +46,14 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
   // MARK: - MenuItem
   @IBAction func useThumbnailView(_ sender: Any) {
     let mainStackViewController = self.contentViewController as! MainStackViewController
-    let mainViewController = mainStackViewController.mainViewController!
-    mainViewController.setCollectionViewStyle(.collection)
+    let bookCollectionViewController = mainStackViewController.bookCollectionViewController!
+    bookCollectionViewController.setCollectionViewStyle(.collection)
   }
 
   @IBAction func useListView(_ sender: Any) {
     let mainStackViewController = self.contentViewController as! MainStackViewController
-    let mainViewController = mainStackViewController.mainViewController!
-    mainViewController.setCollectionViewStyle(.list)
+    let bookCollectionViewController = mainStackViewController.bookCollectionViewController!
+    bookCollectionViewController.setCollectionViewStyle(.list)
   }
 
   @IBAction func addNewCollection(_ sender: Any) {
@@ -65,15 +65,15 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
   // MARK: - NSMenuItemValidation
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     let mainStackViewController = self.contentViewController as! MainStackViewController
-    let mainViewController = mainStackViewController.mainViewController!
+    let bookCollectionViewController = mainStackViewController.bookCollectionViewController!
     guard let selector = menuItem.action else {
       return false
     }
     if selector == #selector(useThumbnailView(_:)) {
-      menuItem.state = mainViewController.collectionViewStyle.value == .collection ? .on : .off
+      menuItem.state = bookCollectionViewController.collectionViewStyle.value == .collection ? .on : .off
       return true
     } else if selector == #selector(useListView(_:)) {
-      menuItem.state = mainViewController.collectionViewStyle.value == .list ? .on : .off
+      menuItem.state = bookCollectionViewController.collectionViewStyle.value == .list ? .on : .off
       return true
     } else if selector == #selector(addNewCollection(_:)) {
       return true

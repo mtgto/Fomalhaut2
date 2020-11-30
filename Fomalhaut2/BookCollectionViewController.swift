@@ -17,7 +17,7 @@ enum CollectionOrder: String {
   case readCount = "readCount"
 }
 
-class MainViewController: NSSplitViewController, NSMenuItemValidation {
+class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation {
   private let tableViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
   private let collectionViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
   let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
@@ -442,7 +442,7 @@ class MainViewController: NSSplitViewController, NSMenuItemValidation {
 }
 
 // MARK: - NSTableViewDataSource
-extension MainViewController: NSTableViewDataSource {
+extension BookCollectionViewController: NSTableViewDataSource {
   func numberOfRows(in: NSTableView) -> Int {
     return self.tableViewBooks.value?.count ?? 0
   }
@@ -493,7 +493,7 @@ extension MainViewController: NSTableViewDataSource {
 }
 
 // MARK: NSTableViewDelegate
-extension MainViewController: NSTableViewDelegate {
+extension BookCollectionViewController: NSTableViewDelegate {
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let identifier = tableColumn?.identifier,
       let cellView = tableView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView
@@ -521,7 +521,7 @@ extension MainViewController: NSTableViewDelegate {
 }
 
 // MARK: - NSCollectionViewDataSource
-extension MainViewController: NSCollectionViewDataSource {
+extension BookCollectionViewController: NSCollectionViewDataSource {
   func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int)
     -> Int
   {
@@ -566,7 +566,7 @@ extension MainViewController: NSCollectionViewDataSource {
 }
 
 // MARK: NSCollectionViewDelegate
-extension MainViewController: NSCollectionViewDelegate {
+extension BookCollectionViewController: NSCollectionViewDelegate {
   func collectionView(
     _ collectionView: NSCollectionView,
     validateDrop draggingInfo: NSDraggingInfo,

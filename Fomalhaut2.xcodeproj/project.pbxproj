@@ -45,6 +45,7 @@
 		CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA51253E9384002C3F7E /* Filter.swift */; };
 		CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB2DA64253EF85D002C3F7E /* Book.storyboard */; };
 		CEB2DA69253FE6DB002C3F7E /* FilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */; };
+		CEC1EA00257514FA0052228E /* BookCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC1EA02257514FA0052228E /* BookCollection.storyboard */; };
 		CECC070A2549C48B00CF56FA /* PdfDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC07092549C48B00CF56FA /* PdfDocument.swift */; };
 		CECC07192549C6C700CF56FA /* BookDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC07172549C6C700CF56FA /* BookDocument.swift */; };
 		CECC072C2549CAFD00CF56FA /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECC072B2549CAFD00CF56FA /* PDFKit.framework */; };
@@ -118,6 +119,8 @@
 		CEB2DA51253E9384002C3F7E /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		CEB2DA63253EF85D002C3F7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Book.storyboard; sourceTree = "<group>"; };
 		CEB2DA68253FE6DB002C3F7E /* FilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListView.swift; sourceTree = "<group>"; };
+		CEC1EA01257514FA0052228E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BookCollection.storyboard; sourceTree = "<group>"; };
+		CEC1EA042575151A0052228E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/BookCollection.strings; sourceTree = "<group>"; };
 		CECC07092549C48B00CF56FA /* PdfDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfDocument.swift; sourceTree = "<group>"; };
 		CECC07172549C6C700CF56FA /* BookDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDocument.swift; sourceTree = "<group>"; };
 		CECC072B2549CAFD00CF56FA /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
@@ -223,6 +226,7 @@
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
 				CEB2DA64253EF85D002C3F7E /* Book.storyboard */,
+				CEC1EA02257514FA0052228E /* BookCollection.storyboard */,
 				CE30281425305AA200986C9A /* Info.plist */,
 				CE9DCB7C256A94C90024FB1B /* InfoPlist.strings */,
 				CE30281525305AA200986C9A /* Fomalhaut2.entitlements */,
@@ -378,6 +382,7 @@
 				CE30281025305AA200986C9A /* Assets.xcassets in Resources */,
 				CEA99445255FD6DF00B8BCC6 /* CollectionViewHeaderView.xib in Resources */,
 				CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */,
+				CEC1EA00257514FA0052228E /* BookCollection.storyboard in Resources */,
 				CE654D762537E9530051D575 /* Credits.rtf in Resources */,
 				CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */,
 				CE9DCC2425730EC30024FB1B /* LICENSE in Resources */,
@@ -515,6 +520,15 @@
 				CEA994642560D9F700B8BCC6 /* ja */,
 			);
 			name = Book.storyboard;
+			sourceTree = "<group>";
+		};
+		CEC1EA02257514FA0052228E /* BookCollection.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEC1EA01257514FA0052228E /* Base */,
+				CEC1EA042575151A0052228E /* ja */,
+			);
+			name = BookCollection.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

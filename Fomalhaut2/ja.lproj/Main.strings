@@ -25,9 +25,6 @@
 /* Class = "NSMenuItem"; title = "Quit Fomalhaut2"; ObjectID = "4sb-4s-VLi"; */
 "4sb-4s-VLi.title" = "Fomalhaut2を終了";
 
-/* Class = "NSTabViewItem"; label = "Thumbnail"; ObjectID = "5i3-1O-XmM"; */
-"5i3-1O-XmM.label" = "Thumbnail";
-
 /* Class = "NSMenuItem"; title = "About Fomalhaut2"; ObjectID = "5kV-Vb-QxS"; */
 "5kV-Vb-QxS.title" = "Fomalhaut2について";
 
@@ -46,9 +43,6 @@
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "9yt-4B-nSM"; */
 "9yt-4B-nSM.title" = "スマートコピー/ペースト";
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "39h-Nz-pT6"; */
-"39h-Nz-pT6.title" = "Table View Cell";
-
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "78Y-hA-62v"; */
 "78Y-hA-62v.title" = "スペルを自動的に修正";
 
@@ -60,9 +54,6 @@
 
 /* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "Main Menu";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "bdj-nH-2eD"; Note = "ListViewHeader"; */
-"bdj-nH-2eD.title" = "Text Cell";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
 "bib-Uj-vzu.title" = "ファイル";
@@ -118,9 +109,6 @@
 /* Class = "NSMenu"; title = "View As"; ObjectID = "fTm-Bv-lvD"; Note = "ViewAsMenuItem"; */
 "fTm-Bv-lvD.title" = "表示形式";
 
-/* Class = "NSTableColumn"; headerCell.title = "File"; ObjectID = "fTx-cq-TM8"; Note = "ListFileHeader"; */
-"fTx-cq-TM8.headerCell.title" = "ファイル";
-
 /* Class = "NSMenuItem"; title = "Backward One Page"; ObjectID = "g9T-PR-SEJ"; Note = "BackMenuItem"; */
 "g9T-PR-SEJ.title" = "1ページ戻す";
 
@@ -172,17 +160,11 @@
 /* Class = "NSToolbarItem"; paletteLabel = "View Style"; ObjectID = "KLM-uf-9of"; Note = "CollectionStyleItem"; */
 "KLM-uf-9of.paletteLabel" = "表示形式";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "kyu-Ce-HWM"; Note = "ListFileHeader"; */
-"kyu-Ce-HWM.title" = "Text Cell";
-
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
 "LE2-aR-0XJ.title" = "すべてを手前に移動";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "mK6-2p-4JG"; */
 "mK6-2p-4JG.title" = "スペルと一緒に文法をチェック";
-
-/* Class = "NSTableColumn"; headerCell.title = "View"; ObjectID = "neH-7i-wKL"; Note = "ListViewHeader"; */
-"neH-7i-wKL.headerCell.title" = "読んだ回数";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "サービス";
@@ -195,9 +177,6 @@
 
 /* Class = "NSMenuItem"; title = "Hide Fomalhaut2"; ObjectID = "Olw-nP-bQN"; */
 "Olw-nP-bQN.title" = "Fomalhaut2を隠す";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "Ovi-yR-ozb"; */
-"Ovi-yR-ozb.title" = "Table View Cell";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "OwM-mh-QMV"; */
 "OwM-mh-QMV.title" = "前を検索";
@@ -255,9 +234,6 @@
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "UEZ-Bs-lqG"; */
 "UEZ-Bs-lqG.title" = "語頭を大文字にする";
-
-/* Class = "NSTabViewItem"; label = "List"; ObjectID = "uJu-qb-hFe"; */
-"uJu-qb-hFe.label" = "リスト";
 
 /* Class = "NSMenu"; title = "Fomalhaut2"; ObjectID = "uQy-DD-JDr"; */
 "uQy-DD-JDr.title" = "Fomalhaut2";

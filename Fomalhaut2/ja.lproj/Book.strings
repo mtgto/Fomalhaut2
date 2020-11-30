@@ -1,20 +1,14 @@
-/* Class = "NSSegmentedCell"; 1Rl-bO-XaM.ibShadowedLabels[0] = "R"; ObjectID = "1Rl-bO-XaM"; */
-"1Rl-bO-XaM.ibShadowedLabels[0]" = "R";
-
-/* Class = "NSSegmentedCell"; 1Rl-bO-XaM.ibShadowedLabels[1] = "L"; ObjectID = "1Rl-bO-XaM"; */
-"1Rl-bO-XaM.ibShadowedLabels[1]" = "L";
-
 /* Class = "NSToolbarItem"; label = "Control"; ObjectID = "fuc-9u-iU4"; */
-"fuc-9u-iU4.label" = "Control";
+"fuc-9u-iU4.label" = "コントロール";
 
 /* Class = "NSToolbarItem"; paletteLabel = "Control"; ObjectID = "fuc-9u-iU4"; */
-"fuc-9u-iU4.paletteLabel" = "Control";
+"fuc-9u-iU4.paletteLabel" = "コントロール";
 
 /* Class = "NSToolbarItem"; label = "Page Order"; ObjectID = "MNP-GK-6ey"; Note = "PageOrder"; */
-"MNP-GK-6ey.label" = "Page Order";
+"MNP-GK-6ey.label" = "ページ順序";
 
 /* Class = "NSToolbarItem"; paletteLabel = "Page Order"; ObjectID = "MNP-GK-6ey"; Note = "PageOrder"; */
-"MNP-GK-6ey.paletteLabel" = "Page Order";
+"MNP-GK-6ey.paletteLabel" = "ページ順序";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "Oyj-62-mGG"; */
 "Oyj-62-mGG.title" = "Window";

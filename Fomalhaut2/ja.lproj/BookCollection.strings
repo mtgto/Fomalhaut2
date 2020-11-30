@@ -1,0 +1,12 @@
+/* Class = "NSTableColumn"; headerCell.title = "View"; ObjectID = "1nM-mn-ggg"; Note = "ListViewHeader"; */
+"1nM-mn-ggg.headerCell.title" = "読んだ回数";
+
+/* Class = "NSTabViewItem"; label = "List"; ObjectID = "8UJ-3S-dgi"; */
+"8UJ-3S-dgi.label" = "リスト";
+
+/* Class = "NSTableColumn"; headerCell.title = "File"; ObjectID = "KpT-OW-gcl"; Note = "ListFileHeader"; */
+"KpT-OW-gcl.headerCell.title" = "ファイル";
+
+/* Class = "NSTabViewItem"; label = "Thumbnail"; ObjectID = "Kzy-4H-3ed"; */
+"Kzy-4H-3ed.label" = "サムネイル";
+

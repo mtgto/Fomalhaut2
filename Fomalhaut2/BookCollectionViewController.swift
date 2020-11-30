@@ -469,6 +469,10 @@ extension BookCollectionViewController: NSTableViewDataSource {
     _ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int,
     proposedDropOperation dropOperation: NSTableView.DropOperation
   ) -> NSDragOperation {
+    // Limitation: You can not reorder books for now
+    if let source = info.draggingSource as? NSTableView, source == tableView {
+      return []
+    }
     let dropFileCount =
       info.draggingPasteboard.readObjects(
         forClasses: [NSURL.self],
@@ -489,6 +493,12 @@ extension BookCollectionViewController: NSTableViewDataSource {
     dropOperation: NSTableView.DropOperation
   ) -> Bool {
     return self.validateDraggingInfo(info)
+  }
+  
+  func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+    let book = self.tableViewBooks.value![row]
+    var isStale = false
+    return try? book.resolveURL(bookmarkDataIsStale: &isStale) as NSURL
   }
 }
 

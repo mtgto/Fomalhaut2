@@ -91,11 +91,11 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView id="i9G-Nl-8GP">
-                                                                                <rect key="frame" x="1" y="1" width="116" height="42"/>
+                                                                                <rect key="frame" x="1" y="1" width="116" height="17"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pfg-Mk-XKj">
-                                                                                        <rect key="frame" x="0.0" y="26" width="116" height="16"/>
+                                                                                        <rect key="frame" x="0.0" y="1" width="116" height="16"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Gft-e0-ism">
                                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -127,11 +127,11 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView id="SsL-kf-0hc">
-                                                                                <rect key="frame" x="120" y="1" width="146" height="42"/>
+                                                                                <rect key="frame" x="120" y="1" width="146" height="17"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dv0-xp-HZc">
-                                                                                        <rect key="frame" x="0.0" y="26" width="146" height="16"/>
+                                                                                        <rect key="frame" x="0.0" y="1" width="146" height="16"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="RqH-eK-oCw">
                                                                                             <font key="font" usesAppearanceFont="YES"/>

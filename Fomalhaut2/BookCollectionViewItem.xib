@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,7 +22,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSBookmarksTemplate" id="mYJ-uC-V2S"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h4P-We-Kpz">
-                    <rect key="frame" x="-2" y="0.0" width="182" height="36"/>
+                    <rect key="frame" x="2" y="0.0" width="176" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="3wJ-65-WEO"/>
                     </constraints>
@@ -34,9 +34,9 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="h4P-We-Kpz" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="HjB-ri-BxY"/>
+                <constraint firstItem="h4P-We-Kpz" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="4" id="HjB-ri-BxY"/>
                 <constraint firstItem="URe-sz-Srt" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="JYG-Wl-h6M"/>
-                <constraint firstAttribute="trailing" secondItem="h4P-We-Kpz" secondAttribute="trailing" id="Pbh-Lc-ifc"/>
+                <constraint firstAttribute="trailing" secondItem="h4P-We-Kpz" secondAttribute="trailing" constant="2" id="Pbh-Lc-ifc"/>
                 <constraint firstItem="h4P-We-Kpz" firstAttribute="top" secondItem="URe-sz-Srt" secondAttribute="bottom" constant="8" id="QEx-ST-hTN"/>
                 <constraint firstItem="URe-sz-Srt" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="QM5-yI-ZuQ"/>
                 <constraint firstAttribute="trailing" secondItem="URe-sz-Srt" secondAttribute="trailing" id="Rkp-nU-XSa"/>

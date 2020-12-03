@@ -29,7 +29,7 @@
                                                         <rect key="frame" x="1" y="1" width="268" height="298"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <collectionView selectable="YES" id="181-T4-tof" customClass="BookCollectionView" customModule="Fomalhaut2" customModuleProvider="target">
+                                                            <collectionView selectable="YES" allowsMultipleSelection="YES" id="181-T4-tof" customClass="BookCollectionView" customModule="Fomalhaut2" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="298"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                 <collectionViewLayout key="collectionViewLayout" id="OWG-c5-DLS" customClass="CollectionViewLayout" customModule="Fomalhaut2" customModuleProvider="target"/>
@@ -70,7 +70,7 @@
                                                         <rect key="frame" x="1" y="0.0" width="268" height="299"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="FileListView" rowSizeStyle="automatic" headerView="KSD-Ui-B0d" viewBased="YES" id="BES-YB-qIc">
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" autosaveName="FileListView" rowSizeStyle="automatic" headerView="KSD-Ui-B0d" viewBased="YES" id="BES-YB-qIc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="274"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>

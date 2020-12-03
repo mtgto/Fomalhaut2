@@ -26,14 +26,13 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   let tableViewSortDescriptors = BehaviorRelay<[NSSortDescriptor]>(value: [])
   private let collectionOrder = BehaviorRelay<CollectionOrder>(value: .createdAt)
   private let disposeBag = DisposeBag()
-  private var bookMenu: NSMenu!
+  private let bookMenu: NSMenu = NSMenu(title: "Book")
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var collectionView: NSCollectionView!
 
   override func viewDidLoad() {
     // Do view setup here.
-    self.bookMenu = NSMenu(title: "Book")
     self.collectionView.menu = self.bookMenu
     self.tableView.menu = self.bookMenu
     self.tableView.registerForDraggedTypes([.fileURL])
@@ -264,13 +263,14 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
 
   // MARK: - NSMenu for NSTableView and NSCollectionView
   @objc func openViewer(_ sender: Any) {
-    if let book = self.selectedBook() {
+    self.selectedBooks().forEach { book in
       self.open(book)
     }
   }
 
   @objc func showFileInFinder(_ sender: Any) {
-    if let book = self.selectedBook() {
+    // TODO: what selection is best...?
+    if let book = self.selectedBooks().first {
       var bookmarkDataIsStale = false
       if let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) {
         _ = url.startAccessingSecurityScopedResource()
@@ -284,42 +284,38 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   }
 
   @objc func deleteFromCollection(_ sender: Any) {
-    if let book = self.selectedBook() {
-      if case .collection(let collection) = self.collectionContent.value, let index = collection.books.index(of: book) {
-        do {
-          let realm = try Realm()
-          try realm.write {
-            collection.books.remove(at: index)
-          }
-        } catch {
-          // TODO: Show alert
-          log.error("Error while deleting a book from collection \(collection.name)")
+    let books = self.selectedBooks()
+    if case .collection(let collection) = self.collectionContent.value {
+      let indexes = books.compactMap { collection.books.index(of: $0) }
+      do {
+        let realm = try Realm()
+        try realm.write {
+          collection.books.remove(atOffsets: IndexSet(indexes))
         }
+      } catch {
+        // TODO: Show alert
+        log.error("Error while deleting a book from collection \(collection.name)")
       }
     }
   }
 
   @objc func deleteFromLibrary(_ sender: Any) {
-    if let book = self.selectedBook() {
-      // TODO: show error dialog
-      Observable.from([book])
-        .subscribe(Realm.rx.delete())
-        .disposed(by: self.disposeBag)
-    }
+    let books = self.selectedBooks()
+    Observable.from(books)
+      .subscribe(Realm.rx.delete())
+      .disposed(by: self.disposeBag)
   }
 
-  func selectedBook() -> Book? {
+  func selectedBooks() -> [Book] {
     if self.collectionViewStyle.value == .collection {
-      if let indexPath = self.collectionView.selectionIndexPaths.first {
-        return self.collectionViewBooks.value![indexPath.item]
+      return self.collectionView.selectionIndexPaths.map {
+        self.collectionViewBooks.value![$0.item]
       }
     } else {
-      let index = self.tableView.clickedRow
-      if index >= 0 {
-        return self.tableViewBooks.value![index]
+      return self.tableView.selectedRowIndexes.map {
+        self.tableViewBooks.value![$0]
       }
     }
-    return nil
   }
 
   // Verify dragged files are suitable for
@@ -494,7 +490,7 @@ extension BookCollectionViewController: NSTableViewDataSource {
   ) -> Bool {
     return self.validateDraggingInfo(info)
   }
-  
+
   func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
     let book = self.tableViewBooks.value![row]
     var isStale = false

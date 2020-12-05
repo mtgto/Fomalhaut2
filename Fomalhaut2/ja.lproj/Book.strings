@@ -10,6 +10,12 @@
 /* Class = "NSToolbarItem"; paletteLabel = "Page Order"; ObjectID = "MNP-GK-6ey"; Note = "PageOrder"; */
 "MNP-GK-6ey.paletteLabel" = "ページ順序";
 
+/* Class = "NSToolbarItem"; label = "Go First"; ObjectID = "oTV-Y3-Ona"; */
+"oTV-Y3-Ona.label" = "最初のページに移動";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Go First"; ObjectID = "oTV-Y3-Ona"; */
+"oTV-Y3-Ona.paletteLabel" = "最初のページに移動";
+
 /* Class = "NSWindow"; title = "Window"; ObjectID = "Oyj-62-mGG"; */
 "Oyj-62-mGG.title" = "Window";
 

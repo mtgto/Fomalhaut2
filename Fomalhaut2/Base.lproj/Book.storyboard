@@ -74,7 +74,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
-                        <toolbar key="toolbar" implicitIdentifier="DD9C1FAD-4AD1-4BE3-9FCF-7756D305A592" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Wzc-1i-JVd">
+                        <toolbar key="toolbar" implicitIdentifier="DD9C1FAD-4AD1-4BE3-9FCF-7756D305A592" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Wzc-1i-JVd">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="48B39D7A-0CDD-4127-B978-D89050CE6037" label="Control" paletteLabel="Control" sizingBehavior="auto" id="fuc-9u-iU4">
                                     <nil key="toolTip"/>
@@ -92,6 +92,20 @@
                                             <action selector="updatePageControl:" target="I31-ld-zmx" id="ofl-fb-DzF"/>
                                         </connections>
                                     </segmentedControl>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="8A3B9B22-C476-48F1-AA8E-636DEC5A62C7" label="Go First" paletteLabel="Go First" image="first" sizingBehavior="auto" id="oTV-Y3-Ona">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="7wl-XX-QNR">
+                                        <rect key="frame" x="10" y="14" width="30" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="first" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iLw-u0-JDG">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="goFirstPage:" target="I31-ld-zmx" id="dSt-8d-40m"/>
+                                        </connections>
+                                    </button>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="8AEFB3A0-E185-4140-B993-564EFAF0099A" label="Page Order" paletteLabel="Page Order" sizingBehavior="auto" id="MNP-GK-6ey">
                                     <nil key="toolTip"/>
@@ -118,6 +132,7 @@
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="fuc-9u-iU4"/>
+                                <toolbarItem reference="oTV-Y3-Ona"/>
                                 <toolbarItem reference="MNP-GK-6ey"/>
                                 <toolbarItem reference="elp-kS-fEt"/>
                             </defaultToolbarItems>
@@ -140,6 +155,7 @@
     <resources>
         <image name="NSTouchBarGoDownTemplate" width="16" height="30"/>
         <image name="NSTouchBarGoUpTemplate" width="16" height="30"/>
+        <image name="first" width="19" height="19"/>
         <image name="left.to.right" width="19" height="19"/>
         <image name="right.to.left" width="19" height="19"/>
     </resources>

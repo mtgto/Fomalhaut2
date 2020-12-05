@@ -141,4 +141,9 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
       }
     }
   }
+
+  @IBAction func goFirstPage(_ sender: Any) {
+    let spreadPageViewController = self.contentViewController as! SpreadPageViewController
+    spreadPageViewController.firstPage()
+  }
 }

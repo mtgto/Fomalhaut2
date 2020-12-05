@@ -52,7 +52,7 @@ class SpreadPageViewController: NSViewController {
   func fetchImages(pageIndex: Int, document: BookAccessible) -> Observable<LoadedImage> {
     return Observable.range(
       start: self.currentPageIndex.value,
-      count: self.pageCount.value - self.currentPageIndex.value
+      count: min(self.pageCount.value - self.currentPageIndex.value, 16)
     )
     .map { pageIndex in
       self.loadImage(pageIndex: pageIndex, document: document)

@@ -55,6 +55,8 @@
 		CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793C25403AD500A35C39 /* MainWindowController.swift */; };
 		CEE979452541618D00A35C39 /* BookCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE979442541618D00A35C39 /* BookCollectionView.swift */; };
 		CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */; };
+		CEEFC63B257C9590008D9636 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC63A257C9590008D9636 /* WebServer.swift */; };
+		CEEFC644257C9645008D9636 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = CEEFC643257C9645008D9636 /* Swifter */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +132,7 @@
 		CEE9793C25403AD500A35C39 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CEE979442541618D00A35C39 /* BookCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionView.swift; sourceTree = "<group>"; };
 		CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Resize.swift"; sourceTree = "<group>"; };
+		CEEFC63A257C9590008D9636 /* WebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEFC644257C9645008D9636 /* Swifter in Frameworks */,
 				CE296C332530A4E400674C99 /* RxSwift in Frameworks */,
 				CE296C312530A4E400674C99 /* RxCocoa in Frameworks */,
 				CE296BCD2530671700674C99 /* ZIPFoundation in Frameworks */,
@@ -219,6 +223,7 @@
 				CEE979442541618D00A35C39 /* BookCollectionView.swift */,
 				CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */,
 				CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */,
+				CEEFC63A257C9590008D9636 /* WebServer.swift */,
 				CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */,
 				CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */,
 				CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */,
@@ -284,6 +289,7 @@
 				CE296C322530A4E400674C99 /* RxSwift */,
 				CE9EE5EA2532C53100B5AF5C /* XCGLogger */,
 				CEB2D9F625399375002C3F7E /* RxRealm */,
+				CEEFC643257C9645008D9636 /* Swifter */,
 			);
 			productName = Fomalhaut2;
 			productReference = CE30280625305AA000986C9A /* Fomalhaut2.app */;
@@ -362,6 +368,7 @@
 				CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */,
 				CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */,
+				CEEFC642257C9645008D9636 /* XCRemoteSwiftPackageReference "swifter" */,
 			);
 			productRefGroup = CE30280725305AA000986C9A /* Products */;
 			projectDirPath = "";
@@ -425,6 +432,7 @@
 				CECC07192549C6C700CF56FA /* BookDocument.swift in Sources */,
 				CE9DCB8B256B610D0024FB1B /* NSOutlineView+Realm.swift in Sources */,
 				CE9DCB9625720C490024FB1B /* CollectionContent.swift in Sources */,
+				CEEFC63B257C9590008D9636 /* WebServer.swift in Sources */,
 				CECC070A2549C48B00CF56FA /* PdfDocument.swift in Sources */,
 				CEA6F6A32550FA4700C50318 /* NSCollectionView+Realm.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
@@ -855,6 +863,14 @@
 				minimumVersion = 3.1.0;
 			};
 		};
+		CEEFC642257C9645008D9636 /* XCRemoteSwiftPackageReference "swifter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/httpswift/swifter.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -882,6 +898,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */;
 			productName = RxRealm;
+		};
+		CEEFC643257C9645008D9636 /* Swifter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEEFC642257C9645008D9636 /* XCRemoteSwiftPackageReference "swifter" */;
+			productName = Swifter;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

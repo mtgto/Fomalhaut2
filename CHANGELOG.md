@@ -1,6 +1,18 @@
 CHANGELOG
 ====
 
+## v0.4.1 (2020-12-06)
+
+### Added
+
+- Enable multiple selection
+
+### Changed
+
+- Enable to drag from file list to drop collection list
+- Delete labels of segmented control in toolbar
+- Set inset to collection view
+
 ## v0.4.0 (2020-11-29)
 
 ### Added

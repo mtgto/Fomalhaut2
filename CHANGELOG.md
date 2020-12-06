@@ -6,10 +6,12 @@ CHANGELOG
 ### Added
 
 - Enable multiple selection
+- Add "Go first" button to toolbar
 
 ### Changed
 
 - Enable to drag from file list to drop collection list
+- Set limitation to preload pages
 - Delete labels of segmented control in toolbar
 - Set inset to collection view
 

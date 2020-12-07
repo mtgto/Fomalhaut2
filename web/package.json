@@ -5,8 +5,7 @@
   "license": "GPL-3.0-only",
   "private": true,
   "scripts": {
-    "proxy": "node proxy.js",
-    "dev": "parcel serve src/index.html",
+    "dev": "node proxy.js",
     "build": "parcel build src/index.html"
   },
   "dependencies": {

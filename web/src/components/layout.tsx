@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import type { FunctionComponent } from "react";
 
 import AppBar from "@material-ui/core/AppBar";
 import Divider from "@material-ui/core/Divider";
@@ -16,11 +15,12 @@ import Typography from "@material-ui/core/Typography";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
 
-import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { Collection } from "../domain/collection";
-import { Link as RouterLink } from "react-router-dom";
 import ListItemLink from "./ListItemLink";
 
+import type { FunctionComponent } from "react";
+
+import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 const drawerWidth = 200;
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -56,7 +56,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   },
-  offset: theme.mixins.toolbar,
 }));
 
 type Props = {
@@ -79,7 +78,7 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar position="fixed">
+        <AppBar position="static">
           <Toolbar className={classes.toolbar}>
             <div className={classes.left}>
               <IconButton
@@ -132,7 +131,6 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
           </List>
         </Drawer>
       </div>
-      <div className={classes.offset} />
       <main>{props.children}</main>
     </>
   );

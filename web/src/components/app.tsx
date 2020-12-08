@@ -1,7 +1,9 @@
 import React, { useEffect, useReducer } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 import { initialState, reducer, setBooks, setCollections } from "../reducer";
 import Book from "./book";
+import Collection from "./collection";
 import Library from "./library";
 
 const App: React.FunctionComponent = () => {
@@ -38,6 +40,9 @@ const App: React.FunctionComponent = () => {
         <Switch>
           <Route path="/books/:id">
             <Book collections={state.collections} books={state.books} />
+          </Route>
+          <Route path="/collections/:id">
+            <Collection collections={state.collections} />
           </Route>
           <Route path="/">
             <Library collections={state.collections} books={state.books} />

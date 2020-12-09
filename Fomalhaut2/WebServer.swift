@@ -7,6 +7,7 @@ import RxRealm
 import RxRelay
 import RxSwift
 import Swifter
+import ZIPFoundation
 
 class WebServer: NSObject {
   private let server: HttpServer = HttpServer()
@@ -14,6 +15,7 @@ class WebServer: NSObject {
   private var collections: [Collection] = []
   private var books: [Book] = []
   private let cache = NSCache<NSString, NSDocument>()
+  private let assetArchive: Archive
   private let disposeBag = DisposeBag()
 
   enum WebServerError: Error {
@@ -21,8 +23,10 @@ class WebServer: NSObject {
   }
 
   override init() {
-    super.init()
+    let assetsURL = Bundle.main.url(forResource: "assets", withExtension: "zip")!
+    self.assetArchive = Archive(url: assetsURL, accessMode: .read)!
     self.cache.countLimit = 1
+    super.init()
     Schema.shared.state
       .skipWhile { $0 != .finish }
       .subscribe(onNext: { [unowned self] _ in
@@ -55,13 +59,34 @@ class WebServer: NSObject {
         self.books = books.map { $0.freeze() }
       })
       .disposed(by: self.disposeBag)
+    self.server["/"] = self.defaultHtml
+    self.server["/books/:id"] = self.defaultHtml
+    self.server["/collections/:id"] = self.defaultHtml
+    self.server["/assets/:filename"] = { request in
+      do {
+        if let filename = request.params[":filename"], let data = try self.asset(filename) {
+          return .ok(.data(data, contentType: "text/javascript"))
+        } else {
+          return .notFound
+        }
+      } catch {
+        log.error("Error: \(error)")
+        return .internalServerError
+      }
+    }
     self.server["/api/v1/collections"] = { request in
       .ok(.json(self.collections.map { self.convert(collection: $0) }))
+    }
+    self.server["/api/v1/collections/:id"] = { request in
+      guard let collection = self.collections.first(where: { $0.id == request.params[":id"] }) else {
+        return .notFound
+      }
+      return .ok(.json(self.convert(collection: collection)))
     }
     self.server["/api/v1/books"] = { request in
       .ok(.json(self.books.map { self.convert(book: $0) }))
     }
-    self.server["assets/books/:id/thumbnail"] = { request in
+    self.server["/images/books/:id/thumbnail"] = { request in
       guard let book = self.books.first(where: { $0.id == request.params[":id"] }) else {
         return .notFound
       }
@@ -72,7 +97,7 @@ class WebServer: NSObject {
         return .notFound
       }
     }
-    self.server["assets/books/:id/pages/:page"] = { request in
+    self.server["/images/books/:id/pages/:page"] = { request in
       guard let book = self.books.first(where: { $0.id == request.params[":id"] }) else {
         return .notFound
       }
@@ -101,6 +126,33 @@ class WebServer: NSObject {
         return .notFound
       }
     }
+  }
+  
+  private func defaultHtml(_: HttpRequest) -> HttpResponse {
+    do {
+      if let data = try self.asset("index.html") {
+        return .ok(.data(data, contentType: "text/html"))
+      } else {
+        return .notFound
+      }
+    } catch {
+      log.error("Error: \(error)")
+      return .internalServerError
+    }
+  }
+  
+  private func asset(_ filename: String) throws -> Data? {
+    guard let entry = self.assetArchive[filename] else {
+      return nil
+    }
+    let semaphore = DispatchSemaphore(value: 0)
+    var data: Data = Data()
+    _ = try self.assetArchive.extract(entry, bufferSize: UInt32(entry.uncompressedSize), skipCRC32: true, progress: nil) { (html) in
+      data.append(html)
+      semaphore.signal()
+    }
+    semaphore.wait()
+    return data
   }
 
   private func document(from book: Book) throws -> BookAccessible {
@@ -138,7 +190,8 @@ class WebServer: NSObject {
   private func convert(collection: Collection) -> Any {
     return [
       "id": collection.id,
-      "name": collection.name
+      "name": collection.name,
+      "books": Array(collection.books.map { self.convert(book: $0) })
     ]
   }
 }

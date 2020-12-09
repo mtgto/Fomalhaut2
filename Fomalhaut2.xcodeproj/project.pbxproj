@@ -57,6 +57,7 @@
 		CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */; };
 		CEEFC63B257C9590008D9636 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC63A257C9590008D9636 /* WebServer.swift */; };
 		CEEFC644257C9645008D9636 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = CEEFC643257C9645008D9636 /* Swifter */; };
+		CEEFC6622580F5DB008D9636 /* assets.zip in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6612580F5DB008D9636 /* assets.zip */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +134,7 @@
 		CEE979442541618D00A35C39 /* BookCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionView.swift; sourceTree = "<group>"; };
 		CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Resize.swift"; sourceTree = "<group>"; };
 		CEEFC63A257C9590008D9636 /* WebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServer.swift; sourceTree = "<group>"; };
+		CEEFC6612580F5DB008D9636 /* assets.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = assets.zip; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 				CE9DCB7C256A94C90024FB1B /* InfoPlist.strings */,
 				CE30281525305AA200986C9A /* Fomalhaut2.entitlements */,
 				CE654D752537E9520051D575 /* Credits.rtf */,
+				CEEFC6612580F5DB008D9636 /* assets.zip */,
 				CEA994842560E06400B8BCC6 /* Localizable.strings */,
 			);
 			path = Fomalhaut2;
@@ -386,6 +389,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEFC6622580F5DB008D9636 /* assets.zip in Resources */,
 				CE30281025305AA200986C9A /* Assets.xcassets in Resources */,
 				CEA99445255FD6DF00B8BCC6 /* CollectionViewHeaderView.xib in Resources */,
 				CEB2DA62253EF85D002C3F7E /* Book.storyboard in Resources */,

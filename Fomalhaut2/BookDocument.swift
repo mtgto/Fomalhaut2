@@ -36,6 +36,11 @@ class BookDocument: NSDocument {
           book.isRightToLeft = isRightToLeft
           book.shiftedSignlePage = shiftedSignlePage
           book.manualViewHeight.value = manualViewHeight.flatMap(Double.init)
+          if selfBook.pageCount == 0 {
+            if let accessible = self as? BookAccessible {
+              book.pageCount = accessible.pageCount()
+            }
+          }
         }
       }
     }

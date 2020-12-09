@@ -7,7 +7,7 @@ const bundler = new Bundler("./src/index.html");
 const app = express();
 
 app.use(
-  ["/api", "/assets"],
+  ["/api", "/images"],
   createProxyMiddleware({
     target: "http://localhost:8080",
   })

@@ -38,7 +38,7 @@ const Cover = (props: Props) => {
         <CardMedia
           component="img"
           className={classes.media}
-          image={`/assets/books/${props.book.id}/thumbnail`}
+          image={`/images/books/${props.book.id}/thumbnail`}
         />
         <CardContent>
           <Typography

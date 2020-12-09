@@ -36,7 +36,7 @@ const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
     <img
       className={classes.image}
       key={id}
-      src={`/assets/books/${book.id}/pages/${id}`}
+      src={`/images/books/${book.id}/pages/${id}`}
     ></img>
   ));
 };

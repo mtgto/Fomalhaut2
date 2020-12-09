@@ -74,12 +74,6 @@
                                                 <action selector="startWebServer:" target="Ady-hI-5gd" id="7WK-d8-d1U"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Stop WebServer" id="5J8-I0-8LL">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="stopWebServer:" target="Ady-hI-5gd" id="1jv-Rj-ask"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Fm2-Gx-kpW"/>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                             <connections>

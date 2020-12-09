@@ -62,10 +62,21 @@ class WebServer: NSObject {
     self.server["/"] = self.defaultHtml
     self.server["/books/:id"] = self.defaultHtml
     self.server["/collections/:id"] = self.defaultHtml
+    self.server["/filters/:id"] = self.defaultHtml
     self.server["/assets/:filename"] = { request in
       do {
         if let filename = request.params[":filename"], let data = try self.asset(filename) {
-          return .ok(.data(data, contentType: "text/javascript"))
+          let contentType: String
+          if filename.hasSuffix(".js") {
+            contentType = "text/javascript"
+          } else if filename.hasSuffix(".map") {
+            contentType = "application/json"
+          } else if filename.hasSuffix(".ico") {
+            contentType = "image/x-ico"
+          } else {
+            contentType = "application/octet-stream"
+          }
+          return .ok(.data(data, contentType: contentType))
         } else {
           return .notFound
         }

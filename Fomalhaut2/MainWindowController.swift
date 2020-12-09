@@ -5,7 +5,6 @@ import Cocoa
 import RxSwift
 
 class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemValidation {
-  private let webServer = WebServer()
   private let disposeBag = DisposeBag()
   @IBOutlet weak var collectionViewStyleSegmentedControl: NSSegmentedControl!
   @IBOutlet weak var searchField: NSSearchField!
@@ -64,15 +63,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
   }
 
   @IBAction func startWebServer(_ sender: Any) {
-    do {
-      try self.webServer.start()
-    } catch {
-      log.error("Failed to start server: \(error)")
-    }
-  }
-
-  @IBAction func stopWebServer(_ sender: Any) {
-    self.webServer.stop()
+    let vc = WebServerViewController(nibName: WebServerViewController.className(), bundle: nil)
+    self.contentViewController?.presentAsSheet(vc)
   }
 
   // MARK: - NSMenuItemValidation
@@ -91,9 +83,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
     } else if selector == #selector(addNewCollection(_:)) {
       return true
     } else if selector == #selector(startWebServer(_:)) {
-      return !self.webServer.started
-    } else if selector == #selector(stopWebServer(_:)) {
-      return self.webServer.started
+      return true
     }
     return false
   }

@@ -16,6 +16,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // Remove main window from window list of Window menu
     // Setting isExcludedFromWindowsMenu in BookWindowController#viewDidLoad is ignored...
     NSApp.windows.first?.isExcludedFromWindowsMenu = true
+    UserDefaults.standard.register(defaults: [
+      WebServerViewController.webServerPortKey: 8080,
+    ])
     do {
       try Schema.shared.migrate()
     } catch {

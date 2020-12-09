@@ -40,3 +40,5 @@
 /* View count */
 "ViewCountCaption" = "読んだ回数";
 
+"Start" = "開始";
+"Stop" = "停止";

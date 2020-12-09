@@ -15,3 +15,6 @@
 "CollectionBookMenuDeleteFromCollection" = "Delete from collection";
 "CollectionBookMenuDeleteFromLibrary" = "Delete from library";
 "FilterListMenuDelete" = "Delete %@";
+
+"Start" = "Start";
+"Stop" = "Stop";

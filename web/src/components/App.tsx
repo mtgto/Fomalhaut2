@@ -2,9 +2,9 @@ import React, { useEffect, useReducer } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { initialState, reducer, setBooks, setCollections } from "../reducer";
-import Book from "./book";
-import Collection from "./collection";
-import Library from "./library";
+import Book from "./Book";
+import Collection from "./Collection";
+import Filter from "./Filter";
 
 const App: React.FunctionComponent = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -45,7 +45,11 @@ const App: React.FunctionComponent = () => {
             <Collection collections={state.collections} />
           </Route>
           <Route path="/">
-            <Library collections={state.collections} books={state.books} />
+            <Filter
+              collections={state.collections}
+              books={state.books}
+              filters={state.filters}
+            />
           </Route>
         </Switch>
       </BrowserRouter>

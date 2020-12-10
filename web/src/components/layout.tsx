@@ -1,13 +1,11 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -68,6 +66,11 @@ type Props = {
 const Layout: FunctionComponent<Props> = (props: Props) => {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
+  const location = useLocation();
+  React.useEffect(() => {
+    // close drawer when route changed
+    setOpen(false);
+  }, [location]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -100,13 +103,13 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
           </Toolbar>
         </AppBar>
         <Drawer
-          variant="persistent"
           anchor="left"
           open={open}
           className={classes.drawer}
           classes={{
             paper: classes.drawerPaper,
           }}
+          onClose={() => setOpen(false)}
         >
           <div className={classes.drawerHeader}>
             <IconButton onClick={handleDrawerClose}>

@@ -16,6 +16,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
 
 import { Collection } from "../domain/collection";
+import { Filter } from "../domain/filter";
 import ListItemLink from "./ListItemLink";
 
 import type { FunctionComponent } from "react";
@@ -60,6 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type Props = {
   collections: Collection[];
+  filters: Filter[];
   children: React.ReactNode;
 };
 
@@ -113,12 +115,13 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
           </div>
           <Divider />
           <List subheader={<ListSubheader>Library</ListSubheader>}>
-            <ListItem>
-              <ListItemText>All</ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemText>Unread</ListItemText>
-            </ListItem>
+            {props.filters.map((filter) => (
+              <ListItemLink
+                to={`/filters/${filter.id}`}
+                primary={filter.name}
+                key={filter.id}
+              />
+            ))}
           </List>
           <List subheader={<ListSubheader>Collection</ListSubheader>}>
             {props.collections.map((collection) => (

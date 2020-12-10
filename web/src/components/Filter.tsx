@@ -13,9 +13,9 @@ type Props = {
 };
 
 const FilterPage = (props: Props) => {
-  const { name }: { name: string } = useParams();
+  const { id }: { id: string } = useParams();
   const filter: Filter | undefined = props.filters.find(
-    (filter) => filter.name === name
+    (filter) => filter.id === id
   );
   const books: Book[] = filter
     ? props.books.filter((book) => filter.filter(book))
@@ -24,6 +24,7 @@ const FilterPage = (props: Props) => {
     <Library
       collections={props.collections}
       books={books}
+      filters={props.filters}
       title={filter?.name ?? "All"}
     />
   );

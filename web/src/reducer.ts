@@ -26,8 +26,8 @@ export const setBooks = (books: Book[]) => ({
 export const initialState: State = {
   collections: [],
   filters: [
-    new Filter("All", () => true),
-    new Filter("Unread", (book: Book) => book.readCount === 0),
+    new Filter("all", "All", () => true),
+    new Filter("unread", "Unread", (book: Book) => book.readCount === 0),
   ],
   books: [],
 };

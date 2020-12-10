@@ -42,7 +42,17 @@ const App: React.FunctionComponent = () => {
             <Book collections={state.collections} books={state.books} />
           </Route>
           <Route path="/collections/:id">
-            <Collection collections={state.collections} />
+            <Collection
+              collections={state.collections}
+              filters={state.filters}
+            />
+          </Route>
+          <Route path="/filters/:id">
+            <Filter
+              collections={state.collections}
+              books={state.books}
+              filters={state.filters}
+            />
           </Route>
           <Route path="/">
             <Filter

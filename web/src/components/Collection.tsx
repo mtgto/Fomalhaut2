@@ -2,10 +2,12 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import { Collection } from "../domain/collection";
+import { Filter } from "../domain/filter";
 import Library from "./Library";
 
 type Props = {
   collections: Collection[];
+  filters: Filter[];
 };
 
 const CollectionPage = (props: Props) => {
@@ -17,6 +19,7 @@ const CollectionPage = (props: Props) => {
     <Library
       books={collection?.books ?? []}
       collections={props.collections}
+      filters={props.filters}
       title={collection?.name ?? "Loading"}
     />
   );

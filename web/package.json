@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "node proxy.js",
-    "build": "parcel build src/index.html --public-url /assets/ && zip -rj ../Fomalhaut2/assets.zip ./dist"
+    "build": "parcel build src/index.html --no-source-maps --public-url /assets/ && zip -rj ../Fomalhaut2/assets.zip ./dist"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",

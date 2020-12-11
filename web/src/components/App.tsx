@@ -39,7 +39,11 @@ const App: React.FunctionComponent = () => {
       <BrowserRouter>
         <Switch>
           <Route path="/books/:id">
-            <Book collections={state.collections} books={state.books} />
+            <Book
+              collections={state.collections}
+              books={state.books}
+              filters={state.filters}
+            />
           </Route>
           <Route path="/collections/:id">
             <Collection

@@ -8,6 +8,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import { Book } from "../domain/book";
 import { Collection } from "../domain/collection";
 import Layout from "./Layout";
+import { Filter } from "../domain/filter";
 
 const useStyles = makeStyles({
   media: {
@@ -44,6 +45,7 @@ const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
 type Props = {
   collections: Collection[];
   books: Book[];
+  filters: Filter[];
 };
 
 const BookPage = (props: Props) => {
@@ -51,7 +53,7 @@ const BookPage = (props: Props) => {
   const classes = useStyles();
   const book: Book | undefined = props.books.find((book) => book.id === id);
   return (
-    <Layout collections={props.collections}>
+    <Layout collections={props.collections} filters={props.filters}>
       <Container maxWidth="md">
         <Box mx="auto">
           {book ? pages(book, classes) : <span>Loading...</span>}

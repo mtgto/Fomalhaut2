@@ -7,8 +7,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 import { Book } from "../domain/book";
 import { Collection } from "../domain/collection";
-import Layout from "./Layout";
 import { Filter } from "../domain/filter";
+import Layout from "./Layout";
 
 const useStyles = makeStyles({
   media: {

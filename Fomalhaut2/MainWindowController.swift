@@ -63,7 +63,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
   }
 
   @IBAction func startWebServer(_ sender: Any) {
-    let vc = WebServerViewController(nibName: WebServerViewController.className(), bundle: nil)
+    let vc = WebSharingViewController(nibName: WebSharingViewController.className(), bundle: nil)
     self.contentViewController?.presentAsSheet(vc)
   }
 

@@ -55,11 +55,11 @@
 		CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793C25403AD500A35C39 /* MainWindowController.swift */; };
 		CEE979452541618D00A35C39 /* BookCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE979442541618D00A35C39 /* BookCollectionView.swift */; };
 		CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */; };
-		CEEFC63B257C9590008D9636 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC63A257C9590008D9636 /* WebServer.swift */; };
+		CEEFC63B257C9590008D9636 /* WebSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC63A257C9590008D9636 /* WebSharing.swift */; };
 		CEEFC644257C9645008D9636 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = CEEFC643257C9645008D9636 /* Swifter */; };
 		CEEFC6622580F5DB008D9636 /* assets.zip in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6612580F5DB008D9636 /* assets.zip */; };
-		CEEFC66B25810C24008D9636 /* WebServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC66925810C24008D9636 /* WebServerViewController.swift */; };
-		CEEFC66C25810C24008D9636 /* WebServerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC66A25810C24008D9636 /* WebServerViewController.xib */; };
+		CEEFC66B25810C24008D9636 /* WebSharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC66925810C24008D9636 /* WebSharingViewController.swift */; };
+		CEEFC66C25810C24008D9636 /* WebSharingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC66A25810C24008D9636 /* WebSharingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,10 +135,10 @@
 		CEE9793C25403AD500A35C39 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CEE979442541618D00A35C39 /* BookCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionView.swift; sourceTree = "<group>"; };
 		CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Resize.swift"; sourceTree = "<group>"; };
-		CEEFC63A257C9590008D9636 /* WebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServer.swift; sourceTree = "<group>"; };
+		CEEFC63A257C9590008D9636 /* WebSharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSharing.swift; sourceTree = "<group>"; };
 		CEEFC6612580F5DB008D9636 /* assets.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = assets.zip; sourceTree = "<group>"; };
-		CEEFC66925810C24008D9636 /* WebServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServerViewController.swift; sourceTree = "<group>"; };
-		CEEFC66A25810C24008D9636 /* WebServerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebServerViewController.xib; sourceTree = "<group>"; };
+		CEEFC66925810C24008D9636 /* WebSharingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSharingViewController.swift; sourceTree = "<group>"; };
+		CEEFC66A25810C24008D9636 /* WebSharingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebSharingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,9 +229,9 @@
 				CEE979442541618D00A35C39 /* BookCollectionView.swift */,
 				CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */,
 				CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */,
-				CEEFC66925810C24008D9636 /* WebServerViewController.swift */,
-				CEEFC66A25810C24008D9636 /* WebServerViewController.xib */,
-				CEEFC63A257C9590008D9636 /* WebServer.swift */,
+				CEEFC66925810C24008D9636 /* WebSharingViewController.swift */,
+				CEEFC66A25810C24008D9636 /* WebSharingViewController.xib */,
+				CEEFC63A257C9590008D9636 /* WebSharing.swift */,
 				CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */,
 				CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */,
 				CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */,
@@ -403,7 +403,7 @@
 				CE654D762537E9530051D575 /* Credits.rtf in Resources */,
 				CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */,
 				CE9DCC2425730EC30024FB1B /* LICENSE in Resources */,
-				CEEFC66C25810C24008D9636 /* WebServerViewController.xib in Resources */,
+				CEEFC66C25810C24008D9636 /* WebSharingViewController.xib in Resources */,
 				CEA994862560E06400B8BCC6 /* Localizable.strings in Resources */,
 				CE9DCB83256AA9EC0024FB1B /* FilterList.storyboard in Resources */,
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,
@@ -443,7 +443,7 @@
 				CECC07192549C6C700CF56FA /* BookDocument.swift in Sources */,
 				CE9DCB8B256B610D0024FB1B /* NSOutlineView+Realm.swift in Sources */,
 				CE9DCB9625720C490024FB1B /* CollectionContent.swift in Sources */,
-				CEEFC63B257C9590008D9636 /* WebServer.swift in Sources */,
+				CEEFC63B257C9590008D9636 /* WebSharing.swift in Sources */,
 				CECC070A2549C48B00CF56FA /* PdfDocument.swift in Sources */,
 				CEA6F6A32550FA4700C50318 /* NSCollectionView+Realm.swift in Sources */,
 				CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */,
@@ -451,7 +451,7 @@
 				CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */,
 				CE275AD625389E0200BEACB7 /* FolderDocument.swift in Sources */,
 				CEA9944A255FE32800B8BCC6 /* CollectionViewLayout.swift in Sources */,
-				CEEFC66B25810C24008D9636 /* WebServerViewController.swift in Sources */,
+				CEEFC66B25810C24008D9636 /* WebSharingViewController.swift in Sources */,
 				CEB2DA69253FE6DB002C3F7E /* FilterListView.swift in Sources */,
 				CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */,
 				CEA6F695254EEFD800C50318 /* ProgressViewController.swift in Sources */,

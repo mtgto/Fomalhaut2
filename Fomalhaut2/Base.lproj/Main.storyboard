@@ -68,7 +68,7 @@
                                                 <action selector="addNewCollection:" target="Ady-hI-5gd" id="wkD-Xc-Ilb"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Start WebServer" id="JCM-nt-Spv">
+                                        <menuItem title="Start Web Sharing" id="JCM-nt-Spv">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="startWebServer:" target="Ady-hI-5gd" id="7WK-d8-d1U"/>
@@ -502,11 +502,11 @@
                     <window key="window" title="Fomalhaut2" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="MainWindow" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="9I8-xZ-12P">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="490" y="534" width="480" height="270"/>
+                        <rect key="contentRect" x="490" y="534" width="572" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2880" height="1597"/>
                         <value key="minSize" type="size" width="480" height="270"/>
                         <view key="contentView" id="oQh-IW-Mil">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <rect key="frame" x="0.0" y="0.0" width="572" height="270"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
                         <toolbar key="toolbar" implicitIdentifier="77CB1D79-397E-4A01-9DEE-E029CD1FEBD1" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="HqW-Zi-JHV">
@@ -571,9 +571,27 @@
                                         <fragment content="NewCollection"/>
                                     </attributedString>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="E6A704CB-20B4-4B7C-9453-6015965140DC" label="Web Sharing" paletteLabel="Web Sharing" sizingBehavior="auto" id="tys-GO-6x8">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="QqI-I0-ZUK">
+                                        <rect key="frame" x="0.0" y="14" width="112" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Web Sharing" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HBl-ak-bCB">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="startWebServer:" target="89S-Z6-qTv" id="bMU-O4-Z9x"/>
+                                        </connections>
+                                    </button>
+                                    <attributedString key="userComments">
+                                        <fragment content="WebSharing"/>
+                                    </attributedString>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="s7q-6j-XVy"/>
+                                <toolbarItem reference="tys-GO-6x8"/>
                                 <toolbarItem reference="2KD-x0-8Cs"/>
                                 <toolbarItem reference="KLM-uf-9of"/>
                                 <toolbarItem reference="2KD-x0-8Cs"/>
@@ -592,7 +610,7 @@
                 </windowController>
                 <customObject id="cLr-Fc-1uG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="64" y="227"/>
+            <point key="canvasLocation" x="110" y="227"/>
         </scene>
         <!--Main Stack View Controller-->
         <scene sceneID="p57-vm-Vho">

@@ -9,7 +9,7 @@ import RxSwift
 import Swifter
 import ZIPFoundation
 
-class WebServer: NSObject {
+class WebSharing: NSObject {
   private let server: HttpServer = HttpServer()
   private(set) var started: Bool = false
   private var collections: [Collection] = []
@@ -138,7 +138,7 @@ class WebServer: NSObject {
       }
     }
   }
-  
+
   private func defaultHtml(_: HttpRequest) -> HttpResponse {
     do {
       if let data = try self.asset("index.html") {
@@ -151,14 +151,15 @@ class WebServer: NSObject {
       return .internalServerError
     }
   }
-  
+
   private func asset(_ filename: String) throws -> Data? {
     guard let entry = self.assetArchive[filename] else {
       return nil
     }
     let semaphore = DispatchSemaphore(value: 0)
     var data: Data = Data()
-    _ = try self.assetArchive.extract(entry, bufferSize: UInt32(entry.uncompressedSize), skipCRC32: true, progress: nil) { (html) in
+    _ = try self.assetArchive.extract(entry, bufferSize: UInt32(entry.uncompressedSize), skipCRC32: true, progress: nil)
+    { (html) in
       data.append(html)
       semaphore.signal()
     }
@@ -194,7 +195,7 @@ class WebServer: NSObject {
       "name": book.name,
       "readCount": book.readCount,
       "pageCount": book.pageCount,
-      "like": book.like
+      "like": book.like,
     ]
   }
 
@@ -202,13 +203,13 @@ class WebServer: NSObject {
     return [
       "id": collection.id,
       "name": collection.name,
-      "books": Array(collection.books.map { self.convert(book: $0) })
+      "books": Array(collection.books.map { self.convert(book: $0) }),
     ]
   }
 }
 
 // MARK: - NSCacheDelegate
-extension WebServer: NSCacheDelegate {
+extension WebSharing: NSCacheDelegate {
   func cache(_ cache: NSCache<AnyObject, AnyObject>, willEvictObject obj: Any) {
     if let document = obj as? NSDocument {
       document.fileURL?.stopAccessingSecurityScopedResource()

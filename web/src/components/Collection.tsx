@@ -5,13 +5,14 @@ import { StateContext } from "../reducer";
 import { Collection } from "../domain/collection";
 import Library from "./Library";
 
-type Props = {};
+type Props = {
+  readonly id: string;
+};
 
 const CollectionPage = (props: Props) => {
   const state = useContext(StateContext);
-  const { id }: { id: string } = useParams();
   const collection: Collection | undefined = state.collections.find(
-    (collection) => collection.id === id
+    (collection) => collection.id === props.id
   );
   return (
     <Library

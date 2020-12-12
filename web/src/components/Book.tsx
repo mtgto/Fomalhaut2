@@ -41,13 +41,16 @@ const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
   ));
 };
 
-type Props = {};
+type Props = {
+  readonly id: string;
+};
 
 const BookPage = (props: Props) => {
   const state = useContext(StateContext);
-  const { id }: { id: string } = useParams();
   const classes = useStyles();
-  const book: Book | undefined = state.books.find((book) => book.id === id);
+  const book: Book | undefined = state.books.find(
+    (book) => book.id === props.id
+  );
   return (
     <Layout>
       <Container maxWidth="md">

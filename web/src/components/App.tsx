@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { RoconRoot } from "rocon/react";
 
 import {
   initialState,
@@ -11,6 +11,7 @@ import {
 import Book from "./Book";
 import Collection from "./Collection";
 import Filter from "./Filter";
+import Routes from "./Routes";
 
 const App: React.FunctionComponent = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -42,22 +43,9 @@ const App: React.FunctionComponent = () => {
 
   return (
     <StateContext.Provider value={state}>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/books/:id">
-            <Book />
-          </Route>
-          <Route path="/collections/:id">
-            <Collection />
-          </Route>
-          <Route path="/filters/:id">
-            <Filter />
-          </Route>
-          <Route path="/">
-            <Filter />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <RoconRoot>
+        <Routes />
+      </RoconRoot>
     </StateContext.Provider>
   );
 };

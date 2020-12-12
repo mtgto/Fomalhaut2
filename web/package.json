@@ -12,7 +12,6 @@
     "@material-ui/icons": "^4.11.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-router-dom": "^5.2.0",
     "rocon": "^1.1.1"
   },
   "devDependencies": {
@@ -23,7 +22,6 @@
     "@types/node": "^14.14.10",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
-    "@types/react-router-dom": "^5.1.6",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "eslint": "^7.15.0",
     "eslint-config-prettier": "^7.0.0",

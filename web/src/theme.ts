@@ -4,6 +4,7 @@ import { createMuiTheme, Theme } from "@material-ui/core/styles";
 // Create a theme instance.
 const theme: Theme = createMuiTheme({
   palette: {
+    //type: "dark",
     primary: {
       main: "#556cd6",
     },
@@ -12,9 +13,6 @@ const theme: Theme = createMuiTheme({
     },
     error: {
       main: red.A400,
-    },
-    background: {
-      default: "#fff",
     },
   },
 });

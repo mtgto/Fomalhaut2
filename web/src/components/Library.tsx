@@ -6,21 +6,17 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 import { Book } from "../domain/book";
-import { Collection } from "../domain/collection";
-import { Filter } from "../domain/filter";
 import Cover from "./Cover";
 import Layout from "./Layout";
 
 type Props = {
-  collections: Collection[];
   books: Book[];
-  filters: Filter[];
   title: string;
 };
 
 const Library = (props: Props) => {
   return (
-    <Layout collections={props.collections} filters={props.filters}>
+    <Layout>
       <Container maxWidth="md">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom>

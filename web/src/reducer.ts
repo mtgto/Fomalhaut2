@@ -1,3 +1,4 @@
+import { createContext } from "react";
 import { Book } from "./domain/book";
 import { Collection } from "./domain/collection";
 import { Filter } from "./domain/filter";
@@ -31,6 +32,8 @@ export const initialState: State = {
   ],
   books: [],
 };
+
+export const StateContext = createContext(initialState);
 
 export const reducer = (state: State, action: Actions): State => {
   switch (action.type) {

@@ -1,33 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
+import { StateContext } from "../reducer";
 
 import { Book } from "../domain/book";
-import { Collection } from "../domain/collection";
 import { Filter } from "../domain/filter";
 import Library from "./Library";
 
-type Props = {
-  books: Book[];
-  collections: Collection[];
-  filters: Filter[];
-};
+type Props = {};
 
 const FilterPage = (props: Props) => {
+  const state = useContext(StateContext);
   const { id }: { id: string } = useParams();
-  const filter: Filter | undefined = props.filters.find(
+  const filter: Filter | undefined = state.filters.find(
     (filter) => filter.id === id
   );
   const books: Book[] = filter
-    ? props.books.filter((book) => filter.filter(book))
-    : props.books;
-  return (
-    <Library
-      collections={props.collections}
-      books={books}
-      filters={props.filters}
-      title={filter?.name ?? "All"}
-    />
-  );
+    ? state.books.filter((book) => filter.filter(book))
+    : state.books;
+  return <Library books={books} title={filter?.name ?? "All"} />;
 };
 
 export default FilterPage;

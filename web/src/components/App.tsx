@@ -1,7 +1,13 @@
 import React, { useEffect, useReducer } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import { initialState, reducer, setBooks, setCollections } from "../reducer";
+import {
+  initialState,
+  reducer,
+  setBooks,
+  setCollections,
+  StateContext,
+} from "../reducer";
 import Book from "./Book";
 import Collection from "./Collection";
 import Filter from "./Filter";
@@ -35,39 +41,24 @@ const App: React.FunctionComponent = () => {
   }, []);
 
   return (
-    <>
+    <StateContext.Provider value={state}>
       <BrowserRouter>
         <Switch>
           <Route path="/books/:id">
-            <Book
-              collections={state.collections}
-              books={state.books}
-              filters={state.filters}
-            />
+            <Book />
           </Route>
           <Route path="/collections/:id">
-            <Collection
-              collections={state.collections}
-              filters={state.filters}
-            />
+            <Collection />
           </Route>
           <Route path="/filters/:id">
-            <Filter
-              collections={state.collections}
-              books={state.books}
-              filters={state.filters}
-            />
+            <Filter />
           </Route>
           <Route path="/">
-            <Filter
-              collections={state.collections}
-              books={state.books}
-              filters={state.filters}
-            />
+            <Filter />
           </Route>
         </Switch>
       </BrowserRouter>
-    </>
+    </StateContext.Provider>
   );
 };
 export default App;

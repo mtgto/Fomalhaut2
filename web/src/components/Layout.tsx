@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useLocation, Link as RouterLink } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import Divider from "@material-ui/core/Divider";
@@ -14,8 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
 
-import { Collection } from "../domain/collection";
-import { Filter } from "../domain/filter";
+import { StateContext } from "../reducer";
 import ListItemLink from "./ListItemLink";
 
 import type { FunctionComponent } from "react";
@@ -59,12 +58,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type Props = {
-  collections: Collection[];
-  filters: Filter[];
   children: React.ReactNode;
 };
 
 const Layout: FunctionComponent<Props> = (props: Props) => {
+  const state = useContext(StateContext);
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const location = useLocation();
@@ -121,7 +119,7 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
           </div>
           <Divider />
           <List subheader={<ListSubheader>Library</ListSubheader>}>
-            {props.filters.map((filter) => (
+            {state.filters.map((filter) => (
               <ListItemLink
                 to={`/filters/${filter.id}`}
                 primary={filter.name}
@@ -130,7 +128,7 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
             ))}
           </List>
           <List subheader={<ListSubheader>Collection</ListSubheader>}>
-            {props.collections.map((collection) => (
+            {state.collections.map((collection) => (
               <ListItemLink
                 to={`/collections/${collection.id}`}
                 primary={collection.name}

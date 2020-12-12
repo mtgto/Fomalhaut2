@@ -917,7 +917,7 @@
     "@babel/helper-validator-option" "^7.12.1"
     "@babel/plugin-transform-typescript" "^7.12.1"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
   version "7.12.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
   integrity sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
@@ -6519,6 +6519,13 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+rocon@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/rocon/-/rocon-1.1.1.tgz#140c5a9d959d3803b3158f6b0688519f6f2c95c8"
+  integrity sha512-n7YSmu/bnVHtbIgrY2bkojGBwXNzOoo5NpfzETBgTpqhr4BJ17B/Oj5b8lYfwtpnrc2igsM8Z61WT+30dlTTtw==
+  dependencies:
+    "@babel/runtime" "^7.11.2"
 
 run-parallel@^1.1.9:
   version "1.1.10"

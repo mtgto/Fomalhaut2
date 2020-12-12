@@ -12,7 +12,8 @@
     "@material-ui/icons": "^4.11.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "rocon": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",

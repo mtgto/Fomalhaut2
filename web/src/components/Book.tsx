@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import Box from "@material-ui/core/Box";
@@ -6,8 +6,7 @@ import Container from "@material-ui/core/Container";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 import { Book } from "../domain/book";
-import { Collection } from "../domain/collection";
-import { Filter } from "../domain/filter";
+import { StateContext } from "../reducer";
 import Layout from "./Layout";
 
 const useStyles = makeStyles({
@@ -42,18 +41,15 @@ const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
   ));
 };
 
-type Props = {
-  collections: Collection[];
-  books: Book[];
-  filters: Filter[];
-};
+type Props = {};
 
 const BookPage = (props: Props) => {
+  const state = useContext(StateContext);
   const { id }: { id: string } = useParams();
   const classes = useStyles();
-  const book: Book | undefined = props.books.find((book) => book.id === id);
+  const book: Book | undefined = state.books.find((book) => book.id === id);
   return (
-    <Layout collections={props.collections} filters={props.filters}>
+    <Layout>
       <Container maxWidth="md">
         <Box mx="auto">
           {book ? pages(book, classes) : <span>Loading...</span>}

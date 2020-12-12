@@ -34,11 +34,15 @@
 /* Sort by */
 "SortPopupTitle" = "順序";
 
+/* Start */
+"Start" = "開始";
+
+/* Stop */
+"Stop" = "停止";
+
 /* Unread */
 "UnreadFilter" = "未読";
 
 /* View count */
 "ViewCountCaption" = "読んだ回数";
 
-"Start" = "開始";
-"Stop" = "停止";

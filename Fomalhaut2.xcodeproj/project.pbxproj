@@ -59,7 +59,7 @@
 		CEEFC644257C9645008D9636 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = CEEFC643257C9645008D9636 /* Swifter */; };
 		CEEFC6622580F5DB008D9636 /* assets.zip in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6612580F5DB008D9636 /* assets.zip */; };
 		CEEFC66B25810C24008D9636 /* WebSharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC66925810C24008D9636 /* WebSharingViewController.swift */; };
-		CEEFC66C25810C24008D9636 /* WebSharingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC66A25810C24008D9636 /* WebSharingViewController.xib */; };
+		CEEFC6942583C91A008D9636 /* WebSharingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6962583C91A008D9636 /* WebSharingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,7 +138,8 @@
 		CEEFC63A257C9590008D9636 /* WebSharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSharing.swift; sourceTree = "<group>"; };
 		CEEFC6612580F5DB008D9636 /* assets.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = assets.zip; sourceTree = "<group>"; };
 		CEEFC66925810C24008D9636 /* WebSharingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSharingViewController.swift; sourceTree = "<group>"; };
-		CEEFC66A25810C24008D9636 /* WebSharingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebSharingViewController.xib; sourceTree = "<group>"; };
+		CEEFC6952583C91A008D9636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WebSharingViewController.xib; sourceTree = "<group>"; };
+		CEEFC69B2583C920008D9636 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/WebSharingViewController.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,7 +231,7 @@
 				CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */,
 				CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */,
 				CEEFC66925810C24008D9636 /* WebSharingViewController.swift */,
-				CEEFC66A25810C24008D9636 /* WebSharingViewController.xib */,
+				CEEFC6962583C91A008D9636 /* WebSharingViewController.xib */,
 				CEEFC63A257C9590008D9636 /* WebSharing.swift */,
 				CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */,
 				CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */,
@@ -403,7 +404,7 @@
 				CE654D762537E9530051D575 /* Credits.rtf in Resources */,
 				CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */,
 				CE9DCC2425730EC30024FB1B /* LICENSE in Resources */,
-				CEEFC66C25810C24008D9636 /* WebSharingViewController.xib in Resources */,
+				CEEFC6942583C91A008D9636 /* WebSharingViewController.xib in Resources */,
 				CEA994862560E06400B8BCC6 /* Localizable.strings in Resources */,
 				CE9DCB83256AA9EC0024FB1B /* FilterList.storyboard in Resources */,
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,
@@ -549,6 +550,15 @@
 				CEC1EA042575151A0052228E /* ja */,
 			);
 			name = BookCollection.storyboard;
+			sourceTree = "<group>";
+		};
+		CEEFC6962583C91A008D9636 /* WebSharingViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEEFC6952583C91A008D9636 /* Base */,
+				CEEFC69B2583C920008D9636 /* ja */,
+			);
+			name = WebSharingViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

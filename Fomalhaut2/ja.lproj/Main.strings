@@ -121,6 +121,9 @@
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "H8h-7b-M4v"; */
 "H8h-7b-M4v.title" = "View";
 
+/* Class = "NSButtonCell"; title = "Web Sharing"; ObjectID = "HBl-ak-bCB"; */
+"HBl-ak-bCB.title" = "Web共有";
+
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "HFo-cy-zxI"; */
 "HFo-cy-zxI.title" = "Show Spelling and Grammar";
 
@@ -144,6 +147,9 @@
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
 "IAo-SY-fd9.title" = "開く…";
+
+/* Class = "NSMenuItem"; title = "Start Web Sharing"; ObjectID = "JCM-nt-Spv"; */
+"JCM-nt-Spv.title" = "Web共有を開始する";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
 "Kd2-mp-pUS.title" = "すべてを表示";
@@ -231,6 +237,12 @@
 
 /* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws"; */
 "tXI-mr-wws.title" = "最近使った項目を開く";
+
+/* Class = "NSToolbarItem"; label = "Web Sharing"; ObjectID = "tys-GO-6x8"; Note = "WebSharing"; */
+"tys-GO-6x8.label" = "Web共有";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Web Sharing"; ObjectID = "tys-GO-6x8"; Note = "WebSharing"; */
+"tys-GO-6x8.paletteLabel" = "Web共有";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "UEZ-Bs-lqG"; */
 "UEZ-Bs-lqG.title" = "語頭を大文字にする";

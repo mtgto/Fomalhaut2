@@ -10,6 +10,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
+    "history": "^5.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "rocon": "^1.1.1"

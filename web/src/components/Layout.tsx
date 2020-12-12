@@ -1,12 +1,15 @@
-import React, { useContext, useState } from "react";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import React, { forwardRef, useContext, useMemo, useState } from "react";
+import { Link as RouterLink, useLocation, useNavigate } from "rocon/react";
 
 import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -15,11 +18,12 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
 
 import { StateContext } from "../reducer";
-import ListItemLink from "./ListItemLink";
+import { collectionRoutes, filterRoutes, topLevelRoutes } from "./Routes";
 
 import type { FunctionComponent } from "react";
 
 import type { Theme } from "@material-ui/core/styles/createMuiTheme";
+
 const drawerWidth = 200;
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -55,6 +59,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   },
+  item: {
+    display: "block",
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+  button: {
+    justifyContent: "flex-start",
+    width: "100%",
+  },
 }));
 
 type Props = {
@@ -66,6 +79,7 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const location = useLocation();
+  const navigate = useNavigate();
   React.useEffect(() => {
     // close drawer when route changed
     setOpen(false);
@@ -78,6 +92,17 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const RootLink = useMemo(
+    () =>
+      forwardRef((linkProps, ref) => (
+        <RouterLink
+          route={topLevelRoutes.exactRoute}
+          {...linkProps}
+        ></RouterLink>
+      )),
+    []
+  );
 
   return (
     <>
@@ -96,7 +121,7 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
               </IconButton>
             </div>
             <Typography variant="h6" className={classes.title}>
-              <Link color="inherit" component={RouterLink} to="/">
+              <Link color="inherit" component={RootLink}>
                 Fomalhaut2
               </Link>
             </Typography>
@@ -120,20 +145,30 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
           <Divider />
           <List subheader={<ListSubheader>Library</ListSubheader>}>
             {state.filters.map((filter) => (
-              <ListItemLink
-                to={`/filters/${filter.id}`}
-                primary={filter.name}
-                key={filter.id}
-              />
+              <ListItem className={classes.item}>
+                <Button
+                  className={classes.button}
+                  onClick={() =>
+                    navigate(filterRoutes.anyRoute, { id: filter.id })
+                  }
+                >
+                  {filter.name}
+                </Button>
+              </ListItem>
             ))}
           </List>
           <List subheader={<ListSubheader>Collection</ListSubheader>}>
             {state.collections.map((collection) => (
-              <ListItemLink
-                to={`/collections/${collection.id}`}
-                primary={collection.name}
-                key={collection.id}
-              />
+              <ListItem className={classes.item}>
+                <Button
+                  className={classes.button}
+                  onClick={() =>
+                    navigate(collectionRoutes.anyRoute, { id: collection.id })
+                  }
+                >
+                  {collection.name}
+                </Button>
+              </ListItem>
             ))}
           </List>
         </Drawer>

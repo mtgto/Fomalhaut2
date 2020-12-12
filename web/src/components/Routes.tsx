@@ -4,13 +4,13 @@ import BookPage from "./Book";
 import CollectionPage from "./Collection";
 import FilterPage from "./Filter";
 
-const bookRoutes = Path().any("id", {
+export const bookRoutes = Path().any("id", {
   action: ({ id }) => <BookPage id={id} />,
 });
-const collectionRoutes = Path().any("id", {
+export const collectionRoutes = Path().any("id", {
   action: ({ id }) => <CollectionPage id={id} />,
 });
-const filterRoutes = Path().any("id", {
+export const filterRoutes = Path().any("id", {
   action: ({ id }) => <FilterPage id={id} />,
 });
 export const topLevelRoutes = Path()

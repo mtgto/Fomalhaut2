@@ -1,5 +1,5 @@
-import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import React, { forwardRef, useMemo } from "react";
+import { Link as RouterLink } from "rocon/react";
 
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -9,6 +9,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 
 import { Book } from "../domain/book";
+import { bookRoutes } from "./Routes";
 
 const useStyles = makeStyles({
   media: {
@@ -32,8 +33,20 @@ type Props = {
 
 const Cover = (props: Props) => {
   const classes = useStyles();
+  const BookLink = useMemo(
+    () =>
+      forwardRef((linkProps, ref) => (
+        <RouterLink
+          route={bookRoutes.anyRoute}
+          match={{ id: props.book.id }}
+          {...linkProps}
+        ></RouterLink>
+      )),
+    [props.book.id]
+  );
   return (
-    <Link component={RouterLink} to={`/books/${props.book.id}`}>
+    <Link component={BookLink}>
+      {/* <RouterLink route={bookRoutes.anyRoute} match={{ id: props.book.id }}> */}
       <Card variant="outlined" className={classes.card}>
         <CardMedia
           component="img"
@@ -51,6 +64,7 @@ const Cover = (props: Props) => {
           </Typography>
         </CardContent>
       </Card>
+      {/* </RouterLink> */}
     </Link>
   );
 };

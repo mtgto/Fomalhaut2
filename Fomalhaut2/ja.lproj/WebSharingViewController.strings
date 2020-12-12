@@ -1,0 +1,15 @@
+
+/* Class = "NSTextFieldCell"; title = "By enabling the sharing, you can browse your book collections from a web browser on your smartphone or computer."; ObjectID = "9Nx-xa-Kp6"; */
+"9Nx-xa-Kp6.title" = "By enabling the sharing, you can browse your book collections from a web browser on your smartphone or computer.";
+
+/* Class = "NSTextFieldCell"; title = "Web sharing (EXPERIMENTAL)"; ObjectID = "M01-49-yxD"; */
+"M01-49-yxD.title" = "Web sharing (EXPERIMENTAL)";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "a7S-r1-dAI"; */
+"a7S-r1-dAI.title" = "Cancel";
+
+/* Class = "NSButtonCell"; title = "Start"; ObjectID = "dNE-43-5Ti"; */
+"dNE-43-5Ti.title" = "Start";
+
+/* Class = "NSTextFieldCell"; title = "Enter the port number"; ObjectID = "i0k-ei-doh"; */
+"i0k-ei-doh.title" = "Enter the port number";

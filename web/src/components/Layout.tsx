@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: 0,
   },
   button: {
+    textTransform: "none",
     justifyContent: "flex-start",
     width: "100%",
   },

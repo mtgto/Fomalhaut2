@@ -145,7 +145,7 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
           <Divider />
           <List subheader={<ListSubheader>Library</ListSubheader>}>
             {state.filters.map((filter) => (
-              <ListItem className={classes.item}>
+              <ListItem className={classes.item} key={filter.id}>
                 <Button
                   className={classes.button}
                   onClick={() =>
@@ -159,7 +159,7 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
           </List>
           <List subheader={<ListSubheader>Collection</ListSubheader>}>
             {state.collections.map((collection) => (
-              <ListItem className={classes.item}>
+              <ListItem className={classes.item} key={collection.id}>
                 <Button
                   className={classes.button}
                   onClick={() =>

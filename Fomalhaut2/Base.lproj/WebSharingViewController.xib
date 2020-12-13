@@ -8,6 +8,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WebSharingViewController" customModule="Fomalhaut2" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="lVd-bD-Ffx" id="DIy-vn-CvG"/>
+                <outlet property="openBrowserButton" destination="OWQ-aa-aQ3" id="Paj-bV-vpM"/>
                 <outlet property="portTextField" destination="B90-KP-T5F" id="DOd-sm-saT"/>
                 <outlet property="toggleWebServerButton" destination="OJv-Cb-db7" id="91A-HV-Kqj"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -73,9 +75,12 @@
                         </gridCell>
                     </gridCells>
                 </gridView>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OJv-Cb-db7">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OJv-Cb-db7">
                     <rect key="frame" x="368" y="13" width="98" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="6a2-Yv-pz4"/>
+                        <constraint firstAttribute="width" constant="86" id="Eml-Kg-sW5"/>
+                    </constraints>
                     <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dNE-43-5Ti">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -87,21 +92,52 @@ DQ
                         <action selector="toggleWebServer:" target="-2" id="iAj-G2-tfZ"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lVd-bD-Ffx">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lVd-bD-Ffx">
                     <rect key="frame" x="278" y="13" width="95" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="a7S-r1-dAI">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="CEp-s9-qta"/>
+                        <constraint firstAttribute="width" constant="83" id="Oke-ZK-xqD"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="a7S-r1-dAI">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
 Gw
 </string>
                     </buttonCell>
+                    <attributedString key="userComments">
+                        <fragment content="Close"/>
+                    </attributedString>
                     <connections>
-                        <action selector="cancel:" target="-2" id="n1a-QU-KbW"/>
+                        <action selector="close:" target="-2" id="kSY-tJ-rRH"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OWQ-aa-aQ3">
+                    <rect key="frame" x="14" y="13" width="125" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="113" id="EFD-Xz-J8Q"/>
+                        <constraint firstAttribute="height" constant="21" id="p1d-XQ-zqZ"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="Open browser" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qpb-bb-q05">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <attributedString key="userComments">
+                        <fragment content="OpenBrowser"/>
+                    </attributedString>
+                    <connections>
+                        <action selector="openBrowser:" target="-2" id="gFp-Ri-X3n"/>
                     </connections>
                 </button>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="OWQ-aa-aQ3" secondAttribute="bottom" constant="20" symbolic="YES" id="BMI-DW-l9T"/>
+                <constraint firstItem="OJv-Cb-db7" firstAttribute="leading" secondItem="lVd-bD-Ffx" secondAttribute="trailing" constant="7" id="XaO-xh-NiG"/>
+                <constraint firstItem="OWQ-aa-aQ3" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="fsy-u9-1a2"/>
+                <constraint firstAttribute="bottom" secondItem="OJv-Cb-db7" secondAttribute="bottom" constant="20" symbolic="YES" id="mk9-gS-HBq"/>
+                <constraint firstAttribute="trailing" secondItem="OJv-Cb-db7" secondAttribute="trailing" constant="20" symbolic="YES" id="nyv-K6-Ind"/>
+                <constraint firstAttribute="bottom" secondItem="lVd-bD-Ffx" secondAttribute="bottom" constant="20" symbolic="YES" id="yLZ-Mt-AIJ"/>
+            </constraints>
             <point key="canvasLocation" x="43" y="154"/>
         </customView>
     </objects>

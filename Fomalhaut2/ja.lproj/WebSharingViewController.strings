@@ -1,8 +1,8 @@
 /* Class = "NSTextFieldCell"; title = "By enabling the sharing, you can browse your book collections from a web browser on your smartphone or computer."; ObjectID = "9Nx-xa-Kp6"; */
 "9Nx-xa-Kp6.title" = "共有を開始することで、スマートフォンやパソコンのWebブラウザからあなたのコレクションを閲覧できるようになります。";
 
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "a7S-r1-dAI"; */
-"a7S-r1-dAI.title" = "キャンセル";
+/* Class = "NSButtonCell"; title = "Close"; ObjectID = "a7S-r1-dAI"; Note = "Close"; */
+"a7S-r1-dAI.title" = "閉じる";
 
 /* Class = "NSButtonCell"; title = "Start"; ObjectID = "dNE-43-5Ti"; */
 "dNE-43-5Ti.title" = "開始";
@@ -12,4 +12,7 @@
 
 /* Class = "NSTextFieldCell"; title = "Web sharing (EXPERIMENTAL)"; ObjectID = "M01-49-yxD"; */
 "M01-49-yxD.title" = "Web共有 (実験的機能)";
+
+/* Class = "NSButtonCell"; title = "Open browser"; ObjectID = "qpb-bb-q05"; Note = "OpenBrowser"; */
+"qpb-bb-q05.title" = "ブラウザで開く";
 

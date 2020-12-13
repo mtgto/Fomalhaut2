@@ -1,6 +1,17 @@
 CHANGELOG
 ====
 
+## v0.5.0 (2020-12-13)
+
+### Added
+
+- Web Sharing (experimental)
+  - Add `com.apple.security.network.server` (Network server feature) to App Sandbox entitlements
+
+### Changed
+
+- Update page count of book on closing a book window
+
 ## v0.4.1 (2020-12-06)
 
 ### Added

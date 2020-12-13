@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
+// SPDX-License-Identifier: GPL-3.0-only
+
 export class Book {
   readonly id: string;
   readonly name: string;

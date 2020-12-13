@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
+// SPDX-License-Identifier: GPL-3.0-only
+
 import React, { forwardRef, useContext, useMemo, useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "rocon/react";
 

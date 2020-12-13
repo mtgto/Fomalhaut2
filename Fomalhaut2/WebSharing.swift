@@ -46,10 +46,6 @@ class WebSharing: NSObject {
     log.info("WebServer stopped.")
     self.started = false
   }
-  
-  func port() throws -> in_port_t {
-    return in_port_t(try self.server.port())
-  }
 
   private func setup() {
     let realm = try! Realm()

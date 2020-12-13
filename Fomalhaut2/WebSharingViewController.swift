@@ -12,7 +12,7 @@ class WebSharingViewController: NSViewController {
   @IBOutlet weak var toggleWebServerButton: NSButton!
   @IBOutlet weak var closeButton: NSButton!
   @IBOutlet weak var openBrowserButton: NSButton!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.portTextField.stringValue = String(

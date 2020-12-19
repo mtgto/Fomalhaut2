@@ -111,7 +111,7 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" id="appbar">
           <Toolbar className={classes.toolbar}>
             <div className={classes.left}>
               <IconButton

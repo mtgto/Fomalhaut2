@@ -4,6 +4,7 @@
 import React, { useContext } from "react";
 
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
@@ -29,7 +30,11 @@ const useStyles = makeStyles({
     width: "100%",
     maxWidth: "720px",
     display: "block",
-    margin: "auto",
+    margin: "8px auto",
+  },
+  footer: {
+    display: "flex",
+    justifyContent: "center",
   },
 });
 
@@ -46,18 +51,30 @@ const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
 type Props = {
   readonly id: string;
 };
-
 const BookPage = (props: Props) => {
   const state = useContext(StateContext);
   const classes = useStyles();
   const book: Book | undefined = state.books.find(
     (book) => book.id === props.id
   );
+
+  const handleClick = () => {
+    const anchor = document.querySelector("#appbar");
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
   return (
     <Layout>
       <Container maxWidth="md">
         <Box mx="auto">
           {book ? pages(book, classes) : <span>Loading...</span>}
+        </Box>
+        <Box mx="auto" mt={2} mb={8} className={classes.footer}>
+          <Button color="primary" size="large" onClick={handleClick}>
+            Go to page top
+          </Button>
         </Box>
       </Container>
     </Layout>

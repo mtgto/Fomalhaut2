@@ -28,7 +28,7 @@ class WebSharingViewController: NSViewController {
           self.toggleWebServerButton.title = NSLocalizedString("Start", comment: "Start")
           return false
         } else {
-          if let portNumber = UInt16(self.portTextField.stringValue) {
+          if let portNumber = Int(self.portTextField.stringValue) {
             log.info("Start WebServer (port = \(portNumber))")
             do {
               try self.webSharing.start(port: portNumber)

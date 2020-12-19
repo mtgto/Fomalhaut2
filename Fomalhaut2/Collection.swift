@@ -7,7 +7,7 @@ import RealmSwift
 let collectionChangedNotificationName = Notification.Name("collectionChanged")
 let collectionWillDeleteNotificationName = Notification.Name("collectionWillDelete")
 
-class Collection: Object {
+class Collection: Object, Encodable {
   @objc dynamic var id: String = UUID().uuidString
   @objc dynamic var name = ""
   @objc dynamic var createdAt: Date = Date()
@@ -15,5 +15,9 @@ class Collection: Object {
 
   override static func primaryKey() -> String? {
     return "id"
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case id, name, createdAt, books
   }
 }

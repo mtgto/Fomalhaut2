@@ -29,6 +29,7 @@
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
 		CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */; };
+		CE9FB2B9258D931700AE8F7A /* Swiftra in Frameworks */ = {isa = PBXBuildFile; productRef = CE9FB2B8258D931700AE8F7A /* Swiftra */; };
 		CEA6F695254EEFD800C50318 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F693254EEFD800C50318 /* ProgressViewController.swift */; };
 		CEA6F69E2550FA1300C50318 /* NSTableView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */; };
 		CEA6F6A32550FA4700C50318 /* NSCollectionView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F6A22550FA4700C50318 /* NSCollectionView+Realm.swift */; };
@@ -56,7 +57,6 @@
 		CEE979452541618D00A35C39 /* BookCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE979442541618D00A35C39 /* BookCollectionView.swift */; };
 		CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */; };
 		CEEFC63B257C9590008D9636 /* WebSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC63A257C9590008D9636 /* WebSharing.swift */; };
-		CEEFC644257C9645008D9636 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = CEEFC643257C9645008D9636 /* Swifter */; };
 		CEEFC6622580F5DB008D9636 /* assets.zip in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6612580F5DB008D9636 /* assets.zip */; };
 		CEEFC66B25810C24008D9636 /* WebSharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC66925810C24008D9636 /* WebSharingViewController.swift */; };
 		CEEFC6942583C91A008D9636 /* WebSharingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6962583C91A008D9636 /* WebSharingViewController.xib */; };
@@ -147,13 +147,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEEFC644257C9645008D9636 /* Swifter in Frameworks */,
 				CE296C332530A4E400674C99 /* RxSwift in Frameworks */,
 				CE296C312530A4E400674C99 /* RxCocoa in Frameworks */,
 				CE296BCD2530671700674C99 /* ZIPFoundation in Frameworks */,
 				CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */,
 				CECC072C2549CAFD00CF56FA /* PDFKit.framework in Frameworks */,
 				CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */,
+				CE9FB2B9258D931700AE8F7A /* Swiftra in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,7 +299,7 @@
 				CE296C322530A4E400674C99 /* RxSwift */,
 				CE9EE5EA2532C53100B5AF5C /* XCGLogger */,
 				CEB2D9F625399375002C3F7E /* RxRealm */,
-				CEEFC643257C9645008D9636 /* Swifter */,
+				CE9FB2B8258D931700AE8F7A /* Swiftra */,
 			);
 			productName = Fomalhaut2;
 			productReference = CE30280625305AA000986C9A /* Fomalhaut2.app */;
@@ -378,7 +378,7 @@
 				CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */,
 				CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */,
-				CEEFC642257C9645008D9636 /* XCRemoteSwiftPackageReference "swifter" */,
+				CE9FB2B7258D931700AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */,
 			);
 			productRefGroup = CE30280725305AA000986C9A /* Products */;
 			projectDirPath = "";
@@ -877,20 +877,20 @@
 				minimumVersion = 7.0.1;
 			};
 		};
+		CE9FB2B7258D931700AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "file:///Users/user/work/cocoa/Swiftra";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxRealm.git";
 			requirement = {
 				kind = upToNextMinorVersion;
 				minimumVersion = 3.1.0;
-			};
-		};
-		CEEFC642257C9645008D9636 /* XCRemoteSwiftPackageReference "swifter" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/httpswift/swifter.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 1.5.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -916,15 +916,15 @@
 			package = CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */;
 			productName = XCGLogger;
 		};
+		CE9FB2B8258D931700AE8F7A /* Swiftra */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE9FB2B7258D931700AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */;
+			productName = Swiftra;
+		};
 		CEB2D9F625399375002C3F7E /* RxRealm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */;
 			productName = RxRealm;
-		};
-		CEEFC643257C9645008D9636 /* Swifter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CEEFC642257C9645008D9636 /* XCRemoteSwiftPackageReference "swifter" */;
-			productName = Swifter;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

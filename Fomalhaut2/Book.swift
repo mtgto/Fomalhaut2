@@ -4,7 +4,7 @@
 import Foundation
 import RealmSwift
 
-class Book: Object {
+class Book: Object, Encodable {
   @objc dynamic var id: String = UUID().uuidString
   @objc dynamic var name: String = ""
   @objc dynamic var filePath: String = ""
@@ -27,6 +27,10 @@ class Book: Object {
 
   override static func indexedProperties() -> [String] {
     return ["filePath"]
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case id, name, readCount, like, pageCount
   }
 
   func resolveURL(bookmarkDataIsStale: inout Bool) throws -> URL {

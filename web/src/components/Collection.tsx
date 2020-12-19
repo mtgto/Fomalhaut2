@@ -11,7 +11,7 @@ type Props = {
   readonly id: string;
 };
 
-const CollectionPage = (props: Props) => {
+const CollectionPage: React.VoidFunctionComponent<Props> = (props: Props) => {
   const state = useContext(StateContext);
   const collection: Collection | undefined = state.collections.find(
     (collection) => collection.id === props.id

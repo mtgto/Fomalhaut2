@@ -25,7 +25,7 @@ export const topLevelRoutes = Path()
   .route("collections", (route) => route.attach(collectionRoutes))
   .route("filters", (route) => route.attach(filterRoutes));
 
-const Routes: React.FC = () => {
+const Routes: React.VoidFunctionComponent = () => {
   return useRoutes(topLevelRoutes);
 };
 

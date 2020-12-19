@@ -18,7 +18,7 @@ import Routes from "./Routes";
 const parseBook = (book: Book): Book =>
   new Book(book.id, book.name, book.pageCount, book.readCount);
 
-const App: React.FunctionComponent = () => {
+const App: React.VoidFunctionComponent = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
     let unmounted = false;

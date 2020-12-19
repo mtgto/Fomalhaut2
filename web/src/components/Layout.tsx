@@ -23,8 +23,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { StateContext } from "../reducer";
 import { collectionRoutes, filterRoutes, topLevelRoutes } from "./Routes";
 
-import type { FunctionComponent } from "react";
-
 import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 const drawerWidth = 200;
@@ -78,7 +76,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Layout: FunctionComponent<Props> = (props: Props) => {
+const Layout: React.FunctionComponent<Props> = (props: Props) => {
   const state = useContext(StateContext);
   const [open, setOpen] = useState(false);
   const classes = useStyles();

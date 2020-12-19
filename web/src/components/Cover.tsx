@@ -34,7 +34,7 @@ type Props = {
   book: Book;
 };
 
-const Cover = (props: Props) => {
+const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
   const classes = useStyles();
   const BookLink = useMemo(
     () =>

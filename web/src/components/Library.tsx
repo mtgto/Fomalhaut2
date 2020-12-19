@@ -17,7 +17,7 @@ type Props = {
   title: string;
 };
 
-const Library = (props: Props) => {
+const Library: React.VoidFunctionComponent<Props> = (props: Props) => {
   return (
     <Layout>
       <Container maxWidth="md">

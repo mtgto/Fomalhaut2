@@ -51,7 +51,7 @@ const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
 type Props = {
   readonly id: string;
 };
-const BookPage = (props: Props) => {
+const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
   const state = useContext(StateContext);
   const classes = useStyles();
   const book: Book | undefined = state.books.find(

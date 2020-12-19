@@ -18,6 +18,7 @@ const useStyles = makeStyles({
   media: {
     height: 200,
     objectFit: "contain",
+    paddingTop: "8px",
   },
   card: {
     //height: "100%",

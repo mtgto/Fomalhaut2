@@ -23,12 +23,12 @@ const Library: React.VoidFunctionComponent<Props> = (props: Props) => {
       <Container maxWidth="md">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom>
-            {props.title}
+            {props.title} {props.books.length > 0 && `(${props.books.length})`}
           </Typography>
         </Box>
       </Container>
       <Container maxWidth="md">
-        <Grid container spacing={4}>
+        <Grid container spacing={1}>
           {props.books.map((book: Book) => (
             <Grid item key={book.id} xs={6} sm={4} md={3}>
               <Cover book={book} />

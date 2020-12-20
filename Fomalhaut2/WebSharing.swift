@@ -7,7 +7,6 @@ import RealmSwift
 import RxRealm
 import RxRelay
 import RxSwift
-import Swifter
 import Swiftra
 import ZIPFoundation
 

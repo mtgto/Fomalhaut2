@@ -134,12 +134,14 @@ class WebSharing: NSObject {
   }
 
   func stop(callback: ((Error?) -> Void)? = nil) {
-    self.server.stop { (error) in
-      log.info("WebServer is stopped")
-      self.started = false
-      callback?(error)
+    if self.started {
+      self.server.stop { (error) in
+        log.info("WebServer is stopped")
+        self.started = false
+        callback?(error)
+      }
+      log.info("WebServer is stopping.")
     }
-    log.info("WebServer is stopping.")
   }
 
   private func setup() {

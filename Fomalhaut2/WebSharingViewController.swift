@@ -21,11 +21,14 @@ class WebSharingViewController: NSViewController {
       .scan(false) { started, newValue in
         if started {
           log.info("Stop WebServer...")
-          self.webSharing.stop()
-          self.portTextField.isEnabled = true
-          self.closeButton.isEnabled = true
-          self.openBrowserButton.isEnabled = false
-          self.toggleWebServerButton.title = NSLocalizedString("Start", comment: "Start")
+          self.webSharing.stop { (error) in
+            DispatchQueue.main.async {
+              self.portTextField.isEnabled = true
+              self.closeButton.isEnabled = true
+              self.openBrowserButton.isEnabled = false
+              self.toggleWebServerButton.title = NSLocalizedString("Start", comment: "Start")
+            }
+          }
           return false
         } else {
           if let portNumber = Int(self.portTextField.stringValue) {

@@ -29,7 +29,7 @@
 		CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CE9EE5EA2532C53100B5AF5C /* XCGLogger */; };
 		CE9EE62825330EE100B5AF5C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE62725330EE100B5AF5C /* ImageCache.swift */; };
 		CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */; };
-		CE9FB2B9258D931700AE8F7A /* Swiftra in Frameworks */ = {isa = PBXBuildFile; productRef = CE9FB2B8258D931700AE8F7A /* Swiftra */; };
+		CE9FB339258EF8E000AE8F7A /* Swiftra in Frameworks */ = {isa = PBXBuildFile; productRef = CE9FB338258EF8E000AE8F7A /* Swiftra */; };
 		CEA6F695254EEFD800C50318 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F693254EEFD800C50318 /* ProgressViewController.swift */; };
 		CEA6F69E2550FA1300C50318 /* NSTableView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */; };
 		CEA6F6A32550FA4700C50318 /* NSCollectionView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6F6A22550FA4700C50318 /* NSCollectionView+Realm.swift */; };
@@ -151,9 +151,9 @@
 				CE296C312530A4E400674C99 /* RxCocoa in Frameworks */,
 				CE296BCD2530671700674C99 /* ZIPFoundation in Frameworks */,
 				CE9EE5EB2532C53100B5AF5C /* XCGLogger in Frameworks */,
+				CE9FB339258EF8E000AE8F7A /* Swiftra in Frameworks */,
 				CECC072C2549CAFD00CF56FA /* PDFKit.framework in Frameworks */,
 				CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */,
-				CE9FB2B9258D931700AE8F7A /* Swiftra in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,7 +299,7 @@
 				CE296C322530A4E400674C99 /* RxSwift */,
 				CE9EE5EA2532C53100B5AF5C /* XCGLogger */,
 				CEB2D9F625399375002C3F7E /* RxRealm */,
-				CE9FB2B8258D931700AE8F7A /* Swiftra */,
+				CE9FB338258EF8E000AE8F7A /* Swiftra */,
 			);
 			productName = Fomalhaut2;
 			productReference = CE30280625305AA000986C9A /* Fomalhaut2.app */;
@@ -378,7 +378,7 @@
 				CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */,
 				CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */,
-				CE9FB2B7258D931700AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */,
+				CE9FB337258EF8DF00AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */,
 			);
 			productRefGroup = CE30280725305AA000986C9A /* Products */;
 			projectDirPath = "";
@@ -877,12 +877,12 @@
 				minimumVersion = 7.0.1;
 			};
 		};
-		CE9FB2B7258D931700AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */ = {
+		CE9FB337258EF8DF00AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "file:///Users/user/work/cocoa/Swiftra";
+			repositoryURL = "https://github.com/mtgto/Swiftra.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.1.0;
 			};
 		};
 		CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */ = {
@@ -916,9 +916,9 @@
 			package = CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */;
 			productName = XCGLogger;
 		};
-		CE9FB2B8258D931700AE8F7A /* Swiftra */ = {
+		CE9FB338258EF8E000AE8F7A /* Swiftra */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE9FB2B7258D931700AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */;
+			package = CE9FB337258EF8DF00AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */;
 			productName = Swiftra;
 		};
 		CEB2D9F625399375002C3F7E /* RxRealm */ = {

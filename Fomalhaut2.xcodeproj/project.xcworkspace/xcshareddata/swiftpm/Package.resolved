@@ -48,11 +48,11 @@
       },
       {
         "package": "Swiftra",
-        "repositoryURL": "/Users/user/work/cocoa/Swiftra",
+        "repositoryURL": "https://github.com/mtgto/Swiftra.git",
         "state": {
-          "branch": "main",
-          "revision": "719908c7e2f126ae1ed654cf702e4e49c5a5fdcb",
-          "version": null
+          "branch": null,
+          "revision": "5c315af48105e90cc2349d4495b529ab8a139759",
+          "version": "0.1.1"
         }
       },
       {

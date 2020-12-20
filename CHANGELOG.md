@@ -1,6 +1,18 @@
 CHANGELOG
 ====
 
+## v0.5.1 (2020-12-20)
+
+### Added
+
+- Use [Swiftra](https://github.com/mtgto/Swiftra) to stabilize web sharing
+- Add "GO TO PAGE TOP" button to bottom of the book web page
+
+### Changed
+
+- Add margin between images of web book
+- Show number of books in title of web books
+
 ## v0.5.0 (2020-12-13)
 
 ### Added

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -58,12 +58,14 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
     (book) => book.id === props.id
   );
 
-  const handleClick = () => {
-    const anchor = document.querySelector("#appbar");
-
-    if (anchor) {
-      anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+  useEffect(() => {
+    if (book) {
+      document.title = `${book.name} - Fomalhaut2`;
     }
+  });
+
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
     <Layout>

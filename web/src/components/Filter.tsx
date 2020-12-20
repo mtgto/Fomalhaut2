@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { StateContext } from "../reducer";
 
 import { Book } from "../domain/book";
@@ -17,6 +17,11 @@ const FilterPage: React.VoidFunctionComponent<Props> = (props: Props) => {
   const filter: Filter | undefined = state.filters.find(
     (filter) => filter.id === props.id
   );
+  useEffect(() => {
+    if (filter) {
+      document.title = `${filter.name} - Fomalhaut2`;
+    }
+  });
   const books: Book[] = filter
     ? state.books.filter((book) => filter.filter(book))
     : state.books;

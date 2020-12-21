@@ -148,8 +148,8 @@
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
 "IAo-SY-fd9.title" = "開く…";
 
-/* Class = "NSMenuItem"; title = "Start Web Sharing"; ObjectID = "JCM-nt-Spv"; */
-"JCM-nt-Spv.title" = "Web共有を開始する";
+/* Class = "NSMenuItem"; title = "Web Sharing…"; ObjectID = "JCM-nt-Spv"; Note = "WebSharing"; */
+"JCM-nt-Spv.title" = "Web共有…";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
 "Kd2-mp-pUS.title" = "すべてを表示";

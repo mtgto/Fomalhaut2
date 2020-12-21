@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -68,8 +68,10 @@
                                                 <action selector="addNewCollection:" target="Ady-hI-5gd" id="wkD-Xc-Ilb"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Start Web Sharing" id="JCM-nt-Spv">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Web Sharing…" keyEquivalent="k" id="JCM-nt-Spv">
+                                            <attributedString key="userComments">
+                                                <fragment content="WebSharing"/>
+                                            </attributedString>
                                             <connections>
                                                 <action selector="startWebServer:" target="Ady-hI-5gd" id="7WK-d8-d1U"/>
                                             </connections>

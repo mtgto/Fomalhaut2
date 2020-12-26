@@ -22,6 +22,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import { StateContext } from "../reducer";
 import { collectionRoutes, filterRoutes, topLevelRoutes } from "./Routes";
+import { message } from "../message";
 
 import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 
@@ -145,7 +146,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             </IconButton>
           </div>
           <Divider />
-          <List subheader={<ListSubheader>Library</ListSubheader>}>
+          <List subheader={<ListSubheader>{message.library}</ListSubheader>}>
             {state.filters.map((filter) => (
               <ListItem className={classes.item} key={filter.id}>
                 <Button
@@ -159,7 +160,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
               </ListItem>
             ))}
           </List>
-          <List subheader={<ListSubheader>Collection</ListSubheader>}>
+          <List subheader={<ListSubheader>{message.collection}</ListSubheader>}>
             {state.collections.map((collection) => (
               <ListItem className={classes.item} key={collection.id}>
                 <Button

@@ -4,9 +4,10 @@
 import React, { useContext, useEffect } from "react";
 
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
+import Fab from "@material-ui/core/Fab";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 import { Book } from "../domain/book";
 import { StateContext } from "../reducer";
@@ -31,10 +32,6 @@ const useStyles = makeStyles({
     maxWidth: "720px",
     display: "block",
     margin: "8px auto",
-  },
-  footer: {
-    display: "flex",
-    justifyContent: "center",
   },
 });
 
@@ -73,12 +70,12 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
         <Box mx="auto">
           {book ? pages(book, classes) : <span>Loading...</span>}
         </Box>
-        <Box mx="auto" mt={2} mb={8} className={classes.footer}>
-          <Button color="primary" size="large" onClick={handleClick}>
-            Go to page top
-          </Button>
-        </Box>
       </Container>
+      <Box display="flex" justifyContent="center" m={2}>
+        <Fab color="primary" aria-label="Go to page top" onClick={handleClick}>
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </Box>
     </Layout>
   );
 };

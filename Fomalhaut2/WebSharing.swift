@@ -96,6 +96,9 @@ class WebSharing: NSObject {
           return promise.futureResult
         }
         let page = Int(req.params("page") ?? "0")!
+        do { try self.document(from: book) } catch {
+          log.info("Error: \(error)")
+        }
         guard let document: BookAccessible = try? self.document(from: book) else {
           promise.succeed(self.internalServerError)
           return promise.futureResult
@@ -195,7 +198,7 @@ class WebSharing: NSObject {
     }
     _ = url.startAccessingSecurityScopedResource()
     let document: BookAccessible
-    if url.pathExtension.lowercased() == "zip" {
+    if url.pathExtension.lowercased() == "zip" || url.pathExtension.lowercased() == "cbz" {
       document =
         try NSDocumentController.shared.makeDocument(withContentsOf: url, ofType: ZipDocument.UTIs.first!)
         as! BookAccessible

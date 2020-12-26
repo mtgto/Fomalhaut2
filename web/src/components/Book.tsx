@@ -72,7 +72,7 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
           {book ? pages(book, classes) : <span>{message.loading}</span>}
         </Box>
       </Container>
-      <Box display="flex" justifyContent="center" m={2}>
+      <Box display="flex" justifyContent="center" pt={2} pb={8}>
         <Fab color="primary" aria-label="Go to page top" onClick={handleClick}>
           <KeyboardArrowUpIcon />
         </Fab>

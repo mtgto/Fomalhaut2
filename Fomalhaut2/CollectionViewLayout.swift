@@ -5,11 +5,12 @@ import Cocoa
 
 // Perform as NSCollectionViewGridLayout
 class CollectionViewLayout: NSCollectionViewFlowLayout {
-  private let itemWidth: CGFloat = 178
-  private let itemHeight: CGFloat = 272
+  private let itemWidth: CGFloat = 133.5
+  private let itemHeight: CGFloat = 204
   private let itemSpacing: CGFloat = 10
   private let lineSpacing: CGFloat = 10
   private let headerHeight: CGFloat = 40
+  private let leftMargin: CGFloat = 8
   private var numberOfColumns: Int = 1
   private var cellLayoutAttributes: [[NSCollectionViewLayoutAttributes?]] = []
   private var headerLayoutAttributes: [NSCollectionViewLayoutAttributes?] = []
@@ -19,14 +20,14 @@ class CollectionViewLayout: NSCollectionViewFlowLayout {
       return
     }
     self.numberOfColumns = max(
-      Int((collectionView.frame.width + self.itemSpacing) / (self.itemWidth + self.itemSpacing)), 1)
+      Int((collectionView.frame.width + self.itemSpacing - self.leftMargin) / (self.itemWidth + self.itemSpacing)), 1)
     self.cellLayoutAttributes = []
     (0..<collectionView.numberOfSections).forEach { section in
       let attributes = (0..<collectionView.numberOfItems(inSection: section)).map {
         index -> NSCollectionViewLayoutAttributes? in
         let layoutAttribute = self.layoutAttributesForItem(
           at: IndexPath(item: index, section: section))
-        let x = CGFloat(index % numberOfColumns) * (self.itemWidth + self.itemSpacing)
+        let x = CGFloat(index % numberOfColumns) * (self.itemWidth + self.itemSpacing) + self.leftMargin
         let y =
           self.headerHeight + CGFloat(index / numberOfColumns)
           * (self.itemHeight + self.lineSpacing)

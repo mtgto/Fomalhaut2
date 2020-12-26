@@ -3,14 +3,16 @@
 
 import React, { useEffect, useReducer } from "react";
 import { RoconRoot } from "rocon/react";
+
 import { Book } from "../domain/book";
 import { Collection } from "../domain/collection";
-
 import {
   initialState,
+  LoadingState,
   reducer,
   setBooks,
   setCollections,
+  setLoading,
   StateContext,
 } from "../reducer";
 import Routes from "./Routes";
@@ -48,8 +50,10 @@ const App: React.VoidFunctionComponent = () => {
         dispatch(setCollections(collections));
       }
     }
-    fetchBooks();
-    fetchCollections();
+    dispatch(setLoading(LoadingState.Loading));
+    Promise.all([fetchBooks(), fetchCollections()])
+      .then(() => setLoading(LoadingState.Loaded))
+      .catch((error) => setLoading(LoadingState.Error));
     return () => {
       unmounted = true;
     };

@@ -10,6 +10,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 import { Book } from "../domain/book";
+import { message } from "../message";
 import { StateContext } from "../reducer";
 import Layout from "./Layout";
 
@@ -68,7 +69,7 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
     <Layout>
       <Container maxWidth="md">
         <Box mx="auto">
-          {book ? pages(book, classes) : <span>Loading...</span>}
+          {book ? pages(book, classes) : <span>{message.loading}</span>}
         </Box>
       </Container>
       <Box display="flex" justifyContent="center" m={2}>

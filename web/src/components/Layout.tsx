@@ -14,18 +14,18 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import Snackbar from "@material-ui/core/Snackbar";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
 
-import { StateContext } from "../reducer";
-import { collectionRoutes, filterRoutes, topLevelRoutes } from "./Routes";
 import { message } from "../message";
+import { LoadingState, StateContext } from "../reducer";
+import { collectionRoutes, filterRoutes, topLevelRoutes } from "./Routes";
 
 import type { Theme } from "@material-ui/core/styles/createMuiTheme";
-
 const drawerWidth = 200;
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -94,6 +94,10 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleReload = () => {
+    document.location.reload();
   };
 
   const RootLink = useMemo(
@@ -175,6 +179,15 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             ))}
           </List>
         </Drawer>
+        <Snackbar
+          open={state.loading === LoadingState.Error}
+          message={message.loadError}
+          action={
+            <Button color="primary" size="small" onClick={handleReload}>
+              {message.reload}
+            </Button>
+          }
+        />
       </div>
       <main>{props.children}</main>
     </>

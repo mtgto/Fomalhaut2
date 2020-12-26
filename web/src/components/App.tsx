@@ -53,7 +53,10 @@ const App: React.VoidFunctionComponent = () => {
     dispatch(setLoading(LoadingState.Loading));
     Promise.all([fetchBooks(), fetchCollections()])
       .then(() => setLoading(LoadingState.Loaded))
-      .catch((error) => setLoading(LoadingState.Error));
+      .catch((error) => {
+        console.error(error);
+        dispatch(setLoading(LoadingState.Error));
+      });
     return () => {
       unmounted = true;
     };

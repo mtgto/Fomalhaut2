@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "serve": "parcel serve src/index.html",
-    "build": "yarn run rimraf ./dist ../Fomalhaut2/assets.zip && parcel build ./src/index.html --public-url /assets/ && zip -rj ../Fomalhaut2/assets.zip ./dist"
+    "build": "yarn run rimraf ./dist ../Fomalhaut2/assets.zip && parcel build ./src/index.html --public-url /assets/ && zip -rj9 ../Fomalhaut2/assets.zip ./dist"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",

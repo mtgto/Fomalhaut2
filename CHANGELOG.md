@@ -5,7 +5,7 @@ CHANGELOG
 
 ### Added
 
-- Localizate web sharing
+- Localize web sharing
 - Show reload snackbar on api call is failure
 - Add shortcut (Cmd-K) to open web sharing view
 

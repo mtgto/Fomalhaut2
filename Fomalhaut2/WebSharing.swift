@@ -95,7 +95,7 @@ class WebSharing: NSObject {
           promise.succeed(self.notFound)
           return promise.futureResult
         }
-        let page = Int(req.params("page") ?? "0")!
+        let page = req.params("page").flatMap { Int($0) } ?? 0
         guard let document: BookAccessible = try? self.document(from: book) else {
           promise.succeed(self.internalServerError)
           return promise.futureResult

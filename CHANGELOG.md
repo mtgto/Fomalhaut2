@@ -1,6 +1,22 @@
 CHANGELOG
 ====
 
+## v0.5.2 (2020-12-27)
+
+### Added
+
+- Localizate web sharing
+- Show reload snackbar on api call is failure
+- Add shortcut (Cmd-K) to open web sharing view
+
+### Changed
+
+- Reduce size of thumbnail of books (178x272 px => 133.5x204 px (75%))
+- Fix unable to open cbz file in web sharing
+- Update [Swiftra](https://github.com/mtgto/Swiftra) to v0.2.1
+- Fix app crashs with wrong url access
+- Fix `Credits.rtf` lacks Fomalhaut2 information
+
 ## v0.5.1 (2020-12-20)
 
 ### Added

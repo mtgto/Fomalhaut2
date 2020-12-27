@@ -17,13 +17,11 @@ A comic viewer for macOS.
 
 ## Screenshots
 
+NOTE: This sample comic is under Public Domain. You can view via https://digitalcomicmuseum.com/index.php?dlid=11721
+
 ![Collection screenshot](https://github.com/mtgto/Fomalhaut2/blob/gh-pages/screenshot1.png)
 
 ![Viewer screenshot](https://github.com/mtgto/Fomalhaut2/blob/gh-pages/screenshot2.png)
-
-![Viewer screenshot2](https://github.com/mtgto/Fomalhaut2/blob/gh-pages/screenshot3.png)
-
-![CC](https://licensebuttons.net/l/by-nd/2.1/jp/88x31.png) 聖☆おにいさん 第1話「ブッダの休日」 by 中村光 is licensed under a Creative Commons 表示 - 改変禁止 2.1 日本 License.
 
 ## System requirements
 

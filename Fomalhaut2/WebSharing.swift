@@ -85,7 +85,9 @@ class WebSharing: NSObject {
         if let thumbnail = book.thumbnailData {
           return Response(data: thumbnail, contentType: "image/jpeg")
         } else {
-          return self.notFound
+          let url = Bundle.main.url(forResource: "defaultThumbnail", withExtension: "jpg")!
+          let data = try! Data(contentsOf: url)
+          return Response(data: data, contentType: "image/jpeg")
         }
       }
 
@@ -159,8 +161,8 @@ class WebSharing: NSObject {
 
   private func defaultHtml(_ request: Request) -> EventLoopFuture<Response> {
     return self.loadAsset("index.html", request: request)
-      .map { Response(data: $0, contentType: "text/html") }
-      .recover { _ in Response(text: "Error", status: .notFound, contentType: "text/html") }
+      .map { Response(data: $0, contentType: ContentType.textHtml.withCharset()) }
+      .recover { _ in Response(text: "Error", status: .notFound, contentType: ContentType.textPlain.withCharset()) }
   }
 
   private func loadAsset(_ filename: String, request: Request) -> EventLoopFuture<Data> {

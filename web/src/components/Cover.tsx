@@ -16,12 +16,16 @@ import { bookRoutes } from "./Routes";
 
 const useStyles = makeStyles({
   media: {
-    height: 200,
-    objectFit: "contain",
-    paddingTop: "8px",
+    objectFit: "cover",
   },
   card: {
-    //height: "100%",
+    height: "100%",
+  },
+  cardContent: {
+    padding: "4px",
+    "&:last-child": {
+      paddingBottom: "inherit",
+    },
   },
   filename: {
     display: "-webkit-box",
@@ -51,18 +55,19 @@ const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
   return (
     <Link component={BookLink}>
       {/* <RouterLink route={bookRoutes.anyRoute} match={{ id: props.book.id }}> */}
-      <Card variant="outlined" className={classes.card}>
+      <Card variant="outlined" className={classes.card} square>
         <CardMedia
           component="img"
           className={classes.media}
           image={`/images/books/${props.book.id}/thumbnail`}
         />
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography
             gutterBottom
-            variant="caption"
+            variant="subtitle2"
             className={classes.filename}
             component="p"
+            title={props.book.name}
           >
             {props.book.name}
           </Typography>

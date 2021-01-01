@@ -28,7 +28,7 @@ const Library: React.VoidFunctionComponent<Props> = (props: Props) => {
         </Box>
       </Container>
       <Container maxWidth="md">
-        <Grid container spacing={1}>
+        <Grid container>
           {props.books.map((book: Book) => (
             <Grid item key={book.id} xs={6} sm={4} md={3}>
               <Cover book={book} />

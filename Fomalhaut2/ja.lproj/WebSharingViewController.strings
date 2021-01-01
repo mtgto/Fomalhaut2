@@ -1,4 +1,4 @@
-/* Class = "NSTextFieldCell"; title = "By enabling the sharing, you can browse your book collections from a web browser on your smartphone or computer."; ObjectID = "9Nx-xa-Kp6"; */
+/* Class = "NSTextFieldCell"; title = "By enabling the sharing, you can browse your book collections from a web browser on your smartphone or computer."; ObjectID = "9Nx-xa-Kp6"; Note = "WebSharingDescription"; */
 "9Nx-xa-Kp6.title" = "共有を開始することで、スマートフォンやパソコンのWebブラウザからあなたのコレクションを閲覧できるようになります。";
 
 /* Class = "NSButtonCell"; title = "Close"; ObjectID = "a7S-r1-dAI"; Note = "Close"; */

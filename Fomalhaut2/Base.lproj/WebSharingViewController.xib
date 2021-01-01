@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,25 +21,30 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9RG-XP-1qW">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9RG-XP-1qW">
                     <rect key="frame" x="18" y="236" width="444" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Web sharing (EXPERIMENTAL)" id="M01-49-yxD">
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Web sharing (EXPERIMENTAL)" usesSingleLineMode="YES" id="M01-49-yxD">
                         <font key="font" metaFont="titleBar"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TCp-0o-nCT">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TCp-0o-nCT">
                     <rect key="frame" x="20" y="171" width="442" height="57"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="438" id="BCh-f0-j6F"/>
+                        <constraint firstAttribute="height" constant="57" id="cjl-sk-Dkx"/>
+                    </constraints>
                     <textFieldCell key="cell" title="By enabling the sharing, you can browse your book collections from a web browser on your smartphone or computer." id="9Nx-xa-Kp6">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <attributedString key="userComments">
+                        <fragment content="WebSharingDescription"/>
+                    </attributedString>
                 </textField>
-                <gridView fixedFrame="YES" xPlacement="leading" yPlacement="center" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="r1y-bL-vH7">
+                <gridView xPlacement="leading" yPlacement="center" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="r1y-bL-vH7">
                     <rect key="frame" x="121" y="142" width="241" height="21"/>
                     <rows>
                         <gridRow id="XVR-Qf-k3T"/>
@@ -76,10 +81,10 @@
                     </gridCells>
                 </gridView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OJv-Cb-db7">
-                    <rect key="frame" x="368" y="13" width="98" height="32"/>
+                    <rect key="frame" x="384" y="13" width="82" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="6a2-Yv-pz4"/>
-                        <constraint firstAttribute="width" constant="86" id="Eml-Kg-sW5"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="Eml-Kg-sW5"/>
                     </constraints>
                     <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dNE-43-5Ti">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -93,10 +98,10 @@ DQ
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lVd-bD-Ffx">
-                    <rect key="frame" x="278" y="13" width="95" height="32"/>
+                    <rect key="frame" x="294" y="13" width="95" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="CEp-s9-qta"/>
-                        <constraint firstAttribute="width" constant="83" id="Oke-ZK-xqD"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="83" id="Oke-ZK-xqD"/>
                     </constraints>
                     <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="a7S-r1-dAI">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -115,7 +120,7 @@ Gw
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OWQ-aa-aQ3">
                     <rect key="frame" x="14" y="13" width="125" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="113" id="EFD-Xz-J8Q"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="EFD-Xz-J8Q"/>
                         <constraint firstAttribute="height" constant="21" id="p1d-XQ-zqZ"/>
                     </constraints>
                     <buttonCell key="cell" type="push" title="Open browser" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qpb-bb-q05">
@@ -132,8 +137,16 @@ Gw
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="OWQ-aa-aQ3" secondAttribute="bottom" constant="20" symbolic="YES" id="BMI-DW-l9T"/>
+                <constraint firstItem="TCp-0o-nCT" firstAttribute="trailing" secondItem="OJv-Cb-db7" secondAttribute="trailing" id="Ehv-zH-7qP"/>
+                <constraint firstItem="9RG-XP-1qW" firstAttribute="trailing" secondItem="TCp-0o-nCT" secondAttribute="trailing" id="Ua8-gD-3dT"/>
+                <constraint firstItem="TCp-0o-nCT" firstAttribute="centerX" secondItem="r1y-bL-vH7" secondAttribute="centerX" id="Uuq-QM-YR6"/>
+                <constraint firstItem="TCp-0o-nCT" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="44" id="VmX-TF-B0X"/>
                 <constraint firstItem="OJv-Cb-db7" firstAttribute="leading" secondItem="lVd-bD-Ffx" secondAttribute="trailing" constant="7" id="XaO-xh-NiG"/>
+                <constraint firstItem="TCp-0o-nCT" firstAttribute="top" secondItem="9RG-XP-1qW" secondAttribute="bottom" constant="8" symbolic="YES" id="cGQ-7g-U6X"/>
                 <constraint firstItem="OWQ-aa-aQ3" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="fsy-u9-1a2"/>
+                <constraint firstItem="r1y-bL-vH7" firstAttribute="top" secondItem="TCp-0o-nCT" secondAttribute="bottom" constant="8" symbolic="YES" id="ipS-A7-IpP"/>
+                <constraint firstItem="9RG-XP-1qW" firstAttribute="leading" secondItem="OWQ-aa-aQ3" secondAttribute="leading" id="kMg-Yq-5u1"/>
+                <constraint firstItem="lVd-bD-Ffx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OWQ-aa-aQ3" secondAttribute="trailing" constant="12" symbolic="YES" id="lYa-UF-HsV"/>
                 <constraint firstAttribute="bottom" secondItem="OJv-Cb-db7" secondAttribute="bottom" constant="20" symbolic="YES" id="mk9-gS-HBq"/>
                 <constraint firstAttribute="trailing" secondItem="OJv-Cb-db7" secondAttribute="trailing" constant="20" symbolic="YES" id="nyv-K6-Ind"/>
                 <constraint firstAttribute="bottom" secondItem="lVd-bD-Ffx" secondAttribute="bottom" constant="20" symbolic="YES" id="yLZ-Mt-AIJ"/>

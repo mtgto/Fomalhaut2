@@ -1,3 +1,18 @@
+/* Class = "NSSegmentedCell"; 1Rl-bO-XaM.ibShadowedToolTips[0] = "Right to Left"; ObjectID = "1Rl-bO-XaM"; */
+"1Rl-bO-XaM.ibShadowedToolTips[0]" = "右側が先";
+
+/* Class = "NSSegmentedCell"; 1Rl-bO-XaM.ibShadowedToolTips[1] = "Left to Right"; ObjectID = "1Rl-bO-XaM"; */
+"1Rl-bO-XaM.ibShadowedToolTips[1]" = "左側が先";
+
+/* Class = "NSSegmentedCell"; 2OF-NQ-M4L.ibShadowedToolTips[0] = "Back"; ObjectID = "2OF-NQ-M4L"; */
+"2OF-NQ-M4L.ibShadowedToolTips[0]" = "前のページ";
+
+/* Class = "NSSegmentedCell"; 2OF-NQ-M4L.ibShadowedToolTips[1] = "Forward"; ObjectID = "2OF-NQ-M4L"; */
+"2OF-NQ-M4L.ibShadowedToolTips[1]" = "次のページ";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Go First"; ObjectID = "7wl-XX-QNR"; */
+"7wl-XX-QNR.ibShadowedToolTip" = "最初のページに移動";
+
 /* Class = "NSToolbarItem"; label = "Control"; ObjectID = "fuc-9u-iU4"; */
 "fuc-9u-iU4.label" = "コントロール";
 

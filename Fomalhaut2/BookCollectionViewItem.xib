@@ -21,7 +21,7 @@
                     <rect key="frame" x="0.0" y="44" width="178" height="228"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSBookmarksTemplate" id="mYJ-uC-V2S"/>
                 </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h4P-We-Kpz">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h4P-We-Kpz">
                     <rect key="frame" x="2" y="0.0" width="176" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="3wJ-65-WEO"/>

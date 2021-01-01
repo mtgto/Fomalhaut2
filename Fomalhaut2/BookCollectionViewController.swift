@@ -543,6 +543,7 @@ extension BookCollectionViewController: NSCollectionViewDataSource {
         for: indexPath) as? BookCollectionViewItem ?? BookCollectionViewItem()
     let book = self.collectionViewBooks.value![indexPath.item]
     item.textField?.stringValue = book.name
+    item.textField?.toolTip = book.name
     if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
       //log.debug("THUMBNAIL SIZE \(thumbnail.representations.first!.pixelsWide) x \(thumbnail.representations.first!.pixelsHigh)")
       item.imageView?.image = thumbnail

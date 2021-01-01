@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="I31-ld-zmx">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="I31-ld-zmx">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -84,8 +84,8 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="2OF-NQ-M4L">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment image="NSTouchBarGoUpTemplate" width="32"/>
-                                                <segment image="NSTouchBarGoDownTemplate" width="32" tag="1"/>
+                                                <segment toolTip="Back" image="NSTouchBarGoUpTemplate" width="32"/>
+                                                <segment toolTip="Forward" image="NSTouchBarGoDownTemplate" width="32" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -95,7 +95,7 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="8A3B9B22-C476-48F1-AA8E-636DEC5A62C7" label="Go First" paletteLabel="Go First" image="first" sizingBehavior="auto" id="oTV-Y3-Ona">
                                     <nil key="toolTip"/>
-                                    <button key="view" verticalHuggingPriority="750" id="7wl-XX-QNR">
+                                    <button key="view" toolTip="Go First" verticalHuggingPriority="750" id="7wl-XX-QNR">
                                         <rect key="frame" x="10" y="14" width="30" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="first" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iLw-u0-JDG">
@@ -115,8 +115,8 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="1Rl-bO-XaM">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment image="right.to.left" width="32" selected="YES"/>
-                                                <segment image="left.to.right" width="32" tag="1"/>
+                                                <segment toolTip="Right to Left" image="right.to.left" width="32" selected="YES"/>
+                                                <segment toolTip="Left to Right" image="left.to.right" width="32" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>

@@ -31,19 +31,24 @@ const useStyles = makeStyles({
   image: {
     width: "100%",
     maxWidth: "720px",
+    minHeight: "200px",
     display: "block",
     margin: "8px auto",
   },
 });
 
 const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
-  return [...Array(book.pageCount).keys()].map((id: number) => (
+  return [...Array(book.pageCount).keys()].map((i: number) => (
     <img
       className={classes.image}
-      key={id}
-      src={`/images/books/${book.id}/pages/${id}`}
+      key={i}
+      src={`/images/books/${book.id}/pages/${i}`}
     ></img>
   ));
+};
+
+const handleClick = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
 type Props = {
@@ -60,11 +65,8 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
     if (book) {
       document.title = `${book.name} - Fomalhaut2`;
     }
-  });
+  }, [book]);
 
-  const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
   return (
     <Layout>
       <Container maxWidth="md">

@@ -20,7 +20,7 @@ const CollectionPage: React.VoidFunctionComponent<Props> = (props: Props) => {
     if (collection) {
       document.title = `${collection.name} - Fomalhaut2`;
     }
-  });
+  }, [collection]);
   return (
     <Library
       books={collection?.books ?? []}

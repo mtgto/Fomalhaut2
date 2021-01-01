@@ -203,6 +203,12 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
           log.error("error while update bookmark of book \(url.path): \(error)")
         }
       }
+      do {
+        let realm = try Realm()
+        try realm.write {
+          book.readCount = book.readCount + 1
+        }
+      }
       let success = url.startAccessingSecurityScopedResource()
       log.debug("success = \(success)")
       // TODO: Call url.stopAccessingSecurityScopedResource() after document is closed

@@ -13,10 +13,10 @@
     "history": "^5.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "rocon": "^1.1.1"
+    "rocon": "^1.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-0",
+    "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
     "@babel/preset-typescript": "^7.12.7",
@@ -29,7 +29,7 @@
     "eslint-plugin-react": "^7.21.5",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.3",
-    "parcel": "2.0.0-nightly.491",
+    "parcel": "nightly",
     "prettier": "^2.2.1",
     "typescript": "^4.1.2"
   }

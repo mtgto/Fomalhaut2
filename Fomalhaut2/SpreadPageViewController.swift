@@ -11,6 +11,9 @@ struct LoadedImage {
   let images: [NSImage]
 }
 
+private let firstImageViewMouseUpNotificationName = Notification.Name("firstImageViewMouseUp")
+private let secondImageViewMouseUpNotificationName = Notification.Name("secondImageViewMouseUp")
+
 class SpreadPageViewController: NSViewController {
   let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
@@ -23,17 +26,34 @@ class SpreadPageViewController: NSViewController {
   private let disposeBag = DisposeBag()
 
   @IBOutlet weak var imageStackView: NSStackView!
-  @IBOutlet weak var firstImageView: NSImageView!
-  @IBOutlet weak var secondImageView: NSImageView!
+  @IBOutlet weak var firstImageView: BookImageView!
+  @IBOutlet weak var secondImageView: BookImageView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do view setup here.
     // TODO: Use NSStackView#setViews instead of use userInterfaceLayoutDirection for page order?
     self.imageStackView.userInterfaceLayoutDirection = .rightToLeft
+    self.firstImageView.notificationName = firstImageViewMouseUpNotificationName
+    self.secondImageView.notificationName = secondImageViewMouseUpNotificationName
     // Set background color for transparent PDF
     self.view.wantsLayer = true
     self.view.layer?.backgroundColor = NSColor.white.cgColor
+
+    NotificationCenter.default.rx.notification(firstImageViewMouseUpNotificationName, object: nil)
+      .subscribe(onNext: { _ in
+        if self.secondImageView.isHidden {
+          self.forwardPage()
+        } else {
+          self.backwardPage()
+        }
+      })
+      .disposed(by: self.disposeBag)
+    NotificationCenter.default.rx.notification(secondImageViewMouseUpNotificationName, object: nil)
+      .subscribe(onNext: { _ in
+        self.forwardPage()
+      })
+      .disposed(by: self.disposeBag)
   }
 
   override func viewWillDisappear() {

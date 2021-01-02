@@ -52,6 +52,7 @@
 		CECC072C2549CAFD00CF56FA /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECC072B2549CAFD00CF56FA /* PDFKit.framework */; };
 		CECC0740254E8D6200CF56FA /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC073F254E8D6200CF56FA /* Schema.swift */; };
 		CEE54750259F515400F9AA30 /* defaultThumbnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEE5474F259F515400F9AA30 /* defaultThumbnail.jpg */; };
+		CEE5475525A0AF4E00F9AA30 /* BookImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */; };
 		CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */; };
 		CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */; };
 		CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793C25403AD500A35C39 /* MainWindowController.swift */; };
@@ -132,6 +133,7 @@
 		CECC072B2549CAFD00CF56FA /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		CECC073F254E8D6200CF56FA /* Schema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
 		CEE5474F259F515400F9AA30 /* defaultThumbnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = defaultThumbnail.jpg; sourceTree = "<group>"; };
+		CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookImageView.swift; sourceTree = "<group>"; };
 		CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewItem.swift; sourceTree = "<group>"; };
 		CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookCollectionViewItem.xib; sourceTree = "<group>"; };
 		CEE9793C25403AD500A35C39 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				CE30280925305AA000986C9A /* AppDelegate.swift */,
 				CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */,
 				CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */,
+				CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */,
 				CECC07172549C6C700CF56FA /* BookDocument.swift */,
 				CE296BBA253063BA00674C99 /* ZipDocument.swift */,
 				CECC07092549C48B00CF56FA /* PdfDocument.swift */,
@@ -467,6 +470,7 @@
 				CEA99440255FD6D000B8BCC6 /* CollectionViewHeaderView.swift in Sources */,
 				CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */,
 				CEB2D9FC2539946D002C3F7E /* BookCollectionViewController.swift in Sources */,
+				CEE5475525A0AF4E00F9AA30 /* BookImageView.swift in Sources */,
 				CEA6F6B625543B3400C50318 /* MainStackViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

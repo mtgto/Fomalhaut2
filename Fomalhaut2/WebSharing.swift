@@ -10,6 +10,10 @@ import RxSwift
 import Swiftra
 import ZIPFoundation
 
+private let cacheControlKey = "Cache-Control"
+private let noCache = "no-cache"
+private let contentTypeJpeg = "image/jpeg"
+
 class WebSharing: NSObject {
   private let server = App()
   //private let server: HttpServer = HttpServer()
@@ -51,31 +55,31 @@ class WebSharing: NSObject {
         }
         let contentType: String
         if filename.hasSuffix(".js") {
-          contentType = "text/javascript"
+          contentType = "text/javascript; charset=utf-8"
         } else if filename.hasSuffix(".map") {
-          contentType = "application/json"
+          contentType = ContentType.applicationJson.withCharset()
         } else if filename.hasSuffix(".ico") {
           contentType = "image/x-ico"
         } else {
-          contentType = "application/octet-stream"
+          contentType = ContentType.applicationOctetStream.rawValue
         }
         return self.loadAsset(filename, request: req)
           .map { Response(data: $0, contentType: contentType) }
       }
 
       get("/api/v1/collections") { req in
-        Response(json: self.collections) ?? self.internalServerError
+        Response(json: self.collections, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
       }
 
       get("/api/v1/collections/:id") { req in
         guard let collection = self.collections.first(where: { $0.id == req.params("id") }) else {
           return self.notFound
         }
-        return Response(json: collection) ?? self.internalServerError
+        return Response(json: collection, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
       }
 
       get("/api/v1/books") { req in
-        Response(json: self.books) ?? self.internalServerError
+        Response(json: self.books, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
       }
 
       get("/images/books/:id/thumbnail") { req in
@@ -83,11 +87,12 @@ class WebSharing: NSObject {
           return self.notFound
         }
         if let thumbnail = book.thumbnailData {
-          return Response(data: thumbnail, contentType: "image/jpeg")
+          return Response(
+            data: thumbnail, contentType: contentTypeJpeg, headers: [(cacheControlKey, "private, max-age=1440")])
         } else {
           let url = Bundle.main.url(forResource: "defaultThumbnail", withExtension: "jpg")!
           let data = try! Data(contentsOf: url)
-          return Response(data: data, contentType: "image/jpeg")
+          return Response(data: data, contentType: contentTypeJpeg, headers: [(cacheControlKey, "private, max-age=60")])
         }
       }
 
@@ -110,7 +115,8 @@ class WebSharing: NSObject {
           switch result {
           case .success(let image):
             let data = image.resizedImageFixedAspectRatio(maxPixelsWide: 1024, maxPixelsHigh: 1024)!
-            promise.succeed(Response(data: data, contentType: "image/jpeg"))
+            promise.succeed(
+              Response(data: data, contentType: contentTypeJpeg, headers: [(cacheControlKey, "private, max-age=1440")]))
           case .failure(let error):
             log.warning("Fail to resize image: \(error)")
             promise.succeed(self.internalServerError)
@@ -197,7 +203,7 @@ class WebSharing: NSObject {
     }
     _ = url.startAccessingSecurityScopedResource()
     let document: BookAccessible
-    if url.pathExtension.lowercased() == "zip" || url.pathExtension.lowercased() == "cbz" {
+    if ["zip", "cbz"].contains(url.pathExtension.lowercased()) {
       document =
         try NSDocumentController.shared.makeDocument(withContentsOf: url, ofType: ZipDocument.UTIs.first!)
         as! BookAccessible

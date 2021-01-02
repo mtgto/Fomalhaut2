@@ -7,8 +7,8 @@ import RealmSwift
 // Base Document class
 class BookDocument: NSDocument {
   var book: Book?  // should be frozen
-  static let thumbnailMaxWidth: Int = 220  // size of pixel
-  static let thumbnailMaxHeight: Int = 340
+  static let thumbnailMaxWidth: Int = 220  // number of pixel of width
+  static let thumbnailMaxHeight: Int = 340  // width * (2 ^ 0.5) + delta
 
   override func makeWindowControllers() {
     // Returns the Storyboard that contains your Document window.

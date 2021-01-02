@@ -82,8 +82,6 @@
 	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -94,6 +92,8 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.entertainment</string>
 	<key>LSMinimumSystemVersion</key>

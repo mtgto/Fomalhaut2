@@ -1,6 +1,19 @@
 CHANGELOG
 ====
 
+## v0.5.3 (2021-01-03)
+
+### Added
+
+- Renew collection view of web sharing (shrink padding, etc.)
+- Add default thumbnail image for no thumbnail book
+
+### Changed
+
+- Backward page when user click previous page
+- Set book title to tooltips of filename label
+- Add cache header to http response
+
 ## v0.5.2 (2020-12-27)
 
 ### Added

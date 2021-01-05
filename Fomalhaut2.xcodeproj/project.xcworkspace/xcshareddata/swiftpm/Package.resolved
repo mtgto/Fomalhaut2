@@ -56,6 +56,15 @@
         }
       },
       {
+        "package": "Unrar",
+        "repositoryURL": "https://github.com/mtgto/Unrar.swift.git",
+        "state": {
+          "branch": "main",
+          "revision": "2b3c3bf98f69ffb16952416d0d38ddacce763279",
+          "version": null
+        }
+      },
+      {
         "package": "XCGLogger",
         "repositoryURL": "https://github.com/DaveWoodCom/XCGLogger.git",
         "state": {

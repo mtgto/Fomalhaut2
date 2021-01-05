@@ -376,6 +376,14 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
           document =
             try NSDocumentController.shared.makeDocument(
               withContentsOf: url, ofType: PdfDocument.UTIs[0]) as! PdfDocument
+        } else if url.pathExtension.lowercased() == "rar" {
+          document =
+            try NSDocumentController.shared.makeDocument(
+              withContentsOf: url, ofType: RarDocument.UTIs[0]) as! RarDocument
+        } else if url.pathExtension.lowercased() == "cbr" {
+          document =
+            try NSDocumentController.shared.makeDocument(
+              withContentsOf: url, ofType: RarDocument.UTIs[1]) as! RarDocument
         } else {
           return
         }

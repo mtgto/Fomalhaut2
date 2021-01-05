@@ -207,6 +207,8 @@ class WebSharing: NSObject {
       document =
         try NSDocumentController.shared.makeDocument(withContentsOf: url, ofType: ZipDocument.UTIs.first!)
         as! BookAccessible
+    } else if ["rar", "cbr"].contains(url.pathExtension.lowercased()) {
+      document = try RarDocument(contentsOf: url, ofType: "RAR")
     } else {
       document = try PdfDocument(contentsOf: url, ofType: "PDF")
     }

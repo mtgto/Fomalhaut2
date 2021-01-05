@@ -2,12 +2,10 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Cocoa
-import RxSwift
 import ZIPFoundation
 
 class ZipDocument: BookDocument {
   static let UTIs: [String] = ["com.pkware.zip-archive", "net.mtgto.Fomalhaut2.cbz"]
-  private let disposeBag = DisposeBag()
   private var archive: Archive?
   private lazy var entries: [Entry] = self.archive!.sorted { (lhs, rhs) -> Bool in
     lhs.path.localizedStandardCompare(rhs.path) == .orderedAscending

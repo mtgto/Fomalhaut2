@@ -59,9 +59,9 @@
         "package": "Unrar",
         "repositoryURL": "https://github.com/mtgto/Unrar.swift.git",
         "state": {
-          "branch": "main",
-          "revision": "2b3c3bf98f69ffb16952416d0d38ddacce763279",
-          "version": null
+          "branch": null,
+          "revision": "77e650b81dbb9c2e9e50a691d3b44b3fd8861d4c",
+          "version": "0.2.0"
         }
       },
       {

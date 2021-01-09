@@ -38,6 +38,15 @@ extension PdfDocument: BookAccessible {
     let imageCacheKey = ImageCacheKey(archiveURL: self.url!, pageIndex: page)
     if let image = imageCache.object(forKey: imageCacheKey) {
       log.debug("success to load from cache at \(page)")
+      if let selfBook = self.book {
+        if page == 0 && selfBook.thumbnailData == nil {
+          do {
+            try self.setBookThumbnail(image)
+          } catch {
+            log.error("Error while creating thumbnail: \(error)")
+          }
+        }
+      }
       completion(.success(image))
       return
     }

@@ -205,7 +205,7 @@ class WebSharing: NSObject {
     let document: BookAccessible
     if ["zip", "cbz"].contains(url.pathExtension.lowercased()) {
       document =
-        try NSDocumentController.shared.makeDocument(withContentsOf: url, ofType: ZipDocument.UTIs.first!)
+        try NSDocumentController.shared.makeDocument(withContentsOf: url, ofType: ZipDocument.utis.first!)
         as! BookAccessible
     } else if ["rar", "cbr"].contains(url.pathExtension.lowercased()) {
       document = try RarDocument(contentsOf: url, ofType: "RAR")

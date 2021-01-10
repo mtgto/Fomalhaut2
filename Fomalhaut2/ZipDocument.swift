@@ -5,7 +5,7 @@ import Cocoa
 import ZIPFoundation
 
 class ZipDocument: BookDocument {
-  static let UTIs: [String] = ["com.pkware.zip-archive", "net.mtgto.Fomalhaut2.cbz"]
+  static let utis: [String] = ["com.pkware.zip-archive", "net.mtgto.Fomalhaut2.cbz"]
   private var archive: Archive?
   private lazy var entries: [Entry] = self.archive!.sorted { (lhs, rhs) -> Bool in
     lhs.path.localizedStandardCompare(rhs.path) == .orderedAscending

@@ -10,7 +10,7 @@ enum PdfError: Error {
 }
 
 class PdfDocument: BookDocument {
-  static let UTIs: [String] = ["com.adobe.pdf"]
+  static let utis: [String] = ["com.adobe.pdf"]
   private var pdfDocument: PDFDocument?
   private var url: URL?
   private let operationQueue: OperationQueue = {

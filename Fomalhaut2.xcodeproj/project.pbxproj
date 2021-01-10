@@ -16,7 +16,6 @@
 		CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280925305AA000986C9A /* AppDelegate.swift */; };
 		CE30281025305AA200986C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE30280F25305AA200986C9A /* Assets.xcassets */; };
 		CE30281325305AA200986C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30281125305AA200986C9A /* Main.storyboard */; };
-		CE30282A25305AA200986C9A /* Fomalhaut2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */; };
 		CE654D762537E9530051D575 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE654D752537E9520051D575 /* Credits.rtf */; };
 		CE7CD508256A0B7B00C97167 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CD507256A0B7B00C97167 /* Collection.swift */; };
 		CE9DCB7E256A94C90024FB1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE9DCB7C256A94C90024FB1B /* InfoPlist.strings */; };
@@ -74,13 +73,6 @@
 			remoteGlobalIDString = CE30280525305AA000986C9A;
 			remoteInfo = Fomalhaut2;
 		};
-		CE30282625305AA200986C9A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE3027FE25305AA000986C9A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CE30280525305AA000986C9A;
-			remoteInfo = Fomalhaut2;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -95,9 +87,6 @@
 		CE30281525305AA200986C9A /* Fomalhaut2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fomalhaut2.entitlements; sourceTree = "<group>"; };
 		CE30281A25305AA200986C9A /* Fomalhaut2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Fomalhaut2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE30282025305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE30282525305AA200986C9A /* Fomalhaut2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Fomalhaut2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fomalhaut2UITests.swift; sourceTree = "<group>"; };
-		CE30282B25305AA200986C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE654D752537E9520051D575 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		CE7CD507256A0B7B00C97167 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		CE9DCB7D256A94C90024FB1B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -172,13 +161,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE30282225305AA200986C9A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -187,7 +169,6 @@
 			children = (
 				CE30280825305AA000986C9A /* Fomalhaut2 */,
 				CE30281D25305AA200986C9A /* Fomalhaut2Tests */,
-				CE30282825305AA200986C9A /* Fomalhaut2UITests */,
 				CE30280725305AA000986C9A /* Products */,
 				CECC072A2549CAFD00CF56FA /* Frameworks */,
 				CE9DCC2325730EC30024FB1B /* LICENSE */,
@@ -202,7 +183,6 @@
 			children = (
 				CE30280625305AA000986C9A /* Fomalhaut2.app */,
 				CE30281A25305AA200986C9A /* Fomalhaut2Tests.xctest */,
-				CE30282525305AA200986C9A /* Fomalhaut2UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,15 +251,6 @@
 			path = Fomalhaut2Tests;
 			sourceTree = "<group>";
 		};
-		CE30282825305AA200986C9A /* Fomalhaut2UITests */ = {
-			isa = PBXGroup;
-			children = (
-				CE30282925305AA200986C9A /* Fomalhaut2UITests.swift */,
-				CE30282B25305AA200986C9A /* Info.plist */,
-			);
-			path = Fomalhaut2UITests;
-			sourceTree = "<group>";
-		};
 		CECC072A2549CAFD00CF56FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,24 +306,6 @@
 			productReference = CE30281A25305AA200986C9A /* Fomalhaut2Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CE30282425305AA200986C9A /* Fomalhaut2UITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CE30283425305AA200986C9A /* Build configuration list for PBXNativeTarget "Fomalhaut2UITests" */;
-			buildPhases = (
-				CE30282125305AA200986C9A /* Sources */,
-				CE30282225305AA200986C9A /* Frameworks */,
-				CE30282325305AA200986C9A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CE30282725305AA200986C9A /* PBXTargetDependency */,
-			);
-			name = Fomalhaut2UITests;
-			productName = Fomalhaut2UITests;
-			productReference = CE30282525305AA200986C9A /* Fomalhaut2UITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -366,10 +319,6 @@
 						CreatedOnToolsVersion = 12.2;
 					};
 					CE30281925305AA200986C9A = {
-						CreatedOnToolsVersion = 12.2;
-						TestTargetID = CE30280525305AA000986C9A;
-					};
-					CE30282425305AA200986C9A = {
 						CreatedOnToolsVersion = 12.2;
 						TestTargetID = CE30280525305AA000986C9A;
 					};
@@ -399,7 +348,6 @@
 			targets = (
 				CE30280525305AA000986C9A /* Fomalhaut2 */,
 				CE30281925305AA200986C9A /* Fomalhaut2Tests */,
-				CE30282425305AA200986C9A /* Fomalhaut2UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -428,13 +376,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CE30281825305AA200986C9A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CE30282325305AA200986C9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -491,14 +432,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE30282125305AA200986C9A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE30282A25305AA200986C9A /* Fomalhaut2UITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -506,11 +439,6 @@
 			isa = PBXTargetDependency;
 			target = CE30280525305AA000986C9A /* Fomalhaut2 */;
 			targetProxy = CE30281B25305AA200986C9A /* PBXContainerItemProxy */;
-		};
-		CE30282725305AA200986C9A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CE30280525305AA000986C9A /* Fomalhaut2 */;
-			targetProxy = CE30282625305AA200986C9A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -789,46 +717,6 @@
 			};
 			name = Release;
 		};
-		CE30283525305AA200986C9A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Fomalhaut2UITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.Fomalhaut2UITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = Fomalhaut2;
-			};
-			name = Debug;
-		};
-		CE30283625305AA200986C9A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Fomalhaut2UITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.Fomalhaut2UITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = Fomalhaut2;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -855,15 +743,6 @@
 			buildConfigurations = (
 				CE30283225305AA200986C9A /* Debug */,
 				CE30283325305AA200986C9A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CE30283425305AA200986C9A /* Build configuration list for PBXNativeTarget "Fomalhaut2UITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CE30283525305AA200986C9A /* Debug */,
-				CE30283625305AA200986C9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

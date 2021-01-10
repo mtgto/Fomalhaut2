@@ -5,7 +5,7 @@ import Cocoa
 import Unrar
 
 class RarDocument: BookDocument {
-  static let UTIs: [String] = ["com.rarlab.rar-archive", "net.mtgto.Fomalhaut2.cbr"]
+  static let utis: [String] = ["com.rarlab.rar-archive", "net.mtgto.Fomalhaut2.cbr"]
   private var entries: [Entry] = []
 
   override func read(from url: URL, ofType typeName: String) throws {

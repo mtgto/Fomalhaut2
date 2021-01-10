@@ -4,7 +4,7 @@
 import Cocoa
 
 class FolderDocument: NSDocument {
-  static let UTIs: [String] = ["public.folder"]
+  static let utis: [String] = ["public.folder"]
   private var entries: [URL] = []
 
   override class func canConcurrentlyReadDocuments(ofType typeName: String) -> Bool {

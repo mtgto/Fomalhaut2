@@ -1,6 +1,16 @@
 CHANGELOG
 ====
 
+## v0.6.0 (2021-01-10)
+
+### Added
+
+- Support RAR/CBR file format
+
+### Changed
+
+- Set thumbnail data if image resolve from cache
+
 ## v0.5.3 (2021-01-03)
 
 ### Added

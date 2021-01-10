@@ -37,12 +37,12 @@ NOTE: This sample comic is under Public Domain. You can view via https://digital
 
 ## Roadmap
 
-- [ ] Web server
-   - [ ] Access comics via web browser (PC / smartphone)
+- [x] Web server
+   - [x] Access comics via web browser (PC / smartphone)
 - [ ] Support more file types
    - [x] zip/cbz
    - [x] PDF
-   - [ ] rar/cbr
+   - [x] rar/cbr
    - [ ] 7z/cb7
 - [ ] QuickLook Thumbnail Extension
 

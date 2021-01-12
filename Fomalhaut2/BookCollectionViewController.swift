@@ -289,7 +289,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     }
   }
 
-  @objc func like(_ sender: Any) {
+  @objc func toggleLike(_ sender: Any) {
     do {
       let realm = try Realm()
       try realm.write {
@@ -299,19 +299,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       }
     } catch {
       log.error("Error while like books: \(error)")
-    }
-  }
-
-  @objc func dislike(_ sender: Any) {
-    do {
-      let realm = try Realm()
-      try realm.write {
-        self.selectedBooks().forEach { book in
-          book.like = false
-        }
-      }
-    } catch {
-      log.error("Error while dislike books: \(error)")
     }
   }
 
@@ -442,7 +429,8 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         title: NSLocalizedString("CollectionBookMenuOpen", comment: "Open"), action: #selector(openViewer(_:)),
         keyEquivalent: ""))
     self.bookMenu.addItem(
-      NSMenuItem(title: NSLocalizedString("Like", comment: "Like"), action: #selector(like(_:)), keyEquivalent: "")
+      NSMenuItem(
+        title: NSLocalizedString("Like", comment: "Like"), action: #selector(toggleLike(_:)), keyEquivalent: "")
     )
     self.bookMenu.addItem(
       NSMenuItem(
@@ -467,7 +455,22 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     guard let selector = menuItem.action else {
       return false
     }
-    if selector == #selector(openViewer(_:)) || selector == #selector(like(_:))
+    if selector == #selector(toggleLike(_:)) {
+      let book: Book?
+      if self.collectionViewStyle.value == .list && self.tableView.clickedRow >= 0 {
+        book = self.tableViewBooks.value![self.tableView.clickedRow]
+      } else if !self.collectionView.selectionIndexes.isEmpty {
+        book = self.collectionViewBooks.value![self.collectionView.selectionIndexes.first!]
+      } else {
+        book = nil
+      }
+      if let book = book {
+        menuItem.title =
+          book.like
+          ? NSLocalizedString("CancelLike", comment: "Cancel Like") : NSLocalizedString("Like", comment: "Like")
+      }
+    }
+    if selector == #selector(openViewer(_:)) || selector == #selector(toggleLike(_:))
       || selector == #selector(showFileInFinder(_:))
       || selector == #selector(deleteFromCollection(_:)) || selector == #selector(deleteFromLibrary(_:))
     {

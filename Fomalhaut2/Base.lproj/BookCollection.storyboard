@@ -30,7 +30,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <collectionView selectable="YES" allowsMultipleSelection="YES" id="181-T4-tof" customClass="BookCollectionView" customModule="Fomalhaut2" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="268" height="272"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="268" height="220"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                 <collectionViewLayout key="collectionViewLayout" id="OWG-c5-DLS" customClass="CollectionViewLayout" customModule="Fomalhaut2" customModuleProvider="target"/>
                                                                 <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -46,7 +46,7 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="jNM-4d-C3Q">
-                                                        <rect key="frame" x="253" y="1" width="16" height="246"/>
+                                                        <rect key="frame" x="253" y="1" width="16" height="220"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                 </scrollView>
@@ -218,10 +218,10 @@
                                                 </scrollView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="sbr-By-kXy" firstAttribute="leading" secondItem="JNV-Oy-3Iq" secondAttribute="leading" id="KEg-4b-fhF"/>
-                                                <constraint firstAttribute="trailing" secondItem="sbr-By-kXy" secondAttribute="trailing" id="PGN-Pv-V96"/>
-                                                <constraint firstItem="sbr-By-kXy" firstAttribute="top" secondItem="JNV-Oy-3Iq" secondAttribute="top" id="WRN-0N-Ybu"/>
-                                                <constraint firstAttribute="bottom" secondItem="sbr-By-kXy" secondAttribute="bottom" id="thf-mB-2Qh"/>
+                                                <constraint firstItem="sbr-By-kXy" firstAttribute="leading" secondItem="JNV-Oy-3Iq" secondAttribute="leading" id="2v8-bs-H3i"/>
+                                                <constraint firstItem="sbr-By-kXy" firstAttribute="top" secondItem="JNV-Oy-3Iq" secondAttribute="top" id="KfG-rv-yXN"/>
+                                                <constraint firstAttribute="bottom" secondItem="sbr-By-kXy" secondAttribute="bottom" id="mWH-jk-9Jn"/>
+                                                <constraint firstAttribute="trailing" secondItem="sbr-By-kXy" secondAttribute="trailing" id="qZs-5D-QOo"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>

@@ -5,6 +5,8 @@ import Cocoa
 
 class BookCollectionViewItem: NSCollectionViewItem {
 
+  @IBOutlet weak var likeImageView: NSImageView!
+
   override var isSelected: Bool {
     didSet {
       self.view.layer?.borderWidth = isSelected ? 3.0 : 0.0

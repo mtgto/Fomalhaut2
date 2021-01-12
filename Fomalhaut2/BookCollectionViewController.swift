@@ -289,6 +289,32 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     }
   }
 
+  @objc func like(_ sender: Any) {
+    do {
+      let realm = try Realm()
+      try realm.write {
+        self.selectedBooks().forEach { book in
+          book.like = true
+        }
+      }
+    } catch {
+      log.error("Error while like books: \(error)")
+    }
+  }
+
+  @objc func dislike(_ sender: Any) {
+    do {
+      let realm = try Realm()
+      try realm.write {
+        self.selectedBooks().forEach { book in
+          book.like = false
+        }
+      }
+    } catch {
+      log.error("Error while dislike books: \(error)")
+    }
+  }
+
   @objc func deleteFromCollection(_ sender: Any) {
     let books = self.selectedBooks()
     if case .collection(let collection) = self.collectionContent.value {
@@ -416,6 +442,9 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         title: NSLocalizedString("CollectionBookMenuOpen", comment: "Open"), action: #selector(openViewer(_:)),
         keyEquivalent: ""))
     self.bookMenu.addItem(
+      NSMenuItem(title: NSLocalizedString("Like", comment: "Like"), action: #selector(like(_:)), keyEquivalent: "")
+    )
+    self.bookMenu.addItem(
       NSMenuItem(
         title: NSLocalizedString("CollectionBookMenuShowInFinder", comment: "Show in Finder"),
         action: #selector(showFileInFinder(_:)), keyEquivalent: ""))
@@ -438,7 +467,8 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     guard let selector = menuItem.action else {
       return false
     }
-    if selector == #selector(openViewer(_:)) || selector == #selector(showFileInFinder(_:))
+    if selector == #selector(openViewer(_:)) || selector == #selector(like(_:))
+      || selector == #selector(showFileInFinder(_:))
       || selector == #selector(deleteFromCollection(_:)) || selector == #selector(deleteFromLibrary(_:))
     {
       if self.collectionViewStyle.value == .list {
@@ -525,6 +555,8 @@ extension BookCollectionViewController: NSTableViewDelegate {
       cellView.textField?.stringValue = self.tableViewBooks.value![row].name
     case "view":
       cellView.textField?.stringValue = String(self.tableViewBooks.value![row].readCount)
+    case "like":
+      cellView.textField?.stringValue = self.tableViewBooks.value![row].like ? "♥" : ""
     default:
       break
     }
@@ -558,6 +590,7 @@ extension BookCollectionViewController: NSCollectionViewDataSource {
     let book = self.collectionViewBooks.value![indexPath.item]
     item.textField?.stringValue = book.name
     item.textField?.toolTip = book.name
+    item.likeImageView?.isHidden = !book.like
     if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
       //log.debug("THUMBNAIL SIZE \(thumbnail.representations.first!.pixelsWide) x \(thumbnail.representations.first!.pixelsHigh)")
       item.imageView?.image = thumbnail

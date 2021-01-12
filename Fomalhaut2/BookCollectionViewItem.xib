@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BookCollectionViewItem" customModule="Fomalhaut2" customModuleProvider="target">
             <connections>
+                <outlet property="likeImageView" destination="aYc-yX-mcB" id="l43-ME-QIQ"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -32,6 +33,14 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aYc-yX-mcB">
+                    <rect key="frame" x="144" y="234" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="32" id="5wR-oE-2AV"/>
+                        <constraint firstAttribute="height" constant="32" id="nuz-aJ-aZx"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="like" id="2D2-qk-z8z"/>
+                </imageView>
             </subviews>
             <constraints>
                 <constraint firstItem="h4P-We-Kpz" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="4" id="HjB-ri-BxY"/>
@@ -40,6 +49,8 @@
                 <constraint firstItem="h4P-We-Kpz" firstAttribute="top" secondItem="URe-sz-Srt" secondAttribute="bottom" constant="8" id="QEx-ST-hTN"/>
                 <constraint firstItem="URe-sz-Srt" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="QM5-yI-ZuQ"/>
                 <constraint firstAttribute="trailing" secondItem="URe-sz-Srt" secondAttribute="trailing" id="Rkp-nU-XSa"/>
+                <constraint firstItem="aYc-yX-mcB" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="6" id="Sfk-YR-0YM"/>
+                <constraint firstAttribute="trailing" secondItem="aYc-yX-mcB" secondAttribute="trailing" constant="2" id="Ufo-d0-hU2"/>
                 <constraint firstAttribute="bottom" secondItem="h4P-We-Kpz" secondAttribute="bottom" id="mHl-bk-kat"/>
             </constraints>
             <point key="canvasLocation" x="-81" y="73"/>
@@ -54,5 +65,6 @@
     </objects>
     <resources>
         <image name="NSBookmarksTemplate" width="17" height="18"/>
+        <image name="like" width="32" height="32"/>
     </resources>
 </document>

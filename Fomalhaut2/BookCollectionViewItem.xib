@@ -8,7 +8,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BookCollectionViewItem" customModule="Fomalhaut2" customModuleProvider="target">
             <connections>
-                <outlet property="likeImageView" destination="aYc-yX-mcB" id="l43-ME-QIQ"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -40,6 +39,13 @@
                         <constraint firstAttribute="height" constant="32" id="nuz-aJ-aZx"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="like" id="2D2-qk-z8z"/>
+                    <connections>
+                        <binding destination="LMf-45-jb7" name="hidden" keyPath="self.like" id="SAI-Me-GOw">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
                 </imageView>
             </subviews>
             <constraints>

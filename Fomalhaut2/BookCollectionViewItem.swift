@@ -4,8 +4,9 @@
 import Cocoa
 
 class BookCollectionViewItem: NSCollectionViewItem {
-
-  @IBOutlet weak var likeImageView: NSImageView!
+  // IBOutlet imageView might be nil when NSCollectionViewItem is created by "NSCollectionView.makeItem"
+  // Instead, use Binding (@objc dynamic variable)
+  @objc dynamic var like: Bool = false
 
   override var isSelected: Bool {
     didSet {

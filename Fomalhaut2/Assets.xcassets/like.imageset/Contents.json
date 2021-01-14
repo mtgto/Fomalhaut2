@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "like.png",
+      "filename" : "heart.png",
       "idiom" : "mac",
       "scale" : "1x"
     },
     {
-      "filename" : "like@2x.png",
+      "filename" : "heart@2x.png",
       "idiom" : "mac",
       "scale" : "2x"
     }
@@ -16,6 +16,6 @@
     "version" : 1
   },
   "properties" : {
-    "template-rendering-intent" : "template"
+    "template-rendering-intent" : "original"
   }
 }

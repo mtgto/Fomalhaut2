@@ -38,6 +38,9 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     self.tableView.registerForDraggedTypes([.fileURL])
     self.collectionView.registerForDraggedTypes([.fileURL])
     self.collectionView.register(
+      NSNib(nibNamed: "BookCollectionViewItem", bundle: Bundle.main),
+      forItemWithIdentifier: NSUserInterfaceItemIdentifier("BookCollectionViewItem"))
+    self.collectionView.register(
       NSNib(nibNamed: "CollectionViewHeaderView", bundle: .main),
       forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader,
       withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionViewHeaderView.className()))
@@ -294,7 +297,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       let realm = try Realm()
       try realm.write {
         self.selectedBooks().forEach { book in
-          book.like = true
+          book.like = !book.like
         }
       }
     } catch {
@@ -589,11 +592,12 @@ extension BookCollectionViewController: NSCollectionViewDataSource {
     let item: BookCollectionViewItem =
       collectionView.makeItem(
         withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BookCollectionViewItem"),
-        for: indexPath) as? BookCollectionViewItem ?? BookCollectionViewItem()
+        for: indexPath) as! BookCollectionViewItem
     let book = self.collectionViewBooks.value![indexPath.item]
     item.textField?.stringValue = book.name
     item.textField?.toolTip = book.name
-    item.likeImageView?.isHidden = !book.like
+    //item.likeImageView?.isHidden = !book.like
+    item.like = book.like
     if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
       //log.debug("THUMBNAIL SIZE \(thumbnail.representations.first!.pixelsWide) x \(thumbnail.representations.first!.pixelsHigh)")
       item.imageView?.image = thumbnail

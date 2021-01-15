@@ -59,8 +59,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         if let collectionContent = collectionContent {
           switch collectionContent {
           case .filter(let filter):
-            let filterPredicate: NSPredicate = NSPredicate(format: filter.predicate)
-            let predicate: NSPredicate = self.predicateFrom(searchText: searchText, filterPredicate: filterPredicate)
+            let predicate: NSPredicate = self.predicateFrom(searchText: searchText, filterPredicate: filter.predicate)
             self.tableViewBooks.accept(
               AnyRealmCollection(realm.objects(Book.self).filter(predicate).sorted(by: sorted)))
           case .collection(let collection):
@@ -78,8 +77,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         if let collectionContent = collectionContent {
           switch collectionContent {
           case .filter(let filter):
-            let filterPredicate: NSPredicate = NSPredicate(format: filter.predicate)
-            let predicate: NSPredicate = self.predicateFrom(searchText: searchText, filterPredicate: filterPredicate)
+            let predicate: NSPredicate = self.predicateFrom(searchText: searchText, filterPredicate: filter.predicate)
             self.collectionViewBooks.accept(
               AnyRealmCollection(
                 realm.objects(Book.self).filter(predicate).sorted(byKeyPath: order.rawValue, ascending: false)))

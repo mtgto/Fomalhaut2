@@ -7,7 +7,7 @@ let filterChangedNotificationName = Notification.Name("bookFilterChanged")
 
 struct Filter: Equatable {
   let name: String
-  let predicate: String
+  let predicate: NSPredicate
 
   static func == (lhs: Filter, rhs: Filter) -> Bool {
     return lhs.name == rhs.name

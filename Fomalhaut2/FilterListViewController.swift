@@ -14,8 +14,9 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
   ]
   // TODO: Use PublishSubject to add/remove filter by user
   private let filters: [Filter] = [
-    Filter(name: NSLocalizedString("AllFilter", comment: "All"), predicate: "readCount >= 0"),
-    Filter(name: NSLocalizedString("UnreadFilter", comment: "Unread"), predicate: "readCount = 0"),
+    Filter(name: NSLocalizedString("AllFilter", comment: "All"), predicate: NSPredicate(format: "readCount >= 0")),
+    Filter(name: NSLocalizedString("UnreadFilter", comment: "Unread"), predicate: NSPredicate(format: "readCount = 0")),
+    Filter(name: NSLocalizedString("LikeFilter", comment: "Like"), predicate: NSPredicate(format: "%K = true", "like")),
   ]
   private let collections = BehaviorRelay<Results<Collection>?>(value: nil)
   private var selectedCollectionContent = BehaviorRelay<CollectionContent?>(value: nil)

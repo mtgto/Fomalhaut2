@@ -4,6 +4,7 @@
 
 "AllFilter" = "All";
 "UnreadFilter" = "Unread";
+"LikeFilter" = "Like";
 "LibraryHeader" = "Library";
 "CollectionHeader" = "Collection";
 

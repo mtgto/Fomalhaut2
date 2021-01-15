@@ -10,6 +10,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Link from "@material-ui/core/Link";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import { Book } from "../domain/book";
 import { bookRoutes } from "./Routes";
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
   },
   card: {
     height: "100%",
+    position: "relative",
   },
   cardContent: {
     padding: "4px",
@@ -32,6 +34,12 @@ const useStyles = makeStyles({
     WebkitLineClamp: 2,
     WebkitBoxOrient: "vertical",
     overflow: "hidden",
+  },
+  like: {
+    position: "absolute",
+    top: "0px",
+    right: "0px",
+    color: "pink",
   },
 });
 
@@ -61,6 +69,7 @@ const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
           className={classes.media}
           image={`/images/books/${props.book.id}/thumbnail`}
         />
+        {props.book.like && <FavoriteIcon className={classes.like} />}
         <CardContent className={classes.cardContent}>
           <Typography
             gutterBottom

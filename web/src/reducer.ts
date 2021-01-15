@@ -6,6 +6,7 @@ import { createContext } from "react";
 import { Book } from "./domain/book";
 import { Collection } from "./domain/collection";
 import { Filter } from "./domain/filter";
+import { message } from "./message";
 
 export const LoadingState = {
   Initial: 0,
@@ -51,8 +52,13 @@ export const initialState: State = {
   loading: LoadingState.Initial,
   collections: [],
   filters: [
-    new Filter("all", "All", () => true),
-    new Filter("unread", "Unread", (book: Book) => book.readCount === 0),
+    new Filter("all", message.filter.all, () => true),
+    new Filter(
+      "unread",
+      message.filter.unread,
+      (book: Book) => book.readCount === 0
+    ),
+    new Filter("like", message.filter.like, (book: Book) => book.like),
   ],
   books: [],
 };

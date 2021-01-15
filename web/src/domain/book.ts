@@ -6,11 +6,19 @@ export class Book {
   readonly name: string;
   readonly pageCount: number;
   readonly readCount: number;
+  readonly like: boolean;
 
-  constructor(id: string, name: string, pageCount: number, readCount: number) {
+  constructor(
+    id: string,
+    name: string,
+    pageCount: number,
+    readCount: number,
+    like: boolean
+  ) {
     this.id = id;
     this.name = name;
     this.pageCount = pageCount;
     this.readCount = readCount;
+    this.like = like;
   }
 }

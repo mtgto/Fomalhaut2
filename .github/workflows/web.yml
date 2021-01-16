@@ -17,6 +17,10 @@ jobs:
       - name: yarn install
         run: yarn install
         working-directory: ./web
+      - name: "install @jamesacarr/eslint-formatter-github-actions"
+        run: yarn add -D @jamesacarr/eslint-formatter-github-actions
       - name: Lint
         run: yarn lint
         working-directory: ./web
+        env:
+          NPM_CONFIG_ESLINT_ARGS: "-f @jamesacarr/github-actions"

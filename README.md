@@ -12,11 +12,13 @@ A comic viewer for macOS.
 
 You can choose Mac App Store or download from github release page.
 
-### 1. Mac App Store
+### 1. Mac App Store (Recommended)
 
 [![Download on the Mac App Store](https://github.com/mtgto/Fomalhaut2/blob/gh-pages/download-on-the-mac-app-store.svg)](https://apps.apple.com/us/app/fomalhaut2/id1546526588?mt=12)
 
-### 2. Download
+### 2. Manual Download
+
+NOTE: It does not have a feature `Check for update`.
 
 1. Download .dmg file from [Release page](https://github.com/mtgto/Fomalhaut2/releases).
 2. Copy `Fomalhaut2.app` to `/Applications` (or you want to).

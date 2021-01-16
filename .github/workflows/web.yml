@@ -1,3 +1,4 @@
+name: web
 on:
   push:
     branches: [main]

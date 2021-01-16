@@ -7,6 +7,7 @@ import { Link as RouterLink } from "rocon/react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import pink from "@material-ui/core/colors/pink";
 import Link from "@material-ui/core/Link";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
     position: "absolute",
     top: "0px",
     right: "0px",
-    color: "pink",
+    color: pink[200],
   },
 });
 

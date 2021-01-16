@@ -1,0 +1,21 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: yarn install
+        run: yarn install
+        working-directory: ./web
+      - name: Lint
+        run: yarn lint
+        working-directory: ./web

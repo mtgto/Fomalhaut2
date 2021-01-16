@@ -1,5 +1,8 @@
 Fomalhaut2
 ====
+![swift-format](https://github.com/mtgto/Fomalhaut2/workflows/.github/workflows/swift-format.yml/badge.svg)
+![eslint](https://github.com/mtgto/Fomalhaut2/workflows/.github/workflows/web.yml/badge.svg)
+
 A comic viewer for macOS.
 
 - A native macOS GUI application
@@ -11,7 +14,7 @@ You can choose Mac App Store or download from github release page.
 
 ### 1. Mac App Store
 
-Open https://apps.apple.com/us/app/fomalhaut2/id1546526588?mt=12
+[![Download on the Mac App Store](https://github.com/mtgto/Fomalhaut2/blob/gh-pages/download-on-the-mac-app-store.svg)](https://apps.apple.com/us/app/fomalhaut2/id1546526588?mt=12)
 
 ### 2. Download
 

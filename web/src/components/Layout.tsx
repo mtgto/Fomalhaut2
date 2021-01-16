@@ -12,7 +12,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Snackbar from "@material-ui/core/Snackbar";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -102,12 +101,15 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
 
   const RootLink = useMemo(
     () =>
-      forwardRef((linkProps, ref) => (
-        <RouterLink
-          route={topLevelRoutes.exactRoute}
-          {...linkProps}
-        ></RouterLink>
-      )),
+      forwardRef((linkProps, _ref) => {
+        const routerLink = (
+          <RouterLink
+            route={topLevelRoutes.exactRoute}
+            {...linkProps}
+          ></RouterLink>
+        );
+        return routerLink;
+      }),
     []
   );
 

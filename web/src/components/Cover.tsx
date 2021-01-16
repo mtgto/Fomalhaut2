@@ -52,7 +52,7 @@ const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
   const classes = useStyles();
   const BookLink = useMemo(
     () =>
-      forwardRef((linkProps, ref) => (
+      forwardRef((linkProps, _ref) => (
         <RouterLink
           route={bookRoutes.anyRoute}
           match={{ id: props.book.id }}
@@ -63,7 +63,6 @@ const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
   );
   return (
     <Link component={BookLink}>
-      {/* <RouterLink route={bookRoutes.anyRoute} match={{ id: props.book.id }}> */}
       <Card variant="outlined" className={classes.card} square>
         <CardMedia
           component="img"
@@ -83,7 +82,6 @@ const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
           </Typography>
         </CardContent>
       </Card>
-      {/* </RouterLink> */}
     </Link>
   );
 };

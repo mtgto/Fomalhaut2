@@ -33,16 +33,19 @@ type Actions =
   | ReturnType<typeof setBooks>
   | ReturnType<typeof setCollections>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const setLoading = (LoadingState: LoadingStateType) => ({
   type: SetLoading,
   payload: LoadingState,
 });
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const setCollections = (collections: Collection[]) => ({
   type: SetCollections,
   payload: collections,
 });
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const setBooks = (books: Book[]) => ({
   type: SetBooks,
   payload: books,

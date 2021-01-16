@@ -9,17 +9,29 @@ import CollectionPage from "./Collection";
 import FilterPage from "./Filter";
 
 export const bookRoutes = Path().any("id", {
-  action: ({ id }) => <BookPage id={id} />,
+  action: ({ id }) => {
+    const bookPage = <BookPage id={id} />;
+    return bookPage;
+  },
 });
 export const collectionRoutes = Path().any("id", {
-  action: ({ id }) => <CollectionPage id={id} />,
+  action: ({ id }) => {
+    const collectionPage = <CollectionPage id={id} />;
+    return collectionPage;
+  },
 });
 export const filterRoutes = Path().any("id", {
-  action: ({ id }) => <FilterPage id={id} />,
+  action: ({ id }) => {
+    const filterPage = <FilterPage id={id} />;
+    return filterPage;
+  },
 });
 export const topLevelRoutes = Path()
   .exact({
-    action: () => <FilterPage id={undefined} />,
+    action: () => {
+      const filterPage = <FilterPage id={undefined} />;
+      return filterPage;
+    },
   })
   .route("books", (route) => route.attach(bookRoutes))
   .route("collections", (route) => route.attach(collectionRoutes))

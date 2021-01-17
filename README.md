@@ -1,7 +1,7 @@
 Fomalhaut2
 ====
-![swift-format](https://github.com/mtgto/Fomalhaut2/workflows/.github/workflows/swift-format.yml/badge.svg)
-![eslint](https://github.com/mtgto/Fomalhaut2/workflows/.github/workflows/web.yml/badge.svg)
+![swift-format](https://github.com/mtgto/Fomalhaut2/workflows/swift-format/badge.svg)
+![web](https://github.com/mtgto/Fomalhaut2/workflows/web/badge.svg)
 
 A comic viewer for macOS.
 

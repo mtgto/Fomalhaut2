@@ -1,6 +1,9 @@
 /* All */
 "AllFilter" = "すべての本";
 
+/* Cancel Like */
+"CancelLike" = "好きを取り消し";
+
 /* Delete from collection */
 "CollectionBookMenuDeleteFromCollection" = "コレクションから削除";
 
@@ -30,6 +33,12 @@
 
 /* Library */
 "LibraryHeader" = "ライブラリ";
+
+/* Like */
+"Like" = "好き";
+
+/* Like */
+"LikeFilter" = "好き";
 
 /* Sort by */
 "SortPopupTitle" = "順序";

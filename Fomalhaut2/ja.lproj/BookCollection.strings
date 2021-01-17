@@ -4,6 +4,9 @@
 /* Class = "NSTabViewItem"; label = "List"; ObjectID = "8UJ-3S-dgi"; */
 "8UJ-3S-dgi.label" = "リスト";
 
+/* Class = "NSTableColumn"; headerCell.title = "Like"; ObjectID = "fcs-1m-87c"; */
+"fcs-1m-87c.headerCell.title" = "好き";
+
 /* Class = "NSTableColumn"; headerCell.title = "File"; ObjectID = "KpT-OW-gcl"; Note = "ListFileHeader"; */
 "KpT-OW-gcl.headerCell.title" = "ファイル";
 

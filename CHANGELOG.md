@@ -1,6 +1,17 @@
 CHANGELOG
 ====
 
+## v0.7.0 (2021-01-17)
+
+### Added
+
+- Add `Like` to books (app/web)
+
+### Changed
+
+- Add missing localization to web libraries
+- Add GitHub Action to run swift-lint, eslint and tsc type checking
+
 ## v0.6.0 (2021-01-10)
 
 ### Added

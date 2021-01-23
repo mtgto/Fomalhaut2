@@ -103,7 +103,7 @@ class WebSharing: NSObject {
           return promise.futureResult
         }
         let page = req.params("page").flatMap { Int($0) } ?? 0
-        guard let document: BookAccessible = try? self.document(from: book) else {
+        guard let document: BookDocument = try? self.document(from: book) else {
           promise.succeed(self.internalServerError)
           return promise.futureResult
         }
@@ -192,8 +192,8 @@ class WebSharing: NSObject {
     return promise.futureResult
   }
 
-  private func document(from book: Book) throws -> BookAccessible {
-    if let document = self.cache.object(forKey: book.id as NSString) as? BookAccessible {
+  private func document(from book: Book) throws -> BookDocument {
+    if let document = self.cache.object(forKey: book.id as NSString) as? BookDocument {
       return document
     }
     var bookmarkDataIsStale: Bool = false
@@ -202,16 +202,9 @@ class WebSharing: NSObject {
       throw WebServerError.badBookURL
     }
     _ = url.startAccessingSecurityScopedResource()
-    let document: BookAccessible
-    if ["zip", "cbz"].contains(url.pathExtension.lowercased()) {
-      document =
-        try NSDocumentController.shared.makeDocument(withContentsOf: url, ofType: ZipDocument.utis.first!)
-        as! BookAccessible
-    } else if ["rar", "cbr"].contains(url.pathExtension.lowercased()) {
-      document = try RarDocument(contentsOf: url, ofType: "RAR")
-    } else {
-      document = try PdfDocument(contentsOf: url, ofType: "PDF")
-    }
+    let typeName = try NSDocumentController.shared.typeForContents(of: url)
+    let document: BookDocument =
+      try NSDocumentController.shared.makeDocument(withContentsOf: url, ofType: typeName) as! BookDocument
     self.cache.setObject(document, forKey: book.id as NSString)
     return document
   }

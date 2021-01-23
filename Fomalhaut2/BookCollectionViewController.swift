@@ -377,27 +377,27 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       }
       _ = url.startAccessingSecurityScopedResource()
       do {
-        let document: BookAccessible
+        let document: BookDocument
         if url.pathExtension.lowercased() == "zip" {
           document =
             try NSDocumentController.shared.makeDocument(
-              withContentsOf: url, ofType: ZipDocument.utis[0]) as! ZipDocument
+              withContentsOf: url, ofType: ZipArchiver.utis[0]) as! BookDocument
         } else if url.pathExtension.lowercased() == "cbz" {
           document =
             try NSDocumentController.shared.makeDocument(
-              withContentsOf: url, ofType: ZipDocument.utis[1]) as! ZipDocument
+              withContentsOf: url, ofType: ZipArchiver.utis[1]) as! BookDocument
         } else if url.pathExtension.lowercased() == "pdf" {
           document =
             try NSDocumentController.shared.makeDocument(
-              withContentsOf: url, ofType: PdfDocument.utis[0]) as! PdfDocument
+              withContentsOf: url, ofType: PdfArchiver.utis[0]) as! BookDocument
         } else if url.pathExtension.lowercased() == "rar" {
           document =
             try NSDocumentController.shared.makeDocument(
-              withContentsOf: url, ofType: RarDocument.utis[0]) as! RarDocument
+              withContentsOf: url, ofType: RarArchiver.utis[0]) as! BookDocument
         } else if url.pathExtension.lowercased() == "cbr" {
           document =
             try NSDocumentController.shared.makeDocument(
-              withContentsOf: url, ofType: RarDocument.utis[1]) as! RarDocument
+              withContentsOf: url, ofType: RarArchiver.utis[1]) as! BookDocument
         } else {
           return
         }

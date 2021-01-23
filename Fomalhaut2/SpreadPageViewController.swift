@@ -69,7 +69,7 @@ class SpreadPageViewController: NSViewController {
     }
   }
 
-  func fetchImages(pageIndex: Int, document: BookAccessible) -> Observable<LoadedImage> {
+  func fetchImages(pageIndex: Int, document: BookDocument) -> Observable<LoadedImage> {
     return Observable.range(
       start: self.currentPageIndex.value,
       count: min(self.pageCount.value - self.currentPageIndex.value, 16)
@@ -88,7 +88,7 @@ class SpreadPageViewController: NSViewController {
 
   override var representedObject: Any? {
     didSet {
-      guard let document = representedObject as? BookAccessible else { return }
+      guard let document = representedObject as? BookDocument else { return }
       self.pageCount.accept(document.pageCount())
       self.shiftedSignlePage = document.shiftedSignlePage() ?? false
       if let lastPageIndex = document.lastPageIndex() {
@@ -189,7 +189,7 @@ class SpreadPageViewController: NSViewController {
     }
   }
 
-  func loadImage(pageIndex: Int, document: BookAccessible) -> Observable<NSImage> {
+  func loadImage(pageIndex: Int, document: BookDocument) -> Observable<NSImage> {
     return Observable<NSImage>.create { observer in
       document.image(at: pageIndex) { (result) in
         switch result {

@@ -6,6 +6,7 @@ import RealmSwift
 
 // Base Document class
 class BookDocument: NSDocument {
+  private var archiver: Archiver! = nil
   var book: Book?  // should be frozen
   static let thumbnailMaxWidth: Int = 220  // number of pixel of width
   static let thumbnailMaxHeight: Int = 340  // width * (2 ^ 0.5) + delta
@@ -37,9 +38,7 @@ class BookDocument: NSDocument {
           book.shiftedSignlePage = shiftedSignlePage
           book.manualViewHeight.value = manualViewHeight.flatMap(Double.init)
           if selfBook.pageCount == 0 {
-            if let accessible = self as? BookAccessible {
-              book.pageCount = accessible.pageCount()
-            }
+            book.pageCount = self.archiver.pageCount()
           }
         }
       }
@@ -47,6 +46,20 @@ class BookDocument: NSDocument {
   }
 
   override func read(from url: URL, ofType typeName: String) throws {
+    let pathExtension = url.pathExtension.lowercased()
+    log.info("typeName = \(typeName), pathExtension = \(pathExtension)")
+    if ZipArchiver.utis.contains(typeName) || ["zip", "cbz"].contains(url.pathExtension.lowercased()) {
+      self.archiver = ZipArchiver(url: url)
+    } else if RarArchiver.utis.contains(typeName) || ["rar", "cbr"].contains(url.pathExtension.lowercased()) {
+      self.archiver = RarArchiver(url: url)
+    } else if PdfArchiver.utis.contains(typeName) || ["pdf"].contains(url.pathExtension.lowercased()) {
+      self.archiver = PdfArchiver(url: url)
+    } else if FolderArchiver.utis.contains(typeName) {
+      self.archiver = FolderArchiver(url: url)
+    } else {
+      log.error("Failed to open a file \(url.path)")
+      throw BookAccessibleError.brokenFile
+    }
     let realm = try Realm()
     if let book = realm.objects(Book.self).filter("filePath = %@", url.path).first {
       self.book = book.freeze()
@@ -60,16 +73,71 @@ class BookDocument: NSDocument {
     }
   }
 
+  func image(at page: Int, completion: @escaping (_ image: Result<NSImage, Error>) -> Void) {
+    let imageCacheKey = ImageCacheKey(archiveURL: self.fileURL!, pageIndex: page)
+    if let image = imageCache.object(forKey: imageCacheKey) {
+      log.debug("success to load from cache at \(page)")
+      if page == 0 {
+        try? self.setBookThumbnail(image)
+      }
+      if let book = self.book {
+        if page == 0 && book.thumbnailData == nil {
+          do {
+            try self.setBookThumbnail(image)
+          } catch {
+            log.error("Error while creating thumbnail: \(error)")
+          }
+        }
+      }
+      completion(.success(image))
+    } else {
+      self.archiver?.image(
+        at: page,
+        completion: { (result) in
+          switch result {
+          case .success(let image):
+            if page == 0 {
+              try? self.setBookThumbnail(image)
+            }
+            completion(.success(image))
+          case .failure(let error):
+            completion(.failure(error))
+          }
+        })
+    }
+  }
+
   func setBookThumbnail(_ image: NSImage) throws {
-    if let data = image.resizedImageFixedAspectRatio(
-      maxPixelsWide: BookDocument.thumbnailMaxWidth, maxPixelsHigh: BookDocument.thumbnailMaxHeight)
-    {
-      let realm = try Realm()
-      if let book = realm.object(ofType: Book.self, forPrimaryKey: self.book!.id) {
-        try realm.write {
-          book.thumbnailData = data
+    let realm = try Realm()
+    if let book = realm.object(ofType: Book.self, forPrimaryKey: self.book!.id) {
+      if book.thumbnailData == nil {
+        if let data = image.resizedImageFixedAspectRatio(
+          maxPixelsWide: BookDocument.thumbnailMaxWidth, maxPixelsHigh: BookDocument.thumbnailMaxHeight)
+        {
+          try realm.write {
+            book.thumbnailData = data
+          }
         }
       }
     }
+  }
+
+  func pageCount() -> Int {
+    return self.archiver.pageCount()
+  }
+
+  func lastPageIndex() -> Int? {
+    return self.book?.lastPageIndex
+  }
+
+  func lastPageOrder() -> PageOrder? {
+    guard let book = self.book else {
+      return nil
+    }
+    return book.isRightToLeft ? .rtl : .ltr
+  }
+
+  func shiftedSignlePage() -> Bool? {
+    return book?.shiftedSignlePage
   }
 }

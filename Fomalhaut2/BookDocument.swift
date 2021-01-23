@@ -45,6 +45,17 @@ class BookDocument: NSDocument {
     }
   }
 
+  func setLike(_ like: Bool) throws {
+    if let selfBook = self.book {
+      let realm = try Realm()
+      if let book = realm.object(ofType: Book.self, forPrimaryKey: selfBook.id) {
+        try realm.write {
+          book.like = like
+        }
+      }
+    }
+  }
+
   override func read(from url: URL, ofType typeName: String) throws {
     let pathExtension = url.pathExtension.lowercased()
     log.info("typeName = \(typeName), pathExtension = \(pathExtension)")
@@ -128,6 +139,10 @@ class BookDocument: NSDocument {
 
   func lastPageIndex() -> Int? {
     return self.book?.lastPageIndex
+  }
+
+  func isLike() -> Bool? {
+    return self.book?.like
   }
 
   func lastPageOrder() -> PageOrder? {

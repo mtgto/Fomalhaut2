@@ -8,6 +8,7 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
   private let disposeBag = DisposeBag()
   @IBOutlet weak var pageControl: NSSegmentedControl!
   @IBOutlet weak var pageOrderControl: NSSegmentedControl!
+  @IBOutlet weak var likeButton: NSButton!
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -25,6 +26,18 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { (pageOrder) in
         self.pageOrderControl.selectSegment(withTag: pageOrder == .rtl ? 0 : 1)
+      })
+      .disposed(by: self.disposeBag)
+    spreadPageViewController.like
+      .compactMap { $0 }
+      .observeOn(MainScheduler.instance)
+      .subscribe(onNext: { (like) in
+        self.likeButton.state = like ? .on : .off
+      })
+      .disposed(by: self.disposeBag)
+    self.likeButton.rx.state
+      .subscribe(onNext: { (state) in
+        spreadPageViewController.like.accept(state == .on)
       })
       .disposed(by: self.disposeBag)
   }

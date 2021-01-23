@@ -129,8 +129,20 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="j9D-dA-3KM"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="elp-kS-fEt"/>
+                                <toolbarItem implicitItemIdentifier="A8F6A301-D838-4A0F-B003-BA6D74540351" label="Like" paletteLabel="Like" sizingBehavior="auto" id="JgL-3n-H2O">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="gRp-EK-n9b">
+                                        <rect key="frame" x="0.0" y="14" width="30" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" title="♥" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RO6-9q-14E">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="JgL-3n-H2O"/>
                                 <toolbarItem reference="fuc-9u-iU4"/>
                                 <toolbarItem reference="oTV-Y3-Ona"/>
                                 <toolbarItem reference="MNP-GK-6ey"/>
@@ -142,6 +154,7 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="likeButton" destination="gRp-EK-n9b" id="qMs-hD-m9d"/>
                         <outlet property="pageControl" destination="grQ-q3-Ia3" id="2pJ-y1-Rao"/>
                         <outlet property="pageOrderControl" destination="WvN-Nn-JeU" id="n6V-fi-KXC"/>
                         <segue destination="T99-gd-Ov7" kind="relationship" relationship="window.shadowedContentViewController" id="b4T-I6-yJI"/>

@@ -18,6 +18,7 @@ class SpreadPageViewController: NSViewController {
   let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
   let currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+  let like: BehaviorRelay<Bool?> = BehaviorRelay(value: nil)
   var isFullScreen: Bool = false
   private var shiftedSignlePage: Bool = false
   // manualViewHeight has non-nil view height after user resized window
@@ -102,6 +103,28 @@ class SpreadPageViewController: NSViewController {
         .subscribe(onNext: { [unowned self] pageOrder in
           self.imageStackView.userInterfaceLayoutDirection =
             pageOrder == PageOrder.rtl ? .rightToLeft : .leftToRight
+        })
+        .disposed(by: self.disposeBag)
+      if let isLike = document.isLike() {
+        self.like.accept(isLike)
+      }
+      if let realm = try? Realm(), let bookId = document.book?.id {
+        if let book = realm.object(ofType: Book.self, forPrimaryKey: bookId) {
+          Observable.from(object: book, properties: ["like"])
+            .map { $0.like }
+            .distinctUntilChanged()
+            .subscribe(onNext: { like in
+              self.like.accept(like)
+            })
+            .disposed(by: self.disposeBag)
+        }
+      }
+      self.like
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { like in
+          if let like = like {
+            try? document.setLike(like)
+          }
         })
         .disposed(by: self.disposeBag)
       self.currentPageIndex.flatMapLatest { (currentPageIndex) in

@@ -68,7 +68,7 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
   }, [book]);
 
   return (
-    <Layout>
+    <Layout title={book?.name}>
       <Container maxWidth="md">
         <Box mx="auto">
           {book ? pages(book, classes) : <span>{message.loading}</span>}

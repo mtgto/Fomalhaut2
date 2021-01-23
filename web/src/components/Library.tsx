@@ -7,17 +7,29 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Pagination from "@material-ui/lab/Pagination";
 
 import { Book } from "../domain/book";
 import Cover from "./Cover";
 import Layout from "./Layout";
 
 type Props = {
-  books: Book[];
-  title: string;
+  readonly books: Book[];
+  readonly title: string;
+  readonly page: number | undefined;
+  readonly pageChanged: (page: number) => void;
 };
 
 const Library: React.VoidFunctionComponent<Props> = (props: Props) => {
+  const handleChangePage = (_e: React.ChangeEvent<unknown>, page: number) => {
+    props.pageChanged(page);
+  };
+  const numberOfbooksPerPage = 20;
+  const pageCount = Math.ceil(props.books.length / numberOfbooksPerPage);
+  const books = props.books.slice(
+    ((props.page ?? 1) - 1) * numberOfbooksPerPage,
+    ((props.page ?? 1) - 1) * numberOfbooksPerPage + numberOfbooksPerPage
+  );
   return (
     <Layout>
       <Container maxWidth="md">
@@ -29,12 +41,19 @@ const Library: React.VoidFunctionComponent<Props> = (props: Props) => {
       </Container>
       <Container maxWidth="md">
         <Grid container>
-          {props.books.map((book: Book) => (
+          {books.map((book: Book) => (
             <Grid item key={book.id} xs={6} sm={4} md={3}>
               <Cover book={book} />
             </Grid>
           ))}
         </Grid>
+        <Box display="flex" justifyContent="center" pt={4} pb={4}>
+          <Pagination
+            count={pageCount}
+            page={props.page ?? 1}
+            onChange={handleChangePage}
+          />
+        </Box>
       </Container>
     </Layout>
   );

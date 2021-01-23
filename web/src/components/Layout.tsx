@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {},
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -73,7 +72,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type Props = {
-  children: React.ReactNode;
+  readonly title?: string;
+  readonly children: React.ReactNode;
 };
 
 const Layout: React.FunctionComponent<Props> = (props: Props) => {
@@ -129,11 +129,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
                 <MenuIcon />
               </IconButton>
             </div>
-            <Typography variant="h6" className={classes.title}>
-              <Link color="inherit" component={RootLink}>
-                Fomalhaut2
-              </Link>
-            </Typography>
+            <Typography variant="h6">{props.title ?? "Fomalhaut2"}</Typography>
             <div className={classes.right} />
           </Toolbar>
         </AppBar>
@@ -158,7 +154,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
                 <Button
                   className={classes.button}
                   onClick={() =>
-                    navigate(filterRoutes.anyRoute, { id: filter.id })
+                    navigate(filterRoutes.route, { id: filter.id })
                   }
                 >
                   {filter.name}
@@ -172,7 +168,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
                 <Button
                   className={classes.button}
                   onClick={() =>
-                    navigate(collectionRoutes.anyRoute, { id: collection.id })
+                    navigate(collectionRoutes.route, { id: collection.id })
                   }
                 >
                   {collection.name}

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import React from "react";
-import { Path, useRoutes } from "rocon/react";
+import { Path, Search, useRoutes } from "rocon/react";
 
 import BookPage from "./Book";
 import CollectionPage from "./Collection";
@@ -14,22 +14,28 @@ export const bookRoutes = Path().any("id", {
     return bookPage;
   },
 });
-export const collectionRoutes = Path().any("id", {
-  action: ({ id }) => {
-    const collectionPage = <CollectionPage id={id} />;
+export const collectionRoutes = Path()
+  .any("id")
+  .anyRoute.attach(Search("page", { optional: true }))
+  .action(({ id, page }) => {
+    const collectionPage = (
+      <CollectionPage id={id} page={page ? Number(page) : undefined} />
+    );
     return collectionPage;
-  },
-});
-export const filterRoutes = Path().any("id", {
-  action: ({ id }) => {
-    const filterPage = <FilterPage id={id} />;
+  });
+export const filterRoutes = Path()
+  .any("id")
+  .anyRoute.attach(Search("page", { optional: true }))
+  .action(({ id, page }) => {
+    const filterPage = (
+      <FilterPage id={id} page={page ? Number(page) : undefined} />
+    );
     return filterPage;
-  },
-});
+  });
 export const topLevelRoutes = Path()
   .exact({
     action: () => {
-      const filterPage = <FilterPage id={undefined} />;
+      const filterPage = <FilterPage id={"all"} />;
       return filterPage;
     },
   })

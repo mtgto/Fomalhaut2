@@ -1,6 +1,18 @@
 CHANGELOG
 ====
 
+## v0.7.1 (2021-01-24)
+
+### Added
+
+- Add "Toggle Like" button to toolbar of book window
+- Add pagination to a collection page and a filter page on web
+
+### Changed
+
+- Add `Archiver` class to avoid using NSDocument for web sharing
+- Update web packages
+
 ## v0.7.0 (2021-01-17)
 
 ### Added

@@ -4,7 +4,6 @@
 import Cocoa
 import RealmSwift
 
-// Base Document class
 class BookDocument: NSDocument {
   private var archiver: Archiver! = nil
   var book: Book?  // should be frozen
@@ -57,19 +56,11 @@ class BookDocument: NSDocument {
   }
 
   override func read(from url: URL, ofType typeName: String) throws {
-    let pathExtension = url.pathExtension.lowercased()
-    if ZipArchiver.utis.contains(typeName) || ["zip", "cbz"].contains(pathExtension) {
-      self.archiver = ZipArchiver(url: url)
-    } else if RarArchiver.utis.contains(typeName) || ["rar", "cbr"].contains(pathExtension) {
-      self.archiver = RarArchiver(url: url)
-    } else if PdfArchiver.utis.contains(typeName) || ["pdf"].contains(pathExtension) {
-      self.archiver = PdfArchiver(url: url)
-    } else if FolderArchiver.utis.contains(typeName) {
-      self.archiver = FolderArchiver(url: url)
-    } else {
+    guard let archiver = CombineArchiver(from: url, ofType: typeName) else {
       log.error("Failed to open a file \(url.path)")
       throw BookAccessibleError.brokenFile
     }
+    self.archiver = archiver
     let realm = try Realm()
     if let book = realm.objects(Book.self).filter("filePath = %@", url.path).first {
       self.book = book.freeze()

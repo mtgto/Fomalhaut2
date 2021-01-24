@@ -23,6 +23,9 @@ class RarArchiver: Archiver {
       log.warning("Error while load Rar archive \(error)")
       return nil
     }
+    if self.entries.isEmpty {
+      return nil
+    }
     self.operationQueue = OperationQueue()
     self.operationQueue.maxConcurrentOperationCount = 1
   }

@@ -3,4 +3,5 @@
 
 enum BookAccessibleError: Error {
   case brokenFile
+  case encrypted
 }

@@ -16,11 +16,10 @@ private let contentTypeJpeg = "image/jpeg"
 
 class WebSharing: NSObject {
   private let server = App()
-  //private let server: HttpServer = HttpServer()
   private(set) var started: Bool = false
   private var collections: [Collection] = []
   private var books: [Book] = []
-  private let cache = NSCache<NSString, NSDocument>()
+  private let cache = NSCache<NSString, CombineArchiver>()
   private let assetArchive: Archive
   private let disposeBag = DisposeBag()
   private let notFound = Response(text: "Not Found", status: .notFound)
@@ -103,15 +102,15 @@ class WebSharing: NSObject {
           return promise.futureResult
         }
         let page = req.params("page").flatMap { Int($0) } ?? 0
-        guard let document: BookDocument = try? self.document(from: book) else {
+        guard let archiver: Archiver = self.archiver(from: book) else {
           promise.succeed(self.internalServerError)
           return promise.futureResult
         }
-        if page < 0 || document.pageCount() <= page {
+        if page < 0 || archiver.pageCount() <= page {
           promise.succeed(self.notFound)
           return promise.futureResult
         }
-        document.image(at: page) { (result) in
+        archiver.image(at: page) { (result) in
           switch result {
           case .success(let image):
             let data = image.resizedImageFixedAspectRatio(maxPixelsWide: 1024, maxPixelsHigh: 1024)!
@@ -192,21 +191,26 @@ class WebSharing: NSObject {
     return promise.futureResult
   }
 
-  private func document(from book: Book) throws -> BookDocument {
-    if let document = self.cache.object(forKey: book.id as NSString) as? BookDocument {
-      return document
+  private func archiver(from book: Book) -> Archiver? {
+    if let archiver = self.cache.object(forKey: book.id as NSString) {
+      return archiver
     }
     var bookmarkDataIsStale: Bool = false
     guard let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) else {
       log.error("Error while resolve URL from a book")
-      throw WebServerError.badBookURL
+      return nil
     }
     _ = url.startAccessingSecurityScopedResource()
-    let typeName = try NSDocumentController.shared.typeForContents(of: url)
-    let document: BookDocument =
-      try NSDocumentController.shared.makeDocument(withContentsOf: url, ofType: typeName) as! BookDocument
-    self.cache.setObject(document, forKey: book.id as NSString)
-    return document
+    do {
+      let typeName = try NSDocumentController.shared.typeForContents(of: url)
+      if let archiver = CombineArchiver(from: url, ofType: typeName) {
+        self.cache.setObject(archiver, forKey: book.id as NSString)
+        return archiver
+      }
+    } catch {
+      log.error("Error while getting type from file: \(error)")
+    }
+    return nil
   }
 }
 

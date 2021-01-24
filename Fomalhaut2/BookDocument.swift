@@ -58,12 +58,11 @@ class BookDocument: NSDocument {
 
   override func read(from url: URL, ofType typeName: String) throws {
     let pathExtension = url.pathExtension.lowercased()
-    log.info("typeName = \(typeName), pathExtension = \(pathExtension)")
-    if ZipArchiver.utis.contains(typeName) || ["zip", "cbz"].contains(url.pathExtension.lowercased()) {
+    if ZipArchiver.utis.contains(typeName) || ["zip", "cbz"].contains(pathExtension) {
       self.archiver = ZipArchiver(url: url)
-    } else if RarArchiver.utis.contains(typeName) || ["rar", "cbr"].contains(url.pathExtension.lowercased()) {
+    } else if RarArchiver.utis.contains(typeName) || ["rar", "cbr"].contains(pathExtension) {
       self.archiver = RarArchiver(url: url)
-    } else if PdfArchiver.utis.contains(typeName) || ["pdf"].contains(url.pathExtension.lowercased()) {
+    } else if PdfArchiver.utis.contains(typeName) || ["pdf"].contains(pathExtension) {
       self.archiver = PdfArchiver(url: url)
     } else if FolderArchiver.utis.contains(typeName) {
       self.archiver = FolderArchiver(url: url)

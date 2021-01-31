@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+## v0.7.2 (2021-01-31)
+
+### Changed
+
+- Fix the comic file couldn't be droped in an image view of item of CollectionView
+- Update to RxSwift 6 and RxRealm 5
+
 ## v0.7.1 (2021-01-24)
 
 ### Added

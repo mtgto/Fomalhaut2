@@ -16,7 +16,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
     let mainStackViewController = self.contentViewController as! MainStackViewController
     let bookCollectionViewController = mainStackViewController.bookCollectionViewController!
     bookCollectionViewController.collectionViewStyle
-      .observeOn(MainScheduler.instance)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { collectionViewStyle in
         self.collectionViewStyleSegmentedControl.selectSegment(
           withTag: collectionViewStyle == .collection ? 0 : 1)

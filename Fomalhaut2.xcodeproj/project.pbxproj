@@ -771,7 +771,7 @@
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 5.1.1;
+				minimumVersion = 6.0.0;
 			};
 		};
 		CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
@@ -803,7 +803,7 @@
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxRealm.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 3.1.0;
+				minimumVersion = 5.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -45,11 +45,11 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader,
       withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionViewHeaderView.className()))
     Schema.shared.state
-      .skipWhile { $0 != .finish }
+      .skip { $0 != .finish }
       .flatMap { _ in
         Observable.combineLatest(self.collectionContent, self.searchText, self.tableViewSortDescriptors)
       }
-      .observeOn(MainScheduler.instance)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { (collectionContent, searchText, sortDescriptors) in
         let sorted = sortDescriptors.map {
           SortDescriptor(
@@ -69,9 +69,9 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       })
       .disposed(by: self.disposeBag)
     Schema.shared.state
-      .skipWhile { $0 != .finish }
+      .skip { $0 != .finish }
       .flatMap { _ in Observable.combineLatest(self.collectionContent, self.searchText, self.collectionOrder) }
-      .observeOn(MainScheduler.instance)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { (collectionContent, searchText, order) in
         let realm = try! Realm()
         if let collectionContent = collectionContent {
@@ -111,14 +111,14 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       })
       .disposed(by: self.disposeBag)
     self.collectionViewStyle
-      .observeOn(MainScheduler.instance)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { collectionViewStyle in
         self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
       })
       .disposed(by: self.disposeBag)
     self.collectionContent
       .compactMap { $0 }
-      .observeOn(MainScheduler.instance)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { collectionContent in
         self.updateBookMenu(collectionContent: collectionContent)
       })
@@ -159,13 +159,14 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   override func viewDidAppear() {
     var progressViewController: ProgressViewController? = nil
     Schema.shared.state
-      .observeOn(MainScheduler.instance)
-      .subscribe(onNext: { [unowned self] state in
+      .withUnretained(self)
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { owner, state in
         switch state {
         case .start:
           progressViewController = ProgressViewController(
             nibName: ProgressViewController.className(), bundle: nil)
-          self.presentAsSheet(progressViewController!)
+          owner.presentAsSheet(progressViewController!)
         case .finish:
           if let progressViewController = progressViewController {
             self.dismiss(progressViewController)

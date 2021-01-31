@@ -28,8 +28,8 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     // Accept from Collection View or List View
     self.filterListView.registerForDraggedTypes([.fileURL])
     Schema.shared.state
-      .skipWhile { $0 != .finish }
-      .observeOn(MainScheduler.instance)
+      .skip { $0 != .finish }
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { _ in
         let realm = try! Realm()
         self.collections.accept(realm.objects(Collection.self).sorted(byKeyPath: "createdAt"))

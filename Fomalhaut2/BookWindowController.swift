@@ -16,21 +16,21 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
     let spreadPageViewController = self.contentViewController as! SpreadPageViewController
     Observable.of(spreadPageViewController.currentPageIndex, spreadPageViewController.pageCount)
       .merge()
-      .observeOn(MainScheduler.instance)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { (_) in
         self.pageControl.setEnabled(spreadPageViewController.canBackwardPage(), forSegment: 0)
         self.pageControl.setEnabled(spreadPageViewController.canForwardPage(), forSegment: 1)
       })
       .disposed(by: self.disposeBag)
     spreadPageViewController.pageOrder
-      .observeOn(MainScheduler.instance)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { (pageOrder) in
         self.pageOrderControl.selectSegment(withTag: pageOrder == .rtl ? 0 : 1)
       })
       .disposed(by: self.disposeBag)
     spreadPageViewController.like
       .compactMap { $0 }
-      .observeOn(MainScheduler.instance)
+      .observe(on: MainScheduler.instance)
       .subscribe(onNext: { (like) in
         self.likeButton.state = like ? .on : .off
       })

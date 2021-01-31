@@ -99,9 +99,10 @@ class SpreadPageViewController: NSViewController {
         self.pageOrder.accept(lastPageOrder)
       }
       self.pageOrder
-        .observeOn(MainScheduler.instance)
-        .subscribe(onNext: { [unowned self] pageOrder in
-          self.imageStackView.userInterfaceLayoutDirection =
+        .withUnretained(self)
+        .observe(on: MainScheduler.instance)
+        .subscribe(onNext: { owner, pageOrder in
+          owner.imageStackView.userInterfaceLayoutDirection =
             pageOrder == PageOrder.rtl ? .rightToLeft : .leftToRight
         })
         .disposed(by: self.disposeBag)
@@ -120,7 +121,7 @@ class SpreadPageViewController: NSViewController {
         }
       }
       self.like
-        .observeOn(MainScheduler.instance)
+        .observe(on: MainScheduler.instance)
         .subscribe(onNext: { like in
           if let like = like {
             try? document.setLike(like)
@@ -130,7 +131,7 @@ class SpreadPageViewController: NSViewController {
       self.currentPageIndex.flatMapLatest { (currentPageIndex) in
         self.fetchImages(pageIndex: currentPageIndex, document: document)
       }
-      .observeOn(MainScheduler.instance)
+      .observe(on: MainScheduler.instance)
       .subscribe(
         onNext: { (loadedImage) in
           //log.debug("image = \(loadedImage.images.count), prefetch = \(loadedImage.preload)")

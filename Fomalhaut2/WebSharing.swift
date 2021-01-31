@@ -126,9 +126,10 @@ class WebSharing: NSObject {
     }
 
     Schema.shared.state
-      .skipWhile { $0 != .finish }
-      .subscribe(onNext: { [unowned self] _ in
-        self.setup()
+      .skip { $0 != .finish }
+      .withUnretained(self)
+      .subscribe(onNext: { owner, _ in
+        owner.setup()
       })
       .disposed(by: self.disposeBag)
   }
@@ -153,13 +154,15 @@ class WebSharing: NSObject {
   private func setup() {
     let realm = try! Realm()
     Observable.array(from: realm.objects(Collection.self).sorted(byKeyPath: "createdAt", ascending: true))
-      .subscribe(onNext: { [unowned self] collections in
-        self.collections = collections.map { $0.freeze() }
+      .withUnretained(self)
+      .subscribe(onNext: { owner, collections in
+        owner.collections = collections.map { $0.freeze() }
       })
       .disposed(by: self.disposeBag)
     Observable.array(from: realm.objects(Book.self).sorted(byKeyPath: "createdAt"))
-      .subscribe(onNext: { [unowned self] books in
-        self.books = books.map { $0.freeze() }
+      .withUnretained(self)
+      .subscribe(onNext: { owner, books in
+        owner.books = books.map { $0.freeze() }
       })
       .disposed(by: self.disposeBag)
   }

@@ -1,15 +1,14 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import React, { forwardRef, useContext, useMemo, useState } from "react";
-import { Link as RouterLink, useLocation, useNavigate } from "rocon/react";
+import React, { useContext, useState } from "react";
+import { useLocation, useNavigate } from "rocon/react";
 
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListSubheader from "@material-ui/core/ListSubheader";
@@ -22,7 +21,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import { message } from "../message";
 import { LoadingState, StateContext } from "../reducer";
-import { collectionRoutes, filterRoutes, topLevelRoutes } from "./Routes";
+import { collectionRoutes, filterRoutes } from "./Routes";
 
 import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 const drawerWidth = 200;
@@ -98,20 +97,6 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
   const handleReload = () => {
     document.location.reload();
   };
-
-  const RootLink = useMemo(
-    () =>
-      forwardRef((linkProps, _ref) => {
-        const routerLink = (
-          <RouterLink
-            route={topLevelRoutes.exactRoute}
-            {...linkProps}
-          ></RouterLink>
-        );
-        return routerLink;
-      }),
-    []
-  );
 
   return (
     <>

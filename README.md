@@ -1,12 +1,12 @@
 Fomalhaut2
 ====
-![swift-format](https://github.com/mtgto/Fomalhaut2/workflows/swift-format/badge.svg)
-![web](https://github.com/mtgto/Fomalhaut2/workflows/web/badge.svg)
+[![swift-format](https://github.com/mtgto/Fomalhaut2/workflows/swift-format/badge.svg)](https://github.com/mtgto/Fomalhaut2/actions?query=workflow%3Aswift-format)
+[![web](https://github.com/mtgto/Fomalhaut2/workflows/web/badge.svg)](https://github.com/mtgto/Fomalhaut2/actions?query=workflow%3Aweb)
 
 A comic viewer for macOS.
 
 - A native macOS GUI application
-- Collect your own comics (zip/cbz, PDF)
+- Collect your own comics (zip/cbz, rar/cbr, PDF)
 
 ## Install
 

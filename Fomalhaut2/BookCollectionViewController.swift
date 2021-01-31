@@ -600,6 +600,7 @@ extension BookCollectionViewController: NSCollectionViewDataSource {
     if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
       //log.debug("THUMBNAIL SIZE \(thumbnail.representations.first!.pixelsWide) x \(thumbnail.representations.first!.pixelsHigh)")
       item.imageView?.image = thumbnail
+      item.imageView?.unregisterDraggedTypes()
     } else {
       // TODO: Use more user friendly image
       item.imageView?.image = NSImage(named: NSImage.bookmarksTemplateName)

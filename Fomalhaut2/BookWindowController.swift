@@ -72,11 +72,6 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
     return [.fullScreen, .autoHideToolbar, .autoHideMenuBar, .hideDock]
   }
 
-  func window(_ window: NSWindow, willUseFullScreenContentSize proposedSize: NSSize) -> NSSize {
-    let spreadPageViewController = window.contentViewController as! SpreadPageViewController
-    return spreadPageViewController.contentSize
-  }
-
   func windowDidEnterFullScreen(_ notification: Notification) {
     let spreadPageViewController = self.contentViewController as! SpreadPageViewController
     spreadPageViewController.isFullScreen = true

@@ -25,6 +25,8 @@ class SpreadPageViewController: NSViewController {
   private var manualViewHeight: CGFloat? = nil
   private(set) var contentSize: CGSize = .zero
   private let disposeBag = DisposeBag()
+  private var swipeDeltaX: CGFloat = 0
+  private var swipeDeltaY: CGFloat = 0
 
   @IBOutlet weak var imageStackView: NSStackView!
   @IBOutlet weak var firstImageView: BookImageView!
@@ -39,8 +41,9 @@ class SpreadPageViewController: NSViewController {
     self.secondImageView.notificationName = secondImageViewMouseUpNotificationName
 
     NotificationCenter.default.rx.notification(firstImageViewMouseUpNotificationName, object: nil)
-      .subscribe(onNext: { _ in
-        if self.secondImageView.isHidden {
+      .subscribe(onNext: { notification in
+        let shiftPressed = notification.userInfo?[BookImageView.shiftPressed] as? Bool ?? false
+        if self.secondImageView.isHidden && !shiftPressed {
           self.forwardPage()
         } else {
           self.backwardPage()
@@ -48,8 +51,13 @@ class SpreadPageViewController: NSViewController {
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(secondImageViewMouseUpNotificationName, object: nil)
-      .subscribe(onNext: { _ in
-        self.forwardPage()
+      .subscribe(onNext: { notification in
+        let shiftPressed = notification.userInfo?[BookImageView.shiftPressed] as? Bool ?? false
+        if shiftPressed {
+          self.backwardPage()
+        } else {
+          self.forwardPage()
+        }
       })
       .disposed(by: self.disposeBag)
   }
@@ -185,10 +193,6 @@ class SpreadPageViewController: NSViewController {
     }
   }
 
-  override func mouseUp(with event: NSEvent) {
-    self.forwardPage()
-  }
-
   override func encodeRestorableState(with coder: NSCoder) {
     super.encodeRestorableState(with: coder)
     coder.encode(self.currentPageIndex.value, forKey: "currentPageIndex")
@@ -280,5 +284,43 @@ class SpreadPageViewController: NSViewController {
 
   func resizedWindowByManual() {
     self.manualViewHeight = self.view.frame.size.height
+  }
+
+  override func scrollWheel(with event: NSEvent) {
+    //log.debug("scrollWheel \(event.deltaX), \(event.phase)")
+    switch event.phase {
+    case .began:
+      self.swipeDeltaX = 0
+      self.swipeDeltaY = 0
+    case .stationary:
+      self.swipeDeltaX += event.scrollingDeltaX
+      self.swipeDeltaY += event.scrollingDeltaY
+      break
+    case .changed:
+      self.swipeDeltaX += event.scrollingDeltaX
+      self.swipeDeltaY += event.scrollingDeltaY
+      break
+    case .ended:
+      if abs(self.swipeDeltaX) > abs(self.swipeDeltaY) {
+        if self.swipeDeltaX < -50 {
+          // go left page
+          self.pageOrder.value == .ltr ? self.forwardPage() : self.backwardPage()
+        } else if swipeDeltaX > 50 {
+          // go right page
+          self.pageOrder.value == .rtl ? self.forwardPage() : self.backwardPage()
+        }
+      } else {
+        if self.swipeDeltaY < -50 {
+          self.backwardPage()
+        } else if swipeDeltaY > 50 {
+          self.forwardPage()
+        }
+      }
+      self.swipeDeltaX = 0
+      self.swipeDeltaY = 0
+    default:
+      self.swipeDeltaX = 0
+      self.swipeDeltaY = 0
+    }
   }
 }

@@ -37,9 +37,6 @@ class SpreadPageViewController: NSViewController {
     self.imageStackView.userInterfaceLayoutDirection = .rightToLeft
     self.firstImageView.notificationName = firstImageViewMouseUpNotificationName
     self.secondImageView.notificationName = secondImageViewMouseUpNotificationName
-    // Set background color for transparent PDF
-    self.view.wantsLayer = true
-    self.view.layer?.backgroundColor = NSColor.white.cgColor
 
     NotificationCenter.default.rx.notification(firstImageViewMouseUpNotificationName, object: nil)
       .subscribe(onNext: { _ in

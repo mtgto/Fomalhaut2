@@ -28,6 +28,9 @@ class PdfArchiver: Archiver {
       {
         let image = NSImage(size: imageRep.size)
         image.lockFocus()
+        // Set background color for transparent PDF
+        NSColor.white.setFill()
+        NSBezierPath.fill(NSRect(origin: .zero, size: imageRep.size))
         imageRep.draw(at: .zero)
         image.unlockFocus()
         //log.debug("pdf image size \(image.size.width)x\(image.size.height)")

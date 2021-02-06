@@ -12,8 +12,8 @@ class RarArchiver: Archiver {
 
   init?(url: URL) {
     self.fileURL = url
-    let archive = Archive(fileURL: url)
     do {
+      let archive = try Archive(fileURL: url)
       self.entries = try archive.entries().filter({ (entry) -> Bool in
         let path = entry.fileName.lowercased()
         return path.hasSuffix(".jpg") || path.hasSuffix(".jpeg") || path.hasSuffix(".png")
@@ -37,8 +37,8 @@ class RarArchiver: Archiver {
   func image(at page: Int, completion: @escaping (Result<NSImage, BookAccessibleError>) -> Void) {
     self.operationQueue.addOperation {
       let entry = self.entries[page]
-      let archive = Archive(path: self.fileURL.path)
       do {
+        let archive = try Archive(path: self.fileURL.path)
         let data = try archive.extract(entry)
         guard let image = NSImage(data: data) else {
           completion(.failure(BookAccessibleError.brokenFile))

@@ -795,7 +795,7 @@
 			repositoryURL = "https://github.com/mtgto/Unrar.swift.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.2.0;
+				minimumVersion = 0.3.0;
 			};
 		};
 		CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */ = {

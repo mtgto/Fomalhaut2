@@ -1,5 +1,17 @@
 CHANGELOG
 ====
+## v0.8.0 (2021-02-07)
+
+### Added
+
+- Enable trackpad swipe page direction (#2)
+- Enable shift-click to go backwise page
+
+### Changed
+
+- Fix white margin top and bottom in full screen (#3)
+- Update Unrar to 0.3.0
+- Update web packages
 
 ## v0.7.2 (2021-01-31)
 

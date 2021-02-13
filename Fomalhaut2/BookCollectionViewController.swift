@@ -362,11 +362,17 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     else {
       return false
     }
+    let validExtensionFileURLs = dropFileURLs.filter {
+      ["zip", "cbz", "rar", "cbr", "pdf"].contains($0.pathExtension.lowercased())
+    }
+    if validExtensionFileURLs.isEmpty {
+      return false
+    }
     guard let realm = try? Realm() else {
       log.error("Failed to initialize Realm")
       return true
     }
-    dropFileURLs.forEach { (fileURL) in
+    validExtensionFileURLs.forEach { (fileURL) in
       let book = Book()
       do {
         try book.setURL(fileURL)

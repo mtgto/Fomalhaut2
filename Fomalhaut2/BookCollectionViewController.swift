@@ -95,22 +95,26 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     self.collectionViewBooks
       .compactMap { $0 }
       .flatMapLatest { Observable.changeset(from: $0) }
-      .subscribe(onNext: { [unowned self] _, changes in
+      .map { $0.1 }
+      .withUnretained(self)
+      .subscribe(onNext: { (owner, changes) in
         if let changes = changes {
-          self.collectionView.applyChangeset(changes)
+          owner.collectionView.applyChangeset(changes)
         } else {
-          self.collectionView.reloadData()
+          owner.collectionView.reloadData()
         }
       })
       .disposed(by: self.disposeBag)
     self.tableViewBooks
       .compactMap { $0 }
       .flatMapLatest { Observable.changeset(from: $0) }
-      .subscribe(onNext: { [unowned self] _, changes in
+      .map { $0.1 }
+      .withUnretained(self)
+      .subscribe(onNext: { owner, changes in
         if let changes = changes {
-          self.tableView.applyChangeset(changes)
+          owner.tableView.applyChangeset(changes)
         } else {
-          self.tableView.reloadData()
+          owner.tableView.reloadData()
         }
       })
       .disposed(by: self.disposeBag)

@@ -49,13 +49,15 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     self.collections
       .compactMap { $0 }
       .flatMapLatest { Observable.changeset(from: $0) }
-      .subscribe(onNext: { [unowned self] results, changes in
-        let lastSelectedRow = self.filterListView.selectedRow
-        let lastSelectedItem = self.filterListView.item(atRow: lastSelectedRow) ?? self.filters[0]
-        self.filterListView.reloadItem(self.rootItems[1], reloadChildren: true)
+      .map { $0.1 }
+      .withUnretained(self)
+      .subscribe(onNext: { owner, changes in
+        let lastSelectedRow = owner.filterListView.selectedRow
+        let lastSelectedItem = owner.filterListView.item(atRow: lastSelectedRow) ?? self.filters[0]
+        self.filterListView.reloadItem(owner.rootItems[1], reloadChildren: true)
         // If user delete selected row, selection is initialized (all books)
-        let row = self.filterListView.row(forItem: lastSelectedItem)
-        self.filterListView.selectRowIndexes(IndexSet([row < 0 ? 1 : row]), byExtendingSelection: false)
+        let row = owner.filterListView.row(forItem: lastSelectedItem)
+        owner.filterListView.selectRowIndexes(IndexSet([row < 0 ? 1 : row]), byExtendingSelection: false)
       })
       .disposed(by: self.disposeBag)
     self.rootItems.forEach { (rootItem) in

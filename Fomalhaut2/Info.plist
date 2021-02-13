@@ -39,6 +39,7 @@
 			<array>
 				<string>net.mtgto.Fomalhaut2.cbz</string>
 				<string>com.yacreader.yacreader.cbz</string>
+				<string>public.data</string>
 			</array>
 			<key>NSDocumentClass</key>
 			<string>$(PRODUCT_MODULE_NAME).BookDocument</string>
@@ -108,6 +109,7 @@
 			<array>
 				<string>net.mtgto.Fomalhaut2.cbr</string>
 				<string>com.yacreader.yacreader.cbr</string>
+				<string>public.data</string>
 			</array>
 			<key>NSDocumentClass</key>
 			<string>$(PRODUCT_MODULE_NAME).BookDocument</string>

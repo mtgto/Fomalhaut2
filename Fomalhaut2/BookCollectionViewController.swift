@@ -18,6 +18,7 @@ enum CollectionOrder: String {
 }
 
 class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation {
+  static let collectionTabViewInitialIndexKey = "collectionTabViewInitialIndex"
   private let tableViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
   private let collectionViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
   let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
@@ -44,6 +45,9 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       NSNib(nibNamed: "CollectionViewHeaderView", bundle: .main),
       forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader,
       withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionViewHeaderView.className()))
+    let initialTabIndex = UserDefaults.standard.integer(
+      forKey: BookCollectionViewController.collectionTabViewInitialIndexKey)
+    self.collectionViewStyle.accept(initialTabIndex == 0 ? .collection : .list)
     Schema.shared.state
       .skip { $0 != .finish }
       .flatMap { _ in
@@ -111,9 +115,12 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       })
       .disposed(by: self.disposeBag)
     self.collectionViewStyle
+      .distinctUntilChanged()
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { collectionViewStyle in
-        self.tabView.selectTabViewItem(at: collectionViewStyle == .collection ? 0 : 1)
+        let tabViewIndex = collectionViewStyle == .collection ? 0 : 1
+        self.tabView.selectTabViewItem(at: tabViewIndex)
+        UserDefaults.standard.set(tabViewIndex, forKey: BookCollectionViewController.collectionTabViewInitialIndexKey)
       })
       .disposed(by: self.disposeBag)
     self.collectionContent

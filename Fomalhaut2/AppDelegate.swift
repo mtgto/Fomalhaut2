@@ -17,7 +17,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // Setting isExcludedFromWindowsMenu in BookWindowController#viewDidLoad is ignored...
     NSApp.windows.first?.isExcludedFromWindowsMenu = true
     UserDefaults.standard.register(defaults: [
-      WebSharingViewController.webServerPortKey: 8080
+      BookCollectionViewController.collectionTabViewInitialIndexKey: 0,
+      WebSharingViewController.webServerPortKey: 8080,
     ])
     do {
       try Schema.shared.migrate()

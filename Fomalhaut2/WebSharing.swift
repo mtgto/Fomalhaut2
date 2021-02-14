@@ -25,6 +25,7 @@ class WebSharing: NSObject {
   private let cache = NSCache<NSString, CombineArchiver>()
   private let assetArchive: Archive
   private let remoteIpAddress = PublishRelay<String>()
+  private let lock = NSRecursiveLock()
   private let disposeBag = DisposeBag()
   private let notFound = Response(text: "Not Found", status: .notFound)
   private let internalServerError = Response(text: "Internal Server Error", status: .internalServerError)
@@ -193,7 +194,10 @@ class WebSharing: NSObject {
 
   private func recordAccess(_ request: Request) {
     if let ipAddress = request.remoteAddress?.ipAddress {
+      // ref. https://stackoverflow.com/a/54401485/6945346
+      self.lock.lock()
       self.remoteIpAddress.accept(ipAddress)
+      self.lock.unlock()
     }
   }
 

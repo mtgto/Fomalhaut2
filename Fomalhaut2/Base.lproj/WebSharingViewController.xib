@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="WebSharingViewController" customModule="Fomalhaut2" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="lVd-bD-Ffx" id="DIy-vn-CvG"/>
+                <outlet property="informationLabel" destination="gmA-y1-0OA" id="mWF-o7-UBU"/>
                 <outlet property="openBrowserButton" destination="OWQ-aa-aQ3" id="Paj-bV-vpM"/>
                 <outlet property="portTextField" destination="B90-KP-T5F" id="DOd-sm-saT"/>
                 <outlet property="toggleWebServerButton" destination="OJv-Cb-db7" id="91A-HV-Kqj"/>
@@ -93,9 +94,6 @@
 DQ
 </string>
                     </buttonCell>
-                    <connections>
-                        <action selector="toggleWebServer:" target="-2" id="iAj-G2-tfZ"/>
-                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lVd-bD-Ffx">
                     <rect key="frame" x="294" y="13" width="95" height="32"/>
@@ -134,8 +132,21 @@ Gw
                         <action selector="openBrowser:" target="-2" id="gFp-Ri-X3n"/>
                     </connections>
                 </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gmA-y1-0OA">
+                    <rect key="frame" x="22" y="49" width="440" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="lsB-58-kJA"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" id="Imi-90-Pd7">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
+                <constraint firstItem="gmA-y1-0OA" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="24" id="79D-gR-tbG"/>
+                <constraint firstItem="OWQ-aa-aQ3" firstAttribute="top" secondItem="gmA-y1-0OA" secondAttribute="bottom" constant="8" id="9dV-0i-1SE"/>
                 <constraint firstAttribute="bottom" secondItem="OWQ-aa-aQ3" secondAttribute="bottom" constant="20" symbolic="YES" id="BMI-DW-l9T"/>
                 <constraint firstItem="TCp-0o-nCT" firstAttribute="trailing" secondItem="OJv-Cb-db7" secondAttribute="trailing" id="Ehv-zH-7qP"/>
                 <constraint firstItem="9RG-XP-1qW" firstAttribute="trailing" secondItem="TCp-0o-nCT" secondAttribute="trailing" id="Ua8-gD-3dT"/>
@@ -143,6 +154,7 @@ Gw
                 <constraint firstItem="TCp-0o-nCT" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="44" id="VmX-TF-B0X"/>
                 <constraint firstItem="OJv-Cb-db7" firstAttribute="leading" secondItem="lVd-bD-Ffx" secondAttribute="trailing" constant="7" id="XaO-xh-NiG"/>
                 <constraint firstItem="TCp-0o-nCT" firstAttribute="top" secondItem="9RG-XP-1qW" secondAttribute="bottom" constant="8" symbolic="YES" id="cGQ-7g-U6X"/>
+                <constraint firstAttribute="trailing" secondItem="gmA-y1-0OA" secondAttribute="trailing" constant="20" id="dmU-3S-1Zz"/>
                 <constraint firstItem="OWQ-aa-aQ3" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="fsy-u9-1a2"/>
                 <constraint firstItem="r1y-bL-vH7" firstAttribute="top" secondItem="TCp-0o-nCT" secondAttribute="bottom" constant="8" symbolic="YES" id="ipS-A7-IpP"/>
                 <constraint firstItem="9RG-XP-1qW" firstAttribute="leading" secondItem="OWQ-aa-aQ3" secondAttribute="leading" id="kMg-Yq-5u1"/>

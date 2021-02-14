@@ -10,6 +10,9 @@ import RxSwift
 import Swiftra
 import ZIPFoundation
 
+let webSharingIpAddressNotificationName = Notification.Name("webSharingIpAddress")
+let webSharingIpAddressNotificationUserInfoKey = "ipAddress"
+
 private let cacheControlKey = "Cache-Control"
 private let noCache = "no-cache"
 private let contentTypeJpeg = "image/jpeg"
@@ -21,6 +24,7 @@ class WebSharing: NSObject {
   private var books: [Book] = []
   private let cache = NSCache<NSString, CombineArchiver>()
   private let assetArchive: Archive
+  private let remoteIpAddress = PublishRelay<String>()
   private let disposeBag = DisposeBag()
   private let notFound = Response(text: "Not Found", status: .notFound)
   private let internalServerError = Response(text: "Internal Server Error", status: .internalServerError)
@@ -37,18 +41,22 @@ class WebSharing: NSObject {
     super.init()
     self.server.addRoutes {
       futureGet("/") { req in
-        self.defaultHtml(req)
+        self.recordAccess(req)
+        return self.defaultHtml(req)
       }
 
       futureGet("/books/:id") { req in
-        self.defaultHtml(req)
+        self.recordAccess(req)
+        return self.defaultHtml(req)
       }
 
       futureGet("/collections/:id") { req in
-        self.defaultHtml(req)
+        self.recordAccess(req)
+        return self.defaultHtml(req)
       }
 
       futureGet("/assets/:filename") { req in
+        self.recordAccess(req)
         guard let filename = req.params("filename") else {
           return req.eventLoop.makeSucceededFuture(self.notFound)
         }
@@ -67,10 +75,12 @@ class WebSharing: NSObject {
       }
 
       get("/api/v1/collections") { req in
-        Response(json: self.collections, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
+        self.recordAccess(req)
+        return Response(json: self.collections, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
       }
 
       get("/api/v1/collections/:id") { req in
+        self.recordAccess(req)
         guard let collection = self.collections.first(where: { $0.id == req.params("id") }) else {
           return self.notFound
         }
@@ -78,10 +88,12 @@ class WebSharing: NSObject {
       }
 
       get("/api/v1/books") { req in
-        Response(json: self.books, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
+        self.recordAccess(req)
+        return Response(json: self.books, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
       }
 
       get("/images/books/:id/thumbnail") { req in
+        self.recordAccess(req)
         guard let book = self.books.first(where: { $0.id == req.params("id") }) else {
           return self.notFound
         }
@@ -96,6 +108,7 @@ class WebSharing: NSObject {
       }
 
       futureGet("/images/books/:id/pages/:page") { req in
+        self.recordAccess(req)
         let promise = req.eventLoop.makePromise(of: Response.self)
         guard let book = self.books.first(where: { $0.id == req.params("id") }) else {
           promise.succeed(self.notFound)
@@ -124,6 +137,16 @@ class WebSharing: NSObject {
         return promise.futureResult
       }
     }
+
+    self.remoteIpAddress
+      .observe(on: MainScheduler.asyncInstance)
+      .subscribe { event in
+        if let ipAddress = event.element {
+          let userInfo = [webSharingIpAddressNotificationUserInfoKey: ipAddress]
+          NotificationCenter.default.post(name: webSharingIpAddressNotificationName, object: nil, userInfo: userInfo)
+        }
+      }
+      .disposed(by: self.disposeBag)
 
     Schema.shared.state
       .skip { $0 != .finish }
@@ -165,6 +188,12 @@ class WebSharing: NSObject {
         owner.books = books.map { $0.freeze() }
       })
       .disposed(by: self.disposeBag)
+  }
+
+  private func recordAccess(_ request: Request) {
+    if let ipAddress = request.remoteAddress?.ipAddress {
+      self.remoteIpAddress.accept(ipAddress)
+    }
   }
 
   private func defaultHtml(_ request: Request) -> EventLoopFuture<Response> {

@@ -2,21 +2,27 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Cocoa
+import RxRelay
 import RxSwift
 
 class WebSharingViewController: NSViewController {
   static let webServerPortKey = "webServerPort"
   private let webSharing = WebSharing()
+  private let dateFormatter = DateFormatter()
   private let disposeBag = DisposeBag()
   @IBOutlet weak var portTextField: NSTextField!
   @IBOutlet weak var toggleWebServerButton: NSButton!
   @IBOutlet weak var closeButton: NSButton!
   @IBOutlet weak var openBrowserButton: NSButton!
+  @IBOutlet weak var informationLabel: NSTextField!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     self.portTextField.stringValue = String(
       UserDefaults.standard.integer(forKey: WebSharingViewController.webServerPortKey))
+    self.dateFormatter.locale = .current
+    self.dateFormatter.dateStyle = .short
+    self.dateFormatter.timeStyle = .short
     self.toggleWebServerButton.rx.tap
       .scan(false) { started, newValue in
         if started {
@@ -49,6 +55,19 @@ class WebSharingViewController: NSViewController {
         }
       }
       .subscribe()
+      .disposed(by: self.disposeBag)
+    NotificationCenter.default.rx.notification(webSharingIpAddressNotificationName, object: nil)
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { notification in
+        if let userInfo = notification.userInfo,
+          let ipAddress = userInfo[webSharingIpAddressNotificationUserInfoKey] as? String
+        {
+          let information = String(
+            format: NSLocalizedString("WebSharingIpAddressInformation", comment: "Last Access from %@ at %@"),
+            ipAddress, self.dateFormatter.string(from: Date()))
+          self.informationLabel.stringValue = information
+        }
+      })
       .disposed(by: self.disposeBag)
   }
 

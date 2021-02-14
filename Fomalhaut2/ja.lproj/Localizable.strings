@@ -57,3 +57,5 @@
 
 "ErrorBrokenFile" = "ファイルが壊れているか未対応です";
 "ErrorEncrypted" = "ファイルが暗号化されています";
+
+"WebSharingIpAddressInformation" = "最終アクセス %@ 日時 %@";

@@ -1,5 +1,19 @@
 CHANGELOG
 ====
+## v0.8.1 (2021-02-14)
+
+### Added
+
+- Show tiny access log for web sharing
+- Restore selected collection tab when app restart
+
+### Changed
+
+- Disable unsupported files drop to collection
+- Set `public.data` to exported file type of `cbz` and `cbr`
+- Update realm-core to 10.5.2
+- Update web packages
+
 ## v0.8.0 (2021-02-07)
 
 ### Added

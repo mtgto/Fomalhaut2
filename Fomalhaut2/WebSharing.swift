@@ -139,6 +139,7 @@ class WebSharing: NSObject {
     }
 
     self.remoteIpAddress
+      .throttle(.seconds(30), scheduler: MainScheduler.asyncInstance)
       .observe(on: MainScheduler.asyncInstance)
       .subscribe { event in
         if let ipAddress = event.element {

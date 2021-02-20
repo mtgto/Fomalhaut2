@@ -771,7 +771,7 @@
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 6.0.0;
+				minimumVersion = 6.1.0;
 			};
 		};
 		CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
@@ -787,7 +787,7 @@
 			repositoryURL = "https://github.com/mtgto/Swiftra.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.3.0;
+				minimumVersion = 0.4.0;
 			};
 		};
 		CEAD7A0F25A494EC00927D10 /* XCRemoteSwiftPackageReference "Unrar.swift" */ = {

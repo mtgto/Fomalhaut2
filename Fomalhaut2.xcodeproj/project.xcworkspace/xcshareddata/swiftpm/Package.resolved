@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
         "state": {
           "branch": null,
-          "revision": "c8742ed97fc2f0c015a5ea5eddefb064cd7532d2",
-          "version": "6.0.0"
+          "revision": "7e01c05f25c025143073eaa3be3532f9375c614b",
+          "version": "6.1.0"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
-          "revision": "43931b7a7daf8120a487601530c8bc03ce711992",
-          "version": "2.25.1"
+          "revision": "6d3ca7e54e06a69d0f2612c2ce8bb8b7319085a4",
+          "version": "2.26.0"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/mtgto/Swiftra.git",
         "state": {
           "branch": null,
-          "revision": "668e74f37aa0ff5ffee1cffc767eb21562ce8d7d",
-          "version": "0.3.1"
+          "revision": "30ceb8cbc069453a38a7484f780a87cbdc61a09f",
+          "version": "0.4.0"
         }
       },
       {

@@ -3,6 +3,7 @@
 
 import Cocoa
 import RealmSwift
+import Shared
 
 class BookDocument: NSDocument {
   private var archiver: Archiver! = nil

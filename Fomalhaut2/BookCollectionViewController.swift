@@ -7,6 +7,7 @@ import RxCocoa
 import RxRealm
 import RxRelay
 import RxSwift
+import Shared
 
 enum CollectionViewStyle {
   case collection, list

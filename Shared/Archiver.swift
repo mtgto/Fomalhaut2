@@ -3,16 +3,16 @@
 
 import Cocoa
 
-protocol Archiver {
+public protocol Archiver {
   func pageCount() -> Int
 
   func image(at page: Int, completion: @escaping (_ image: Result<NSImage, BookAccessibleError>) -> Void)
 }
 
-class CombineArchiver: Archiver {
+public class CombineArchiver: Archiver {
   private let archiver: Archiver
 
-  init?(from url: URL, ofType typeName: String) {
+  public init?(from url: URL, ofType typeName: String) {
     let pathExtension = url.pathExtension.lowercased()
     let archiver: Archiver?
     if ZipArchiver.utis.contains(typeName) || ["zip", "cbz"].contains(pathExtension) {
@@ -34,11 +34,11 @@ class CombineArchiver: Archiver {
     }
   }
 
-  func pageCount() -> Int {
+  public func pageCount() -> Int {
     return self.archiver.pageCount()
   }
 
-  func image(at page: Int, completion: @escaping (_ image: Result<NSImage, BookAccessibleError>) -> Void) {
+  public func image(at page: Int, completion: @escaping (_ image: Result<NSImage, BookAccessibleError>) -> Void) {
     self.archiver.image(at: page, completion: completion)
   }
 }

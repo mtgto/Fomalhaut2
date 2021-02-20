@@ -4,13 +4,13 @@
 import Cocoa
 import ZIPFoundation
 
-class ZipArchiver: Archiver {
-  static let utis: [String] = ["com.pkware.zip-archive", "net.mtgto.Fomalhaut2.cbz"]
+public class ZipArchiver: Archiver {
+  public static let utis: [String] = ["com.pkware.zip-archive", "net.mtgto.Fomalhaut2.cbz"]
   private let archive: Archive
   private let entries: [Entry]
   private let operationQueue: OperationQueue
 
-  init?(url: URL) {
+  public init?(url: URL) {
     guard let archive = Archive(url: url, accessMode: .read, preferredEncoding: .shiftJIS) else {
       return nil
     }
@@ -29,11 +29,11 @@ class ZipArchiver: Archiver {
     self.operationQueue.maxConcurrentOperationCount = 1
   }
 
-  func pageCount() -> Int {
+  public func pageCount() -> Int {
     return self.entries.count
   }
 
-  func image(at page: Int, completion: @escaping (Result<NSImage, BookAccessibleError>) -> Void) {
+  public func image(at page: Int, completion: @escaping (Result<NSImage, BookAccessibleError>) -> Void) {
     self.operationQueue.addOperation {
       let entry = self.entries[page]
       var rawData = Data()

@@ -4,13 +4,13 @@
 import Cocoa
 import Unrar
 
-class RarArchiver: Archiver {
-  static let utis: [String] = ["com.rarlab.rar-archive", "net.mtgto.Fomalhaut2.cbr"]
+public class RarArchiver: Archiver {
+  public static let utis: [String] = ["com.rarlab.rar-archive", "net.mtgto.Fomalhaut2.cbr"]
   private let fileURL: URL
   private let entries: [Entry]
   private let operationQueue: OperationQueue
 
-  init?(url: URL) {
+  public init?(url: URL) {
     self.fileURL = url
     do {
       let archive = try Archive(fileURL: url)
@@ -30,11 +30,11 @@ class RarArchiver: Archiver {
     self.operationQueue.maxConcurrentOperationCount = 1
   }
 
-  func pageCount() -> Int {
+  public func pageCount() -> Int {
     return self.entries.count
   }
 
-  func image(at page: Int, completion: @escaping (Result<NSImage, BookAccessibleError>) -> Void) {
+  public func image(at page: Int, completion: @escaping (Result<NSImage, BookAccessibleError>) -> Void) {
     self.operationQueue.addOperation {
       let entry = self.entries[page]
       do {

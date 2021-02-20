@@ -3,13 +3,13 @@
 
 import Foundation
 
-enum BookAccessibleError: Error {
+public enum BookAccessibleError: Error {
   case brokenFile
   case encrypted
 }
 
 extension BookAccessibleError: LocalizedError {
-  var errorDescription: String? {
+  public var errorDescription: String? {
     switch self {
     case .brokenFile:
       return NSLocalizedString("ErrorBrokenFile", comment: "File is corrupt or unsupported file type")

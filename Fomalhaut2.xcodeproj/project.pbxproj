@@ -60,6 +60,7 @@
 		CEE4D7E525E11C23003B8EB2 /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CEE4D7E425E11C23003B8EB2 /* XCGLogger */; };
 		CEE4D82525E23926003B8EB2 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4D82425E23926003B8EB2 /* PreferencesViewController.swift */; };
 		CEE4D82925E23981003B8EB2 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE4D82825E23981003B8EB2 /* Preferences.storyboard */; };
+		CEE4D82F25E240B1003B8EB2 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4D82E25E240B1003B8EB2 /* Preferences.swift */; };
 		CEE54750259F515400F9AA30 /* defaultThumbnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEE5474F259F515400F9AA30 /* defaultThumbnail.jpg */; };
 		CEE5475525A0AF4E00F9AA30 /* BookImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */; };
 		CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */; };
@@ -161,6 +162,7 @@
 		CEE4D7E025E11C13003B8EB2 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		CEE4D82425E23926003B8EB2 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		CEE4D82825E23981003B8EB2 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		CEE4D82E25E240B1003B8EB2 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		CEE5474F259F515400F9AA30 /* defaultThumbnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = defaultThumbnail.jpg; sourceTree = "<group>"; };
 		CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookImageView.swift; sourceTree = "<group>"; };
 		CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewItem.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				CEEFC6962583C91A008D9636 /* WebSharingViewController.xib */,
 				CEEFC63A257C9590008D9636 /* WebSharing.swift */,
 				CEE4D82425E23926003B8EB2 /* PreferencesViewController.swift */,
+				CEE4D82E25E240B1003B8EB2 /* Preferences.swift */,
 				CEE4D82825E23981003B8EB2 /* Preferences.storyboard */,
 				CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */,
 				CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */,
@@ -497,6 +500,7 @@
 			files = (
 				CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */,
 				CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */,
+				CEE4D82F25E240B1003B8EB2 /* Preferences.swift in Sources */,
 				CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */,
 				CE9EE63C2534A71200B5AF5C /* SpreadPageViewController.swift in Sources */,
 				CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */,

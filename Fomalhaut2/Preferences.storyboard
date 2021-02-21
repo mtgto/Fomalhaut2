@@ -9,7 +9,7 @@
         <!--Window Controller-->
         <scene sceneID="PJ1-hE-u5I">
             <objects>
-                <windowController id="FfR-gF-BLU" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="FfR-gF-BLU" sceneMemberID="viewController">
                     <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="hCg-DJ-bHR">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -34,14 +34,79 @@
             </objects>
             <point key="canvasLocation" x="-190" y="-330"/>
         </scene>
-        <!--Preferences View Controller-->
+        <!--Preferences...-->
         <scene sceneID="PMb-ga-JDC">
             <objects>
-                <viewController id="CBA-p3-wd1" customClass="PreferencesViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Preferences..." showSeguePresentationStyle="single" id="CBA-p3-wd1" customClass="PreferencesViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="nGC-A0-FeF">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="LRL-bG-fBE">
+                                <rect key="frame" x="125" y="89" width="230" height="93"/>
+                                <rows>
+                                    <gridRow id="fnb-KD-ddb"/>
+                                    <gridRow id="J9O-1z-BhJ"/>
+                                    <gridRow id="fvd-yj-T2Y"/>
+                                </rows>
+                                <columns>
+                                    <gridColumn id="Hkb-Su-qNq"/>
+                                    <gridColumn id="iYf-cN-Li2"/>
+                                </columns>
+                                <gridCells>
+                                    <gridCell row="fnb-KD-ddb" column="Hkb-Su-qNq" id="BBt-zE-k32">
+                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eUU-rE-8oK">
+                                            <rect key="frame" x="-2" y="72" width="120" height="16"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Default Page Order" id="eZR-JX-E3r">
+                                                <font key="font" usesAppearanceFont="YES"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <attributedString key="userComments">
+                                                <fragment content="Default Page Order"/>
+                                            </attributedString>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="fnb-KD-ddb" column="iYf-cN-Li2" id="Wia-Hn-kdU">
+                                        <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P5Z-mq-dHc">
+                                            <rect key="frame" x="120" y="69" width="113" height="25"/>
+                                            <popUpButtonCell key="cell" type="push" title="Right to Left" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="mQa-9D-KLh" id="Ieg-LH-CJn">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" id="4DF-2h-fDS">
+                                                    <items>
+                                                        <menuItem title="Right to Left" state="on" id="mQa-9D-KLh">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Left to Right" id="awn-vZ-H6d">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <action selector="selectPageOrder:" target="CBA-p3-wd1" id="auO-JY-OsG"/>
+                                            </connections>
+                                        </popUpButton>
+                                    </gridCell>
+                                    <gridCell row="J9O-1z-BhJ" column="Hkb-Su-qNq" id="Ecn-nm-eHX"/>
+                                    <gridCell row="J9O-1z-BhJ" column="iYf-cN-Li2" id="142-3W-Sa9"/>
+                                    <gridCell row="fvd-yj-T2Y" column="Hkb-Su-qNq" id="x2p-8q-bgI"/>
+                                    <gridCell row="fvd-yj-T2Y" column="iYf-cN-Li2" id="wss-kQ-XQr"/>
+                                </gridCells>
+                            </gridView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="LRL-bG-fBE" firstAttribute="centerX" secondItem="nGC-A0-FeF" secondAttribute="centerX" id="KV2-OY-TTm"/>
+                            <constraint firstItem="LRL-bG-fBE" firstAttribute="centerY" secondItem="nGC-A0-FeF" secondAttribute="centerY" id="YES-Lc-dTj"/>
+                        </constraints>
                     </view>
+                    <attributedString key="userComments">
+                        <fragment content="Preferences..."/>
+                    </attributedString>
+                    <connections>
+                        <outlet property="pageOrderPopupButton" destination="P5Z-mq-dHc" id="Vsc-EZ-BWb"/>
+                    </connections>
                 </viewController>
                 <customObject id="L75-i2-ert" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

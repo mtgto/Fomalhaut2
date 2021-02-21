@@ -375,6 +375,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     }
     validExtensionFileURLs.forEach { (fileURL) in
       let book = Book()
+      book.isRightToLeft = Preferences.standard.defaultPageOrder == .rtl
       do {
         try book.setURL(fileURL)
       } catch {

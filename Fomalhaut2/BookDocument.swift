@@ -67,6 +67,7 @@ class BookDocument: NSDocument {
       self.book = book.freeze()
     } else {
       let book = Book()
+      book.isRightToLeft = Preferences.standard.defaultPageOrder == .rtl
       try book.setURL(url)
       try realm.write {
         realm.add(book)

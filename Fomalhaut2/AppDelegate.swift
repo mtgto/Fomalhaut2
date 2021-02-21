@@ -63,4 +63,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBAction func openWebsite(_ sender: Any) {
     NSWorkspace.shared.open(URL(string: "https://github.com/mtgto/Fomalhaut2")!)
   }
+
+  @IBAction func showPreferences(_ sender: Any) {
+    let storyboard = NSStoryboard(name: NSStoryboard.Name("Preferences"), bundle: nil)
+    if let vc = storyboard.instantiateInitialController() as? PreferencesViewController {
+
+    }
+  }
 }

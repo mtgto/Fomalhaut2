@@ -23,7 +23,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="Dge-bw-s5E" kind="modal" id="OrQ-bZ-eaP"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -612,6 +616,14 @@
                 <customObject id="cLr-Fc-1uG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="110" y="227"/>
+        </scene>
+        <!--Preferences-->
+        <scene sceneID="ZE8-8K-Xn5">
+            <objects>
+                <controllerPlaceholder storyboardName="Preferences" id="Dge-bw-s5E" sceneMemberID="viewController"/>
+                <customObject id="0MV-wx-lne" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="501" y="222"/>
         </scene>
         <!--Main Stack View Controller-->
         <scene sceneID="p57-vm-Vho">

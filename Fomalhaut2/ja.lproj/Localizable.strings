@@ -28,6 +28,12 @@
 /* Confirm your app is latest */
 "DatabaseBrokenInformativeText" = "最新のバージョンを使用しているか確認してください。\nError(\"%@\")";
 
+/* (No Comment) */
+"ErrorBrokenFile" = "ファイルが壊れているか未対応です";
+
+/* (No Comment) */
+"ErrorEncrypted" = "ファイルが暗号化されています";
+
 /* Delete %@ */
 "FilterListMenuDelete" = "%@ を削除";
 
@@ -55,7 +61,6 @@
 /* View count */
 "ViewCountCaption" = "読んだ回数";
 
-"ErrorBrokenFile" = "ファイルが壊れているか未対応です";
-"ErrorEncrypted" = "ファイルが暗号化されています";
-
+/* Last Access from %@ at %@ */
 "WebSharingIpAddressInformation" = "最終アクセス %@ 日時 %@";
+

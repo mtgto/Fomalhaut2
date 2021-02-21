@@ -59,8 +59,8 @@
 		CEE4D7E125E11C13003B8EB2 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4D7E025E11C13003B8EB2 /* Log.swift */; };
 		CEE4D7E525E11C23003B8EB2 /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CEE4D7E425E11C23003B8EB2 /* XCGLogger */; };
 		CEE4D82525E23926003B8EB2 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4D82425E23926003B8EB2 /* PreferencesViewController.swift */; };
-		CEE4D82925E23981003B8EB2 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE4D82825E23981003B8EB2 /* Preferences.storyboard */; };
 		CEE4D82F25E240B1003B8EB2 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4D82E25E240B1003B8EB2 /* Preferences.swift */; };
+		CEE4D83425E245B1003B8EB2 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE4D83625E245B1003B8EB2 /* Preferences.storyboard */; };
 		CEE54750259F515400F9AA30 /* defaultThumbnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEE5474F259F515400F9AA30 /* defaultThumbnail.jpg */; };
 		CEE5475525A0AF4E00F9AA30 /* BookImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */; };
 		CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */; };
@@ -161,8 +161,9 @@
 		CEE4D7BC25E11B28003B8EB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE4D7E025E11C13003B8EB2 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		CEE4D82425E23926003B8EB2 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
-		CEE4D82825E23981003B8EB2 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		CEE4D82E25E240B1003B8EB2 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		CEE4D83525E245B1003B8EB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
+		CEE4D83825E245BF003B8EB2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Preferences.strings; sourceTree = "<group>"; };
 		CEE5474F259F515400F9AA30 /* defaultThumbnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = defaultThumbnail.jpg; sourceTree = "<group>"; };
 		CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookImageView.swift; sourceTree = "<group>"; };
 		CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionViewItem.swift; sourceTree = "<group>"; };
@@ -270,7 +271,7 @@
 				CEEFC63A257C9590008D9636 /* WebSharing.swift */,
 				CEE4D82425E23926003B8EB2 /* PreferencesViewController.swift */,
 				CEE4D82E25E240B1003B8EB2 /* Preferences.swift */,
-				CEE4D82825E23981003B8EB2 /* Preferences.storyboard */,
+				CEE4D83625E245B1003B8EB2 /* Preferences.storyboard */,
 				CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */,
 				CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */,
 				CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */,
@@ -473,7 +474,7 @@
 				CE30281325305AA200986C9A /* Main.storyboard in Resources */,
 				CE9DCB7E256A94C90024FB1B /* InfoPlist.strings in Resources */,
 				CEA994592560D9A500B8BCC6 /* ProgressViewController.xib in Resources */,
-				CEE4D82925E23981003B8EB2 /* Preferences.storyboard in Resources */,
+				CEE4D83425E245B1003B8EB2 /* Preferences.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +621,15 @@
 				CEC1EA042575151A0052228E /* ja */,
 			);
 			name = BookCollection.storyboard;
+			sourceTree = "<group>";
+		};
+		CEE4D83625E245B1003B8EB2 /* Preferences.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEE4D83525E245B1003B8EB2 /* Base */,
+				CEE4D83825E245BF003B8EB2 /* ja */,
+			);
+			name = Preferences.storyboard;
 			sourceTree = "<group>";
 		};
 		CEEFC6962583C91A008D9636 /* WebSharingViewController.xib */ = {

@@ -26,4 +26,4 @@
 "ErrorBrokenFile" = "File is corrupt or unsupported file type";
 "ErrorEncrypted" = "File is encrypted";
 
-"WebSharingIpAddressInformation" = "Last Access from %@ at %@"
+"WebSharingIpAddressInformation" = "Last Access from %@ at %@";

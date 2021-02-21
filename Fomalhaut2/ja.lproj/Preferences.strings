@@ -1,0 +1,12 @@
+/* Class = "NSMenuItem"; title = "Left to Right"; ObjectID = "awn-vZ-H6d"; */
+"awn-vZ-H6d.title" = "左側が先";
+
+/* Class = "NSViewController"; title = "Preferences..."; ObjectID = "CBA-p3-wd1"; Note = "Preferences..."; */
+"CBA-p3-wd1.title" = "環境設定…";
+
+/* Class = "NSTextFieldCell"; title = "Default Page Order"; ObjectID = "eZR-JX-E3r"; Note = "Default Page Order"; */
+"eZR-JX-E3r.title" = "デフォルトのページ順序";
+
+/* Class = "NSMenuItem"; title = "Right to Left"; ObjectID = "mQa-9D-KLh"; */
+"mQa-9D-KLh.title" = "右側が先";
+

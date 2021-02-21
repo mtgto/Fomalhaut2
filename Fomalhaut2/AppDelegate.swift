@@ -19,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     UserDefaults.standard.register(defaults: [
       BookCollectionViewController.collectionTabViewInitialIndexKey: 0,
       WebSharingViewController.webServerPortKey: 8080,
-      PageOrder.pageOrderKey: PageOrder.defaultPageOrder,
+      PageOrder.pageOrderKey: PageOrder.defaultValue.rawValue,
     ])
     do {
       try Schema.shared.migrate()

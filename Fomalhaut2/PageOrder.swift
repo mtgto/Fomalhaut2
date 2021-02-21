@@ -8,7 +8,7 @@ enum PageOrder: Int {
   case rtl = 0
 
   static let pageOrderKey = "pageOrder"
-  static let defaultPageOrder = 0  // default is right-to-left
+  static let defaultValue: PageOrder = .rtl  // default is right-to-left
 
   static func defaultPageOrder(_ userDefaults: UserDefaults = UserDefaults.standard) -> PageOrder {
     let value = userDefaults.integer(forKey: PageOrder.pageOrderKey)

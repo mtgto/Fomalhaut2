@@ -1,5 +1,17 @@
 CHANGELOG
 ====
+## v0.8.2 (2021-02-21)
+
+### Added
+
+- Add a preference window
+
+### Changed
+
+- Use embedded framework (for QuickLook feature)
+- Update RxSwift to 6.1.0
+- Update Swiftra to 0.4.0
+
 ## v0.8.1 (2021-02-14)
 
 ### Added

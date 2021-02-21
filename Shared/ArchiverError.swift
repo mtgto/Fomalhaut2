@@ -3,12 +3,12 @@
 
 import Foundation
 
-public enum BookAccessibleError: Error {
+public enum ArchiverError: Error {
   case brokenFile
   case encrypted
 }
 
-extension BookAccessibleError: LocalizedError {
+extension ArchiverError: LocalizedError {
   public var errorDescription: String? {
     switch self {
     case .brokenFile:

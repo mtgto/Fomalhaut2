@@ -59,7 +59,7 @@ class BookDocument: NSDocument {
   override func read(from url: URL, ofType typeName: String) throws {
     guard let archiver = CombineArchiver(from: url, ofType: typeName) else {
       log.error("Failed to open a file \(url.path)")
-      throw BookAccessibleError.brokenFile
+      throw ArchiverError.brokenFile
     }
     self.archiver = archiver
     let realm = try Realm()

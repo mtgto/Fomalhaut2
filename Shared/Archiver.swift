@@ -6,7 +6,7 @@ import Cocoa
 public protocol Archiver {
   func pageCount() -> Int
 
-  func image(at page: Int, completion: @escaping (_ image: Result<NSImage, BookAccessibleError>) -> Void)
+  func image(at page: Int, completion: @escaping (_ image: Result<NSImage, ArchiverError>) -> Void)
 }
 
 public class CombineArchiver: Archiver {
@@ -38,7 +38,7 @@ public class CombineArchiver: Archiver {
     return self.archiver.pageCount()
   }
 
-  public func image(at page: Int, completion: @escaping (_ image: Result<NSImage, BookAccessibleError>) -> Void) {
+  public func image(at page: Int, completion: @escaping (_ image: Result<NSImage, ArchiverError>) -> Void) {
     self.archiver.image(at: page, completion: completion)
   }
 }

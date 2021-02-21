@@ -34,20 +34,20 @@ public class RarArchiver: Archiver {
     return self.entries.count
   }
 
-  public func image(at page: Int, completion: @escaping (Result<NSImage, BookAccessibleError>) -> Void) {
+  public func image(at page: Int, completion: @escaping (Result<NSImage, ArchiverError>) -> Void) {
     self.operationQueue.addOperation {
       let entry = self.entries[page]
       do {
         let archive = try Archive(path: self.fileURL.path)
         let data = try archive.extract(entry)
         guard let image = NSImage(data: data) else {
-          completion(.failure(BookAccessibleError.brokenFile))
+          completion(.failure(ArchiverError.brokenFile))
           return
         }
         completion(.success(image))
       } catch {
         log.info("Error while extracting at \(page): \(error)")
-        completion(.failure(BookAccessibleError.brokenFile))
+        completion(.failure(ArchiverError.brokenFile))
       }
     }
   }

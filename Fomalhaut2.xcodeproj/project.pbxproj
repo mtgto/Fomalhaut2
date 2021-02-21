@@ -55,7 +55,7 @@
 		CEE4D7D425E11B81003B8EB2 /* Unrar in Frameworks */ = {isa = PBXBuildFile; productRef = CEE4D7D325E11B81003B8EB2 /* Unrar */; };
 		CEE4D7D525E11B89003B8EB2 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECC072B2549CAFD00CF56FA /* PDFKit.framework */; };
 		CEE4D7D625E11B91003B8EB2 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4D7B925E11B28003B8EB2 /* Shared.framework */; };
-		CEE4D7DB25E11BD7003B8EB2 /* BookAccessibleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE296BEB2530722A00674C99 /* BookAccessibleError.swift */; };
+		CEE4D7DB25E11BD7003B8EB2 /* ArchiverError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE296BEB2530722A00674C99 /* ArchiverError.swift */; };
 		CEE4D7E125E11C13003B8EB2 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4D7E025E11C13003B8EB2 /* Log.swift */; };
 		CEE4D7E525E11C23003B8EB2 /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = CEE4D7E425E11C23003B8EB2 /* XCGLogger */; };
 		CEE54750259F515400F9AA30 /* defaultThumbnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEE5474F259F515400F9AA30 /* defaultThumbnail.jpg */; };
@@ -103,7 +103,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CE296BEB2530722A00674C99 /* BookAccessibleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAccessibleError.swift; sourceTree = "<group>"; };
+		CE296BEB2530722A00674C99 /* ArchiverError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiverError.swift; sourceTree = "<group>"; };
 		CE30280625305AA000986C9A /* Fomalhaut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fomalhaut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE30280925305AA000986C9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE30280F25305AA200986C9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 		CEE4D7BA25E11B28003B8EB2 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				CE296BEB2530722A00674C99 /* BookAccessibleError.swift */,
+				CE296BEB2530722A00674C99 /* ArchiverError.swift */,
 				CE34A3F825BBC45100B4C0B5 /* Archiver.swift */,
 				CE34A3FE25BBC5BA00B4C0B5 /* ZipArchiver.swift */,
 				CE34A40425BBC6E400B4C0B5 /* FolderArchiver.swift */,
@@ -535,7 +535,7 @@
 				CEE4D7E125E11C13003B8EB2 /* Log.swift in Sources */,
 				CEE4D7CC25E11B48003B8EB2 /* FolderArchiver.swift in Sources */,
 				CEE4D7CA25E11B48003B8EB2 /* PdfArchiver.swift in Sources */,
-				CEE4D7DB25E11BD7003B8EB2 /* BookAccessibleError.swift in Sources */,
+				CEE4D7DB25E11BD7003B8EB2 /* ArchiverError.swift in Sources */,
 				CEE4D7CB25E11B48003B8EB2 /* RarArchiver.swift in Sources */,
 				CEE4D7CD25E11B48003B8EB2 /* ZipArchiver.swift in Sources */,
 			);

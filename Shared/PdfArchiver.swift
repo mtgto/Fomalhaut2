@@ -21,7 +21,7 @@ public class PdfArchiver: Archiver {
     return self.pdfDocument.pageCount
   }
 
-  public func image(at page: Int, completion: @escaping (Result<NSImage, BookAccessibleError>) -> Void) {
+  public func image(at page: Int, completion: @escaping (Result<NSImage, ArchiverError>) -> Void) {
     self.operationQueue.addOperation {
       if let pdfPage = self.pdfDocument.page(at: page), let data = pdfPage.dataRepresentation,
         let imageRep = NSPDFImageRep(data: data)
@@ -37,7 +37,7 @@ public class PdfArchiver: Archiver {
         completion(.success(image))
       } else {
         log.info("Error while extracting at \(page)")
-        completion(.failure(BookAccessibleError.brokenFile))
+        completion(.failure(ArchiverError.brokenFile))
       }
     }
   }

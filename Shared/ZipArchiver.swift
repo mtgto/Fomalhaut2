@@ -33,7 +33,7 @@ public class ZipArchiver: Archiver {
     return self.entries.count
   }
 
-  public func image(at page: Int, completion: @escaping (Result<NSImage, BookAccessibleError>) -> Void) {
+  public func image(at page: Int, completion: @escaping (Result<NSImage, ArchiverError>) -> Void) {
     self.operationQueue.addOperation {
       let entry = self.entries[page]
       var rawData = Data()
@@ -46,7 +46,7 @@ public class ZipArchiver: Archiver {
           rawData.append(data)
           if rawData.count >= entry.uncompressedSize {
             guard let image = NSImage(data: rawData) else {
-              completion(.failure(BookAccessibleError.brokenFile))
+              completion(.failure(ArchiverError.brokenFile))
               return
             }
             completion(.success(image))
@@ -54,7 +54,7 @@ public class ZipArchiver: Archiver {
         }
       } catch {
         log.info("Error while extracting at \(page): \(error)")
-        completion(.failure(BookAccessibleError.brokenFile))
+        completion(.failure(ArchiverError.brokenFile))
       }
     }
   }

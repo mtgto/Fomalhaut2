@@ -27,12 +27,12 @@ class FolderArchiver: Archiver {
     return self.entries.count
   }
 
-  func image(at page: Int, completion: @escaping (Result<NSImage, BookAccessibleError>) -> Void) {
+  func image(at page: Int, completion: @escaping (Result<NSImage, ArchiverError>) -> Void) {
     if let image = NSImage(contentsOf: self.entries[page]) {
       completion(.success(image))
     } else {
       log.info("Can not load a image from \(self.entries[page].path)")
-      completion(.failure(BookAccessibleError.brokenFile))
+      completion(.failure(ArchiverError.brokenFile))
     }
   }
 }

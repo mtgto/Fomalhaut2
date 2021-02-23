@@ -72,6 +72,12 @@
 		CEEFC6622580F5DB008D9636 /* assets.zip in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6612580F5DB008D9636 /* assets.zip */; };
 		CEEFC66B25810C24008D9636 /* WebSharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC66925810C24008D9636 /* WebSharingViewController.swift */; };
 		CEEFC6942583C91A008D9636 /* WebSharingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6962583C91A008D9636 /* WebSharingViewController.xib */; };
+		CEF8C98325E4E1E9005347BF /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF8C98225E4E1E9005347BF /* Quartz.framework */; };
+		CEF8C98625E4E1E9005347BF /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8C98525E4E1E9005347BF /* PreviewViewController.swift */; };
+		CEF8C98925E4E1E9005347BF /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF8C98725E4E1E9005347BF /* PreviewViewController.xib */; };
+		CEF8C98E25E4E1E9005347BF /* Fomalhaut2QuickLook.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CEF8C98125E4E1E9005347BF /* Fomalhaut2QuickLook.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CEF8C99625E4E1F6005347BF /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4D7B925E11B28003B8EB2 /* Shared.framework */; };
+		CEF8C99725E4E1F6005347BF /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4D7B925E11B28003B8EB2 /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +95,20 @@
 			remoteGlobalIDString = CEE4D7B825E11B28003B8EB2;
 			remoteInfo = Archiver;
 		};
+		CEF8C98C25E4E1E9005347BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE3027FE25305AA000986C9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEF8C98025E4E1E9005347BF;
+			remoteInfo = Fomalhaut2QuickLook;
+		};
+		CEF8C99825E4E1F6005347BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE3027FE25305AA000986C9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEE4D7B825E11B28003B8EB2;
+			remoteInfo = Shared;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -99,6 +119,28 @@
 			dstSubfolderSpec = 10;
 			files = (
 				CEE4D7C125E11B28003B8EB2 /* Shared.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEF8C98F25E4E1E9005347BF /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CEF8C98E25E4E1E9005347BF /* Fomalhaut2QuickLook.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEF8C99A25E4E1F7005347BF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CEF8C99725E4E1F6005347BF /* Shared.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +218,12 @@
 		CEEFC66925810C24008D9636 /* WebSharingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSharingViewController.swift; sourceTree = "<group>"; };
 		CEEFC6952583C91A008D9636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WebSharingViewController.xib; sourceTree = "<group>"; };
 		CEEFC69B2583C920008D9636 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/WebSharingViewController.strings; sourceTree = "<group>"; };
+		CEF8C98125E4E1E9005347BF /* Fomalhaut2QuickLook.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Fomalhaut2QuickLook.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEF8C98225E4E1E9005347BF /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		CEF8C98525E4E1E9005347BF /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		CEF8C98825E4E1E9005347BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreviewViewController.xib; sourceTree = "<group>"; };
+		CEF8C98A25E4E1E9005347BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEF8C98B25E4E1E9005347BF /* Fomalhaut2QuickLook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fomalhaut2QuickLook.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +257,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEF8C97E25E4E1E9005347BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEF8C98325E4E1E9005347BF /* Quartz.framework in Frameworks */,
+				CEF8C99625E4E1F6005347BF /* Shared.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -218,6 +275,7 @@
 				CE30280825305AA000986C9A /* Fomalhaut2 */,
 				CE30281D25305AA200986C9A /* Fomalhaut2Tests */,
 				CEE4D7BA25E11B28003B8EB2 /* Shared */,
+				CEF8C98425E4E1E9005347BF /* Fomalhaut2QuickLook */,
 				CE30280725305AA000986C9A /* Products */,
 				CECC072A2549CAFD00CF56FA /* Frameworks */,
 				CE9DCC2325730EC30024FB1B /* LICENSE */,
@@ -233,6 +291,7 @@
 				CE30280625305AA000986C9A /* Fomalhaut2.app */,
 				CE30281A25305AA200986C9A /* Fomalhaut2Tests.xctest */,
 				CEE4D7B925E11B28003B8EB2 /* Shared.framework */,
+				CEF8C98125E4E1E9005347BF /* Fomalhaut2QuickLook.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -304,6 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				CECC072B2549CAFD00CF56FA /* PDFKit.framework */,
+				CEF8C98225E4E1E9005347BF /* Quartz.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -322,6 +382,17 @@
 				CEE4D7E025E11C13003B8EB2 /* Log.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		CEF8C98425E4E1E9005347BF /* Fomalhaut2QuickLook */ = {
+			isa = PBXGroup;
+			children = (
+				CEF8C98525E4E1E9005347BF /* PreviewViewController.swift */,
+				CEF8C98725E4E1E9005347BF /* PreviewViewController.xib */,
+				CEF8C98A25E4E1E9005347BF /* Info.plist */,
+				CEF8C98B25E4E1E9005347BF /* Fomalhaut2QuickLook.entitlements */,
+			);
+			path = Fomalhaut2QuickLook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,11 +417,13 @@
 				CE30280325305AA000986C9A /* Frameworks */,
 				CE30280425305AA000986C9A /* Resources */,
 				CEE4D7C525E11B28003B8EB2 /* Embed Frameworks */,
+				CEF8C98F25E4E1E9005347BF /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				CEE4D7BF25E11B28003B8EB2 /* PBXTargetDependency */,
+				CEF8C98D25E4E1E9005347BF /* PBXTargetDependency */,
 			);
 			name = Fomalhaut2;
 			packageProductDependencies = (
@@ -404,13 +477,32 @@
 			productReference = CEE4D7B925E11B28003B8EB2 /* Shared.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		CEF8C98025E4E1E9005347BF /* Fomalhaut2QuickLook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEF8C99225E4E1E9005347BF /* Build configuration list for PBXNativeTarget "Fomalhaut2QuickLook" */;
+			buildPhases = (
+				CEF8C97D25E4E1E9005347BF /* Sources */,
+				CEF8C97E25E4E1E9005347BF /* Frameworks */,
+				CEF8C97F25E4E1E9005347BF /* Resources */,
+				CEF8C99A25E4E1F7005347BF /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEF8C99925E4E1F6005347BF /* PBXTargetDependency */,
+			);
+			name = Fomalhaut2QuickLook;
+			productName = Fomalhaut2QuickLook;
+			productReference = CEF8C98125E4E1E9005347BF /* Fomalhaut2QuickLook.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		CE3027FE25305AA000986C9A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					CE30280525305AA000986C9A = {
@@ -421,6 +513,9 @@
 						TestTargetID = CE30280525305AA000986C9A;
 					};
 					CEE4D7B825E11B28003B8EB2 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					CEF8C98025E4E1E9005347BF = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -450,6 +545,7 @@
 				CE30280525305AA000986C9A /* Fomalhaut2 */,
 				CE30281925305AA200986C9A /* Fomalhaut2Tests */,
 				CEE4D7B825E11B28003B8EB2 /* Shared */,
+				CEF8C98025E4E1E9005347BF /* Fomalhaut2QuickLook */,
 			);
 		};
 /* End PBXProject section */
@@ -489,6 +585,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEF8C97F25E4E1E9005347BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEF8C98925E4E1E9005347BF /* PreviewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,6 +658,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEF8C97D25E4E1E9005347BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEF8C98625E4E1E9005347BF /* PreviewViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -566,6 +678,16 @@
 			isa = PBXTargetDependency;
 			target = CEE4D7B825E11B28003B8EB2 /* Shared */;
 			targetProxy = CEE4D7BE25E11B28003B8EB2 /* PBXContainerItemProxy */;
+		};
+		CEF8C98D25E4E1E9005347BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEF8C98025E4E1E9005347BF /* Fomalhaut2QuickLook */;
+			targetProxy = CEF8C98C25E4E1E9005347BF /* PBXContainerItemProxy */;
+		};
+		CEF8C99925E4E1F6005347BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEE4D7B825E11B28003B8EB2 /* Shared */;
+			targetProxy = CEF8C99825E4E1F6005347BF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -639,6 +761,14 @@
 				CEEFC69B2583C920008D9636 /* ja */,
 			);
 			name = WebSharingViewController.xib;
+			sourceTree = "<group>";
+		};
+		CEF8C98725E4E1E9005347BF /* PreviewViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEF8C98825E4E1E9005347BF /* Base */,
+			);
+			name = PreviewViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -913,6 +1043,48 @@
 			};
 			name = Release;
 		};
+		CEF8C99025E4E1E9005347BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Fomalhaut2QuickLook/Fomalhaut2QuickLook.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W3A6B7FDC7;
+				INFOPLIST_FILE = Fomalhaut2QuickLook/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.Fomalhaut2.Fomalhaut2QuickLook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CEF8C99125E4E1E9005347BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Fomalhaut2QuickLook/Fomalhaut2QuickLook.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W3A6B7FDC7;
+				INFOPLIST_FILE = Fomalhaut2QuickLook/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.Fomalhaut2.Fomalhaut2QuickLook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -948,6 +1120,15 @@
 			buildConfigurations = (
 				CEE4D7C325E11B28003B8EB2 /* Debug */,
 				CEE4D7C425E11B28003B8EB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEF8C99225E4E1E9005347BF /* Build configuration list for PBXNativeTarget "Fomalhaut2QuickLook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEF8C99025E4E1E9005347BF /* Debug */,
+				CEF8C99125E4E1E9005347BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

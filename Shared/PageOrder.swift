@@ -3,14 +3,14 @@
 
 import Foundation
 
-enum PageOrder: Int {
+public enum PageOrder: Int {
   case ltr = 1
   case rtl = 0
 
-  static let pageOrderKey = "pageOrder"
-  static let defaultValue: PageOrder = .rtl  // default is right-to-left
+  public static let pageOrderKey = "pageOrder"
+  public static let defaultValue: PageOrder = .rtl  // default is right-to-left
 
-  static func defaultPageOrder(_ userDefaults: UserDefaults = UserDefaults.standard) -> PageOrder {
+  public static func defaultPageOrder(_ userDefaults: UserDefaults = UserDefaults.standard) -> PageOrder {
     let value = userDefaults.integer(forKey: PageOrder.pageOrderKey)
     switch value {
     case rtl.rawValue:

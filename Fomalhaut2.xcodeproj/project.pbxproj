@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE296C312530A4E400674C99 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CE296C302530A4E400674C99 /* RxCocoa */; };
-		CE296C332530A4E400674C99 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE296C322530A4E400674C99 /* RxSwift */; };
 		CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280925305AA000986C9A /* AppDelegate.swift */; };
 		CE30281025305AA200986C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE30280F25305AA200986C9A /* Assets.xcassets */; };
 		CE30281325305AA200986C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30281125305AA200986C9A /* Main.storyboard */; };
-		CE34A41925BC105800B4C0B5 /* PageOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34A41825BC105800B4C0B5 /* PageOrder.swift */; };
+		CE46413C25EA19A7004F0F0D /* PageOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34A41825BC105800B4C0B5 /* PageOrder.swift */; };
+		CE4641AA25EA7F33004F0F0D /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = CE4641A925EA7F33004F0F0D /* RxRealm */; };
+		CE4641B025EA7F79004F0F0D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CE4641AF25EA7F79004F0F0D /* RxCocoa */; };
+		CE4641B225EA7F79004F0F0D /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE4641B125EA7F79004F0F0D /* RxSwift */; };
+		CE4641B625EA7F91004F0F0D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CE4641B525EA7F91004F0F0D /* RxCocoa */; };
+		CE4641B825EA7F91004F0F0D /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE4641B725EA7F91004F0F0D /* RxSwift */; };
 		CE654D762537E9530051D575 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE654D752537E9520051D575 /* Credits.rtf */; };
 		CE7CD508256A0B7B00C97167 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CD507256A0B7B00C97167 /* Collection.swift */; };
 		CE9DCB7E256A94C90024FB1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE9DCB7C256A94C90024FB1B /* InfoPlist.strings */; };
@@ -34,7 +37,6 @@
 		CEA9944A255FE32800B8BCC6 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA99449255FE32800B8BCC6 /* CollectionViewLayout.swift */; };
 		CEA994592560D9A500B8BCC6 /* ProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA9945B2560D9A500B8BCC6 /* ProgressViewController.xib */; };
 		CEA994862560E06400B8BCC6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEA994842560E06400B8BCC6 /* Localizable.strings */; };
-		CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = CEB2D9F625399375002C3F7E /* RxRealm */; };
 		CEB2D9FC2539946D002C3F7E /* BookCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2D9FB2539946D002C3F7E /* BookCollectionViewController.swift */; };
 		CEB2DA0425399693002C3F7E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA0325399693002C3F7E /* Book.swift */; };
 		CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB2DA49253E91AC002C3F7E /* FilterListViewController.swift */; };
@@ -62,7 +64,6 @@
 		CEE4D82F25E240B1003B8EB2 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4D82E25E240B1003B8EB2 /* Preferences.swift */; };
 		CEE4D83425E245B1003B8EB2 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE4D83625E245B1003B8EB2 /* Preferences.storyboard */; };
 		CEE54750259F515400F9AA30 /* defaultThumbnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEE5474F259F515400F9AA30 /* defaultThumbnail.jpg */; };
-		CEE5475525A0AF4E00F9AA30 /* BookImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */; };
 		CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793225402BEA00A35C39 /* BookCollectionViewItem.swift */; };
 		CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */; };
 		CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793C25403AD500A35C39 /* MainWindowController.swift */; };
@@ -78,6 +79,7 @@
 		CEF8C98E25E4E1E9005347BF /* Fomalhaut2QuickLook.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CEF8C98125E4E1E9005347BF /* Fomalhaut2QuickLook.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CEF8C99625E4E1F6005347BF /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4D7B925E11B28003B8EB2 /* Shared.framework */; };
 		CEF8C99725E4E1F6005347BF /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4D7B925E11B28003B8EB2 /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CEF8C9A725E4EC7D005347BF /* BookImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,11 +233,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE296C332530A4E400674C99 /* RxSwift in Frameworks */,
-				CE296C312530A4E400674C99 /* RxCocoa in Frameworks */,
+				CE4641AA25EA7F33004F0F0D /* RxRealm in Frameworks */,
 				CE9FB339258EF8E000AE8F7A /* Swiftra in Frameworks */,
+				CE4641B225EA7F79004F0F0D /* RxSwift in Frameworks */,
+				CE4641B025EA7F79004F0F0D /* RxCocoa in Frameworks */,
 				CEE4D7D625E11B91003B8EB2 /* Shared.framework in Frameworks */,
-				CEB2D9F725399375002C3F7E /* RxRealm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +263,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4641B625EA7F91004F0F0D /* RxCocoa in Frameworks */,
 				CEF8C98325E4E1E9005347BF /* Quartz.framework in Frameworks */,
+				CE4641B825EA7F91004F0F0D /* RxSwift in Frameworks */,
 				CEF8C99625E4E1F6005347BF /* Shared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,10 +306,8 @@
 				CE30280925305AA000986C9A /* AppDelegate.swift */,
 				CE9EE5E12532C49400B5AF5C /* BookWindowController.swift */,
 				CE9EE63B2534A71200B5AF5C /* SpreadPageViewController.swift */,
-				CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */,
 				CECC07172549C6C700CF56FA /* BookDocument.swift */,
 				CE9EE62725330EE100B5AF5C /* ImageCache.swift */,
-				CE34A41825BC105800B4C0B5 /* PageOrder.swift */,
 				CEE9793C25403AD500A35C39 /* MainWindowController.swift */,
 				CEA6F6B525543B3400C50318 /* MainStackViewController.swift */,
 				CEB2D9FB2539946D002C3F7E /* BookCollectionViewController.swift */,
@@ -380,6 +382,8 @@
 				CEE4D7BB25E11B28003B8EB2 /* Archiver.h */,
 				CEE4D7BC25E11B28003B8EB2 /* Info.plist */,
 				CEE4D7E025E11C13003B8EB2 /* Log.swift */,
+				CE34A41825BC105800B4C0B5 /* PageOrder.swift */,
+				CEE5475425A0AF4E00F9AA30 /* BookImageView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -427,10 +431,10 @@
 			);
 			name = Fomalhaut2;
 			packageProductDependencies = (
-				CE296C302530A4E400674C99 /* RxCocoa */,
-				CE296C322530A4E400674C99 /* RxSwift */,
-				CEB2D9F625399375002C3F7E /* RxRealm */,
 				CE9FB338258EF8E000AE8F7A /* Swiftra */,
+				CE4641A925EA7F33004F0F0D /* RxRealm */,
+				CE4641AF25EA7F79004F0F0D /* RxCocoa */,
+				CE4641B125EA7F79004F0F0D /* RxSwift */,
 			);
 			productName = Fomalhaut2;
 			productReference = CE30280625305AA000986C9A /* Fomalhaut2.app */;
@@ -492,6 +496,10 @@
 				CEF8C99925E4E1F6005347BF /* PBXTargetDependency */,
 			);
 			name = Fomalhaut2QuickLook;
+			packageProductDependencies = (
+				CE4641B525EA7F91004F0F0D /* RxCocoa */,
+				CE4641B725EA7F91004F0F0D /* RxSwift */,
+			);
 			productName = Fomalhaut2QuickLook;
 			productReference = CEF8C98125E4E1E9005347BF /* Fomalhaut2QuickLook.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -534,9 +542,9 @@
 				CE296BCB2530671700674C99 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */,
-				CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */,
 				CE9FB337258EF8DF00AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */,
 				CEAD7A0F25A494EC00927D10 /* XCRemoteSwiftPackageReference "Unrar.swift" */,
+				CE4641A825EA7F33004F0F0D /* XCRemoteSwiftPackageReference "RxRealm" */,
 			);
 			productRefGroup = CE30280725305AA000986C9A /* Products */;
 			projectDirPath = "";
@@ -625,13 +633,11 @@
 				CEA6F695254EEFD800C50318 /* ProgressViewController.swift in Sources */,
 				CE7CD508256A0B7B00C97167 /* Collection.swift in Sources */,
 				CEA6F69E2550FA1300C50318 /* NSTableView+Realm.swift in Sources */,
-				CE34A41925BC105800B4C0B5 /* PageOrder.swift in Sources */,
 				CECC0740254E8D6200CF56FA /* Schema.swift in Sources */,
 				CEA99440255FD6D000B8BCC6 /* CollectionViewHeaderView.swift in Sources */,
 				CEE4D82525E23926003B8EB2 /* PreferencesViewController.swift in Sources */,
 				CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */,
 				CEB2D9FC2539946D002C3F7E /* BookCollectionViewController.swift in Sources */,
-				CEE5475525A0AF4E00F9AA30 /* BookImageView.swift in Sources */,
 				CEA6F6B625543B3400C50318 /* MainStackViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,11 +655,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE4D7CE25E11B48003B8EB2 /* Archiver.swift in Sources */,
+				CE46413C25EA19A7004F0F0D /* PageOrder.swift in Sources */,
 				CEE4D7E125E11C13003B8EB2 /* Log.swift in Sources */,
 				CEE4D7CC25E11B48003B8EB2 /* FolderArchiver.swift in Sources */,
 				CEE4D7CA25E11B48003B8EB2 /* PdfArchiver.swift in Sources */,
 				CEE4D7DB25E11BD7003B8EB2 /* ArchiverError.swift in Sources */,
 				CEE4D7CB25E11B48003B8EB2 /* RarArchiver.swift in Sources */,
+				CEF8C9A725E4EC7D005347BF /* BookImageView.swift in Sources */,
 				CEE4D7CD25E11B48003B8EB2 /* ZipArchiver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1049,6 +1057,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fomalhaut2QuickLook/Fomalhaut2QuickLook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2021.2.22;
 				DEVELOPMENT_TEAM = W3A6B7FDC7;
 				INFOPLIST_FILE = Fomalhaut2QuickLook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1057,6 +1066,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 0.8.2;
 				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.Fomalhaut2.Fomalhaut2QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1070,6 +1080,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fomalhaut2QuickLook/Fomalhaut2QuickLook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2021.2.22;
 				DEVELOPMENT_TEAM = W3A6B7FDC7;
 				INFOPLIST_FILE = Fomalhaut2QuickLook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1078,6 +1089,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 0.8.2;
 				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.Fomalhaut2.Fomalhaut2QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1152,6 +1164,14 @@
 				minimumVersion = 6.1.0;
 			};
 		};
+		CE4641A825EA7F33004F0F0D /* XCRemoteSwiftPackageReference "RxRealm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxRealm.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 		CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger.git";
@@ -1176,23 +1196,30 @@
 				minimumVersion = 0.3.0;
 			};
 		};
-		CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RxSwiftCommunity/RxRealm.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CE296C302530A4E400674C99 /* RxCocoa */ = {
+		CE4641A925EA7F33004F0F0D /* RxRealm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE4641A825EA7F33004F0F0D /* XCRemoteSwiftPackageReference "RxRealm" */;
+			productName = RxRealm;
+		};
+		CE4641AF25EA7F79004F0F0D /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
-		CE296C322530A4E400674C99 /* RxSwift */ = {
+		CE4641B125EA7F79004F0F0D /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		CE4641B525EA7F91004F0F0D /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		CE4641B725EA7F91004F0F0D /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE296C2F2530A4E400674C99 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
@@ -1201,11 +1228,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE9FB337258EF8DF00AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */;
 			productName = Swiftra;
-		};
-		CEB2D9F625399375002C3F7E /* RxRealm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CEB2D9F525399375002C3F7E /* XCRemoteSwiftPackageReference "RxRealm" */;
-			productName = RxRealm;
 		};
 		CEE4D7D125E11B81003B8EB2 /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;

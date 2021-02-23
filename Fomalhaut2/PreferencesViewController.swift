@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Cocoa
+import Shared
 
 class PreferencesViewController: NSViewController {
   @IBOutlet weak var pageOrderPopupButton: NSPopUpButton!

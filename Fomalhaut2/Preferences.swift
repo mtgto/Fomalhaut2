@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Foundation
+import Shared
 
 struct Preferences {
   static var standard = Preferences()

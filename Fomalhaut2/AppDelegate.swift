@@ -4,6 +4,7 @@
 import Cocoa
 import RealmSwift
 import RxSwift
+import Shared
 import XCGLogger
 
 let log = XCGLogger.default

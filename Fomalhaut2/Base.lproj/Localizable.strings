@@ -25,5 +25,6 @@
 
 "ErrorBrokenFile" = "File is corrupt or unsupported file type";
 "ErrorEncrypted" = "File is encrypted";
+"ErrorNoImage" = "There is no image in archive";
 
 "WebSharingIpAddressInformation" = "Last Access from %@ at %@";

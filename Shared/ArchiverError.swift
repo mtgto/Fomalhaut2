@@ -6,6 +6,7 @@ import Foundation
 public enum ArchiverError: Error {
   case brokenFile
   case encrypted
+  case noImage
 }
 
 extension ArchiverError: LocalizedError {
@@ -15,6 +16,8 @@ extension ArchiverError: LocalizedError {
       return NSLocalizedString("ErrorBrokenFile", comment: "File is corrupt or unsupported file type")
     case .encrypted:
       return NSLocalizedString("ErrorEncrypted", comment: "File is encrypted")
+    case .noImage:
+      return NSLocalizedString("ErrorNoImage", comment: "There is no image in archive")
     }
   }
 }

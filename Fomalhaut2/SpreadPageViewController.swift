@@ -5,6 +5,7 @@ import Cocoa
 import RealmSwift
 import RxRelay
 import RxSwift
+import Shared
 
 struct LoadedImage {
   let preload: Bool
@@ -154,9 +155,12 @@ class SpreadPageViewController: NSViewController {
 
           self.firstImageView.image = firstImage
           if secondImage != nil {
+            self.firstImageView.imageAlignment = self.pageOrder.value == .rtl ? .alignLeft : .alignRight
+            self.secondImageView.imageAlignment = self.pageOrder.value == .rtl ? .alignRight : .alignLeft
             self.secondImageView.image = secondImage
             self.secondImageView.isHidden = false
           } else {
+            self.firstImageView.imageAlignment = .alignCenter
             self.secondImageView.isHidden = true
           }
           guard let window = self.view.window else {

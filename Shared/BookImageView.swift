@@ -3,11 +3,11 @@
 
 import Cocoa
 
-class BookImageView: NSImageView {
-  var notificationName: Notification.Name!
-  static let shiftPressed = "shiftPressed"
+public class BookImageView: NSImageView {
+  public var notificationName: Notification.Name!
+  public static let shiftPressed = "shiftPressed"
 
-  override func mouseUp(with event: NSEvent) {
+  public override func mouseUp(with event: NSEvent) {
     NotificationCenter.default.post(
       name: self.notificationName,
       object: nil,

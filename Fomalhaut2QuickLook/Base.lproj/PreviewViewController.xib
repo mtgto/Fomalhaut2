@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PreviewViewController" customModule="Fomalhaut2QuickLook" customModuleProvider="target">
+            <connections>
+                <outlet property="firstImageView" destination="k3z-eQ-UIq" id="ZBz-oa-GUO"/>
+                <outlet property="imageStackView" destination="4zI-he-Uay" id="Pte-to-eVv"/>
+                <outlet property="secondImageView" destination="bT7-JY-WDR" id="QpN-cc-5OO"/>
+                <outlet property="view" destination="ERp-eI-pu0" id="MeQ-i9-MmG"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view id="ERp-eI-pu0" userLabel="Preview View">
+            <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4zI-he-Uay">
+                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                    <subviews>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="k3z-eQ-UIq" userLabel="Left Image View" customClass="BookImageView" customModule="Shared">
+                            <rect key="frame" x="0.0" y="0.0" width="225" height="300"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyUpOrDown" id="azh-Fy-xQu"/>
+                        </imageView>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="bT7-JY-WDR" userLabel="Right Image View" customClass="BookImageView" customModule="Shared">
+                            <rect key="frame" x="225" y="0.0" width="225" height="300"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="right" imageScaling="proportionallyUpOrDown" id="Xul-Mz-Gmo"/>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="k3z-eQ-UIq" secondAttribute="bottom" id="7Lw-xW-9bI"/>
+                        <constraint firstItem="bT7-JY-WDR" firstAttribute="top" secondItem="4zI-he-Uay" secondAttribute="top" id="Gxc-hJ-KTX"/>
+                        <constraint firstItem="k3z-eQ-UIq" firstAttribute="width" secondItem="bT7-JY-WDR" secondAttribute="width" id="LnJ-aZ-P3H"/>
+                        <constraint firstItem="k3z-eQ-UIq" firstAttribute="top" secondItem="4zI-he-Uay" secondAttribute="top" id="QIK-jM-V6j"/>
+                        <constraint firstAttribute="bottom" secondItem="bT7-JY-WDR" secondAttribute="bottom" id="bmb-RF-Ecl"/>
+                    </constraints>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="4zI-he-Uay" firstAttribute="leading" secondItem="ERp-eI-pu0" secondAttribute="leading" id="9O9-FX-v4W"/>
+                <constraint firstAttribute="bottom" secondItem="4zI-he-Uay" secondAttribute="bottom" id="M5D-N4-fL4"/>
+                <constraint firstAttribute="trailing" secondItem="4zI-he-Uay" secondAttribute="trailing" id="XxB-LY-7dl"/>
+                <constraint firstItem="4zI-he-Uay" firstAttribute="top" secondItem="ERp-eI-pu0" secondAttribute="top" id="e1v-8E-wz4"/>
+            </constraints>
+            <point key="canvasLocation" x="-88" y="-197"/>
+        </view>
+    </objects>
+</document>

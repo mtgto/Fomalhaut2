@@ -14,11 +14,15 @@ public class RarArchiver: Archiver {
     self.fileURL = url
     do {
       let archive = try Archive(fileURL: url)
-      self.entries = try archive.entries().filter({ (entry) -> Bool in
-        let path = entry.fileName.lowercased()
-        return path.hasSuffix(".jpg") || path.hasSuffix(".jpeg") || path.hasSuffix(".png")
-          || path.hasSuffix(".gif") || path.hasSuffix(".bmp")
-      })
+      self.entries = (try archive.entries())
+        .filter({ (entry) -> Bool in
+          let path = entry.fileName.lowercased()
+          return path.hasSuffix(".jpg") || path.hasSuffix(".jpeg") || path.hasSuffix(".png")
+            || path.hasSuffix(".gif") || path.hasSuffix(".bmp")
+        })
+        .sorted(by: { (lhs, rhs) -> Bool in
+          return lhs.fileName.localizedStandardCompare(rhs.fileName) == .orderedAscending
+        })
     } catch {
       log.warning("Error while load Rar archive \(error)")
       return nil

@@ -19,7 +19,9 @@
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
+				<string>public.zip-archive</string>
 				<string>com.pkware.zip-archive</string>
+				<string>public.data</string>
 			</array>
 			<key>NSDocumentClass</key>
 			<string>$(PRODUCT_MODULE_NAME).BookDocument</string>
@@ -90,6 +92,7 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.rarlab.rar-archive</string>
+				<string>public.data</string>
 			</array>
 			<key>NSDocumentClass</key>
 			<string>$(PRODUCT_MODULE_NAME).BookDocument</string>

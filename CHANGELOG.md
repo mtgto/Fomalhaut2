@@ -12,6 +12,7 @@ CHANGELOG
 ### Changed
 
 - Center two spread images to avoid margin
+- Sort entries of RAR archive
 
 ## v0.8.2 (2021-02-21)
 

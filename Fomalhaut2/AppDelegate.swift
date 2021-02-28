@@ -13,15 +13,21 @@ let log = XCGLogger.default
 class AppDelegate: NSObject, NSApplicationDelegate {
   private let disposeBag = DisposeBag()
 
+  override init() {
+    super.init()
+    // Set defaults before NSViewController.viewDidLoad
+    UserDefaults.standard.register(defaults: [
+      BookCollectionViewController.collectionTabViewInitialIndexKey: 0,
+      BookCollectionViewController.collectionOrderKey: CollectionOrder.createdAt.rawValue,
+      WebSharingViewController.webServerPortKey: 8080,
+      PageOrder.pageOrderKey: PageOrder.defaultValue.rawValue,
+    ])
+  }
+
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     // Remove main window from window list of Window menu
     // Setting isExcludedFromWindowsMenu in BookWindowController#viewDidLoad is ignored...
     NSApp.windows.first?.isExcludedFromWindowsMenu = true
-    UserDefaults.standard.register(defaults: [
-      BookCollectionViewController.collectionTabViewInitialIndexKey: 0,
-      WebSharingViewController.webServerPortKey: 8080,
-      PageOrder.pageOrderKey: PageOrder.defaultValue.rawValue,
-    ])
     do {
       try Schema.shared.migrate()
     } catch {

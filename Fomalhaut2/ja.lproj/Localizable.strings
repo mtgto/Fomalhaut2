@@ -66,3 +66,4 @@
 /* Last Access from %@ at %@ */
 "WebSharingIpAddressInformation" = "最終アクセス %@ 日時 %@";
 
+"NameCaption" = "名前";

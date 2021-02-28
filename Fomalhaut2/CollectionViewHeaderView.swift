@@ -13,9 +13,22 @@ class CollectionViewHeaderView: NSView, NSCollectionViewElement {
       NSLocalizedString("SortPopupTitle", comment: "Sort by"),
       NSLocalizedString("CreatedAtCaption", comment: "Created"),
       NSLocalizedString("ViewCountCaption", comment: "View count"),
+      NSLocalizedString("NameCaption", comment: "Name"),
     ])
-    // TODO: Restore last selected item
-    self.orderButton.item(at: 1)?.state = .on
+    let collectionOrder = CollectionOrder(
+      rawValue: UserDefaults.standard.string(forKey: BookCollectionViewController.collectionOrderKey)!)!
+    self.orderButton.item(at: self.menuItemIndex(collectionOrder: collectionOrder))!.state = .on
+  }
+
+  private func menuItemIndex(collectionOrder: CollectionOrder) -> Int {
+    switch collectionOrder {
+    case .createdAt:
+      return 1
+    case .readCount:
+      return 2
+    case .name:
+      return 3
+    }
   }
 
   @IBAction func setOrder(_ sender: Any) {
@@ -26,6 +39,8 @@ class CollectionViewHeaderView: NSView, NSCollectionViewElement {
       collectionOrder = .createdAt
     case 2:
       collectionOrder = .readCount
+    case 3:
+      collectionOrder = .name
     default:
       log.error("Unknown collection order selected: \(selectedIndex)")
       collectionOrder = .createdAt

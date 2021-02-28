@@ -1,6 +1,7 @@
 "SortPopupTitle" = "Sort by";
 "CreatedAtCaption" = "Created";
 "ViewCountCaption" = "View count";
+"NameCaption" = "Name";
 
 "AllFilter" = "All";
 "UnreadFilter" = "Unread";

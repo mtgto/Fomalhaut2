@@ -13,13 +13,9 @@ enum CollectionViewStyle {
   case collection, list
 }
 
-enum CollectionOrder: String {
-  case createdAt = "createdAt"
-  case readCount = "readCount"
-}
-
 class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation {
   static let collectionTabViewInitialIndexKey = "collectionTabViewInitialIndex"
+  static let collectionOrderKey = "collectionOrder"
   private let tableViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
   private let collectionViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
   let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
@@ -49,6 +45,9 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     let initialTabIndex = UserDefaults.standard.integer(
       forKey: BookCollectionViewController.collectionTabViewInitialIndexKey)
     self.collectionViewStyle.accept(initialTabIndex == 0 ? .collection : .list)
+    let collectionOrder = CollectionOrder(
+      rawValue: UserDefaults.standard.string(forKey: BookCollectionViewController.collectionOrderKey)!)!
+    self.collectionOrder.accept(collectionOrder)
     Schema.shared.state
       .skip { $0 != .finish }
       .flatMap { _ in
@@ -85,10 +84,11 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
             let predicate: NSPredicate = self.predicateFrom(searchText: searchText, filterPredicate: filter.predicate)
             self.collectionViewBooks.accept(
               AnyRealmCollection(
-                realm.objects(Book.self).filter(predicate).sorted(byKeyPath: order.rawValue, ascending: false)))
+                realm.objects(Book.self).filter(predicate).sorted(byKeyPath: order.rawValue, ascending: order.ascending)
+              ))
           case .collection(let collection):
             self.collectionViewBooks.accept(
-              AnyRealmCollection(collection.books.sorted(byKeyPath: order.rawValue, ascending: false)))
+              AnyRealmCollection(collection.books.sorted(byKeyPath: order.rawValue, ascending: order.ascending)))
           }
         }
       })
@@ -133,6 +133,13 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { collectionContent in
         self.updateBookMenu(collectionContent: collectionContent)
+      })
+      .disposed(by: self.disposeBag)
+    self.collectionOrder
+      .distinctUntilChanged()
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { collectionOrder in
+        UserDefaults.standard.set(collectionOrder.rawValue, forKey: BookCollectionViewController.collectionOrderKey)
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)

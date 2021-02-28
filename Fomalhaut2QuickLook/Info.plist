@@ -35,8 +35,6 @@
 				<string>public.zip-archive</string>
 				<string>public.data</string>
 			</array>
-			<key>QLSupportsSearchableItems</key>
-			<false/>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.quicklook.preview</string>

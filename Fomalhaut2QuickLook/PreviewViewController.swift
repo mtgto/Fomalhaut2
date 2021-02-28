@@ -237,9 +237,15 @@ class PreviewViewController: NSViewController, QLPreviewingController {
       )
       .disposed(by: self.disposeBag)
     imageLoaded
+      .take(1)
       .asSingle()
-      .subscribe { _ in
-        handler(nil)
+      .subscribe { result in
+        if case .failure(let error) = result {
+          log.info("Failed to load image: \(error)")
+          handler(error)
+        } else {
+          handler(nil)
+        }
       }
       .disposed(by: self.disposeBag)
   }

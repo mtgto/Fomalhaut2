@@ -32,6 +32,7 @@
 				<string>com.rarlab.rar-archive</string>
 				<string>net.mtgto.Fomalhaut2.cbz</string>
 				<string>com.pkware.zip-archive</string>
+				<string>public.zip-archive</string>
 				<string>public.data</string>
 			</array>
 			<key>QLSupportsSearchableItems</key>

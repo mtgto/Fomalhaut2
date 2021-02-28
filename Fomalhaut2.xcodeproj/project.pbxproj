@@ -1065,6 +1065,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2021.2.28;
 				DEVELOPMENT_TEAM = W3A6B7FDC7;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Fomalhaut2QuickLook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1088,6 +1089,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2021.2.28;
 				DEVELOPMENT_TEAM = W3A6B7FDC7;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Fomalhaut2QuickLook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

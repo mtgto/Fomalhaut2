@@ -49,7 +49,7 @@ NOTE: This sample comic is under Public Domain. You can view via https://digital
    - [x] PDF
    - [x] rar/cbr
    - [ ] 7z/cb7
-- [ ] QuickLook Thumbnail Extension
+- [x] QuickLook Thumbnail Extension
 
 ## Contributing
 

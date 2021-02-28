@@ -1,5 +1,18 @@
 CHANGELOG
 ====
+
+## v0.9.0 (2021-02-28)
+
+### Added
+
+- Add QuickLook Preview Extension for zip/cbz/rar/cbr files
+- Add new sort order `by name` for collection view
+- Restore last selected sort order of collection view
+
+### Changed
+
+- Center two spread images to avoid margin
+
 ## v0.8.2 (2021-02-21)
 
 ### Added

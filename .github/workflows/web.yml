@@ -27,6 +27,7 @@ jobs:
       - name: yarn install
         run: yarn install
         working-directory: ./web
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
       - name: "install @jamesacarr/eslint-formatter-github-actions"
         run: yarn add -D @jamesacarr/eslint-formatter-github-actions
       - name: Lint

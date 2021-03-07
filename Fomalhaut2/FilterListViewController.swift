@@ -91,7 +91,10 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
   func deleteCollection(_ collection: Collection) {
     // TODO: MUST remove items from NSOutlineView before delete from Realm.
     // https://github.com/realm/realm-cocoa/issues/6169
-    if let index = self.collections.value?.index(of: collection) {
+    if let collections = self.collections.value, let index = collections.index(of: collection) {
+      if collections.count > 1 {
+
+      }
       self.filterListView.removeItems(at: IndexSet([index]), inParent: self.rootItems[1])
     }
     do {
@@ -111,7 +114,17 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
   override func keyDown(with event: NSEvent) {
     if event.keyCode == 51 {  // delete
       if case .collection(let collection) = self.selectedCollectionContent.value {
-        self.deleteCollection(collection)
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString(
+          "AlertMessageTextDeleteCollection", comment: "Do you delete a selected collection?")
+        alert.addButton(withTitle: NSLocalizedString("Delete", comment: "Delete"))
+        alert.addButton(withTitle: NSLocalizedString("Cancel", comment: "Cancel"))
+        switch alert.runModal() {
+        case .alertFirstButtonReturn:  // OK
+          self.deleteCollection(collection)
+        default:
+          break
+        }
       }
     }
   }

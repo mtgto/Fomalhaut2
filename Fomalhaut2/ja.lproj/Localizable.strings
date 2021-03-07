@@ -73,3 +73,6 @@
 /* Last Access from %@ at %@ */
 "WebSharingIpAddressInformation" = "最終アクセス %@ 日時 %@";
 
+"AlertMessageTextDeleteCollection" = "選択したコレクションを削除しますか?";
+"Cancel" = "キャンセル";
+"Delete" = "削除";

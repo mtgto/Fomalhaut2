@@ -24,6 +24,7 @@
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
     "@babel/preset-typescript": "^7.12.7",
+    "@jamesacarr/eslint-formatter-github-actions": "^0.1.0",
     "@parcel/optimizer-htmlnano": "2.0.0-nightly.612",
     "@parcel/packager-html": "2.0.0-nightly.612",
     "@parcel/transformer-html": "2.0.0-nightly.612",

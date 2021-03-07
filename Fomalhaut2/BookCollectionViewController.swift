@@ -370,9 +370,19 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     else {
       return false
     }
-    let validExtensionFileURLs = dropFileURLs.filter {
-      ["zip", "cbz", "rar", "cbr", "pdf"].contains($0.pathExtension.lowercased())
-    }
+    let validExtensionFileURLs = dropFileURLs.flatMap { fileURL -> [URL] in
+      if fileURL.hasDirectoryPath {
+        do {
+          return try FileManager.default.contentsOfDirectory(atPath: fileURL.path)
+            .map { URL(fileURLWithPath: $0, relativeTo: fileURL) }
+        } catch {
+          log.error(error)
+        }
+        return [fileURL]
+      } else {
+        return [fileURL]
+      }
+    }.filter { ["zip", "cbz", "rar", "cbr", "pdf"].contains($0.pathExtension.lowercased()) }
     if validExtensionFileURLs.isEmpty {
       return false
     }

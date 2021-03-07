@@ -1,6 +1,20 @@
 CHANGELOG
 ====
 
+## v0.9.1 (2021-03-07)
+
+### Added
+
+- Add a footer button to add a new collection
+- Add comic files under drag'n'dropped folder
+
+### Changed
+
+- Fix to ignore dropped files already added
+- Add missing localized messages
+- Update Unrar to v0.3.1
+- Update ZIPFoundation to v0.9.12
+
 ## v0.9.0 (2021-02-28)
 
 ### Added

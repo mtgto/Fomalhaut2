@@ -47,16 +47,8 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
     if let collection = self.selectedCollection {
       // To avoid crash, you MUST remove items from NSOutlineView before delete.
       NotificationCenter.default.post(
-        name: collectionWillDeleteNotificationName, object: nil, userInfo: ["collection": collection])
+        name: collectionDeleteNotificationName, object: nil, userInfo: ["collection": collection])
       self.selectedCollection = nil
-      do {
-        let realm = try Realm()
-        try realm.write {
-          realm.delete(collection)
-        }
-      } catch {
-        log.error("Error while deleting a collection \(collection.name): \(error)")
-      }
     }
   }
 

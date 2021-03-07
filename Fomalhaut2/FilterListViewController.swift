@@ -35,14 +35,10 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
         self.collections.accept(realm.objects(Collection.self).sorted(byKeyPath: "createdAt"))
       })
       .disposed(by: self.disposeBag)
-    // TODO: MUST remove items from NSOutlineView before delete from Realm.
-    // https://github.com/realm/realm-cocoa/issues/6169
-    NotificationCenter.default.rx.notification(collectionWillDeleteNotificationName, object: nil)
+    NotificationCenter.default.rx.notification(collectionDeleteNotificationName, object: nil)
       .subscribe(onNext: { notification in
         if let collection = notification.userInfo?["collection"] as? Collection {
-          if let index = self.collections.value?.index(of: collection) {
-            self.filterListView.removeItems(at: IndexSet([index]), inParent: self.rootItems[1])
-          }
+          self.deleteCollection(collection)
         }
       })
       .disposed(by: self.disposeBag)
@@ -92,8 +88,32 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     }
   }
 
+  func deleteCollection(_ collection: Collection) {
+    // TODO: MUST remove items from NSOutlineView before delete from Realm.
+    // https://github.com/realm/realm-cocoa/issues/6169
+    if let index = self.collections.value?.index(of: collection) {
+      self.filterListView.removeItems(at: IndexSet([index]), inParent: self.rootItems[1])
+    }
+    do {
+      let realm = try Realm()
+      try realm.write {
+        realm.delete(collection)
+      }
+    } catch {
+      log.error("Error while deleting a collection \(collection.name): \(error)")
+    }
+  }
+
   @IBAction func addCollection(_ sender: Any) {
     self.addNewCollection()
+  }
+
+  override func keyDown(with event: NSEvent) {
+    if event.keyCode == 51 {  // delete
+      if case .collection(let collection) = self.selectedCollectionContent.value {
+        self.deleteCollection(collection)
+      }
+    }
   }
 
   // MARK: - NSOutlineViewDataSource

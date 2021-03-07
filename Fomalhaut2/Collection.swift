@@ -5,7 +5,7 @@ import Foundation
 import RealmSwift
 
 let collectionChangedNotificationName = Notification.Name("collectionChanged")
-let collectionWillDeleteNotificationName = Notification.Name("collectionWillDelete")
+let collectionDeleteNotificationName = Notification.Name("collectionDelete")
 
 class Collection: Object, Encodable {
   @objc dynamic var id: String = UUID().uuidString

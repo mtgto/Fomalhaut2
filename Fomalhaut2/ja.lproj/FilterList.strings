@@ -1,0 +1,12 @@
+/* Class = "NSTextFieldCell"; title = "HEADER CELL"; ObjectID = "AJH-cv-Lwt"; */
+"AJH-cv-Lwt.title" = "HEADER CELL";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "OWe-t9-wNY"; */
+"OWe-t9-wNY.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "UUm-pT-NbN"; */
+"UUm-pT-NbN.title" = "Table View Cell";
+
+/* Class = "NSButtonCell"; title = " New Collection"; ObjectID = "yBO-YQ-5oF"; Note = "NewCollection"; */
+"yBO-YQ-5oF.title" = " 新規コレクション";
+

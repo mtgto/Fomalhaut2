@@ -34,6 +34,7 @@
 /* (No Comment) */
 "ErrorEncrypted" = "ファイルが暗号化されています";
 
+/* (No Comment) */
 "ErrorNoImage" = "アーカイブに画像が見つかりません";
 
 /* Delete %@ */
@@ -47,6 +48,12 @@
 
 /* Like */
 "LikeFilter" = "好き";
+
+/* Name */
+"NameCaption" = "名前";
+
+/* New Collection */
+"NewCollection" = "新規コレクション";
 
 /* Sort by */
 "SortPopupTitle" = "順序";
@@ -66,4 +73,3 @@
 /* Last Access from %@ at %@ */
 "WebSharingIpAddressInformation" = "最終アクセス %@ 日時 %@";
 
-"NameCaption" = "名前";

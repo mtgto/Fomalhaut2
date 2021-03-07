@@ -81,7 +81,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
 
   func addNewCollection() {
     let collection = Collection()
-    collection.name = "New Collection"
+    collection.name = NSLocalizedString("NewCollection", comment: "New Collection")
     do {
       let realm = try Realm()
       try realm.write {
@@ -90,6 +90,10 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     } catch {
       log.error("Error while adding new collection: \(error)")
     }
+  }
+
+  @IBAction func addCollection(_ sender: Any) {
+    self.addNewCollection()
   }
 
   // MARK: - NSOutlineViewDataSource

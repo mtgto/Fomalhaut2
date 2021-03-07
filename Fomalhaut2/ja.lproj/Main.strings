@@ -220,12 +220,6 @@
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "S0p-oC-mLd"; */
 "S0p-oC-mLd.title" = "選択部分へジャンプ";
 
-/* Class = "NSToolbarItem"; label = "New collection"; ObjectID = "s7q-6j-XVy"; Note = "NewCollection"; */
-"s7q-6j-XVy.label" = "新規コレクション";
-
-/* Class = "NSToolbarItem"; paletteLabel = "New collection"; ObjectID = "s7q-6j-XVy"; Note = "NewCollection"; */
-"s7q-6j-XVy.paletteLabel" = "新規コレクション";
-
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "snW-S8-Cw5"; */
 "snW-S8-Cw5.title" = "ツールバーを表示";
 

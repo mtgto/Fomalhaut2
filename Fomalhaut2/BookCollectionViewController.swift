@@ -391,6 +391,10 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       return true
     }
     validExtensionFileURLs.forEach { (fileURL) in
+      if realm.objects(Book.self).filter("filePath = %@", fileURL.path).first != nil {
+        log.info("file \(fileURL.path) is already added.")
+        return
+      }
       let book = Book()
       book.isRightToLeft = Preferences.standard.defaultPageOrder == .rtl
       do {

@@ -1,6 +1,17 @@
 CHANGELOG
 ====
 
+## v0.9.2 (2021-03-14)
+
+### Added
+
+- Add new feature to reorder collections by drag & drop
+
+### Changed
+
+- Add missing localized message
+- Update web packages
+
 ## v0.9.1 (2021-03-07)
 
 ### Added

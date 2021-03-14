@@ -179,7 +179,7 @@ class WebSharing: NSObject {
 
   private func setup() {
     let realm = try! Realm()
-    Observable.array(from: realm.objects(Collection.self).sorted(byKeyPath: "createdAt", ascending: true))
+    Observable.array(from: realm.objects(Collection.self).sorted(byKeyPath: "order"))
       .withUnretained(self)
       .subscribe(onNext: { owner, collections in
         owner.collections = collections.map { $0.freeze() }

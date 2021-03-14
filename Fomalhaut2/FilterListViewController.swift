@@ -238,12 +238,12 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
             for i in (index..<source.order).reversed() {
               collections[i].order = collections[i].order + 1
             }
-            source.order = min(index, collections.count - 1)
+            source.order = index
           } else if index > source.order {
             for i in source.order..<index {
               collections[i].order = collections[i].order - 1
             }
-            source.order = min(max(index - 1, 0), collections.count - 1)
+            source.order = index - 1
           }
         }
         return true

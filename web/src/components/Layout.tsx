@@ -76,7 +76,7 @@ type Props = {
 };
 
 const Layout: React.FunctionComponent<Props> = (props: Props) => {
-  const state = useContext(StateContext);
+  const { state } = useContext(StateContext);
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const location = useLocation();

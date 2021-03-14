@@ -6,11 +6,11 @@ import { Book } from "./book";
 export class Collection {
   readonly id: string;
   readonly name: string;
-  readonly books: Book[];
+  readonly bookIds: string[];
 
   constructor(id: string, name: string, books: Book[]) {
     this.id = id;
     this.name = name;
-    this.books = books;
+    this.bookIds = books.map((book) => book.id);
   }
 }

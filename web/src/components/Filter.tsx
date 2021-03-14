@@ -17,7 +17,7 @@ type Props = {
 };
 
 const FilterPage: React.VoidFunctionComponent<Props> = (props: Props) => {
-  const state = useContext(StateContext);
+  const { state } = useContext(StateContext);
   const filter: Filter | undefined = state.filters.find(
     (filter) => filter.id === props.id
   );

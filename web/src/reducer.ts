@@ -1,7 +1,8 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import { createContext } from "react";
+import React, { createContext } from "react";
+import { State } from "rocon/react";
 
 import { Book } from "./domain/book";
 import { Collection } from "./domain/collection";
@@ -27,11 +28,13 @@ export interface State {
 const SetLoading = "SetLoading" as const;
 const SetBooks = "SetBooks" as const;
 const SetCollections = "SetCollections" as const;
+const ToggleLike = "ToggleLike" as const;
 
 type Actions =
   | ReturnType<typeof setLoading>
   | ReturnType<typeof setBooks>
-  | ReturnType<typeof setCollections>;
+  | ReturnType<typeof setCollections>
+  | ReturnType<typeof toggleLike>;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const setLoading = (LoadingState: LoadingStateType) => ({
@@ -51,6 +54,12 @@ export const setBooks = (books: Book[]) => ({
   payload: books,
 });
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const toggleLike = (bookId: string) => ({
+  type: ToggleLike,
+  payload: bookId,
+});
+
 export const initialState: State = {
   loading: LoadingState.Initial,
   collections: [],
@@ -66,7 +75,10 @@ export const initialState: State = {
   books: [],
 };
 
-export const StateContext = createContext(initialState);
+export const StateContext = createContext<{
+  state: State;
+  dispatch: React.Dispatch<Actions>;
+}>({ state: initialState, dispatch: () => null });
 
 export const reducer = (state: State, action: Actions): State => {
   switch (action.type) {
@@ -76,6 +88,13 @@ export const reducer = (state: State, action: Actions): State => {
       return { ...state, collections: action.payload };
     case SetBooks:
       return { ...state, books: action.payload };
+    case ToggleLike:
+      return {
+        ...state,
+        books: state.books.map((book) =>
+          book.id === action.payload ? { ...book, like: !book.like } : book
+        ),
+      };
     default:
       return initialState;
   }

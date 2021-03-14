@@ -89,6 +89,42 @@ class WebSharing: NSObject {
         return Response(json: collection, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
       }
 
+      post("/api/v1/books/:id/like") { req in
+        self.recordAccess(req)
+        guard let realm = try? Realm() else {
+          return self.internalServerError
+        }
+        guard let book = realm.object(ofType: Book.self, forPrimaryKey: req.params("id")) else {
+          return self.notFound
+        }
+        do {
+          try realm.write {
+            book.like = true
+          }
+        } catch {
+          return self.internalServerError
+        }
+        return Response(json: book) ?? self.internalServerError
+      }
+
+      post("/api/v1/books/:id/dislike") { req in
+        self.recordAccess(req)
+        guard let realm = try? Realm() else {
+          return self.internalServerError
+        }
+        guard let book = realm.object(ofType: Book.self, forPrimaryKey: req.params("id")) else {
+          return self.notFound
+        }
+        do {
+          try realm.write {
+            book.like = false
+          }
+        } catch {
+          return self.internalServerError
+        }
+        return Response(json: book) ?? self.internalServerError
+      }
+
       get("/api/v1/books") { req in
         self.recordAccess(req)
         return Response(json: self.books, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError

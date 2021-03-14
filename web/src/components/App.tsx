@@ -36,7 +36,7 @@ const App: React.VoidFunctionComponent = () => {
     async function fetchCollections() {
       const collections: Collection[] = await fetch("/api/v1/collections")
         .then((response) => response.json())
-        .then((collections: Collection[]) =>
+        .then((collections: { id: string; name: string; books: Book[] }[]) =>
           collections.map(
             (collection) =>
               new Collection(
@@ -63,7 +63,7 @@ const App: React.VoidFunctionComponent = () => {
   }, []);
 
   return (
-    <StateContext.Provider value={state}>
+    <StateContext.Provider value={{ state, dispatch }}>
       <RoconRoot>
         <Routes />
       </RoconRoot>

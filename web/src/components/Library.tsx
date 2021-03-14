@@ -24,11 +24,11 @@ const Library: React.VoidFunctionComponent<Props> = (props: Props) => {
   const handleChangePage = (_e: React.ChangeEvent<unknown>, page: number) => {
     props.pageChanged(page);
   };
-  const numberOfbooksPerPage = 20;
-  const pageCount = Math.ceil(props.books.length / numberOfbooksPerPage);
+  const numberOfBooksPerPage = 20;
+  const pageCount = Math.ceil(props.books.length / numberOfBooksPerPage);
   const books = props.books.slice(
-    ((props.page ?? 1) - 1) * numberOfbooksPerPage,
-    ((props.page ?? 1) - 1) * numberOfbooksPerPage + numberOfbooksPerPage
+    ((props.page ?? 1) - 1) * numberOfBooksPerPage,
+    ((props.page ?? 1) - 1) * numberOfBooksPerPage + numberOfBooksPerPage
   );
   return (
     <Layout>

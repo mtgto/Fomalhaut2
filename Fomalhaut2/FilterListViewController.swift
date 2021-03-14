@@ -25,8 +25,10 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Accept from Collection View or List View
-    self.filterListView.registerForDraggedTypes([.fileURL])
+    // Accept from Collection View or List View (fileURL) or FilterListView (string)
+    self.filterListView.registerForDraggedTypes([.fileURL, .string])
+    self.filterListView.setDraggingSourceOperationMask(.move, forLocal: true)
+    self.filterListView.draggingDestinationFeedbackStyle = .gap
     Schema.shared.state
       .skip { $0 != .finish }
       .observe(on: MainScheduler.instance)
@@ -178,11 +180,19 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     _ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?,
     proposedChildIndex index: Int
   ) -> NSDragOperation {
-    if let collection = item as? Collection {
+    if let _ = item as? Collection {
       if info.draggingSource is NSCollectionView || info.draggingSource is NSTableView {
-        let dropFiles = info.draggingPasteboard.readObjects(
-          forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: 1])
-        return .copy
+        if let dropFiles = info.draggingPasteboard.readObjects(
+          forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: 1]), !dropFiles.isEmpty
+        {
+          return .copy
+        }
+      }
+    } else if let view = info.draggingSource as? NSOutlineView,
+      view == self.filterListView && info.draggingPasteboard.canReadObject(forClasses: [NSString.self], options: nil)
+    {
+      if let item = item as? String, item == self.rootItems[1] && index >= 0 {
+        return .move
       }
     }
     return []
@@ -216,9 +226,38 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
         collection.books.append(objectsIn: books)
       }
       return true
+    } else if let item = item as? String, item == self.rootItems[1] && index >= 0 {
+      guard let ids = info.draggingPasteboard.readObjects(forClasses: [NSString.self], options: nil) as? [String] else {
+        return false
+      }
+      if let collections = self.collections.value, let sourceCollectionId = ids.first,
+        let source = realm.object(ofType: Collection.self, forPrimaryKey: sourceCollectionId)
+      {
+        try? realm.write {
+          if index < source.order {
+            for i in (index..<source.order).reversed() {
+              collections[i].order = collections[i].order + 1
+            }
+            source.order = min(index, collections.count - 1)
+          } else if index > source.order {
+            for i in source.order..<index {
+              collections[i].order = collections[i].order - 1
+            }
+            source.order = min(max(index - 1, 0), collections.count - 1)
+          }
+        }
+        return true
+      }
     }
 
     return false
+  }
+
+  func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
+    if let collection = item as? Collection {
+      return collection.id as NSPasteboardWriting
+    }
+    return nil
   }
 
   // MARK: NSOutlineViewDelegate
@@ -270,6 +309,14 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
         return nil
       }
       return cell
+    }
+  }
+
+  func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
+    if let _ = item as? String {
+      return 20
+    } else {
+      return 24
     }
   }
 

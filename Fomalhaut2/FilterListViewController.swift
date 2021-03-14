@@ -32,7 +32,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { _ in
         let realm = try! Realm()
-        self.collections.accept(realm.objects(Collection.self).sorted(byKeyPath: "createdAt"))
+        self.collections.accept(realm.objects(Collection.self).sorted(byKeyPath: "order"))
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(collectionDeleteNotificationName, object: nil)

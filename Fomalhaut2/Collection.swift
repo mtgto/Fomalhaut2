@@ -11,6 +11,7 @@ class Collection: Object, Encodable {
   @objc dynamic var id: String = UUID().uuidString
   @objc dynamic var name = ""
   @objc dynamic var createdAt: Date = Date()
+  @objc dynamic var order: Int = 0
   let books = List<Book>()
 
   override static func primaryKey() -> String? {

@@ -13,8 +13,9 @@ enum SchemaMigrationState {
 class Schema {
   // 0: v0.1.0 - v0.2.0
   // 1: v0.3.0 - v0.3.1
-  // 2: v0.3.2 -
-  static let schemaVersion: UInt64 = 2
+  // 2: v0.3.2 - v0.9.1
+  // 3: v0.9.2 -
+  static let schemaVersion: UInt64 = 3
   static let shared = Schema()
   // only one event is streamed after anyone subscribe
   let state: Observable<SchemaMigrationState>
@@ -26,6 +27,7 @@ class Schema {
   }
 
   func migrate() throws {
+    var needReorderCollection: Bool = false
     Realm.Configuration.defaultConfiguration = Realm.Configuration(
       schemaVersion: Schema.schemaVersion,
       migrationBlock: { migration, oldSchemaVersion in
@@ -69,12 +71,27 @@ class Schema {
               }
             }
           }
+          if oldSchemaVersion < 3 {
+            needReorderCollection = true
+            migration.enumerateObjects(ofType: Collection.className()) { oldObject, newObject in
+              newObject!["order"] = 0
+            }
+
+          }
         }
       })
     // start migration if need.
-    // Be raised an exception if database version is newer than schemaVersion:
+    // NOTE: If database version is newer than schemaVersion, an exception is raised.
     // ex. "Provided schema version 1 is less than last set version 2."
-    _ = try Realm()
+    let realm = try Realm()
+    if needReorderCollection {
+      let collections = realm.objects(Collection.self).sorted(byKeyPath: "createdAt")
+      try realm.write {
+        for (i, collection) in collections.enumerated() {
+          collection.order = i
+        }
+      }
+    }
     self._state.onNext(.finish)
   }
 }

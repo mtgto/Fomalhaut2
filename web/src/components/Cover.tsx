@@ -52,6 +52,7 @@ const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
   const classes = useStyles();
   const BookLink = useMemo(
     () =>
+      // eslint-disable-next-line react/display-name
       forwardRef((linkProps, _ref) => (
         <RouterLink
           route={bookRoutes.anyRoute}

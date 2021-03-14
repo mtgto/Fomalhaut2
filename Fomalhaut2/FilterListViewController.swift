@@ -28,7 +28,6 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     // Accept from Collection View or List View (fileURL) or FilterListView (string)
     self.filterListView.registerForDraggedTypes([.fileURL, .string])
     self.filterListView.setDraggingSourceOperationMask(.move, forLocal: true)
-    self.filterListView.draggingDestinationFeedbackStyle = .gap
     Schema.shared.state
       .skip { $0 != .finish }
       .observe(on: MainScheduler.instance)
@@ -80,6 +79,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
   func addNewCollection() {
     let collection = Collection()
     collection.name = NSLocalizedString("NewCollection", comment: "New Collection")
+    collection.order = self.collections.value?.count ?? 0
     do {
       let realm = try Realm()
       try realm.write {
@@ -260,6 +260,20 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     return nil
   }
 
+  func outlineView(
+    _ outlineView: NSOutlineView, draggingSession session: NSDraggingSession, willBeginAt screenPoint: NSPoint,
+    forItems draggedItems: [Any]
+  ) {
+    outlineView.draggingDestinationFeedbackStyle = .gap
+  }
+
+  func outlineView(
+    _ outlineView: NSOutlineView, draggingSession session: NSDraggingSession, endedAt screenPoint: NSPoint,
+    operation: NSDragOperation
+  ) {
+    outlineView.draggingDestinationFeedbackStyle = .sourceList
+  }
+
   // MARK: NSOutlineViewDelegate
   func outlineView(_ outlineView: NSOutlineView, shouldExpandItem item: Any) -> Bool {
     return true
@@ -312,6 +326,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     }
   }
 
+  // Need for drag'n'drop reorder collections
   func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
     if let _ = item as? String {
       return 20

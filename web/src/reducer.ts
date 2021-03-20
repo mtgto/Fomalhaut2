@@ -61,6 +61,7 @@ export const toggleLike = (bookId: string) => ({
   payload: bookId,
 });
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const setCurrentList = (selectedBookIds: ReadonlyArray<string>) => ({
   type: SetCurrentList,
   payload: selectedBookIds,

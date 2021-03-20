@@ -25,6 +25,7 @@ const CollectionPage: React.VoidFunctionComponent<Props> = (props: Props) => {
       document.title = `${collection.name} - Fomalhaut2`;
       dispatch(setCurrentList(collection.bookIds));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collection]);
   const books: Book[] =
     collection?.bookIds.flatMap(

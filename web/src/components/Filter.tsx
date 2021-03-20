@@ -29,6 +29,7 @@ const FilterPage: React.VoidFunctionComponent<Props> = (props: Props) => {
       document.title = `${filter.name} - Fomalhaut2`;
       dispatch(setCurrentList(books.map((book) => book.id)));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
   return (
     <Library

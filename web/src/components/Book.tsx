@@ -1,21 +1,24 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import React, { useEffect, useContext, useState } from "react";
-
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import Fab from "@material-ui/core/Fab";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-
+import SkipNextIcon from "@material-ui/icons/SkipNext";
+import SpeedDial from "@material-ui/lab/SpeedDial";
+import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
+import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "rocon/react";
 import { Book } from "../domain/book";
 import { message } from "../message";
 import { StateContext, toggleLike } from "../reducer";
-import Layout from "./Layout";
 import theme from "../theme";
+import Layout from "./Layout";
+import { bookRoutes } from "./Routes";
 
 const useStyles = makeStyles({
   media: {
@@ -42,6 +45,11 @@ const useStyles = makeStyles({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
+  speedDial: {
+    position: "fixed",
+    bottom: theme.spacing(8),
+    right: theme.spacing(2),
+  },
 });
 
 const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
@@ -54,20 +62,36 @@ const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
   ));
 };
 
-const handleClick = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
 type Props = {
   readonly id: string;
 };
+
 const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
   const [calling, setCalling] = useState(false);
+  const [speedDialOpen, setSpeedDialOpen] = useState(false);
   const { state, dispatch } = useContext(StateContext);
   const classes = useStyles();
+  const navigate = useNavigate();
   const book: Book | undefined = state.books.find(
     (book) => book.id === props.id
   );
+  const currentBookIndex = state.selectedBookIds.findIndex(
+    (bookId) => props.id === bookId
+  );
+  const nextBookId: string | undefined =
+    state.selectedBookIds.length > currentBookIndex + 1
+      ? state.selectedBookIds[currentBookIndex + 1]
+      : undefined;
+  const navigateNextBookId = () => {
+    if (nextBookId) {
+      navigate(bookRoutes.anyRoute, { id: nextBookId });
+    }
+  };
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setSpeedDialOpen(false);
+  };
 
   const handleToggleLike = async () => {
     if (book) {
@@ -86,6 +110,18 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
     }
   };
 
+  const handleNext = () => {
+    navigateNextBookId();
+  };
+
+  const handleSpeedDialClose = () => {
+    setSpeedDialOpen(false);
+  };
+
+  const handleSpeedDialOpen = () => {
+    setSpeedDialOpen(true);
+  };
+
   useEffect(() => {
     if (book) {
       document.title = `${book.name} - Fomalhaut2`;
@@ -99,24 +135,35 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
           {book ? pages(book, classes) : <span>{message.loading}</span>}
         </Box>
       </Container>
-      <Box display="flex" justifyContent="center" pt={2} pb={8}>
-        <Fab
-          className={classes.fab}
-          aria-label="Toggle Like"
+      <SpeedDial
+        ariaLabel="direction"
+        className={classes.speedDial}
+        open={speedDialOpen}
+        onOpen={handleSpeedDialOpen}
+        onClose={handleSpeedDialClose}
+        icon={<SpeedDialIcon />}
+      >
+        <SpeedDialAction
+          onClick={handleScrollToTop}
+          icon={<KeyboardArrowUpIcon />}
+          tooltipTitle={message.commands.scrollToTop}
+        />
+        <SpeedDialAction
           onClick={handleToggleLike}
-          disabled={calling}
-        >
-          {book?.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-        </Fab>
-        <Fab
-          className={classes.fab}
-          color="primary"
-          aria-label="Go to page top"
-          onClick={handleClick}
-        >
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </Box>
+          FabProps={{ disabled: calling }}
+          icon={book?.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          tooltipTitle={
+            book?.like ? message.commands.dislike : message.commands.like
+          }
+        />
+        {nextBookId ? (
+          <SpeedDialAction
+            onClick={handleNext}
+            icon={<SkipNextIcon />}
+            tooltipTitle={message.commands.next}
+          />
+        ) : null}
+      </SpeedDial>
     </Layout>
   );
 };

@@ -1,20 +1,18 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import React from "react";
-
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Pagination from "@material-ui/lab/Pagination";
-
+import React from "react";
 import { Book } from "../domain/book";
 import Cover from "./Cover";
 import Layout from "./Layout";
 
 type Props = {
-  readonly books: Book[];
+  readonly books: ReadonlyArray<Book>;
   readonly title: string;
   readonly page: number | undefined;
   readonly pageChanged: (page: number) => void;

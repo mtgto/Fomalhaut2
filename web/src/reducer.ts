@@ -2,8 +2,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import React, { createContext } from "react";
-import { State } from "rocon/react";
-
 import { Book } from "./domain/book";
 import { Collection } from "./domain/collection";
 import { Filter } from "./domain/filter";
@@ -20,21 +18,24 @@ type LoadingStateType = typeof LoadingState[keyof typeof LoadingState];
 
 export interface State {
   readonly loading: LoadingStateType;
-  readonly collections: Collection[];
-  readonly filters: Filter[];
-  readonly books: Book[];
+  readonly collections: ReadonlyArray<Collection>;
+  readonly filters: ReadonlyArray<Filter>;
+  readonly books: ReadonlyArray<Book>;
+  readonly selectedBookIds: ReadonlyArray<string>;
 }
 
 const SetLoading = "SetLoading" as const;
 const SetBooks = "SetBooks" as const;
 const SetCollections = "SetCollections" as const;
 const ToggleLike = "ToggleLike" as const;
+const SetCurrentList = "SetCurrentList" as const;
 
 type Actions =
   | ReturnType<typeof setLoading>
   | ReturnType<typeof setBooks>
   | ReturnType<typeof setCollections>
-  | ReturnType<typeof toggleLike>;
+  | ReturnType<typeof toggleLike>
+  | ReturnType<typeof setCurrentList>;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const setLoading = (LoadingState: LoadingStateType) => ({
@@ -60,6 +61,11 @@ export const toggleLike = (bookId: string) => ({
   payload: bookId,
 });
 
+export const setCurrentList = (selectedBookIds: ReadonlyArray<string>) => ({
+  type: SetCurrentList,
+  payload: selectedBookIds,
+});
+
 export const initialState: State = {
   loading: LoadingState.Initial,
   collections: [],
@@ -73,6 +79,7 @@ export const initialState: State = {
     new Filter("like", message.filter.like, (book: Book) => book.like),
   ],
   books: [],
+  selectedBookIds: [],
 };
 
 export const StateContext = createContext<{
@@ -94,6 +101,11 @@ export const reducer = (state: State, action: Actions): State => {
         books: state.books.map((book) =>
           book.id === action.payload ? { ...book, like: !book.like } : book
         ),
+      };
+    case SetCurrentList:
+      return {
+        ...state,
+        selectedBookIds: action.payload,
       };
     default:
       return initialState;

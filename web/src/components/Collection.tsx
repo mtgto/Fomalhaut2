@@ -4,9 +4,8 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "rocon/react";
 import { Book } from "../domain/book";
-
 import { Collection } from "../domain/collection";
-import { StateContext } from "../reducer";
+import { setCurrentList, StateContext } from "../reducer";
 import Library from "./Library";
 import { collectionRoutes } from "./Routes";
 
@@ -16,7 +15,7 @@ type Props = {
 };
 
 const CollectionPage: React.VoidFunctionComponent<Props> = (props: Props) => {
-  const { state } = useContext(StateContext);
+  const { dispatch, state } = useContext(StateContext);
   const collection: Collection | undefined = state.collections.find(
     (collection) => collection.id === props.id
   );
@@ -24,10 +23,13 @@ const CollectionPage: React.VoidFunctionComponent<Props> = (props: Props) => {
   useEffect(() => {
     if (collection) {
       document.title = `${collection.name} - Fomalhaut2`;
+      dispatch(setCurrentList(collection.bookIds));
     }
   }, [collection]);
   const books: Book[] =
-    state.books.filter((book) => collection?.bookIds.includes(book.id)) ?? [];
+    collection?.bookIds.flatMap(
+      (bookId) => state.books.find((book) => book.id === bookId) ?? []
+    ) ?? [];
 
   return (
     <Library

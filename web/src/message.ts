@@ -12,6 +12,12 @@ export type Message = {
     readonly unread: string;
     readonly like: string;
   };
+  readonly commands: {
+    readonly scrollToTop: string;
+    readonly like: string;
+    readonly dislike: string;
+    readonly next: string;
+  };
 };
 
 export const ja: Message = {
@@ -25,6 +31,12 @@ export const ja: Message = {
     unread: "未読",
     like: "好き",
   },
+  commands: {
+    scrollToTop: "一番上に戻る",
+    like: "好き",
+    dislike: "好きを取り消し",
+    next: "次の本を開く",
+  },
 };
 
 export const en: Message = {
@@ -37,6 +49,12 @@ export const en: Message = {
     all: "All",
     unread: "Unread",
     like: "Like",
+  },
+  commands: {
+    scrollToTop: "Go to page top",
+    like: "Like",
+    dislike: "Cancel Like",
+    next: "Go to next book",
   },
 };
 

@@ -3,11 +3,10 @@
 
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "rocon/react";
-
 import { Book } from "../domain/book";
 import { Filter } from "../domain/filter";
 import { message } from "../message";
-import { StateContext } from "../reducer";
+import { setCurrentList, StateContext } from "../reducer";
 import Library from "./Library";
 import { filterRoutes } from "./Routes";
 
@@ -17,19 +16,20 @@ type Props = {
 };
 
 const FilterPage: React.VoidFunctionComponent<Props> = (props: Props) => {
-  const { state } = useContext(StateContext);
+  const { dispatch, state } = useContext(StateContext);
   const filter: Filter | undefined = state.filters.find(
     (filter) => filter.id === props.id
   );
+  const books: ReadonlyArray<Book> = filter
+    ? state.books.filter((book) => filter.filter(book))
+    : state.books;
   const navigate = useNavigate();
   useEffect(() => {
     if (filter) {
       document.title = `${filter.name} - Fomalhaut2`;
+      dispatch(setCurrentList(books.map((book) => book.id)));
     }
   }, [filter]);
-  const books: Book[] = filter
-    ? state.books.filter((book) => filter.filter(book))
-    : state.books;
   return (
     <Library
       books={books}

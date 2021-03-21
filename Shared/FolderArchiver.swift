@@ -13,7 +13,7 @@ class FolderArchiver: Archiver {
         at: url, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
       self.entries =
         contentUrls
-        .filter { ["jpg", "jpeg", "png", "gif", "bmp"].contains($0.pathExtension.lowercased()) }
+        .filter { ["jpg", "jpeg", "png", "gif", "bmp", "tif", "tiff"].contains($0.pathExtension.lowercased()) }
         .sorted { (lhs, rhs) -> Bool in
           lhs.lastPathComponent.localizedStandardCompare(rhs.lastPathComponent) == .orderedAscending
         }

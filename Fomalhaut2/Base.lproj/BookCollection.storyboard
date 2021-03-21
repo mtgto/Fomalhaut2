@@ -10,7 +10,7 @@
         <scene sceneID="nb1-9E-W0Z">
             <objects>
                 <viewController showSeguePresentationStyle="single" id="e60-p4-DRD" customClass="BookCollectionViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="e91-vB-5qh">
+                    <view key="view" id="e91-vB-5qh">
                         <rect key="frame" x="0.0" y="0.0" width="270" height="196"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -20,17 +20,17 @@
                                 <tabViewItems>
                                     <tabViewItem label="Thumbnail" identifier="" id="Kzy-4H-3ed">
                                         <view key="view" id="sAX-th-huN">
-                                            <rect key="frame" x="0.0" y="0.0" width="270" height="222"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="270" height="196"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZdS-3F-YTu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="222"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="196"/>
                                                     <clipView key="contentView" id="Sno-dt-z3P">
-                                                        <rect key="frame" x="1" y="1" width="268" height="220"/>
+                                                        <rect key="frame" x="1" y="1" width="268" height="194"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <collectionView selectable="YES" allowsMultipleSelection="YES" id="181-T4-tof" customClass="BookCollectionView" customModule="Fomalhaut2" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="268" height="220"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="268" height="194"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                 <collectionViewLayout key="collectionViewLayout" id="OWG-c5-DLS" customClass="CollectionViewLayout" customModule="Fomalhaut2" customModuleProvider="target"/>
                                                                 <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -46,7 +46,7 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="jNM-4d-C3Q">
-                                                        <rect key="frame" x="253" y="1" width="16" height="220"/>
+                                                        <rect key="frame" x="253" y="1" width="16" height="194"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                 </scrollView>

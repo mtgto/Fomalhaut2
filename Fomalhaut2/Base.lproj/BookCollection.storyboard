@@ -11,22 +11,22 @@
             <objects>
                 <viewController showSeguePresentationStyle="single" id="e60-p4-DRD" customClass="BookCollectionViewController" customModule="Fomalhaut2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="e91-vB-5qh">
-                        <rect key="frame" x="0.0" y="0.0" width="270" height="222"/>
+                        <rect key="frame" x="0.0" y="0.0" width="270" height="196"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView type="noTabsNoBorder" initialItem="Kzy-4H-3ed" translatesAutoresizingMaskIntoConstraints="NO" id="dk9-z2-loH">
-                                <rect key="frame" x="0.0" y="0.0" width="270" height="222"/>
+                                <rect key="frame" x="0.0" y="0.0" width="270" height="196"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="Thumbnail" identifier="" id="Kzy-4H-3ed">
                                         <view key="view" id="sAX-th-huN">
-                                            <rect key="frame" x="0.0" y="0.0" width="270" height="274"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="270" height="222"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZdS-3F-YTu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="274"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="222"/>
                                                     <clipView key="contentView" id="Sno-dt-z3P">
-                                                        <rect key="frame" x="1" y="1" width="268" height="272"/>
+                                                        <rect key="frame" x="1" y="1" width="268" height="220"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <collectionView selectable="YES" allowsMultipleSelection="YES" id="181-T4-tof" customClass="BookCollectionView" customModule="Fomalhaut2" customModuleProvider="target">
@@ -61,17 +61,17 @@
                                     </tabViewItem>
                                     <tabViewItem label="List" identifier="" id="8UJ-3S-dgi">
                                         <view key="view" id="JNV-Oy-3Iq">
-                                            <rect key="frame" x="0.0" y="0.0" width="270" height="222"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="270" height="196"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbr-By-kXy">
-                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="222"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="196"/>
                                                     <clipView key="contentView" id="cio-a6-iSI">
-                                                        <rect key="frame" x="1" y="0.0" width="268" height="221"/>
+                                                        <rect key="frame" x="1" y="0.0" width="268" height="195"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveName="FileListView" rowSizeStyle="automatic" headerView="159-tO-4zi" viewBased="YES" id="BES-YB-qIc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="268" height="196"/>
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveName="FileListView" rowSizeStyle="automatic" headerView="159-tO-4zi" viewBased="YES" id="BES-YB-qIc">
+                                                                <rect key="frame" x="0.0" y="0.0" width="268" height="170"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>

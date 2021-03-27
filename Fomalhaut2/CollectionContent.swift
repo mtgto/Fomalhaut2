@@ -1,8 +1,12 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
+import RxRelay
+
 // Selected content in sidebar
 enum CollectionContent: Equatable {
+  static let selected = BehaviorRelay<CollectionContent?>(value: nil)
+
   case collection(Collection)
   case filter(Filter)
 

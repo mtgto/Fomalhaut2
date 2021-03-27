@@ -17,16 +17,6 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
     self.collectionMenu.delegate = self
   }
 
-  // Dirty hack: select initially first child of NSOutlineView
-  // https://gist.github.com/mrjjwright/218405
-  // It is easy to select first parent of NSOutlineView (index == 0)
-  override func becomeFirstResponder() -> Bool {
-    if self.numberOfSelectedRows == 0 {
-      self.selectRowIndexes(IndexSet([1]), byExtendingSelection: false)
-    }
-    return super.becomeFirstResponder()
-  }
-
   // MAKR: NSMenuDelegate
   override func menu(for event: NSEvent) -> NSMenu? {
     let point = convert(event.locationInWindow, from: nil)

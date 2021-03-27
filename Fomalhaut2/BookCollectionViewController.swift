@@ -20,7 +20,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   private let collectionViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)
   let collectionViewStyle = BehaviorRelay<CollectionViewStyle>(value: .collection)
   let searchText = BehaviorRelay<String?>(value: nil)
-  let collectionContent = BehaviorRelay<CollectionContent?>(value: nil)
   let tableViewSortDescriptors = BehaviorRelay<[NSSortDescriptor]>(value: [])
   private let collectionOrder = BehaviorRelay<CollectionOrder>(value: .createdAt)
   private let disposeBag = DisposeBag()
@@ -51,7 +50,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     Schema.shared.state
       .skip { $0 != .finish }
       .flatMap { _ in
-        Observable.combineLatest(self.collectionContent, self.searchText, self.tableViewSortDescriptors)
+        Observable.combineLatest(CollectionContent.selected, self.searchText, self.tableViewSortDescriptors)
       }
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { (collectionContent, searchText, sortDescriptors) in
@@ -74,7 +73,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .disposed(by: self.disposeBag)
     Schema.shared.state
       .skip { $0 != .finish }
-      .flatMap { _ in Observable.combineLatest(self.collectionContent, self.searchText, self.collectionOrder) }
+      .flatMap { _ in Observable.combineLatest(CollectionContent.selected, self.searchText, self.collectionOrder) }
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { (collectionContent, searchText, order) in
         let realm = try! Realm()
@@ -128,7 +127,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         UserDefaults.standard.set(tabViewIndex, forKey: BookCollectionViewController.collectionTabViewInitialIndexKey)
       })
       .disposed(by: self.disposeBag)
-    self.collectionContent
+    CollectionContent.selected
       .compactMap { $0 }
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { collectionContent in
@@ -140,26 +139,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { collectionOrder in
         UserDefaults.standard.set(collectionOrder.rawValue, forKey: BookCollectionViewController.collectionOrderKey)
-      })
-      .disposed(by: self.disposeBag)
-    NotificationCenter.default.rx.notification(filterChangedNotificationName, object: nil)
-      .subscribe(onNext: { notification in
-        if let filter = notification.userInfo?["filter"] as? Filter {
-          log.debug("Filter selected: \(filter.name), \(filter.predicate)")
-          self.collectionContent.accept(.filter(filter))
-        } else {
-          log.error("Unsupported userInfo from filterChangedNotification")
-        }
-      })
-      .disposed(by: self.disposeBag)
-    NotificationCenter.default.rx.notification(collectionChangedNotificationName, object: nil)
-      .subscribe(onNext: { notification in
-        if let collection = notification.userInfo?["collection"] as? Collection {
-          log.debug("Collection selected: \(collection.name)")
-          self.collectionContent.accept(.collection(collection))
-        } else {
-          log.error("Unsupported userInfo from collectionChangedNotification")
-        }
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(collectionOrderChangedNotificationName, object: nil)
@@ -325,7 +304,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
 
   @objc func deleteFromCollection(_ sender: Any) {
     let books = self.selectedBooks()
-    if case .collection(let collection) = self.collectionContent.value {
+    if case .collection(let collection) = CollectionContent.selected.value {
       let indexes = books.compactMap { collection.books.index(of: $0) }
       do {
         let realm = try Realm()
@@ -406,7 +385,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       // Write before open a NSDocument
       try? realm.write {
         realm.add(book)
-        if case .collection(let collection) = self.collectionContent.value {
+        if case .collection(let collection) = CollectionContent.selected.value {
           collection.books.append(book)
         }
       }

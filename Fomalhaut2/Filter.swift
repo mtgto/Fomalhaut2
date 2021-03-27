@@ -3,13 +3,12 @@
 
 import Cocoa
 
-let filterChangedNotificationName = Notification.Name("bookFilterChanged")
-
 struct Filter: Equatable {
+  let id: String
   let name: String
   let predicate: NSPredicate
 
   static func == (lhs: Filter, rhs: Filter) -> Bool {
-    return lhs.name == rhs.name
+    return lhs.id == rhs.id
   }
 }

@@ -4,7 +4,6 @@
 import Foundation
 import RealmSwift
 
-let collectionChangedNotificationName = Notification.Name("collectionChanged")
 let collectionDeleteNotificationName = Notification.Name("collectionDelete")
 
 class Collection: Object, Encodable {

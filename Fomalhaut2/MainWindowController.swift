@@ -67,6 +67,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
     self.contentViewController?.presentAsSheet(vc)
   }
 
+  func bookCollectionViewController() -> BookCollectionViewController {
+    let mainStackViewController = self.contentViewController as! MainStackViewController
+    return mainStackViewController.bookCollectionViewController!
+  }
+
   // MARK: - NSMenuItemValidation
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     let mainStackViewController = self.contentViewController as! MainStackViewController

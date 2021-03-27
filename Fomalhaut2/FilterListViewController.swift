@@ -8,20 +8,26 @@ import RxRelay
 import RxSwift
 
 class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
+  static let selectedCollectionContentIdKey = "selectedCollectionContentId"
   private let rootItems = [
     NSLocalizedString("LibraryHeader", comment: "Library"),
     NSLocalizedString("CollectionHeader", comment: "Collection"),
   ]
   // TODO: Use PublishSubject to add/remove filter by user
   private let filters: [Filter] = [
-    Filter(name: NSLocalizedString("AllFilter", comment: "All"), predicate: NSPredicate(format: "readCount >= 0")),
-    Filter(name: NSLocalizedString("UnreadFilter", comment: "Unread"), predicate: NSPredicate(format: "readCount = 0")),
-    Filter(name: NSLocalizedString("LikeFilter", comment: "Like"), predicate: NSPredicate(format: "%K = true", "like")),
+    Filter(
+      id: "all", name: NSLocalizedString("AllFilter", comment: "All"), predicate: NSPredicate(format: "readCount >= 0")),
+    Filter(
+      id: "unread", name: NSLocalizedString("UnreadFilter", comment: "Unread"),
+      predicate: NSPredicate(format: "readCount = 0")),
+    Filter(
+      id: "like", name: NSLocalizedString("LikeFilter", comment: "Like"),
+      predicate: NSPredicate(format: "%K = true", "like")),
   ]
   private let collections = BehaviorRelay<Results<Collection>?>(value: nil)
   private var selectedCollectionContent = BehaviorRelay<CollectionContent?>(value: nil)
   private let disposeBag = DisposeBag()
-  @IBOutlet weak var filterListView: NSOutlineView!
+  @IBOutlet weak var filterListView: FilterListView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -66,14 +72,25 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
       .subscribe(onNext: { collectionContent in
         switch collectionContent {
         case .filter(let filter):
-          NotificationCenter.default.post(
-            name: filterChangedNotificationName, object: nil, userInfo: ["filter": filter])
+          CollectionContent.selected.accept(.filter(filter))
         case .collection(let collection):
-          NotificationCenter.default.post(
-            name: collectionChangedNotificationName, object: nil, userInfo: ["collection": collection])
+          CollectionContent.selected.accept(.collection(collection))
         }
       })
       .disposed(by: self.disposeBag)
+    let selectedCollectionContentId = UserDefaults.standard.string(
+      forKey: FilterListViewController.selectedCollectionContentIdKey)
+    if let filterIndex = self.filters.firstIndex(where: { $0.id == selectedCollectionContentId }), filterIndex >= 0 {
+      self.filterListView.selectRowIndexes(IndexSet(integer: filterIndex + 1), byExtendingSelection: false)
+      self.selectedCollectionContent.accept(.filter(self.filters[filterIndex]))
+    } else if let collections = self.collections.value,
+      let collectionIndex = collections.firstIndex(where: { $0.id == selectedCollectionContentId }),
+      collectionIndex >= 0
+    {
+      self.selectedCollectionContent.accept(.collection(collections[collectionIndex]))
+      self.filterListView.selectRowIndexes(
+        IndexSet(integer: 2 + self.filters.count + collectionIndex), byExtendingSelection: false)
+    }
   }
 
   func addNewCollection() {
@@ -336,7 +353,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
   }
 
   func outlineViewSelectionDidChange(_ notification: Notification) {
-    //log.info("selectedRow = \(self.filterListView.selectedRow)")
+    //log.debug("selectedRow = \(self.filterListView.selectedRow)")
     let item = self.filterListView.item(atRow: self.filterListView.selectedRow)
     if let filter = item as? Filter {
       self.selectedCollectionContent.accept(.filter(filter))

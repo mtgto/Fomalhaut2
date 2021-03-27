@@ -8,7 +8,8 @@
     "build": "yarn run rimraf ./dist ../Fomalhaut2/assets.zip && parcel build ./src/index.html --public-url /assets/ && zip -rj9 ../Fomalhaut2/assets.zip ./dist",
     "lint": "yarn run lint:tsc && yarn run lint:eslint",
     "lint:eslint": "eslint $npm_config_eslint_args '*/**/*.{ts,tsx}'",
-    "lint:tsc": "tsc --noEmit"
+    "lint:tsc": "tsc --noEmit",
+    "prepare": "cd .. && husky install web/.husky"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
@@ -34,7 +35,7 @@
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^4.3.0",
+    "husky": "5",
     "lint-staged": "^10.5.3",
     "parcel": "^2.0.0-beta.2",
     "prettier": "^2.2.1",

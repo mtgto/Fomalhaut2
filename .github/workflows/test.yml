@@ -11,5 +11,12 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: apple-actions/import-codesign-certs@v1
+      with: 
+        p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
+        p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
     - name: test
       run: xcodebuild -target Fomalhaut2Tests -scheme Fomalhaut2 test
+      env:
+        DEVELOPMENT_TEAM: ""
+        PROFILE_PATH: ""

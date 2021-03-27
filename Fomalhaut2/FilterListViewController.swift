@@ -25,7 +25,6 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
       predicate: NSPredicate(format: "%K = true", "like")),
   ]
   private let collections = BehaviorRelay<Results<Collection>?>(value: nil)
-  private var selectedCollectionContent = BehaviorRelay<CollectionContent?>(value: nil)
   private let disposeBag = DisposeBag()
   @IBOutlet weak var filterListView: FilterListView!
 
@@ -66,30 +65,19 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     self.rootItems.forEach { (rootItem) in
       self.filterListView.expandItem(rootItem)
     }
-    self.selectedCollectionContent
-      .distinctUntilChanged()
-      .compactMap { $0 }
-      .subscribe(onNext: { collectionContent in
-        switch collectionContent {
-        case .filter(let filter):
-          CollectionContent.selected.accept(.filter(filter))
-        case .collection(let collection):
-          CollectionContent.selected.accept(.collection(collection))
-        }
-      })
-      .disposed(by: self.disposeBag)
     let selectedCollectionContentId = UserDefaults.standard.string(
       forKey: FilterListViewController.selectedCollectionContentIdKey)
-    if let filterIndex = self.filters.firstIndex(where: { $0.id == selectedCollectionContentId }), filterIndex >= 0 {
-      self.filterListView.selectRowIndexes(IndexSet(integer: filterIndex + 1), byExtendingSelection: false)
-      self.selectedCollectionContent.accept(.filter(self.filters[filterIndex]))
-    } else if let collections = self.collections.value,
-      let collectionIndex = collections.firstIndex(where: { $0.id == selectedCollectionContentId }),
-      collectionIndex >= 0
+    if let collections = self.collections.value,
+      let collectionIndex = collections.firstIndex(where: { $0.id == selectedCollectionContentId })
     {
-      self.selectedCollectionContent.accept(.collection(collections[collectionIndex]))
-      self.filterListView.selectRowIndexes(
-        IndexSet(integer: 2 + self.filters.count + collectionIndex), byExtendingSelection: false)
+      if collectionIndex >= 0 {
+        CollectionContent.selected.accept(.collection(collections[collectionIndex]))
+        self.filterListView.selectRowIndexes(
+          IndexSet(integer: 2 + self.filters.count + collectionIndex), byExtendingSelection: false)
+      }
+    } else if let filterIndex = self.filters.firstIndex(where: { $0.id == selectedCollectionContentId }) {
+      CollectionContent.selected.accept(.filter(self.filters[filterIndex]))
+      self.filterListView.selectRowIndexes(IndexSet(integer: 1 + filterIndex), byExtendingSelection: false)
     }
   }
 
@@ -132,7 +120,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
 
   override func keyDown(with event: NSEvent) {
     if event.keyCode == 51 {  // delete
-      if case .collection(let collection) = self.selectedCollectionContent.value {
+      if case .collection(let collection) = CollectionContent.selected.value {
         let alert = NSAlert()
         alert.messageText = NSLocalizedString(
           "AlertMessageTextDeleteCollection", comment: "Do you delete a selected collection?")
@@ -356,9 +344,9 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     //log.debug("selectedRow = \(self.filterListView.selectedRow)")
     let item = self.filterListView.item(atRow: self.filterListView.selectedRow)
     if let filter = item as? Filter {
-      self.selectedCollectionContent.accept(.filter(filter))
+      CollectionContent.selected.accept(.filter(filter))
     } else if let collection = item as? Collection {
-      self.selectedCollectionContent.accept(.collection(collection))
+      CollectionContent.selected.accept(.collection(collection))
     }
   }
 }

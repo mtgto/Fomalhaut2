@@ -57,6 +57,11 @@ class WebSharing: NSObject {
         return self.defaultHtml(req)
       }
 
+      futureGet("/filters/:id") { req in
+        self.recordAccess(req)
+        return self.defaultHtml(req)
+      }
+
       futureGet("/assets/:filename") { req in
         self.recordAccess(req)
         guard let filename = req.params("filename") else {
@@ -241,7 +246,9 @@ class WebSharing: NSObject {
   private func defaultHtml(_ request: Request) -> EventLoopFuture<Response> {
     return self.loadAsset("index.html", request: request)
       .map { Response(data: $0, contentType: ContentType.textHtml.withCharset()) }
-      .recover { _ in Response(text: "Error", status: .notFound, contentType: ContentType.textPlain.withCharset()) }
+      .recover { _ in
+        Response(text: "Error", status: .internalServerError, contentType: ContentType.textPlain.withCharset())
+      }
   }
 
   private func loadAsset(_ filename: String, request: Request) -> EventLoopFuture<Data> {

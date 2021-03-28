@@ -10,10 +10,11 @@ class CollectionContentTests: XCTestCase {
     let collection: Collection = Collection()
     let collectionCopied = Collection()
     collectionCopied.id = collection.id
-    let filter: Filter = Filter(name: "testFilter", predicate: NSPredicate(format: "name = \"test\""))
+    let filter: Filter = Filter(id: "test", name: "testFilter", predicate: NSPredicate(format: "name = \"test\""))
     XCTAssertTrue(CollectionContent.collection(collection) == .collection(collectionCopied))
     XCTAssertTrue(CollectionContent.collection(collection) != .filter(filter))
     XCTAssertTrue(
-      CollectionContent.filter(filter) != .filter(Filter(name: filter.name + "copy", predicate: filter.predicate)))
+      CollectionContent.filter(filter)
+        != .filter(Filter(id: "testcopy", name: filter.name + "copy", predicate: filter.predicate)))
   }
 }

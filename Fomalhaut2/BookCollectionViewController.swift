@@ -132,6 +132,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { collectionContent in
         self.updateBookMenu(collectionContent: collectionContent)
+        UserDefaults.standard.set(collectionContent.id, forKey: FilterListViewController.selectedCollectionContentIdKey)
       })
       .disposed(by: self.disposeBag)
     self.collectionOrder

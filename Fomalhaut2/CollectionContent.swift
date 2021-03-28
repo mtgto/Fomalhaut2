@@ -10,6 +10,15 @@ enum CollectionContent: Equatable {
   case collection(Collection)
   case filter(Filter)
 
+  var id: String {
+    switch self {
+    case .collection(let collection):
+      return collection.id
+    case .filter(let filter):
+      return filter.id
+    }
+  }
+
   static func == (lhs: CollectionContent, rhs: CollectionContent) -> Bool {
     switch (lhs, rhs) {
     case (let .collection(left), let .collection(right)):

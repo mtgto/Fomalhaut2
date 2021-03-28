@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       BookCollectionViewController.collectionOrderKey: CollectionOrder.createdAt.rawValue,
       WebSharingViewController.webServerPortKey: 8080,
       PageOrder.pageOrderKey: PageOrder.defaultValue.rawValue,
-      FilterListViewController.selectedCollectionContentIdKey: "unread",  // Filter.id | Collection.id
+      FilterListViewController.selectedCollectionContentIdKey: "all",  // Filter.id | Collection.id
     ])
   }
 

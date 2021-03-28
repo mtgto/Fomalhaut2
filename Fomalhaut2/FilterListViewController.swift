@@ -39,6 +39,20 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
       .subscribe(onNext: { _ in
         let realm = try! Realm()
         self.collections.accept(realm.objects(Collection.self).sorted(byKeyPath: "order"))
+        let selectedCollectionContentId = UserDefaults.standard.string(
+          forKey: FilterListViewController.selectedCollectionContentIdKey)
+        if let collections = self.collections.value,
+          let collectionIndex = collections.firstIndex(where: { $0.id == selectedCollectionContentId })
+        {
+          if collectionIndex >= 0 {
+            CollectionContent.selected.accept(.collection(collections[collectionIndex]))
+            self.filterListView.selectRowIndexes(
+              IndexSet(integer: 2 + self.filters.count + collectionIndex), byExtendingSelection: false)
+          }
+        } else if let filterIndex = self.filters.firstIndex(where: { $0.id == selectedCollectionContentId }) {
+          CollectionContent.selected.accept(.filter(self.filters[filterIndex]))
+          self.filterListView.selectRowIndexes(IndexSet(integer: 1 + filterIndex), byExtendingSelection: false)
+        }
       })
       .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(collectionDeleteNotificationName, object: nil)
@@ -64,20 +78,6 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
       .disposed(by: self.disposeBag)
     self.rootItems.forEach { (rootItem) in
       self.filterListView.expandItem(rootItem)
-    }
-    let selectedCollectionContentId = UserDefaults.standard.string(
-      forKey: FilterListViewController.selectedCollectionContentIdKey)
-    if let collections = self.collections.value,
-      let collectionIndex = collections.firstIndex(where: { $0.id == selectedCollectionContentId })
-    {
-      if collectionIndex >= 0 {
-        CollectionContent.selected.accept(.collection(collections[collectionIndex]))
-        self.filterListView.selectRowIndexes(
-          IndexSet(integer: 2 + self.filters.count + collectionIndex), byExtendingSelection: false)
-      }
-    } else if let filterIndex = self.filters.firstIndex(where: { $0.id == selectedCollectionContentId }) {
-      CollectionContent.selected.accept(.filter(self.filters[filterIndex]))
-      self.filterListView.selectRowIndexes(IndexSet(integer: 1 + filterIndex), byExtendingSelection: false)
     }
   }
 

@@ -1,6 +1,19 @@
 CHANGELOG
 ====
 
+## v0.9.4 (2021-03-28)
+
+### Added
+
+- Restore last selected collection
+
+### Changed
+
+- Update Unrar to 0.3.3 to fix the bug that opened RAR/CBR files is extracted to `~/Library/Containers/net.mtgto.Fomalhaut2/Data"`
+- Fix to fail to reload a page in filter page
+- Add CI for xcodebuild
+- Update web packages
+
 ## v0.9.3 (2021-03-21)
 
 ### Added

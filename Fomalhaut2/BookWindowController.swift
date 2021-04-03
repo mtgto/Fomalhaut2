@@ -154,4 +154,15 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
     let spreadPageViewController = self.contentViewController as! SpreadPageViewController
     spreadPageViewController.firstPage()
   }
+
+  @IBAction func updateSinglePageControl(_ sender: Any) {
+    let spreadPageViewController = self.contentViewController as! SpreadPageViewController
+    if let segmentedControl = sender as? NSSegmentedControl {
+      if segmentedControl.selectedSegment == 0 {
+        spreadPageViewController.backwardSinglePage()
+      } else {
+        spreadPageViewController.forwardSinglePage()
+      }
+    }
+  }
 }

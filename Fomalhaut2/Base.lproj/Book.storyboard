@@ -84,8 +84,8 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="2OF-NQ-M4L">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment toolTip="Back" image="NSTouchBarGoUpTemplate" width="32"/>
-                                                <segment toolTip="Forward" image="NSTouchBarGoDownTemplate" width="32" tag="1"/>
+                                                <segment toolTip="Back" image="up" width="32"/>
+                                                <segment toolTip="Forward" image="down" width="32" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -140,10 +140,31 @@
                                         </buttonCell>
                                     </button>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="421940CB-307D-47B5-B2E3-6582ED88DD0A" label="Single Control" paletteLabel="Single Control" sizingBehavior="auto" id="TNH-8s-IdF">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="mfl-J5-UV0">
+                                        <rect key="frame" x="3" y="14" width="75" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="dP7-d8-KIT">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment image="NSTouchBarGoUpTemplate" width="32"/>
+                                                <segment image="NSTouchBarGoDownTemplate" width="32" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="updateSinglePageControl:" target="I31-ld-zmx" id="dnq-uY-TWZ"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <attributedString key="userComments">
+                                        <fragment content="Single Control"/>
+                                    </attributedString>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="JgL-3n-H2O"/>
                                 <toolbarItem reference="fuc-9u-iU4"/>
+                                <toolbarItem reference="TNH-8s-IdF"/>
                                 <toolbarItem reference="oTV-Y3-Ona"/>
                                 <toolbarItem reference="MNP-GK-6ey"/>
                                 <toolbarItem reference="elp-kS-fEt"/>
@@ -168,8 +189,10 @@
     <resources>
         <image name="NSTouchBarGoDownTemplate" width="16" height="30"/>
         <image name="NSTouchBarGoUpTemplate" width="16" height="30"/>
+        <image name="down" width="19" height="19"/>
         <image name="first" width="19" height="19"/>
         <image name="left.to.right" width="19" height="19"/>
         <image name="right.to.left" width="19" height="19"/>
+        <image name="up" width="19" height="19"/>
     </resources>
 </document>

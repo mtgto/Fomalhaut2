@@ -1,5 +1,11 @@
+/* Do you delete a selected collection? */
+"AlertMessageTextDeleteCollection" = "選択したコレクションを削除しますか?";
+
 /* All */
 "AllFilter" = "すべての本";
+
+/* Cancel */
+"Cancel" = "キャンセル";
 
 /* Cancel Like */
 "CancelLike" = "好きを取り消し";
@@ -27,6 +33,9 @@
 
 /* Confirm your app is latest */
 "DatabaseBrokenInformativeText" = "最新のバージョンを使用しているか確認してください。\nError(\"%@\")";
+
+/* Delete */
+"Delete" = "削除";
 
 /* (No Comment) */
 "ErrorBrokenFile" = "ファイルが壊れているか未対応です";
@@ -73,6 +82,3 @@
 /* Last Access from %@ at %@ */
 "WebSharingIpAddressInformation" = "最終アクセス %@ 日時 %@";
 
-"AlertMessageTextDeleteCollection" = "選択したコレクションを削除しますか?";
-"Cancel" = "キャンセル";
-"Delete" = "削除";

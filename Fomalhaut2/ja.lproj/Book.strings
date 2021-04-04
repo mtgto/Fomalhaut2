@@ -19,6 +19,12 @@
 /* Class = "NSToolbarItem"; paletteLabel = "Control"; ObjectID = "fuc-9u-iU4"; */
 "fuc-9u-iU4.paletteLabel" = "コントロール";
 
+/* Class = "NSToolbarItem"; label = "Like"; ObjectID = "JgL-3n-H2O"; */
+"JgL-3n-H2O.label" = "好き";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Like"; ObjectID = "JgL-3n-H2O"; */
+"JgL-3n-H2O.paletteLabel" = "好き";
+
 /* Class = "NSToolbarItem"; label = "Page Order"; ObjectID = "MNP-GK-6ey"; Note = "PageOrder"; */
 "MNP-GK-6ey.label" = "ページ順序";
 
@@ -33,4 +39,10 @@
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "Oyj-62-mGG"; */
 "Oyj-62-mGG.title" = "Window";
+
+/* Class = "NSToolbarItem"; label = "Single Control"; ObjectID = "TNH-8s-IdF"; Note = "Single Control"; */
+"TNH-8s-IdF.label" = "単ページコントロール";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Single Control"; ObjectID = "TNH-8s-IdF"; Note = "Single Control"; */
+"TNH-8s-IdF.paletteLabel" = "単ページコントロール";
 

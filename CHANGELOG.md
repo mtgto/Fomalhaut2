@@ -1,6 +1,19 @@
 CHANGELOG
 ====
 
+## v0.9.5 (2021-04-04)
+
+### Added
+
+- Add single page control to toolbar
+- Hide file extension of book
+
+### Changed
+
+- Fix `Go to next book` is not often displayed
+- Set background of sidebar by using NSVisualEffectView
+- Update web packages
+
 ## v0.9.4 (2021-03-28)
 
 ### Added

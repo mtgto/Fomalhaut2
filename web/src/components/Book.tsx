@@ -56,7 +56,7 @@ const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
   return [...Array(book.pageCount).keys()].map((i: number) => (
     <img
       className={classes.image}
-      key={i}
+      key={`${book.id}.${i}`}
       src={`/images/books/${book.id}/pages/${i}`}
     ></img>
   ));

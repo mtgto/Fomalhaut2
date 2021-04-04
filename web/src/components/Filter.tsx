@@ -30,7 +30,7 @@ const FilterPage: React.VoidFunctionComponent<Props> = (props: Props) => {
       dispatch(setCurrentList(books.map((book) => book.id)));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter]);
+  }, [filter, books.map((book) => book.id).join(",")]);
   return (
     <Library
       books={books}

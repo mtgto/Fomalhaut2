@@ -577,7 +577,7 @@ extension BookCollectionViewController: NSTableViewDelegate {
     }
     switch identifier.rawValue {
     case "name":
-      cellView.textField?.stringValue = self.tableViewBooks.value![row].name
+      cellView.textField?.stringValue = self.tableViewBooks.value![row].displayName
     case "view":
       cellView.textField?.stringValue = String(self.tableViewBooks.value![row].readCount)
     case "like":
@@ -613,8 +613,8 @@ extension BookCollectionViewController: NSCollectionViewDataSource {
         withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BookCollectionViewItem"),
         for: indexPath) as! BookCollectionViewItem
     let book = self.collectionViewBooks.value![indexPath.item]
-    item.textField?.stringValue = book.name
-    item.textField?.toolTip = book.name
+    item.textField?.stringValue = book.displayName
+    item.textField?.toolTip = book.displayName
     //item.likeImageView?.isHidden = !book.like
     item.like = book.like
     if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {

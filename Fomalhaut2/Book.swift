@@ -21,6 +21,13 @@ class Book: Object, Encodable {
   // jpeg data
   @objc dynamic var thumbnailData: Data? = nil
 
+  static let abbreviateFileNamePattern = try! NSRegularExpression(
+    pattern: "\\.(zip|cbz|rar|cbr|pdf)$", options: .caseInsensitive)
+  var displayName: String {
+    return Book.abbreviateFileNamePattern.stringByReplacingMatches(
+      in: self.name, options: [], range: NSMakeRange(0, self.name.utf16.count), withTemplate: "")
+  }
+
   override static func primaryKey() -> String? {
     return "id"
   }
@@ -31,6 +38,15 @@ class Book: Object, Encodable {
 
   enum CodingKeys: String, CodingKey {
     case id, name, readCount, like, pageCount
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(self.id, forKey: .id)
+    try container.encode(self.displayName, forKey: .name)
+    try container.encode(self.readCount, forKey: .readCount)
+    try container.encode(self.like, forKey: .like)
+    try container.encode(self.pageCount, forKey: .pageCount)
   }
 
   func resolveURL(bookmarkDataIsStale: inout Bool) throws -> URL {

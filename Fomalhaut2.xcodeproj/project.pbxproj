@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE2AC0522618761100317DA3 /* NSView+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2AC0512618761100317DA3 /* NSView+BackgroundColor.swift */; };
+		CE2AC0582619673E00317DA3 /* BookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2AC0572619673E00317DA3 /* BookTests.swift */; };
 		CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280925305AA000986C9A /* AppDelegate.swift */; };
 		CE30281025305AA200986C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE30280F25305AA200986C9A /* Assets.xcassets */; };
 		CE30281325305AA200986C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30281125305AA200986C9A /* Main.storyboard */; };
@@ -154,6 +155,7 @@
 /* Begin PBXFileReference section */
 		CE296BEB2530722A00674C99 /* ArchiverError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiverError.swift; sourceTree = "<group>"; };
 		CE2AC0512618761100317DA3 /* NSView+BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+BackgroundColor.swift"; sourceTree = "<group>"; };
+		CE2AC0572619673E00317DA3 /* BookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTests.swift; sourceTree = "<group>"; };
 		CE30280625305AA000986C9A /* Fomalhaut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fomalhaut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE30280925305AA000986C9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE30280F25305AA200986C9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9DCB9D25722DA80024FB1B /* CollectionContentTests.swift */,
+				CE2AC0572619673E00317DA3 /* BookTests.swift */,
 				CE30282025305AA200986C9A /* Info.plist */,
 			);
 			path = Fomalhaut2Tests;
@@ -655,6 +658,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2AC0582619673E00317DA3 /* BookTests.swift in Sources */,
 				CE9DCB9E25722DA80024FB1B /* CollectionContentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,7 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
     self.collectionMenu.delegate = self
   }
 
-  // MAKR: NSMenuDelegate
+  // MARK: NSMenuDelegate
   override func menu(for event: NSEvent) -> NSMenu? {
     let point = convert(event.locationInWindow, from: nil)
     let clickedRow = self.row(at: point)
@@ -46,5 +46,11 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     // All collection can be deleted
     return true
+  }
+
+  // MARK: NSResponder
+  override func becomeFirstResponder() -> Bool {
+    // To force selected cell color to dark
+    return false
   }
 }

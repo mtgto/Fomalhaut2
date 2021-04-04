@@ -9,6 +9,7 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
   @IBOutlet weak var pageControl: NSSegmentedControl!
   @IBOutlet weak var pageOrderControl: NSSegmentedControl!
   @IBOutlet weak var likeButton: NSButton!
+  @IBOutlet weak var singlePageControl: NSSegmentedControl!
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -20,6 +21,8 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
       .subscribe(onNext: { (_) in
         self.pageControl.setEnabled(spreadPageViewController.canBackwardPage(), forSegment: 0)
         self.pageControl.setEnabled(spreadPageViewController.canForwardPage(), forSegment: 1)
+        self.singlePageControl.setEnabled(spreadPageViewController.canBackwardPage(), forSegment: 0)
+        self.singlePageControl.setEnabled(spreadPageViewController.canForwardPage(), forSegment: 1)
       })
       .disposed(by: self.disposeBag)
     spreadPageViewController.pageOrder

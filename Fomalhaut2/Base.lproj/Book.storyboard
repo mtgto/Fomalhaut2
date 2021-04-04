@@ -178,6 +178,7 @@
                         <outlet property="likeButton" destination="gRp-EK-n9b" id="qMs-hD-m9d"/>
                         <outlet property="pageControl" destination="grQ-q3-Ia3" id="2pJ-y1-Rao"/>
                         <outlet property="pageOrderControl" destination="WvN-Nn-JeU" id="n6V-fi-KXC"/>
+                        <outlet property="singlePageControl" destination="mfl-J5-UV0" id="OTS-9y-aET"/>
                         <segue destination="T99-gd-Ov7" kind="relationship" relationship="window.shadowedContentViewController" id="b4T-I6-yJI"/>
                     </connections>
                 </windowController>

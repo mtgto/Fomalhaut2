@@ -1,6 +1,14 @@
 CHANGELOG
 ====
 
+## v0.9.6 (2021-04-11)
+
+### Added
+
+- Add thumbnail size slider
+- Add rename menu item to collection list
+- Enable to animate collection view
+
 ## v0.9.5 (2021-04-04)
 
 ### Added

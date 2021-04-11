@@ -55,6 +55,13 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
         }
       })
       .disposed(by: self.disposeBag)
+    NotificationCenter.default.rx.notification(collectionStartRenamingNotificationName, object: nil)
+      .subscribe(onNext: { notification in
+        if let collection = notification.userInfo?["collection"] as? Collection {
+          self.editCollectionName(collection)
+        }
+      })
+      .disposed(by: self.disposeBag)
     NotificationCenter.default.rx.notification(collectionDeleteNotificationName, object: nil)
       .subscribe(onNext: { notification in
         if let collection = notification.userInfo?["collection"] as? Collection {
@@ -121,14 +128,21 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
   @IBAction func doubleClick(_ sender: Any) {
     let row = self.filterListView.selectedRow
     if self.filterListView.clickedRow == row {
-      if let tableCellView = self.filterListView.view(atColumn: 0, row: row, makeIfNecessary: false) as? NSTableCellView
-      {
-        guard self.filterListView.item(atRow: row) is Collection else { return }
-        // NOTE: set false after text edit is done
-        tableCellView.textField?.isEditable = true
+      if let collection = self.filterListView.item(atRow: row) as? Collection {
+        self.editCollectionName(collection)
       }
-      self.filterListView.editColumn(0, row: row, with: nil, select: false)
     }
+  }
+
+  func editCollectionName(_ collection: Collection) {
+    let row = self.filterListView.row(forItem: collection)
+    guard row >= 0 else { return }
+    if let tableCellView = self.filterListView.view(atColumn: 0, row: row, makeIfNecessary: false) as? NSTableCellView {
+      guard self.filterListView.item(atRow: row) is Collection else { return }
+      // NOTE: set false after text edit is done
+      tableCellView.textField?.isEditable = true
+    }
+    self.filterListView.editColumn(0, row: row, with: nil, select: false)
   }
 
   override func keyDown(with event: NSEvent) {

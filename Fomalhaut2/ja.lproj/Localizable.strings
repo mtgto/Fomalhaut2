@@ -48,6 +48,7 @@
 
 /* Delete %@ */
 "FilterListMenuDelete" = "%@ を削除";
+"FilterListMenuRename" = "名前を変更";
 
 /* Library */
 "LibraryHeader" = "ライブラリ";

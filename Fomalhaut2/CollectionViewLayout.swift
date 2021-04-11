@@ -116,9 +116,13 @@ class CollectionViewLayout: NSCollectionViewFlowLayout {
   }
 
   override func shouldInvalidateLayout(forBoundsChange newBounds: NSRect) -> Bool {
-    //    let newNumberOfColumns = max(Int((newBounds.width + self.itemSpacing) / (self.itemWidth + self.itemSpacing)), 1)
+    let itemSize = CollectionViewLayout.itemSizes[CollectionViewLayout.itemSizeIndex.value]
+    let newNumberOfColumns = max(
+      Int((newBounds.width + self.itemSpacing - self.leftMargin) / (itemSize.width + self.itemSpacing)), 1)
     //    return self.numberOfColumns != newNumberOfColumns
-
+    if self.numberOfColumns != newNumberOfColumns {
+      self.collectionView?.animator().performBatchUpdates(nil)
+    }
     // Resize header frame to fix header position in right
     return true
   }

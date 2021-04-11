@@ -118,6 +118,19 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     self.addNewCollection()
   }
 
+  @IBAction func doubleClick(_ sender: Any) {
+    let row = self.filterListView.selectedRow
+    if self.filterListView.clickedRow == row {
+      if let tableCellView = self.filterListView.view(atColumn: 0, row: row, makeIfNecessary: false) as? NSTableCellView
+      {
+        guard self.filterListView.item(atRow: row) is Collection else { return }
+        // NOTE: set false after text edit is done
+        tableCellView.textField?.isEditable = true
+      }
+      self.filterListView.editColumn(0, row: row, with: nil, select: false)
+    }
+  }
+
   override func keyDown(with event: NSEvent) {
     if event.keyCode == 51 {  // delete
       if case .collection(let collection) = CollectionContent.selected.value {
@@ -319,10 +332,8 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
         as! NSTableCellView
       if let filter = item as? Filter {
         cell.textField?.stringValue = filter.name
-        cell.textField?.isEditable = false
       } else if let collection = item as? Collection {
         cell.textField?.stringValue = collection.name
-        cell.textField?.isEditable = true
       } else {
         log.error("Unexpected tableColumn. item: \(item)")
         return nil
@@ -363,6 +374,7 @@ extension FilterListViewController: NSControlTextEditingDelegate {
     if let textField = obj.object as? NSTextField,
       let collection = self.filterListView.item(atRow: self.filterListView.selectedRow) as? Collection
     {
+      textField.isEditable = false
       do {
         try Realm().write {
           collection.name = textField.stringValue

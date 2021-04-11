@@ -33,7 +33,7 @@
                                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                             <tableColumns>
-                                                                <tableColumn width="175" minWidth="16" maxWidth="1000" id="Ahe-qq-R5w">
+                                                                <tableColumn editable="NO" width="175" minWidth="16" maxWidth="1000" id="Ahe-qq-R5w">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -100,6 +100,7 @@
                                                                 </tableColumn>
                                                             </tableColumns>
                                                             <connections>
+                                                                <action trigger="doubleAction" selector="doubleClick:" target="tHN-Aj-iAS" id="Tbb-p5-c0K"/>
                                                                 <outlet property="dataSource" destination="tHN-Aj-iAS" id="R0c-Gi-Iml"/>
                                                                 <outlet property="delegate" destination="tHN-Aj-iAS" id="xQf-tM-Y89"/>
                                                             </connections>

@@ -52,4 +52,10 @@ class CollectionViewHeaderView: NSView, NSCollectionViewElement {
       name: collectionOrderChangedNotificationName, object: nil,
       userInfo: ["order": collectionOrder])
   }
+
+  @IBAction func resize(_ sender: Any) {
+    if let slider = sender as? NSSlider {
+      log.debug(slider.intValue)
+    }
+  }
 }

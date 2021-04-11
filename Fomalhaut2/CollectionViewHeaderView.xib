@@ -32,10 +32,43 @@
                         </connections>
                     </popUpButtonCell>
                 </popUpButton>
+                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fIc-xg-bl5">
+                    <rect key="frame" x="43" y="8" width="96" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="BTL-8r-NFb"/>
+                        <constraint firstAttribute="width" constant="92" id="jsq-lv-Rzn"/>
+                    </constraints>
+                    <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="2" tickMarkPosition="below" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="fp3-5H-WcD"/>
+                    <connections>
+                        <action selector="resize:" target="c22-O7-iKe" id="NXv-s8-1Vg"/>
+                    </connections>
+                </slider>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PrZ-u6-XBx">
+                    <rect key="frame" x="151" y="8" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="HdM-7u-yO8"/>
+                        <constraint firstAttribute="width" constant="24" id="R8a-ke-YZt"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSIconViewTemplate" id="3A4-9W-wkY"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h5r-gH-vU4">
+                    <rect key="frame" x="8" y="15" width="20" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="N8r-Ji-hbt"/>
+                        <constraint firstAttribute="height" constant="10" id="qSx-zA-Hkb"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSIconViewTemplate" id="89R-8a-30e"/>
+                </imageView>
             </subviews>
             <constraints>
+                <constraint firstItem="h5r-gH-vU4" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="8" id="6wn-bi-2cS"/>
+                <constraint firstItem="PrZ-u6-XBx" firstAttribute="leading" secondItem="fIc-xg-bl5" secondAttribute="trailing" constant="14" id="BQK-HG-UhB"/>
                 <constraint firstItem="qC7-cL-L4h" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="LN7-qE-kpF"/>
+                <constraint firstItem="fIc-xg-bl5" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="16" id="T1H-4y-9yn"/>
+                <constraint firstItem="h5r-gH-vU4" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="V2y-fO-ckm"/>
+                <constraint firstItem="fIc-xg-bl5" firstAttribute="leading" secondItem="h5r-gH-vU4" secondAttribute="trailing" constant="17" id="jFO-tp-KL1"/>
                 <constraint firstAttribute="trailing" secondItem="qC7-cL-L4h" secondAttribute="trailing" constant="20" symbolic="YES" id="ny8-6T-brC"/>
+                <constraint firstItem="PrZ-u6-XBx" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="qTz-bO-Bm7"/>
             </constraints>
             <connections>
                 <outlet property="orderButton" destination="qC7-cL-L4h" id="Km1-70-jMD"/>
@@ -43,4 +76,7 @@
             <point key="canvasLocation" x="44" y="158"/>
         </customView>
     </objects>
+    <resources>
+        <image name="NSIconViewTemplate" width="14" height="10"/>
+    </resources>
 </document>

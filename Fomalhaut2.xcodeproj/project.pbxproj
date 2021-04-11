@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE2AC0522618761100317DA3 /* NSView+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2AC0512618761100317DA3 /* NSView+BackgroundColor.swift */; };
 		CE2AC0582619673E00317DA3 /* BookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2AC0572619673E00317DA3 /* BookTests.swift */; };
 		CE30280A25305AA000986C9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30280925305AA000986C9A /* AppDelegate.swift */; };
 		CE30281025305AA200986C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE30280F25305AA200986C9A /* Assets.xcassets */; };
@@ -154,7 +153,6 @@
 
 /* Begin PBXFileReference section */
 		CE296BEB2530722A00674C99 /* ArchiverError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiverError.swift; sourceTree = "<group>"; };
-		CE2AC0512618761100317DA3 /* NSView+BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+BackgroundColor.swift"; sourceTree = "<group>"; };
 		CE2AC0572619673E00317DA3 /* BookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTests.swift; sourceTree = "<group>"; };
 		CE30280625305AA000986C9A /* Fomalhaut2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fomalhaut2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE30280925305AA000986C9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -345,7 +343,6 @@
 				CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */,
 				CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */,
 				CEA6F6A22550FA4700C50318 /* NSCollectionView+Realm.swift */,
-				CE2AC0512618761100317DA3 /* NSView+BackgroundColor.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
 				CEB2DA64253EF85D002C3F7E /* Book.storyboard */,
@@ -622,7 +619,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */,
-				CE2AC0522618761100317DA3 /* NSView+BackgroundColor.swift in Sources */,
 				CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */,
 				CEE4D82F25E240B1003B8EB2 /* Preferences.swift in Sources */,
 				CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */,

@@ -71,6 +71,7 @@
                 <constraint firstItem="PrZ-u6-XBx" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="qTz-bO-Bm7"/>
             </constraints>
             <connections>
+                <outlet property="collectionSizeSlider" destination="fIc-xg-bl5" id="yEG-x1-cGN"/>
                 <outlet property="orderButton" destination="qC7-cL-L4h" id="Km1-70-jMD"/>
             </connections>
             <point key="canvasLocation" x="44" y="158"/>

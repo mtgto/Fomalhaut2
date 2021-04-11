@@ -2,11 +2,17 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Cocoa
+import RxRelay
+import RxSwift
 
 // Perform as NSCollectionViewGridLayout
 class CollectionViewLayout: NSCollectionViewFlowLayout {
-  private let itemWidth: CGFloat = 133.5
-  private let itemHeight: CGFloat = 204
+  static let itemSizeIndexKey = "collectionViewitemSizeIndex"
+  static let itemSizeIndex = BehaviorRelay<Int>(value: 1)
+  private static let itemSizes: [NSSize] = [
+    NSMakeSize(100.125, 153), NSMakeSize(120.15, 183.6), NSMakeSize(133.5, 204),
+  ]
+  private let disposeBag = DisposeBag()
   private let itemSpacing: CGFloat = 10
   private let lineSpacing: CGFloat = 10
   private let headerHeight: CGFloat = 40
@@ -15,23 +21,38 @@ class CollectionViewLayout: NSCollectionViewFlowLayout {
   private var cellLayoutAttributes: [[NSCollectionViewLayoutAttributes?]] = []
   private var headerLayoutAttributes: [NSCollectionViewLayoutAttributes?] = []
 
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    CollectionViewLayout.itemSizeIndex.accept(
+      UserDefaults.standard.integer(forKey: CollectionViewLayout.itemSizeIndexKey))
+    CollectionViewLayout.itemSizeIndex
+      .distinctUntilChanged()
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { itemSizeIndex in
+        self.invalidateLayout()
+        UserDefaults.standard.set(itemSizeIndex, forKey: CollectionViewLayout.itemSizeIndexKey)
+      })
+      .disposed(by: self.disposeBag)
+  }
+
   override func prepare() {
     guard let collectionView = self.collectionView else {
       return
     }
+    let itemSize = CollectionViewLayout.itemSizes[CollectionViewLayout.itemSizeIndex.value]
+    let itemWidth = itemSize.width
+    let itemHeight = itemSize.height
     self.numberOfColumns = max(
-      Int((collectionView.frame.width + self.itemSpacing - self.leftMargin) / (self.itemWidth + self.itemSpacing)), 1)
+      Int((collectionView.frame.width + self.itemSpacing - self.leftMargin) / (itemWidth + self.itemSpacing)), 1)
     self.cellLayoutAttributes = []
     (0..<collectionView.numberOfSections).forEach { section in
       let attributes = (0..<collectionView.numberOfItems(inSection: section)).map {
         index -> NSCollectionViewLayoutAttributes? in
         let layoutAttribute = self.layoutAttributesForItem(
           at: IndexPath(item: index, section: section))
-        let x = CGFloat(index % numberOfColumns) * (self.itemWidth + self.itemSpacing) + self.leftMargin
-        let y =
-          self.headerHeight + CGFloat(index / numberOfColumns)
-          * (self.itemHeight + self.lineSpacing)
-        layoutAttribute?.frame = NSRect(x: x, y: y, width: self.itemWidth, height: self.itemHeight)
+        let x = CGFloat(index % numberOfColumns) * (itemWidth + self.itemSpacing) + self.leftMargin
+        let y = self.headerHeight + CGFloat(index / numberOfColumns) * (itemHeight + self.lineSpacing)
+        layoutAttribute?.frame = NSRect(x: x, y: y, width: itemWidth, height: itemHeight)
         return layoutAttribute
       }
       self.cellLayoutAttributes.append(attributes)

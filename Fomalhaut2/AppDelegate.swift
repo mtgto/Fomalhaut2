@@ -22,6 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       WebSharingViewController.webServerPortKey: 8080,
       PageOrder.pageOrderKey: PageOrder.defaultValue.rawValue,
       FilterListViewController.selectedCollectionContentIdKey: "all",  // Filter.id | Collection.id
+      CollectionViewLayout.itemSizeIndexKey: 2,
     ])
   }
 

@@ -2,9 +2,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import Cocoa
-import RealmSwift
-import RxRealm
-import RxSwift
 
 class FilterListView: NSOutlineView, NSMenuDelegate {
   private let collectionMenu: NSMenu

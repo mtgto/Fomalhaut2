@@ -6,6 +6,7 @@ import Cocoa
 class CollectionViewHeaderView: NSView, NSCollectionViewElement {
 
   @IBOutlet weak var orderButton: NSPopUpButton!
+  @IBOutlet weak var collectionSizeSlider: NSSlider!
 
   override func awakeFromNib() {
     self.orderButton.removeAllItems()
@@ -18,6 +19,8 @@ class CollectionViewHeaderView: NSView, NSCollectionViewElement {
     let collectionOrder = CollectionOrder(
       rawValue: UserDefaults.standard.string(forKey: BookCollectionViewController.collectionOrderKey)!)!
     self.orderButton.item(at: self.menuItemIndex(collectionOrder: collectionOrder))!.state = .on
+    self.collectionSizeSlider.integerValue = UserDefaults.standard.integer(
+      forKey: CollectionViewLayout.itemSizeIndexKey)
   }
 
   private func menuItemIndex(collectionOrder: CollectionOrder) -> Int {
@@ -55,7 +58,7 @@ class CollectionViewHeaderView: NSView, NSCollectionViewElement {
 
   @IBAction func resize(_ sender: Any) {
     if let slider = sender as? NSSlider {
-      log.debug(slider.intValue)
+      CollectionViewLayout.itemSizeIndex.accept(slider.integerValue)
     }
   }
 }

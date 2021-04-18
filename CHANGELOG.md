@@ -1,6 +1,18 @@
 CHANGELOG
 ====
 
+## v0.9.7 (2021-04-18)
+
+### Added
+
+- Add timer config to stop web sharing automatically
+
+### Changed
+
+- Fix multiple selection of collection view is broken after right click
+- Update Unrar to v0.3.3
+- Update web packages
+
 ## v0.9.6 (2021-04-11)
 
 ### Added

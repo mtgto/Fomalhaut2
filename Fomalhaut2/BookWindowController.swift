@@ -62,6 +62,13 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
     }
   }
 
+  override func windowTitle(forDocumentDisplayName displayName: String) -> String {
+    if let document = self.document as? BookDocument, let bookDisplayName = document.book?.displayName {
+      return bookDisplayName
+    }
+    return displayName
+  }
+
   // MARK: - NSWindowDelegate
   func windowDidEndLiveResize(_ notification: Notification) {
     // Called after user did resize by yourself

@@ -37,7 +37,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "5",
     "lint-staged": "^10.5.3",
-    "parcel": "^2.0.0-beta.2",
+    "parcel": "^2.0.0-nightly.636",
     "prettier": "^2.2.1",
     "typescript": "^4.1.3"
   }

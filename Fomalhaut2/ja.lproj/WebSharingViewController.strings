@@ -7,6 +7,9 @@
 /* Class = "NSButtonCell"; title = "Start"; ObjectID = "dNE-43-5Ti"; */
 "dNE-43-5Ti.title" = "開始";
 
+/* Class = "NSButtonCell"; title = "Stop after 10 minutes of inactivity"; ObjectID = "F8k-ae-bfY"; */
+"F8k-ae-bfY.title" = "10分間利用されなくなったら自動で止める";
+
 /* Class = "NSTextFieldCell"; title = "Enter the port number"; ObjectID = "i0k-ei-doh"; */
 "i0k-ei-doh.title" = "ポート番号";
 

@@ -11,14 +11,12 @@ import Shared
 import Swiftra
 import ZIPFoundation
 
-let webSharingIpAddressNotificationName = Notification.Name("webSharingIpAddress")
-let webSharingIpAddressNotificationUserInfoKey = "ipAddress"
-
 private let cacheControlKey = "Cache-Control"
 private let noCache = "no-cache"
 private let contentTypeJpeg = "image/jpeg"
 
 class WebSharing: NSObject {
+  static let remoteAddress = PublishRelay<String>()
   private let server = App()
   private(set) var started: Bool = false
   private var collections: [Collection] = []
@@ -186,8 +184,7 @@ class WebSharing: NSObject {
       .observe(on: MainScheduler.asyncInstance)
       .subscribe { event in
         if let ipAddress = event.element {
-          let userInfo = [webSharingIpAddressNotificationUserInfoKey: ipAddress]
-          NotificationCenter.default.post(name: webSharingIpAddressNotificationName, object: nil, userInfo: userInfo)
+          WebSharing.remoteAddress.accept(ipAddress)
         }
       }
       .disposed(by: self.disposeBag)

@@ -48,6 +48,8 @@
 
 /* Delete %@ */
 "FilterListMenuDelete" = "%@ を削除";
+
+/* Rename */
 "FilterListMenuRename" = "名前を変更";
 
 /* Library */
@@ -82,4 +84,7 @@
 
 /* Last Access from %@ at %@ */
 "WebSharingIpAddressInformation" = "最終アクセス %@ 日時 %@";
+
+/* (No Comment) */
+"WebSharingTimeout" = "しばらくアクセスがなかったためWeb共有を停止しました";
 

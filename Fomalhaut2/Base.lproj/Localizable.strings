@@ -30,6 +30,7 @@
 "ErrorNoImage" = "There is no image in archive";
 
 "WebSharingIpAddressInformation" = "Last Access from %@ at %@";
+"WebSharingTimeout" = "Stopped web sharing because there was no access for a while.";
 "NewCollection" = "New Collection";
 
 "AlertMessageTextDeleteCollection" = "Do you delete a selected collection?";

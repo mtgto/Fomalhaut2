@@ -3,14 +3,14 @@
 
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
+import SpeedDial from "@material-ui/core/SpeedDial";
+import SpeedDialAction from "@material-ui/core/SpeedDialAction";
+import SpeedDialIcon from "@material-ui/core/SpeedDialIcon";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
-import SpeedDial from "@material-ui/lab/SpeedDial";
-import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
-import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "rocon/react";
 import { Book } from "../domain/book";

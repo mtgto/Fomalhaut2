@@ -499,7 +499,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       if self.collectionViewStyle.value == .list {
         return self.tableView.clickedRow >= 0
       } else {
-        return !self.collectionView.selectionIndexes.isEmpty
+        return !self.collectionView.selectionIndexes.isEmpty || true
       }
     }
     return false

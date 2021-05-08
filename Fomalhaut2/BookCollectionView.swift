@@ -18,4 +18,16 @@ class BookCollectionView: NSCollectionView {
     }
     super.mouseDown(with: event)
   }
+
+  override func rightMouseDown(with event: NSEvent) {
+    if event.clickCount == 1 {
+      let locationInView = convert(event.locationInWindow, from: nil)
+      guard let path = indexPathForItem(at: locationInView) else {
+        return super.mouseDown(with: event)
+      }
+      // Add to selected items
+      self.collectionViewLayout?.collectionView?.selectItems(at: [path], scrollPosition: [])
+    }
+    super.rightMouseDown(with: event)
+  }
 }

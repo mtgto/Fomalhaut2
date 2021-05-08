@@ -1083,7 +1083,7 @@
   dependencies:
     "@actions/core" "^1.2.6"
 
-"@material-ui/core@^5.0.0":
+"@material-ui/core@next":
   version "5.0.0-alpha.32"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-5.0.0-alpha.32.tgz#1f93a4d3481974221e4217085c015bdad7e788fb"
   integrity sha512-Q7ppqI0+xWf7bV3EkLwW6t18l+Q/vWrRi8VgGJ9hTii9EBMmgKqGPLxGRQKfNo6VO4yb6Kp4JVPG0NI8q7l+iw==
@@ -1104,7 +1104,7 @@
     react-is "^17.0.0"
     react-transition-group "^4.4.0"
 
-"@material-ui/icons@^5.0.0":
+"@material-ui/icons@next":
   version "5.0.0-alpha.29"
   resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-5.0.0-alpha.29.tgz#8b137dc014f928e18331028b896bf640d2743897"
   integrity sha512-DNJ7MD46WMEAPl0j8CVOcCIDuLOMbTf7+x8EO4diJ4R7DlNwH1YPJ47gHr1yYhp6ETLmlIrzo+apzfLerAmRSw==

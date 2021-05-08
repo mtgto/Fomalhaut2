@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import { red } from "@material-ui/core/colors";
-import { createMuiTheme, Theme } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 // Create a theme instance.
-const theme: Theme = createMuiTheme({
+const theme = createMuiTheme({
   palette: {
     //type: "dark",
     primary: {

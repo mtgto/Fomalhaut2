@@ -1,9 +1,6 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import React, { useContext, useState } from "react";
-import { useLocation, useNavigate } from "rocon/react";
-
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
@@ -11,19 +8,21 @@ import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Snackbar from "@material-ui/core/Snackbar";
+import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
-
+import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "rocon/react";
 import { message } from "../message";
 import { LoadingState, StateContext } from "../reducer";
 import { collectionRoutes, filterRoutes } from "./Routes";
 
-import type { Theme } from "@material-ui/core/styles/createMuiTheme";
 const drawerWidth = 200;
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -58,16 +57,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   },
-  item: {
-    display: "block",
-    paddingTop: 0,
-    paddingBottom: 0,
-  },
-  button: {
-    textTransform: "none",
-    justifyContent: "flex-start",
-    width: "100%",
-  },
 }));
 
 type Props = {
@@ -81,7 +70,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
   const classes = useStyles();
   const location = useLocation();
   const navigate = useNavigate();
-  React.useEffect(() => {
+  useEffect(() => {
     // close drawer when route changed
     setOpen(false);
   }, [location]);
@@ -133,31 +122,33 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             </IconButton>
           </div>
           <Divider />
-          <List subheader={<ListSubheader>{message.library}</ListSubheader>}>
+          <List
+            subheader={<ListSubheader>{message.library}</ListSubheader>}
+            dense
+          >
             {state.filters.map((filter) => (
-              <ListItem className={classes.item} key={filter.id}>
-                <Button
-                  className={classes.button}
-                  onClick={() =>
-                    navigate(filterRoutes.route, { id: filter.id })
-                  }
-                >
-                  {filter.name}
-                </Button>
+              <ListItem
+                button
+                key={filter.id}
+                onClick={() => navigate(filterRoutes.route, { id: filter.id })}
+              >
+                <ListItemText primary={filter.name} />
               </ListItem>
             ))}
           </List>
-          <List subheader={<ListSubheader>{message.collection}</ListSubheader>}>
+          <List
+            subheader={<ListSubheader>{message.collection}</ListSubheader>}
+            dense
+          >
             {state.collections.map((collection) => (
-              <ListItem className={classes.item} key={collection.id}>
-                <Button
-                  className={classes.button}
-                  onClick={() =>
-                    navigate(collectionRoutes.route, { id: collection.id })
-                  }
-                >
-                  {collection.name}
-                </Button>
+              <ListItem
+                button
+                key={collection.id}
+                onClick={() =>
+                  navigate(collectionRoutes.route, { id: collection.id })
+                }
+              >
+                <ListItemText primary={collection.name} />
               </ListItem>
             ))}
           </List>

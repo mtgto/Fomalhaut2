@@ -6,7 +6,6 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Pagination from "@material-ui/core/Pagination";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
 import { Book } from "../domain/book";
 import Cover from "./Cover";
 import Layout from "./Layout";

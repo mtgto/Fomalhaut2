@@ -11,7 +11,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "rocon/react";
 import { Book } from "../domain/book";
 import { message } from "../message";

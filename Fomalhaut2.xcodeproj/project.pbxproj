@@ -1207,7 +1207,7 @@
 			repositoryURL = "https://github.com/mtgto/Swiftra.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.4.0;
+				minimumVersion = 0.5.0;
 			};
 		};
 		CEAD7A0F25A494EC00927D10 /* XCRemoteSwiftPackageReference "Unrar.swift" */ = {

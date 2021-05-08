@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/realm/realm-cocoa.git",
         "state": {
           "branch": null,
-          "revision": "ae8e646590396dfc13c1abbf8aa2e48c43766dce",
-          "version": "10.7.2"
+          "revision": "b481f2cc637bd101a03dba52ad1bef6eadfdac9f",
+          "version": "10.7.5"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/realm/realm-core",
         "state": {
           "branch": null,
-          "revision": "bab46acdca91c417a0d4849b8f4992a3c17e29a5",
-          "version": "10.5.5"
+          "revision": "28ed052d10d2245542b4fbdc71d388febb1e9bc4",
+          "version": "10.6.0"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
-          "revision": "3be4e0980075de10a4bc8dee07491d49175cfd7a",
-          "version": "2.27.0"
+          "revision": "d161bf658780b209c185994528e7e24376cf7283",
+          "version": "2.29.0"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/mtgto/Swiftra.git",
         "state": {
           "branch": null,
-          "revision": "30ceb8cbc069453a38a7484f780a87cbdc61a09f",
-          "version": "0.4.0"
+          "revision": "390f4bc765acf0fc5c0cc3632b153b2142bf9ce8",
+          "version": "0.5.0"
         }
       },
       {

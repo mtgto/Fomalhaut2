@@ -1,63 +1,29 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
+/** @jsxImportSource @emotion/react */
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Snackbar from "@material-ui/core/Snackbar";
-import type { Theme } from "@material-ui/core/styles/createMuiTheme";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import useTheme from "@material-ui/core/styles/useTheme";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "rocon/react";
 import { message } from "../message";
 import { LoadingState, StateContext } from "../reducer";
 import { collectionRoutes, filterRoutes } from "./Routes";
 
 const drawerWidth = 200;
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  toolbar: {
-    justifyContent: "space-between",
-  },
-  left: {
-    flex: 1,
-  },
-  right: {
-    flex: 1,
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
-  },
-}));
 
 type Props = {
   readonly title?: string;
@@ -67,7 +33,7 @@ type Props = {
 const Layout: React.FunctionComponent<Props> = (props: Props) => {
   const { state } = useContext(StateContext);
   const [open, setOpen] = useState(false);
-  const classes = useStyles();
+  const theme = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
@@ -88,14 +54,14 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
   };
 
   return (
-    <>
-      <div className={classes.root}>
+    <Fragment>
+      <div css={{ flexGrow: 1 }}>
         <AppBar position="static" id="appbar">
-          <Toolbar className={classes.toolbar}>
-            <div className={classes.left}>
+          <Toolbar css={{ justifyContent: "space-between" }}>
+            <div css={{ flex: 1 }}>
               <IconButton
                 edge="start"
-                className={classes.menuButton}
+                css={{ marginRight: theme.spacing(2) }}
                 color="inherit"
                 aria-label="menu"
                 onClick={handleDrawerOpen}
@@ -104,19 +70,35 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
               </IconButton>
             </div>
             <Typography variant="h6">{props.title ?? "Fomalhaut2"}</Typography>
-            <div className={classes.right} />
+            <div
+              css={{ flex: 1, display: "flex", justifyContent: "flex-end" }}
+            />
           </Toolbar>
         </AppBar>
-        <Drawer
+        <SwipeableDrawer
           anchor="left"
           open={open}
-          className={classes.drawer}
-          classes={{
-            paper: classes.drawerPaper,
+          css={{
+            width: drawerWidth,
+            flexShrink: 0,
+            ".MuiDrawer-paper": { width: drawerWidth },
           }}
+          classes={
+            {
+              //paper: classes.drawerPaper,
+            }
+          }
+          onOpen={() => setOpen(true)}
           onClose={() => setOpen(false)}
         >
-          <div className={classes.drawerHeader}>
+          <div
+            css={{
+              display: "flex",
+              alignItems: "center",
+              padding: theme.spacing(0, 1),
+              justifyContent: "flex-end",
+            }}
+          >
             <IconButton onClick={handleDrawerClose}>
               <ChevronLeftIcon />
             </IconButton>
@@ -152,7 +134,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
               </ListItem>
             ))}
           </List>
-        </Drawer>
+        </SwipeableDrawer>
         <Snackbar
           open={state.loading === LoadingState.Error}
           message={message.loadError}
@@ -164,7 +146,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
         />
       </div>
       <main>{props.children}</main>
-    </>
+    </Fragment>
   );
 };
 export default Layout;

@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
+/** @jsxImportSource @emotion/react */
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import SpeedDial from "@material-ui/core/SpeedDial";
 import SpeedDialAction from "@material-ui/core/SpeedDialAction";
 import SpeedDialIcon from "@material-ui/core/SpeedDialIcon";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
@@ -20,42 +20,16 @@ import theme from "../theme";
 import Layout from "./Layout";
 import { bookRoutes } from "./Routes";
 
-const useStyles = makeStyles({
-  media: {
-    height: 200,
-    objectFit: "contain",
-  },
-  card: {
-    //height: "100%",
-  },
-  filename: {
-    display: "-webkit-box",
-    WebkitLineClamp: 2,
-    WebkitBoxOrient: "vertical",
-    overflow: "hidden",
-  },
-  image: {
-    width: "100%",
-    maxWidth: "720px",
-    minHeight: "200px",
-    display: "block",
-    margin: "8px auto",
-  },
-  fab: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-  speedDial: {
-    position: "fixed",
-    bottom: theme.spacing(8),
-    right: theme.spacing(2),
-  },
-});
-
-const pages = (book: Book, classes: ReturnType<typeof useStyles>) => {
+const pages = (book: Book) => {
   return [...Array(book.pageCount).keys()].map((i: number) => (
     <img
-      className={classes.image}
+      css={{
+        width: "100%",
+        maxWidth: "720px",
+        minHeight: "200px",
+        display: "block",
+        margin: "8px auto",
+      }}
       key={`${book.id}.${i}`}
       src={`/images/books/${book.id}/pages/${i}`}
     ></img>
@@ -70,7 +44,6 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
   const [calling, setCalling] = useState(false);
   const [speedDialOpen, setSpeedDialOpen] = useState(false);
   const { state, dispatch } = useContext(StateContext);
-  const classes = useStyles();
   const navigate = useNavigate();
   const book: Book | undefined = state.books.find(
     (book) => book.id === props.id
@@ -132,12 +105,16 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
     <Layout title={book?.name}>
       <Container maxWidth="md">
         <Box mx="auto">
-          {book ? pages(book, classes) : <span>{message.loading}</span>}
+          {book ? pages(book) : <span>{message.loading}</span>}
         </Box>
       </Container>
       <SpeedDial
         ariaLabel="direction"
-        className={classes.speedDial}
+        css={{
+          position: "fixed",
+          bottom: theme.spacing(8),
+          right: theme.spacing(2),
+        }}
         open={speedDialOpen}
         onOpen={handleSpeedDialOpen}
         onClose={handleSpeedDialClose}

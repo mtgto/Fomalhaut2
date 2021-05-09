@@ -1,5 +1,14 @@
-CHANGELOG
-====
+# CHANGELOG
+
+## v0.9.8 (2021-05-09)
+
+### Changed
+
+- Fix to select a book by right click to collection view
+- Update web ui to material-ui v5-alpha and React 17
+- Use emotion for component css
+- Update Swiftra from v0.4.0 to v0.5.0
+- Update realm-cocoa from v10.7.2 to v10.7.5
 
 ## v0.9.7 (2021-04-18)
 

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { RoconRoot } from "rocon/react";
 import { Book } from "../domain/book";
 import { Collection } from "../domain/collection";

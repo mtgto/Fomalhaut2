@@ -14,20 +14,8 @@
       }
     ],
     "@babel/typescript",
-    [
-      "@babel/preset-react",
-      {
-        "runtime": "automatic"
-      }
-    ]
+    "@babel/preset-react",
+    "@emotion/babel-preset-css-prop"
   ],
-  "plugins": [
-    "@emotion/babel-plugin",
-    [
-      "@babel/plugin-transform-react-jsx",
-      {
-        "runtime": "automatic"
-      }
-    ]
-  ]
+  "plugins": ["@emotion/babel-plugin"]
 }

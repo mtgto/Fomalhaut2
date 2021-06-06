@@ -8,7 +8,7 @@ import { pink } from "@material-ui/core/colors";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { forwardRef, useMemo } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { Link as RouterLink } from "rocon/react";
 import { Book } from "../domain/book";
 import { bookRoutes } from "./Routes";

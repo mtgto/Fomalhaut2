@@ -5,7 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import NoSsr from "@material-ui/core/NoSsr";
 import StyledEngineProvider from "@material-ui/core/StyledEngineProvider";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
 import theme from "./theme";

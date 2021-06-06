@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-/** @jsxImportSource @emotion/react */
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import SpeedDial from "@material-ui/core/SpeedDial";
@@ -11,7 +10,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "rocon/react";
 import { Book } from "../domain/book";
 import { message } from "../message";

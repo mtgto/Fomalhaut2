@@ -15,8 +15,6 @@ module.exports = {
   rules: {
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "react/display-name": "warn",
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
     "no-restricted-imports": [
       "error",
       {

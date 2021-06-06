@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.9.9 (2021-06-06)
+
+### Changed
+
+- Fix memory leak on reading RAR/CBR comics
+- Fix style sheet is broken in web sharing
+- Update web packages
+
 ## v0.9.8 (2021-05-09)
 
 ### Changed

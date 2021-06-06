@@ -21,9 +21,9 @@ enum CollectionContent: Equatable {
 
   static func == (lhs: CollectionContent, rhs: CollectionContent) -> Bool {
     switch (lhs, rhs) {
-    case (let .collection(left), let .collection(right)):
+    case (.collection(let left), .collection(let right)):
       return left.id == right.id
-    case (let .filter(left), let .filter(right)):
+    case (.filter(let left), .filter(let right)):
       return left == right  // Use Filter#==
     default:
       return false

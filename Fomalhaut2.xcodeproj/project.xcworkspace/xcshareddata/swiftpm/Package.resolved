@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/realm/realm-cocoa.git",
         "state": {
           "branch": null,
-          "revision": "b481f2cc637bd101a03dba52ad1bef6eadfdac9f",
-          "version": "10.7.5"
+          "revision": "7e5c77fd7fbb30259e8e6e6a41f32289f72e0812",
+          "version": "10.7.6"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/realm/realm-core",
         "state": {
           "branch": null,
-          "revision": "28ed052d10d2245542b4fbdc71d388febb1e9bc4",
-          "version": "10.6.0"
+          "revision": "018adb3469c2882904febca251778129ef4a9b70",
+          "version": "10.7.2"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/RxSwiftCommunity/RxRealm.git",
         "state": {
           "branch": null,
-          "revision": "7eef1d1ba130627af7d140682f912c89830cf1eb",
-          "version": "5.0.1"
+          "revision": "73b8d93bddb5b1c012ae96f1f3858d5c720dea1b",
+          "version": "5.0.2"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/mtgto/Unrar.swift.git",
         "state": {
           "branch": null,
-          "revision": "31149890402ee67e2366e5d4d1d7cb1ae781b8ea",
-          "version": "0.3.3"
+          "revision": "db29f1420470b3f5e9266974c40852f99f7f0a87",
+          "version": "0.3.5"
         }
       },
       {

@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v1.0.0 (2021-07-11)
+
+### Added
+
+- Add arrow left/right keys shortcuts to move page (#8)
+
+### Changed
+
+- Update realm-cocoa to 10.10.0 from 10.7.6
+- Update web packages
+
 ## v0.9.9 (2021-06-06)
 
 ### Changed

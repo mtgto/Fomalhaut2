@@ -47,7 +47,7 @@ class Schema {
               }
               newObject!["like"] = false
               newObject!["pageCount"] = 0
-              newObject!["manualViewHeight"] = RealmOptional<Double>()
+              newObject!["manualViewHeight"] = nil
             }
             if oldSchemaVersion < 2 {
               let bookmarkData = oldObject!["bookmark"] as! Data

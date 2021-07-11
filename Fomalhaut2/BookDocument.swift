@@ -36,7 +36,7 @@ class BookDocument: NSDocument {
           book.lastPageIndex = lastPageIndex
           book.isRightToLeft = isRightToLeft
           book.shiftedSignlePage = shiftedSignlePage
-          book.manualViewHeight.value = manualViewHeight.flatMap(Double.init)
+          book.manualViewHeight = manualViewHeight.flatMap(Double.init)
           if selfBook.pageCount == 0 {
             book.pageCount = self.archiver.pageCount()
           }

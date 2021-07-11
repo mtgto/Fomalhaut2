@@ -5,35 +5,27 @@ import Foundation
 import RealmSwift
 
 class Book: Object, Encodable {
-  @objc dynamic var id: String = UUID().uuidString
-  @objc dynamic var name: String = ""
-  @objc dynamic var filePath: String = ""
-  @objc dynamic var bookmark: Data = Data()
-  @objc dynamic var readCount: Int = 0
-  @objc dynamic var createdAt: Date = Date()
-  @objc dynamic var like: Bool = false
-  @objc dynamic var pageCount: Int = 0
+  @Persisted(primaryKey: true) var id: String = UUID().uuidString
+  @Persisted var name: String = ""
+  @Persisted(indexed: true) var filePath: String = ""
+  @Persisted var bookmark: Data = Data()
+  @Persisted var readCount: Int = 0
+  @Persisted var createdAt: Date = Date()
+  @Persisted var like: Bool = false
+  @Persisted var pageCount: Int = 0
   // for viewer information
-  @objc dynamic var isRightToLeft: Bool = true
-  @objc dynamic var lastPageIndex: Int = 0
-  @objc dynamic var shiftedSignlePage: Bool = false
-  let manualViewHeight = RealmOptional<Double>()
+  @Persisted var isRightToLeft: Bool = true
+  @Persisted var lastPageIndex: Int = 0
+  @Persisted var shiftedSignlePage: Bool = false
+  @Persisted var manualViewHeight: Double? = nil
   // jpeg data
-  @objc dynamic var thumbnailData: Data? = nil
+  @Persisted var thumbnailData: Data? = nil
 
   static let abbreviateFileNamePattern = try! NSRegularExpression(
     pattern: "\\.(zip|cbz|rar|cbr|pdf)$", options: .caseInsensitive)
   var displayName: String {
     return Book.abbreviateFileNamePattern.stringByReplacingMatches(
       in: self.name, options: [], range: NSMakeRange(0, self.name.utf16.count), withTemplate: "")
-  }
-
-  override static func primaryKey() -> String? {
-    return "id"
-  }
-
-  override static func indexedProperties() -> [String] {
-    return ["filePath"]
   }
 
   enum CodingKeys: String, CodingKey {

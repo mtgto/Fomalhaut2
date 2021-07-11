@@ -51,6 +51,12 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
       spreadPageViewController.forwardPage()
     } else if event.keyCode == 126 || event.keyCode == 40 {  // ↑ or k
       spreadPageViewController.backwardPage()
+    } else if event.keyCode == 123 {  // ←
+      spreadPageViewController.pageOrder.value == .ltr
+        ? spreadPageViewController.backwardPage() : spreadPageViewController.forwardPage()
+    } else if event.keyCode == 124 {  // →
+      spreadPageViewController.pageOrder.value == .rtl
+        ? spreadPageViewController.backwardPage() : spreadPageViewController.forwardPage()
     } else if event.keyCode == 49 {  // space
       if event.modifierFlags.contains(.shift) {
         spreadPageViewController.backwardPage()

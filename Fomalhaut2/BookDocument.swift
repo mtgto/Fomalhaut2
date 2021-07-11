@@ -11,6 +11,10 @@ class BookDocument: NSDocument {
   static let thumbnailMaxWidth: Int = 220  // number of pixel of width
   static let thumbnailMaxHeight: Int = 340  // width * (2 ^ 0.5) + delta
 
+  override class func canConcurrentlyReadDocuments(ofType typeName: String) -> Bool {
+    return true
+  }
+
   override func makeWindowControllers() {
     // Returns the Storyboard that contains your Document window.
     let storyboard = NSStoryboard(name: NSStoryboard.Name("Book"), bundle: nil)

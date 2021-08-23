@@ -268,6 +268,11 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     }
   }
 
+  func openRandomBook() {
+    //let mainStackViewController = self.contentViewController as! MainStackViewController
+    log.debug("openRandomBook")
+  }
+
   // MARK: - NSMenu for NSTableView and NSCollectionView
   @objc func openViewer(_ sender: Any) {
     self.selectedBooks().forEach { book in

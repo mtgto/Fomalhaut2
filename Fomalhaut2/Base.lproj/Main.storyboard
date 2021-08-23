@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -98,6 +98,12 @@
                                                     </menuItem>
                                                 </items>
                                             </menu>
+                                        </menuItem>
+                                        <menuItem title="Open a random book" keyEquivalent="o" id="Ffg-wx-79L">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openRandomBook:" target="Ady-hI-5gd" id="9Rf-m3-qNe"/>
+                                            </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
@@ -523,7 +529,7 @@
                                     <nil key="toolTip"/>
                                     <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="3G3-IO-GLY">
                                         <rect key="frame" x="0.0" y="14" width="96" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="UY6-aA-syv">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -541,7 +547,7 @@
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="WnA-DQ-KgP">
                                         <rect key="frame" x="0.0" y="14" width="183" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="fhf-YH-hap">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -560,11 +566,11 @@
                                         <fragment content="CollectionStyleItem"/>
                                     </attributedString>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E6A704CB-20B4-4B7C-9453-6015965140DC" label="Web Sharing" paletteLabel="Web Sharing" sizingBehavior="auto" id="tys-GO-6x8">
+                                <toolbarItem implicitItemIdentifier="E6A704CB-20B4-4B7C-9453-6015965140DC" label="Web Sharing" paletteLabel="Web Sharing" title="Web Sharing" sizingBehavior="auto" id="tys-GO-6x8">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="QqI-I0-ZUK">
                                         <rect key="frame" x="0.0" y="14" width="112" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="push" title="Web Sharing" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HBl-ak-bCB">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>

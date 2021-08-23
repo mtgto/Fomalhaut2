@@ -67,6 +67,11 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
     self.contentViewController?.presentAsSheet(vc)
   }
 
+  @IBAction func openRandomBook(_ sender: Any) {
+    let mainStackViewController = self.contentViewController as! MainStackViewController
+    mainStackViewController.bookCollectionViewController?.openRandomBook()
+  }
+
   func bookCollectionViewController() -> BookCollectionViewController {
     let mainStackViewController = self.contentViewController as! MainStackViewController
     return mainStackViewController.bookCollectionViewController!
@@ -88,6 +93,9 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
     } else if selector == #selector(addNewCollection(_:)) {
       return true
     } else if selector == #selector(startWebServer(_:)) {
+      return true
+    } else if selector == #selector(openRandomBook(_:)) {
+      // TODO: at least one book
       return true
     }
     return false

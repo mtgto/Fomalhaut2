@@ -127,7 +127,6 @@ class SpreadPageViewController: NSViewController {
         }
       }
       self.like
-        .observe(on: MainScheduler.instance)
         .subscribe(onNext: { like in
           if let like = like {
             try? document.setLike(like)

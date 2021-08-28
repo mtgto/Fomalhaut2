@@ -546,7 +546,7 @@
                                 <toolbarItem implicitItemIdentifier="2FAA3AD0-B186-4709-A2EB-E96DD5C4D06E" label="View Style" paletteLabel="View Style" sizingBehavior="auto" id="KLM-uf-9of">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="WnA-DQ-KgP">
-                                        <rect key="frame" x="0.0" y="14" width="183" height="23"/>
+                                        <rect key="frame" x="0.0" y="14" width="187" height="23"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="fhf-YH-hap">
                                             <font key="font" metaFont="system"/>
@@ -569,7 +569,7 @@
                                 <toolbarItem implicitItemIdentifier="E6A704CB-20B4-4B7C-9453-6015965140DC" label="Web Sharing" paletteLabel="Web Sharing" title="Web Sharing" sizingBehavior="auto" id="tys-GO-6x8">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="QqI-I0-ZUK">
-                                        <rect key="frame" x="0.0" y="14" width="112" height="32"/>
+                                        <rect key="frame" x="0.0" y="14" width="111" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="push" title="Web Sharing" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HBl-ak-bCB">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -583,9 +583,24 @@
                                         <fragment content="WebSharing"/>
                                     </attributedString>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="E8B2DFA9-AE6C-48B2-A064-505A5404DCBF" label="Open a random book" paletteLabel="Open a random book" bordered="YES" title="Random" sizingBehavior="auto" id="aXc-hw-I3c">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="gIt-eY-hjg">
+                                        <rect key="frame" x="8" y="14" width="101" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Random" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BPb-vu-jZu">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="openRandomBook:" target="89S-Z6-qTv" id="8L6-bw-rGk"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="tys-GO-6x8"/>
+                                <toolbarItem reference="aXc-hw-I3c"/>
                                 <toolbarItem reference="2KD-x0-8Cs"/>
                                 <toolbarItem reference="KLM-uf-9of"/>
                                 <toolbarItem reference="2KD-x0-8Cs"/>

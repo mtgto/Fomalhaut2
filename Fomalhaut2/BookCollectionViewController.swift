@@ -269,8 +269,14 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   }
 
   func openRandomBook() {
-    //let mainStackViewController = self.contentViewController as! MainStackViewController
-    log.debug("openRandomBook")
+    guard
+      let books = self.collectionViewStyle.value == .collection
+        ? self.collectionViewBooks.value : self.tableViewBooks.value
+    else { return }
+    if books.isEmpty {
+      return
+    }
+    self.open(books[Int(arc4random_uniform(UInt32(books.count)))])
   }
 
   // MARK: - NSMenu for NSTableView and NSCollectionView

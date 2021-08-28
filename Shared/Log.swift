@@ -4,4 +4,4 @@
 import Cocoa
 import XCGLogger
 
-let log = XCGLogger.default
+public let log = XCGLogger.default

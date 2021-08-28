@@ -5,9 +5,8 @@ import Cocoa
 import RealmSwift
 import RxSwift
 import Shared
-import XCGLogger
 
-let log = XCGLogger.default
+let log = Shared.log
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {

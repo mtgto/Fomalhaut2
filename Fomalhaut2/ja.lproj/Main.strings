@@ -61,6 +61,9 @@
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
 "BOF-NM-1cW.title" = "環境設定…";
 
+/* Class = "NSButtonCell"; title = "Random"; ObjectID = "BPb-vu-jZu"; */
+"BPb-vu-jZu.title" = "ランダム";
+
 /* Class = "NSMenuItem"; title = "View As"; ObjectID = "bt3-tT-Vcq"; */
 "bt3-tT-Vcq.title" = "表示形式";
 
@@ -99,6 +102,9 @@
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "FeM-D8-WVr"; */
 "FeM-D8-WVr.title" = "自動変換";
+
+/* Class = "NSMenuItem"; title = "Open a random book"; ObjectID = "Ffg-wx-79L"; */
+"Ffg-wx-79L.title" = "ランダムに本を開く";
 
 /* Class = "NSSegmentedCell"; fhf-YH-hap.ibShadowedLabels[0] = "Thumbnail"; ObjectID = "fhf-YH-hap"; Note = "CollectionStyleSegmentCell"; */
 "fhf-YH-hap.ibShadowedLabels[0]" = "サムネイル";

@@ -431,13 +431,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
           book.pageCount = document.pageCount()
         }
         // Generate thumbnail
-        Observable<Result<NSImage, Error>>.create { observer in
-          document.image(at: 0) { (result) in
-            observer.onNext(result)
-            observer.onCompleted()
-          }
-          return Disposables.create()
-        }.subscribe(onNext: { (result) in
+        document.image(at: 0).subscribe(onNext: { (result) in
           url.stopAccessingSecurityScopedResource()
           document.close()
         }).disposed(by: self.disposeBag)

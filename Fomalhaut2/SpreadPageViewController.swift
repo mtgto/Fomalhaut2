@@ -82,7 +82,7 @@ class SpreadPageViewController: NSViewController {
       count: min(self.pageCount.value - self.currentPageIndex.value, 16)
     )
     .map { pageIndex in
-      self.loadImage(pageIndex: pageIndex, document: document)
+      document.image(at: pageIndex)
     }
     .concat()
     .buffer(
@@ -215,26 +215,6 @@ class SpreadPageViewController: NSViewController {
       return image.size
     } else {
       return NSSize(width: width, height: height)
-    }
-  }
-
-  func loadImage(pageIndex: Int, document: BookDocument) -> Observable<NSImage> {
-    return Observable<NSImage>.create { observer in
-      document.image(at: pageIndex) { (result) in
-        switch result {
-        case .success(let image):
-          observer.onNext(image)
-          observer.onCompleted()
-          log.debug("success to load image at \(pageIndex)")
-        case .failure(let error):
-          // do nothing (= skip broken page)
-          // TODO: Remember error index in ZipDocument not to reload same error page
-          // observer.onError(error)
-          log.info("fail to load image at \(pageIndex): \(error)")
-          observer.onCompleted()
-        }
-      }
-      return Disposables.create()
     }
   }
 

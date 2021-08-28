@@ -3,6 +3,7 @@
 
 import Cocoa
 import RealmSwift
+import RxSwift
 import Shared
 
 class BookDocument: NSDocument {
@@ -80,37 +81,32 @@ class BookDocument: NSDocument {
     }
   }
 
-  func image(at page: Int, completion: @escaping (_ image: Result<NSImage, Error>) -> Void) {
-    let imageCacheKey = ImageCacheKey(archiveURL: self.fileURL!, pageIndex: page)
-    if let image = imageCache.object(forKey: imageCacheKey) {
-      log.debug("success to load from cache at \(page)")
+  func image(at page: Int) -> Observable<NSImage> {
+    return Observable<NSImage>.create { observer in
+      let imageCacheKey = ImageCacheKey(archiveURL: self.fileURL!, pageIndex: page)
+      if let image = imageCache.object(forKey: imageCacheKey) {
+        log.debug("success to load from cache at \(page)")
+        observer.onNext(image)
+        observer.onCompleted()
+      } else {
+        self.archiver?.image(
+          at: page,
+          completion: { (result) in
+            switch result {
+            case .success(let image):
+              observer.onNext(image)
+              observer.onCompleted()
+            case .failure(let error):
+              observer.onError(error)
+            }
+          })
+      }
+      return Disposables.create()
+    }.map { image in
       if page == 0 {
         try? self.setBookThumbnail(image)
       }
-      if let book = self.book {
-        if page == 0 && book.thumbnailData == nil {
-          do {
-            try self.setBookThumbnail(image)
-          } catch {
-            log.error("Error while creating thumbnail: \(error)")
-          }
-        }
-      }
-      completion(.success(image))
-    } else {
-      self.archiver?.image(
-        at: page,
-        completion: { (result) in
-          switch result {
-          case .success(let image):
-            if page == 0 {
-              try? self.setBookThumbnail(image)
-            }
-            completion(.success(image))
-          case .failure(let error):
-            completion(.failure(error))
-          }
-        })
+      return image
     }
   }
 

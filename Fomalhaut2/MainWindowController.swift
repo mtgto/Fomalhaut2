@@ -72,6 +72,10 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
     mainStackViewController.bookCollectionViewController?.openRandomBook()
   }
 
+  @IBAction func performFindPanelAction(_ sender: Any?) {
+    self.searchField.window?.makeFirstResponder(self.searchField)
+  }
+
   func bookCollectionViewController() -> BookCollectionViewController {
     let mainStackViewController = self.contentViewController as! MainStackViewController
     return mainStackViewController.bookCollectionViewController!
@@ -96,6 +100,8 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
       return true
     } else if selector == #selector(openRandomBook(_:)) {
       // TODO: at least one book
+      return true
+    } else if selector == #selector(performFindPanelAction(_:)) {
       return true
     }
     return false

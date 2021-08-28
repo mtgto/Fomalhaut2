@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v1.0.1 (2021-08-28)
+
+### Added
+
+- Add "Open a random book" menu item and toolbar button
+- Enable Cmd-F shortcut to focus search field
+
+### Changed
+
+- Update realm-cocoa to 10.13.0 from 10.10.0
+- Update Unrar to 0.3.3 from 0.3.5
+- Update swift-nio to 2.32.1 from 2.30.0
+- Update web packages
+
 ## v1.0.0 (2021-07-11)
 
 ### Added

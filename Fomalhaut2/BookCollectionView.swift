@@ -25,8 +25,10 @@ class BookCollectionView: NSCollectionView {
       guard let path = indexPathForItem(at: locationInView) else {
         return super.mouseDown(with: event)
       }
-      // Add to selected items
-      self.collectionViewLayout?.collectionView?.selectItems(at: [path], scrollPosition: [])
+      if !self.selectionIndexPaths.contains(path) {
+        self.deselectAll(nil)
+        self.selectItems(at: [path], scrollPosition: [])
+      }
     }
     super.rightMouseDown(with: event)
   }

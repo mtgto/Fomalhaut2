@@ -523,11 +523,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       || selector == #selector(showFileInFinder(_:))
       || selector == #selector(deleteFromCollection(_:)) || selector == #selector(deleteFromLibrary(_:))
     {
-      if self.collectionViewStyle.value == .list {
-        return self.tableView.clickedRow >= 0
-      } else {
-        return !self.collectionView.selectionIndexes.isEmpty || true
-      }
+      return !self.selectedBooks().isEmpty
     } else if selector == #selector(markUnread(_:)) {
       guard let book = self.clickedBook() else { return false }
       return book.readCount > 0

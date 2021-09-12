@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v1.0.2 (2021-09-12)
+
+### Added
+
+- Add feature "Mark as unread" to context menu
+- Add Duplicate feature in collections list
+
+### Changed
+
+- Fix to deselect selected books when non-selected book is right clicked
+- Update realm-cocoa to 10.15.0 from 10.13.0
+- Update Unrar to 0.3.7 from 0.3.5
+- Update swift-nio to 2.32.2 from 2.30.1
+- Update web packages
+
 ## v1.0.1 (2021-08-28)
 
 ### Added
@@ -10,7 +25,7 @@
 ### Changed
 
 - Update realm-cocoa to 10.13.0 from 10.10.0
-- Update Unrar to 0.3.3 from 0.3.5
+- Update Unrar to 0.3.5 from 0.3.3
 - Update swift-nio to 2.32.1 from 2.30.0
 - Update web packages
 

@@ -7,6 +7,9 @@ let collectionOrderChangedNotificationName = Notification.Name("collectionOrderC
 
 class BookCollectionView: NSCollectionView {
   override func mouseDown(with event: NSEvent) {
+    defer {
+      super.mouseDown(with: event)
+    }
     if event.clickCount == 2 {
       let locationInView = convert(event.locationInWindow, from: nil)
       guard let path = indexPathForItem(at: locationInView) else {
@@ -16,14 +19,13 @@ class BookCollectionView: NSCollectionView {
         bookCollectionViewController.openCollectionViewBook(path)
       }
     }
-    super.mouseDown(with: event)
   }
 
   override func rightMouseDown(with event: NSEvent) {
     if event.clickCount == 1 {
       let locationInView = convert(event.locationInWindow, from: nil)
       guard let path = indexPathForItem(at: locationInView) else {
-        return super.mouseDown(with: event)
+        return super.rightMouseDown(with: event)
       }
       if !self.selectionIndexPaths.contains(path) {
         self.deselectAll(nil)

@@ -49,6 +49,9 @@
 /* Delete %@ */
 "FilterListMenuDelete" = "%@ を削除";
 
+/* Duplicate */
+"FilterListMenuDuplicate" = "複製";
+
 /* Rename */
 "FilterListMenuRename" = "名前を変更";
 

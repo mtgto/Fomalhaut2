@@ -69,6 +69,13 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
         }
       })
       .disposed(by: self.disposeBag)
+    NotificationCenter.default.rx.notification(collectionDuplicateNotificationName, object: nil)
+      .subscribe(onNext: { notification in
+        if let collection = notification.userInfo?["collection"] as? Collection {
+          self.duplicateCollection(collection)
+        }
+      })
+      .disposed(by: self.disposeBag)
     self.collections
       .compactMap { $0 }
       .flatMapLatest { Observable.changeset(from: $0) }
@@ -106,18 +113,38 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     // TODO: MUST remove items from NSOutlineView before delete from Realm.
     // https://github.com/realm/realm-cocoa/issues/6169
     if let collections = self.collections.value, let index = collections.index(of: collection) {
-      if collections.count > 1 {
-
-      }
       self.filterListView.removeItems(at: IndexSet([index]), inParent: self.rootItems[1])
     }
     do {
       let realm = try Realm()
       try realm.write {
+        self.collections.value?.forEach({ col in
+          if col.order > collection.order {
+            col.order -= 1
+          }
+        })
         realm.delete(collection)
       }
     } catch {
       log.error("Error while deleting a collection \(collection.name): \(error)")
+    }
+  }
+
+  func duplicateCollection(_ collection: Collection) {
+    let newCollection = collection.duplicate()
+    newCollection.order = collection.order + 1
+    do {
+      let realm = try Realm()
+      try realm.write {
+        self.collections.value?.forEach({ col in
+          if col.order > collection.order {
+            col.order += 1
+          }
+        })
+        realm.add(newCollection)
+      }
+    } catch {
+      log.error("Error while adding new collection: \(error)")
     }
   }
 

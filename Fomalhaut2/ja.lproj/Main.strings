@@ -52,6 +52,12 @@
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "Window";
 
+/* Class = "NSToolbarItem"; label = "Open a random book"; ObjectID = "aXc-hw-I3c"; */
+"aXc-hw-I3c.label" = "ランダムに本を開く";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Open a random book"; ObjectID = "aXc-hw-I3c"; */
+"aXc-hw-I3c.paletteLabel" = "ランダムに本を開く";
+
 /* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
 "AYu-sK-qS6.title" = "Main Menu";
 

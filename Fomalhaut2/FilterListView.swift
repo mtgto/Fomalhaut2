@@ -13,6 +13,12 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
       NSMenuItem(
         title: NSLocalizedString("FilterListMenuRename", comment: "Rename"), action: #selector(renameCollection(_:)),
         keyEquivalent: ""))
+    self.collectionMenu.addItem(
+      NSMenuItem(
+        title: NSLocalizedString("FilterListMenuDuplicate", comment: "Duplicate"),
+        action: #selector(duplicateCollection(_:)),
+        keyEquivalent: ""))
+    self.collectionMenu.addItem(NSMenuItem.separator())
     self.collectionMenu.addItem(NSMenuItem(title: "Delete", action: #selector(deleteCollection(_:)), keyEquivalent: ""))
     super.init(coder: coder)
     self.collectionMenu.delegate = self
@@ -24,7 +30,7 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
     let clickedRow = self.row(at: point)
     if let collection = self.item(atRow: clickedRow) as? Collection {
       self.selectedCollection = collection
-      self.collectionMenu.item(at: 1)?.title = String(
+      self.collectionMenu.item(at: 3)?.title = String(
         format: NSLocalizedString("FilterListMenuDelete", comment: "Delete %@"), collection.name)
       return self.collectionMenu
     } else {
@@ -39,6 +45,13 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
       NotificationCenter.default.post(
         name: collectionStartRenamingNotificationName, object: nil, userInfo: ["collection": collection])
       self.selectedCollection = nil
+    }
+  }
+
+  @objc func duplicateCollection(_ sender: Any) {
+    if let collection = self.selectedCollection {
+      NotificationCenter.default.post(
+        name: collectionDuplicateNotificationName, object: nil, userInfo: ["collection": collection])
     }
   }
 

@@ -6,6 +6,7 @@ import RealmSwift
 
 let collectionDeleteNotificationName = Notification.Name("collectionDelete")
 let collectionStartRenamingNotificationName = Notification.Name("collectionStartRenaming")
+let collectionDuplicateNotificationName = Notification.Name("collectionDuplicate")
 
 class Collection: Object, Encodable {
   @Persisted(primaryKey: true) var id: String = UUID().uuidString
@@ -13,6 +14,12 @@ class Collection: Object, Encodable {
   @Persisted var createdAt: Date = Date()
   @Persisted var order: Int = 0
   @Persisted var books = List<Book>()
+
+  func duplicate() -> Collection {
+    let dup = Collection(value: self)
+    dup.id = UUID().uuidString
+    return dup
+  }
 
   enum CodingKeys: String, CodingKey {
     case id, name, createdAt, books

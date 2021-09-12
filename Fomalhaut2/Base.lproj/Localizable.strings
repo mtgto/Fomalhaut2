@@ -24,6 +24,7 @@
 
 "Like" = "Like";
 "CancelLike" = "Cancel Like";
+"MarkUnread" = "Mark as unread";
 
 "ErrorBrokenFile" = "File is corrupt or unsupported file type";
 "ErrorEncrypted" = "File is encrypted";

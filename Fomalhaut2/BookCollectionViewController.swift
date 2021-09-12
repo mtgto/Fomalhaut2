@@ -310,7 +310,22 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         }
       }
     } catch {
+      // TODO: Show alert
       log.error("Error while like books: \(error)")
+    }
+  }
+
+  @objc func markUnread(_ sender: Any) {
+    do {
+      let realm = try Realm()
+      try realm.write {
+        self.selectedBooks().forEach { book in
+          book.readCount = 0
+        }
+      }
+    } catch {
+      // TODO: Show alert
+      log.error("Error while mark as unread books: \(error)")
     }
   }
 
@@ -346,6 +361,16 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       return self.tableView.selectedRowIndexes.map {
         self.tableViewBooks.value![$0]
       }
+    }
+  }
+
+  func clickedBook() -> Book? {
+    if self.collectionViewStyle.value == .list && self.tableView.clickedRow >= 0 {
+      return self.tableViewBooks.value![self.tableView.clickedRow]
+    } else if !self.collectionView.selectionIndexes.isEmpty {
+      return self.collectionViewBooks.value![self.collectionView.selectionIndexes.first!]
+    } else {
+      return nil
     }
   }
 
@@ -461,6 +486,11 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     )
     self.bookMenu.addItem(
       NSMenuItem(
+        title: NSLocalizedString("MarkUnread", comment: "Mark as unread"), action: #selector(markUnread(_:)),
+        keyEquivalent: "")
+    )
+    self.bookMenu.addItem(
+      NSMenuItem(
         title: NSLocalizedString("CollectionBookMenuShowInFinder", comment: "Show in Finder"),
         action: #selector(showFileInFinder(_:)), keyEquivalent: ""))
     self.bookMenu.addItem(NSMenuItem.separator())
@@ -483,15 +513,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       return false
     }
     if selector == #selector(toggleLike(_:)) {
-      let book: Book?
-      if self.collectionViewStyle.value == .list && self.tableView.clickedRow >= 0 {
-        book = self.tableViewBooks.value![self.tableView.clickedRow]
-      } else if !self.collectionView.selectionIndexes.isEmpty {
-        book = self.collectionViewBooks.value![self.collectionView.selectionIndexes.first!]
-      } else {
-        book = nil
-      }
-      if let book = book {
+      if let book = self.clickedBook() {
         menuItem.title =
           book.like
           ? NSLocalizedString("CancelLike", comment: "Cancel Like") : NSLocalizedString("Like", comment: "Like")
@@ -506,6 +528,9 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       } else {
         return !self.collectionView.selectionIndexes.isEmpty || true
       }
+    } else if selector == #selector(markUnread(_:)) {
+      guard let book = self.clickedBook() else { return false }
+      return book.readCount > 0
     }
     return false
   }

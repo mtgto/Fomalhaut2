@@ -61,6 +61,9 @@
 /* Like */
 "LikeFilter" = "好き";
 
+/* Mark as unread */
+"MarkUnread" = "未読にする";
+
 /* Name */
 "NameCaption" = "名前";
 

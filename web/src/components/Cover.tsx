@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import { pink } from "@material-ui/core/colors";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { pink } from "@mui/material/colors";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
 import React, { forwardRef, useMemo } from "react";
 import { Link as RouterLink } from "rocon/react";
 import { Book } from "../domain/book";

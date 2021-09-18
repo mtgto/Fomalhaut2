@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import { red } from "@material-ui/core/colors";
-import { createTheme } from "@material-ui/core/styles";
+import { red } from "@mui/material/colors";
+import { createTheme } from "@mui/material/styles";
 
 // Create a theme instance.
 const theme = createTheme({

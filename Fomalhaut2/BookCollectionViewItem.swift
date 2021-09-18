@@ -10,7 +10,13 @@ class BookCollectionViewItem: NSCollectionViewItem {
 
   override var isSelected: Bool {
     didSet {
-      self.view.layer?.borderWidth = isSelected ? 3.0 : 0.0
+      self.updateSelection()
+    }
+  }
+
+  override var highlightState: NSCollectionViewItem.HighlightState {
+    didSet {
+      self.updateSelection()
     }
   }
 
@@ -21,5 +27,12 @@ class BookCollectionViewItem: NSCollectionViewItem {
     view.layer?.borderWidth = 0.0
     view.layer?.cornerRadius = 8.0
     view.layer?.borderColor = NSColor.selectedControlColor.cgColor
+  }
+
+  private func updateSelection() {
+    let highlighted =
+      self.highlightState == .forSelection || (self.isSelected && self.highlightState != .forDeselection)
+      || (self.highlightState == .asDropTarget)
+    self.view.layer?.borderWidth = highlighted ? 3.0 : 0.0
   }
 }

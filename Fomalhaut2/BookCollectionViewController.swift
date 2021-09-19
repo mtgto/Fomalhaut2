@@ -273,11 +273,15 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
 
   // called when the item of NSCollectionView is double-clicked
   func openCollectionViewBook(_ indexPath: IndexPath) {
-    self.open(self.collectionViewBooks.value![indexPath.item]).subscribe { _ in
-      // TODO: Stop loading
+    guard let item = self.collectionView.item(at: indexPath) as? BookCollectionViewItem else { return }
+    item.opening = true
+    self.open(self.collectionViewBooks.value![indexPath.item]).subscribe {
+      // do nothing
     } onFailure: { error in
       log.error("Error while open a book: \(error)")
       NSAlert(error: error).runModal()
+    } onDisposed: {
+      item.opening = false
     }.disposed(by: self.disposeBag)
   }
 
@@ -286,7 +290,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     let index = self.tableView.clickedRow
     if index >= 0 {
       let book = self.tableViewBooks.value![index]
-      self.open(book).subscribe { _ in
+      self.open(book).subscribe {
         // do nothing
       } onFailure: { error in
         log.error("Error while open a book: \(error)")
@@ -303,7 +307,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     if books.isEmpty {
       return
     }
-    self.open(books[Int(arc4random_uniform(UInt32(books.count)))]).subscribe { _ in
+    self.open(books[Int(arc4random_uniform(UInt32(books.count)))]).subscribe {
       // do nothing
     } onFailure: { error in
       log.error("Error while open a book: \(error)")
@@ -314,11 +318,22 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   // MARK: - NSMenu for NSTableView and NSCollectionView
   @objc func openViewer(_ sender: Any) {
     self.selectedBooks().forEach { book in
-      self.open(book).subscribe { _ in
+      var bookCollectionViewItem: BookCollectionViewItem? = nil
+      if self.collectionViewStyle.value == .collection {
+        if let index = self.collectionViewBooks.value?.index(of: book) {
+          bookCollectionViewItem =
+            self.collectionView.item(at: IndexPath(item: index, section: 0)) as? BookCollectionViewItem
+        }
+      }
+      bookCollectionViewItem?.opening = true
+      self.open(book).subscribe {
         // do nothing
+        bookCollectionViewItem?.opening = false
       } onFailure: { error in
         // TODO: show error dialog
         log.error("Error while open a book: \(error)")
+      } onDisposed: {
+        bookCollectionViewItem?.opening = false
       }.disposed(by: self.disposeBag)
     }
   }

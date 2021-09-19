@@ -47,10 +47,43 @@
                         </binding>
                     </connections>
                 </imageView>
+                <box hidden="YES" boxType="custom" cornerRadius="10" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="0nJ-0p-Nep">
+                    <rect key="frame" x="60" y="126" width="58" height="60"/>
+                    <view key="contentView" id="16z-BZ-x7F">
+                        <rect key="frame" x="1" y="1" width="56" height="58"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressIndicator maxValue="100" doubleValue="44" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="8aW-Sf-RVk">
+                                <rect key="frame" x="12" y="13" width="32" height="32"/>
+                                <connections>
+                                    <binding destination="LMf-45-jb7" name="animate" keyPath="self.opening" id="ZUo-DJ-CSf"/>
+                                </connections>
+                            </progressIndicator>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="8aW-Sf-RVk" firstAttribute="centerY" secondItem="16z-BZ-x7F" secondAttribute="centerY" id="k6n-y8-tb4"/>
+                            <constraint firstItem="8aW-Sf-RVk" firstAttribute="centerX" secondItem="16z-BZ-x7F" secondAttribute="centerX" id="lR7-QB-eoD"/>
+                        </constraints>
+                    </view>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="58" id="rZh-Ff-kOF"/>
+                        <constraint firstAttribute="height" constant="60" id="vZ3-lw-DnH"/>
+                    </constraints>
+                    <color key="borderColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="0.75438664922651077" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="fillColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="0.74841197437008489" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <binding destination="LMf-45-jb7" name="hidden" keyPath="self.opening" id="VNk-NC-4Oc">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </box>
             </subviews>
             <constraints>
                 <constraint firstItem="h4P-We-Kpz" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="4" id="HjB-ri-BxY"/>
                 <constraint firstItem="URe-sz-Srt" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="JYG-Wl-h6M"/>
+                <constraint firstItem="0nJ-0p-Nep" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" constant="-20" id="PFg-mj-cWs"/>
                 <constraint firstAttribute="trailing" secondItem="h4P-We-Kpz" secondAttribute="trailing" constant="2" id="Pbh-Lc-ifc"/>
                 <constraint firstItem="h4P-We-Kpz" firstAttribute="top" secondItem="URe-sz-Srt" secondAttribute="bottom" constant="8" id="QEx-ST-hTN"/>
                 <constraint firstItem="URe-sz-Srt" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="QM5-yI-ZuQ"/>
@@ -58,6 +91,7 @@
                 <constraint firstItem="aYc-yX-mcB" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="6" id="Sfk-YR-0YM"/>
                 <constraint firstAttribute="trailing" secondItem="aYc-yX-mcB" secondAttribute="trailing" constant="2" id="Ufo-d0-hU2"/>
                 <constraint firstAttribute="bottom" secondItem="h4P-We-Kpz" secondAttribute="bottom" id="mHl-bk-kat"/>
+                <constraint firstItem="0nJ-0p-Nep" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="ofv-mr-Y0W"/>
             </constraints>
             <point key="canvasLocation" x="-81" y="73"/>
         </customView>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="e60-p4-DRD">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="e60-p4-DRD">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,7 +29,7 @@
                                                         <rect key="frame" x="1" y="1" width="268" height="194"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <collectionView selectable="YES" allowsMultipleSelection="YES" id="181-T4-tof" customClass="BookCollectionView" customModule="Fomalhaut2" customModuleProvider="target">
+                                                            <collectionView selectable="YES" allowsMultipleSelection="YES" id="181-T4-tof">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="194"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                 <collectionViewLayout key="collectionViewLayout" id="OWG-c5-DLS" customClass="CollectionViewLayout" customModule="Fomalhaut2" customModuleProvider="target"/>
@@ -67,11 +67,11 @@
                                                 <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbr-By-kXy">
                                                     <rect key="frame" x="0.0" y="0.0" width="270" height="196"/>
                                                     <clipView key="contentView" id="cio-a6-iSI">
-                                                        <rect key="frame" x="1" y="0.0" width="268" height="195"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <rect key="frame" x="1" y="1" width="268" height="194"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveName="FileListView" rowSizeStyle="automatic" headerView="159-tO-4zi" viewBased="YES" id="BES-YB-qIc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="268" height="170"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="268" height="169"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -91,11 +91,11 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView id="i9G-Nl-8GP">
-                                                                                <rect key="frame" x="1" y="1" width="116" height="17"/>
+                                                                                <rect key="frame" x="11" y="1" width="121" height="17"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="pfg-Mk-XKj">
-                                                                                        <rect key="frame" x="0.0" y="1" width="116" height="16"/>
+                                                                                        <rect key="frame" x="0.0" y="1" width="121" height="16"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Gft-e0-ism">
                                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -131,7 +131,7 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView id="SsL-kf-0hc">
-                                                                                <rect key="frame" x="120" y="1" width="99" height="17"/>
+                                                                                <rect key="frame" x="135" y="1" width="99" height="17"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Dv0-xp-HZc">
@@ -157,7 +157,7 @@
                                                                             <fragment content="ListViewHeader"/>
                                                                         </attributedString>
                                                                     </tableColumn>
-                                                                    <tableColumn identifier="like" width="44" minWidth="10" maxWidth="3.4028234663852886e+38" id="fcs-1m-87c">
+                                                                    <tableColumn identifier="like" width="15" minWidth="10" maxWidth="3.4028234663852886e+38" id="fcs-1m-87c">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Like">
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -171,11 +171,11 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView id="Q4V-hi-Knx">
-                                                                                <rect key="frame" x="222" y="1" width="44" height="17"/>
+                                                                                <rect key="frame" x="237" y="1" width="19" height="17"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="T6g-vH-e7a">
-                                                                                        <rect key="frame" x="0.0" y="1" width="44" height="16"/>
+                                                                                        <rect key="frame" x="0.0" y="1" width="19" height="16"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="UZv-tW-2pw">
                                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>

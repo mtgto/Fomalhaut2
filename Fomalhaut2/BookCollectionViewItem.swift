@@ -29,6 +29,30 @@ class BookCollectionViewItem: NSCollectionViewItem {
     view.layer?.borderColor = NSColor.selectedControlColor.cgColor
   }
 
+  override func mouseDown(with event: NSEvent) {
+    if event.clickCount == 2 {
+      if let path = self.collectionView?.indexPath(for: self),
+        let bookCollectionViewController = self.collectionView?.delegate as? BookCollectionViewController
+      {
+        bookCollectionViewController.openCollectionViewBook(path)
+        return
+      }
+    }
+    super.mouseDown(with: event)
+  }
+
+  override func rightMouseDown(with event: NSEvent) {
+    if event.clickCount == 1 {
+      if let path = self.collectionView?.indexPath(for: self) {
+        if !self.isSelected {
+          self.collectionView?.deselectAll(nil)
+          self.collectionView?.selectItems(at: [path], scrollPosition: [])
+        }
+      }
+    }
+    super.rightMouseDown(with: event)
+  }
+
   private func updateSelection() {
     let highlighted =
       self.highlightState == .forSelection || (self.isSelected && self.highlightState != .forDeselection)

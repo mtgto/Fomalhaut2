@@ -13,6 +13,8 @@ enum CollectionViewStyle {
   case collection, list
 }
 
+let collectionOrderChangedNotificationName = Notification.Name("collectionOrderChanged")
+
 class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation {
   static let collectionTabViewInitialIndexKey = "collectionTabViewInitialIndex"
   static let collectionOrderKey = "collectionOrder"
@@ -618,7 +620,6 @@ extension BookCollectionViewController: NSTableViewDelegate {
   func tableView(
     _ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]
   ) {
-    log.debug("sortDescriptorsDidChange: \(tableView.sortDescriptors)")
     self.tableViewSortDescriptors.accept(tableView.sortDescriptors)
   }
 }

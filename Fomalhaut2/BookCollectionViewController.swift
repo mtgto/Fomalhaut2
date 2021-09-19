@@ -217,6 +217,9 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       // TODO: Call url.stopAccessingSecurityScopedResource() after document is closed
       NSDocumentController.shared.openDocument(withContentsOf: url, display: false) {
         (document, documentWasAlreadyOpen, error) in
+        defer {
+          url.stopAccessingSecurityScopedResource()
+        }
         if let error = error {
           // TODO: show error dialog
           log.error("Error while open a book at \(url.path): \(error)")
@@ -234,7 +237,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
             }
             document.makeWindowControllers()
             document.showWindows()
-            //url.stopAccessingSecurityScopedResource()
           }
         }
       }

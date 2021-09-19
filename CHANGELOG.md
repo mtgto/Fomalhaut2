@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v1.0.3 (2021-09-19)
+
+### Added
+
+- Show loading progress in collection view
+- Set Content Security Policy header to response headers in web sharing
+- Store whether auto timeout close to UserDefaults
+
+### Changed
+
+- Fix live selection while mouse dragging in collection view
+- Fix deselection after double click a book in collection view
+- Update RxSwift to 6.2.0 from 6.1.0
+- Update web packages
+
 ## v1.0.2 (2021-09-12)
 
 ### Added

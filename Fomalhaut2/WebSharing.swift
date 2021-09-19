@@ -39,6 +39,12 @@ class WebSharing: NSObject {
     self.assetArchive = Archive(url: assetsURL, accessMode: .read)!
     self.cache.countLimit = 1
     super.init()
+    if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") {
+      self.server.defaultHeaders = [
+        ("Server", "Fomalhaut2/\(version)"),
+        ("Content-Security-Policy", "default-src 'self'; style-src 'self' 'unsafe-inline'"),
+      ]
+    }
     self.server.addRoutes {
       futureGet("/") { req in
         self.recordAccess(req)

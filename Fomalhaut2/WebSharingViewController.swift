@@ -7,6 +7,7 @@ import RxSwift
 
 class WebSharingViewController: NSViewController {
   static let webServerPortKey = "webServerPort"
+  static let webServerAutoSuspendKey = "webServerAutoSuspend"
   private let webSharing = WebSharing()
   private let dateFormatter = DateFormatter()
   private var timeoutDisposable: Disposable? = nil
@@ -25,6 +26,14 @@ class WebSharingViewController: NSViewController {
     self.dateFormatter.locale = .current
     self.dateFormatter.dateStyle = .short
     self.dateFormatter.timeStyle = .short
+    self.timeoutCheckboxButton.state =
+      UserDefaults.standard.bool(forKey: WebSharingViewController.webServerAutoSuspendKey) ? .on : .off
+    self.timeoutCheckboxButton.rx.state
+      .subscribe(onNext: { newState in
+        UserDefaults.standard.set(
+          self.timeoutCheckboxButton.state == .on, forKey: WebSharingViewController.webServerAutoSuspendKey)
+      })
+      .disposed(by: self.disposeBag)
     self.toggleWebServerButton.rx.tap
       .scan(false) { started, newValue in
         self.timeoutDisposable?.dispose()

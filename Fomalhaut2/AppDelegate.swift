@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       BookCollectionViewController.collectionTabViewInitialIndexKey: 0,
       BookCollectionViewController.collectionOrderKey: CollectionOrder.createdAt.rawValue,
       WebSharingViewController.webServerPortKey: 8080,
+      WebSharingViewController.webServerAutoSuspendKey: true,
       PageOrder.pageOrderKey: PageOrder.defaultValue.rawValue,
       FilterListViewController.selectedCollectionContentIdKey: "all",  // Filter.id | Collection.id
       CollectionViewLayout.itemSizeIndexKey: 2,

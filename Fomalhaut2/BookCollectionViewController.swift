@@ -13,6 +13,10 @@ enum CollectionViewStyle {
   case collection, list
 }
 
+enum BookCollectionViewControllerError: Error {
+  case openFailure
+}
+
 let collectionOrderChangedNotificationName = Notification.Name("collectionOrderChanged")
 
 class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation {
@@ -188,61 +192,70 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       andPredicateWithSubpredicates: [filterPredicate, searchPredicate].compactMap { $0 })
   }
 
-  func open(_ book: Book) {
-    var bookmarkDataIsStale: Bool = false
-    do {
-      let url = try book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale)
-      log.debug("bookmarkDataIsStale = \(bookmarkDataIsStale)")
-      if bookmarkDataIsStale {
-        log.info("Regenerate book.bookmark of \(url.path)")
-        do {
-          let realm = try Realm()
-          try realm.write {
-            book.bookmark = try url.bookmarkData(options: [
-              .withSecurityScope, .securityScopeAllowOnlyReadAccess,
-            ])
-          }
-        } catch {
-          log.error("error while update bookmark of book \(url.path): \(error)")
-        }
-      }
+  private func resolveBookURL(_ book: Book) -> Single<URL> {
+    return Single.create { single in
+      var bookmarkDataIsStale: Bool = false
       do {
-        let realm = try Realm()
-        try realm.write {
-          book.readCount = book.readCount + 1
-        }
-      }
-      let success = url.startAccessingSecurityScopedResource()
-      log.debug("success = \(success)")
-      // TODO: Call url.stopAccessingSecurityScopedResource() after document is closed
-      NSDocumentController.shared.openDocument(withContentsOf: url, display: false) {
-        (document, documentWasAlreadyOpen, error) in
-        defer {
-          url.stopAccessingSecurityScopedResource()
-        }
-        if let error = error {
-          // TODO: show error dialog
-          log.error("Error while open a book at \(url.path): \(error)")
-          NSAlert(error: error).runModal()
-        } else {
-          guard let document = document else {
-            log.error("Failed to open a document: \(url.path)")
-            return
-          }
-          if documentWasAlreadyOpen {
-            document.showWindows()
-          } else {
-            if let document = document as? BookDocument {
-              document.book = book.freeze()
+        let url = try book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale)
+        log.debug("bookmarkDataIsStale = \(bookmarkDataIsStale)")
+        if bookmarkDataIsStale {
+          log.info("Regenerate book.bookmark of \(url.path)")
+          do {
+            let realm = try Realm()
+            try realm.write {
+              book.bookmark = try url.bookmarkData(options: [.withSecurityScope, .securityScopeAllowOnlyReadAccess])
             }
-            document.makeWindowControllers()
-            document.showWindows()
+          } catch {
+            log.error("error while update bookmark of book \(url.path): \(error)")
+            single(.failure(error))
+            return Disposables.create()
           }
         }
+        single(.success(url))
+        return Disposables.create()
+      } catch {
+        single(.failure(error))
+        return Disposables.create()
       }
-    } catch {
-      // TODO: show error dialog
-      log.error("Error while resolve URL from a book: \(error)")
+    }
+  }
+
+  func open(_ book: Book) -> Single<Void> {
+    return Single.create { single in
+      self.resolveBookURL(book).subscribe { url in
+        let success = url.startAccessingSecurityScopedResource()
+        log.debug("startAccessingSecurityScopedResource = \(success)")
+        NSDocumentController.shared.openDocument(withContentsOf: url, display: false) {
+          (document, documentWasAlreadyOpen, error) in
+          defer {
+            url.stopAccessingSecurityScopedResource()
+          }
+          if let error = error {
+            // TODO: show error dialog
+            log.error("Error while open a book at \(url.path): \(error)")
+            single(.failure(error))
+          } else {
+            guard let document = document else {
+              log.error("Failed to open a document: \(url.path)")
+              single(.failure(BookCollectionViewControllerError.openFailure))
+              return
+            }
+            if documentWasAlreadyOpen {
+              document.showWindows()
+            } else {
+              if let document = document as? BookDocument {
+                document.book = book.freeze()
+              }
+              document.makeWindowControllers()
+              document.showWindows()
+            }
+            single(.success(()))
+          }
+        }
+      } onFailure: { error in
+        single(.failure(error))
+      }.disposed(by: self.disposeBag)
+      return Disposables.create()
     }
   }
 
@@ -260,7 +273,12 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
 
   // called when the item of NSCollectionView is double-clicked
   func openCollectionViewBook(_ indexPath: IndexPath) {
-    self.open(self.collectionViewBooks.value![indexPath.item])
+    self.open(self.collectionViewBooks.value![indexPath.item]).subscribe { _ in
+      // TODO: Stop loading
+    } onFailure: { error in
+      log.error("Error while open a book: \(error)")
+      NSAlert(error: error).runModal()
+    }.disposed(by: self.disposeBag)
   }
 
   // Double click the row of TableView
@@ -268,7 +286,12 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     let index = self.tableView.clickedRow
     if index >= 0 {
       let book = self.tableViewBooks.value![index]
-      self.open(book)
+      self.open(book).subscribe { _ in
+        // do nothing
+      } onFailure: { error in
+        log.error("Error while open a book: \(error)")
+        NSAlert(error: error).runModal()
+      }.disposed(by: self.disposeBag)
     }
   }
 
@@ -280,13 +303,23 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     if books.isEmpty {
       return
     }
-    self.open(books[Int(arc4random_uniform(UInt32(books.count)))])
+    self.open(books[Int(arc4random_uniform(UInt32(books.count)))]).subscribe { _ in
+      // do nothing
+    } onFailure: { error in
+      log.error("Error while open a book: \(error)")
+      NSAlert(error: error).runModal()
+    }.disposed(by: self.disposeBag)
   }
 
   // MARK: - NSMenu for NSTableView and NSCollectionView
   @objc func openViewer(_ sender: Any) {
     self.selectedBooks().forEach { book in
-      self.open(book)
+      self.open(book).subscribe { _ in
+        // do nothing
+      } onFailure: { error in
+        // TODO: show error dialog
+        log.error("Error while open a book: \(error)")
+      }.disposed(by: self.disposeBag)
     }
   }
 

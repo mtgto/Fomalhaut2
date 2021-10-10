@@ -82,11 +82,6 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             flexShrink: 0,
             ".MuiDrawer-paper": { width: drawerWidth },
           }}
-          classes={
-            {
-              //paper: classes.drawerPaper,
-            }
-          }
           onOpen={() => setOpen(true)}
           onClose={() => setOpen(false)}
         >

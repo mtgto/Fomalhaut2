@@ -22,7 +22,7 @@ class Book: Object, Encodable {
   @Persisted var thumbnailData: Data? = nil
 
   static let abbreviateFileNamePattern = try! NSRegularExpression(
-    pattern: "\\.(zip|cbz|rar|cbr|pdf)$", options: .caseInsensitive)
+    pattern: "\\.(zip|cbz|rar|cbr|pdf|7z|cb7)$", options: .caseInsensitive)
   var displayName: String {
     return Book.abbreviateFileNamePattern.stringByReplacingMatches(
       in: self.name, options: [], range: NSMakeRange(0, self.name.utf16.count), withTemplate: "")

@@ -450,7 +450,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       } else {
         return [fileURL]
       }
-    }.filter { ["zip", "cbz", "rar", "cbr", "pdf"].contains($0.pathExtension.lowercased()) }
+    }.filter { ["zip", "cbz", "rar", "cbr", "pdf", "7z", "cb7"].contains($0.pathExtension.lowercased()) }
     if validExtensionFileURLs.isEmpty {
       return false
     }
@@ -487,26 +487,35 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       _ = url.startAccessingSecurityScopedResource()
       do {
         let document: BookDocument
-        if url.pathExtension.lowercased() == "zip" {
+        let pathExtension = url.pathExtension.lowercased()
+        if pathExtension == "zip" {
           document =
             try NSDocumentController.shared.makeDocument(
               withContentsOf: url, ofType: ZipArchiver.utis[0]) as! BookDocument
-        } else if url.pathExtension.lowercased() == "cbz" {
+        } else if pathExtension == "cbz" {
           document =
             try NSDocumentController.shared.makeDocument(
               withContentsOf: url, ofType: ZipArchiver.utis[1]) as! BookDocument
-        } else if url.pathExtension.lowercased() == "pdf" {
+        } else if pathExtension == "pdf" {
           document =
             try NSDocumentController.shared.makeDocument(
               withContentsOf: url, ofType: PdfArchiver.utis[0]) as! BookDocument
-        } else if url.pathExtension.lowercased() == "rar" {
+        } else if pathExtension == "rar" {
           document =
             try NSDocumentController.shared.makeDocument(
               withContentsOf: url, ofType: RarArchiver.utis[0]) as! BookDocument
-        } else if url.pathExtension.lowercased() == "cbr" {
+        } else if pathExtension == "cbr" {
           document =
             try NSDocumentController.shared.makeDocument(
               withContentsOf: url, ofType: RarArchiver.utis[1]) as! BookDocument
+        } else if pathExtension == "7z" {
+          document =
+            try NSDocumentController.shared.makeDocument(
+              withContentsOf: url, ofType: SevenZipArchiver.utis[0]) as! BookDocument
+        } else if pathExtension == "cb7" {
+          document =
+            try NSDocumentController.shared.makeDocument(
+              withContentsOf: url, ofType: SevenZipArchiver.utis[1]) as! BookDocument
         } else {
           return
         }

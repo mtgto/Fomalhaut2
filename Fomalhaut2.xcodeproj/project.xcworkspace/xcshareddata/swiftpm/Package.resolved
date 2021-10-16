@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/realm/realm-cocoa.git",
         "state": {
           "branch": null,
-          "revision": "c619512ed75937ed3425df9343dc592f39bd8a43",
-          "version": "10.15.0"
+          "revision": "7ca0ce1dd58553d5be1ec9cc7283b068c256979d",
+          "version": "10.17.0"
         }
       },
       {
@@ -38,12 +38,21 @@
         }
       },
       {
+        "package": "SevenZip",
+        "repositoryURL": "https://github.com/mtgto/SevenZip.swift",
+        "state": {
+          "branch": null,
+          "revision": "253648b256e63abbb1cde8952160e9eb03968def",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "swift-nio",
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
-          "revision": "f2705f9655ede35399b12040e892cf653126de98",
-          "version": "2.32.2"
+          "revision": "6aa9347d9bc5bbfe6a84983aec955c17ffea96ef",
+          "version": "2.33.0"
         }
       },
       {

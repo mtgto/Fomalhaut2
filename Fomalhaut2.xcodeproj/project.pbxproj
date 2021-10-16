@@ -20,6 +20,7 @@
 		CE4641B825EA7F91004F0F0D /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE4641B725EA7F91004F0F0D /* RxSwift */; };
 		CE4641CA25EB6E45004F0F0D /* CollectionOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4641C925EB6E45004F0F0D /* CollectionOrder.swift */; };
 		CE654D762537E9530051D575 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE654D752537E9520051D575 /* Credits.rtf */; };
+		CE7A1C58271A7B9800177824 /* SevenZipArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7A1C57271A7B9800177824 /* SevenZipArchiver.swift */; };
 		CE7CD508256A0B7B00C97167 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CD507256A0B7B00C97167 /* Collection.swift */; };
 		CE9DCB7E256A94C90024FB1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE9DCB7C256A94C90024FB1B /* InfoPlist.strings */; };
 		CE9DCB8B256B610D0024FB1B /* NSOutlineView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */; };
@@ -69,6 +70,7 @@
 		CEE9793525402BEA00A35C39 /* BookCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */; };
 		CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793C25403AD500A35C39 /* MainWindowController.swift */; };
 		CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */; };
+		CEEBAE622721A25D0048034E /* SevenZip in Frameworks */ = {isa = PBXBuildFile; productRef = CEEBAE612721A25D0048034E /* SevenZip */; };
 		CEEFC63B257C9590008D9636 /* WebSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC63A257C9590008D9636 /* WebSharing.swift */; };
 		CEEFC6622580F5DB008D9636 /* assets.zip in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6612580F5DB008D9636 /* assets.zip */; };
 		CEEFC66B25810C24008D9636 /* WebSharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC66925810C24008D9636 /* WebSharingViewController.swift */; };
@@ -170,6 +172,7 @@
 		CE38432125F4E19900262E4E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FilterList.strings; sourceTree = "<group>"; };
 		CE4641C925EB6E45004F0F0D /* CollectionOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionOrder.swift; sourceTree = "<group>"; };
 		CE654D752537E9520051D575 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		CE7A1C57271A7B9800177824 /* SevenZipArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenZipArchiver.swift; sourceTree = "<group>"; };
 		CE7CD507256A0B7B00C97167 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		CE9DCB7D256A94C90024FB1B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSOutlineView+Realm.swift"; sourceTree = "<group>"; };
@@ -256,6 +259,7 @@
 				CEE4D7D225E11B81003B8EB2 /* ZIPFoundation in Frameworks */,
 				CEE4D7D525E11B89003B8EB2 /* PDFKit.framework in Frameworks */,
 				CEE4D7D425E11B81003B8EB2 /* Unrar in Frameworks */,
+				CEEBAE622721A25D0048034E /* SevenZip in Frameworks */,
 				CEE4D7E525E11C23003B8EB2 /* XCGLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +385,7 @@
 				CE34A40425BBC6E400B4C0B5 /* FolderArchiver.swift */,
 				CE34A40825BBD75F00B4C0B5 /* PdfArchiver.swift */,
 				CE34A40E25BBD8EA00B4C0B5 /* RarArchiver.swift */,
+				CE7A1C57271A7B9800177824 /* SevenZipArchiver.swift */,
 				CEE4D7BC25E11B28003B8EB2 /* Info.plist */,
 				CEE4D7E025E11C13003B8EB2 /* Log.swift */,
 				CE34A41825BC105800B4C0B5 /* PageOrder.swift */,
@@ -476,6 +481,7 @@
 				CEE4D7D125E11B81003B8EB2 /* ZIPFoundation */,
 				CEE4D7D325E11B81003B8EB2 /* Unrar */,
 				CEE4D7E425E11C23003B8EB2 /* XCGLogger */,
+				CEEBAE612721A25D0048034E /* SevenZip */,
 			);
 			productName = Archiver;
 			productReference = CEE4D7B925E11B28003B8EB2 /* Shared.framework */;
@@ -545,6 +551,7 @@
 				CE9FB337258EF8DF00AE8F7A /* XCRemoteSwiftPackageReference "Swiftra" */,
 				CEAD7A0F25A494EC00927D10 /* XCRemoteSwiftPackageReference "Unrar.swift" */,
 				CE4641A825EA7F33004F0F0D /* XCRemoteSwiftPackageReference "RxRealm" */,
+				CEEBAE5E2721A18B0048034E /* XCRemoteSwiftPackageReference "SevenZip" */,
 			);
 			productRefGroup = CE30280725305AA000986C9A /* Products */;
 			projectDirPath = "";
@@ -664,6 +671,7 @@
 				CEE4D7CB25E11B48003B8EB2 /* RarArchiver.swift in Sources */,
 				CEF8C9A725E4EC7D005347BF /* BookImageView.swift in Sources */,
 				CEE4D7CD25E11B48003B8EB2 /* ZipArchiver.swift in Sources */,
+				CE7A1C58271A7B9800177824 /* SevenZipArchiver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1210,6 +1218,14 @@
 				minimumVersion = 0.3.0;
 			};
 		};
+		CEEBAE5E2721A18B0048034E /* XCRemoteSwiftPackageReference "SevenZip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mtgto/SevenZip.swift";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1257,6 +1273,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE9EE5E92532C53100B5AF5C /* XCRemoteSwiftPackageReference "XCGLogger" */;
 			productName = XCGLogger;
+		};
+		CEEBAE612721A25D0048034E /* SevenZip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEEBAE5E2721A18B0048034E /* XCRemoteSwiftPackageReference "SevenZip" */;
+			productName = SevenZip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

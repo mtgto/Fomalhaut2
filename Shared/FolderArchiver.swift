@@ -7,7 +7,7 @@ class FolderArchiver: Archiver {
   static let utis: [String] = ["public.folder"]
   private let entries: [URL]
 
-  init?(url: URL) {
+  public init?(url: URL) {
     do {
       let contentUrls = try FileManager.default.contentsOfDirectory(
         at: url, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])

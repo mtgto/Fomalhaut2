@@ -12,7 +12,7 @@ public protocol Archiver {
 public class CombineArchiver: Archiver {
   private let archiver: Archiver
 
-  public init?(from url: URL, ofType typeName: String) {
+  public required init?(from url: URL, ofType typeName: String) {
     let pathExtension = url.pathExtension.lowercased()
     let archiver: Archiver?
     if ZipArchiver.utis.contains(typeName) || ["zip", "cbz"].contains(pathExtension) {
@@ -21,6 +21,8 @@ public class CombineArchiver: Archiver {
       archiver = RarArchiver(url: url)
     } else if PdfArchiver.utis.contains(typeName) || ["pdf"].contains(pathExtension) {
       archiver = PdfArchiver(url: url)
+    } else if SevenZipArchiver.utis.contains(typeName) || ["7z", "cb7"].contains(pathExtension) {
+      archiver = SevenZipArchiver(url: url)
     } else if FolderArchiver.utis.contains(typeName) {
       archiver = FolderArchiver(url: url)
     } else {

@@ -16,7 +16,7 @@ import { useTheme } from "@mui/material/styles";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "rocon/react";
 import { message } from "../message";
 import { LoadingState, StateContext } from "../reducer";

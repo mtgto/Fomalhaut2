@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "rocon/react";
 import { Book } from "../domain/book";
 import { message } from "../message";

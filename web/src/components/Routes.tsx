@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import React from "react";
 import { Path, Search, useRoutes } from "rocon/react";
 import BookPage from "./Book";
 import CollectionPage from "./Collection";

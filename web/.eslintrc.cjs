@@ -20,6 +20,8 @@ module.exports = {
       {
         "patterns": ["@material-ui/*/*/*", "!@material-ui/core/test-utils/*"]
       }
-    ]
+    ],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
   },
 };

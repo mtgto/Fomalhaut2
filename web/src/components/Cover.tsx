@@ -8,7 +8,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { pink } from "@mui/material/colors";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import React, { forwardRef, useMemo } from "react";
+import { forwardRef, useMemo } from "react";
 import { Link as RouterLink } from "rocon/react";
 import { Book } from "../domain/book";
 import { bookRoutes } from "./Routes";

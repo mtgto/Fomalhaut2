@@ -89,11 +89,13 @@ class BookDocument: NSDocument {
         observer.onNext(image)
         observer.onCompleted()
       } else {
+        log.debug("fail to load from cache at \(page)")
         self.archiver?.image(
           at: page,
           completion: { (result) in
             switch result {
             case .success(let image):
+              imageCache.setObject(image, forKey: imageCacheKey)
               observer.onNext(image)
               observer.onCompleted()
             case .failure(let error):

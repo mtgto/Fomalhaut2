@@ -4,7 +4,8 @@
 import Cocoa
 
 class FolderArchiver: Archiver {
-  static let utis: [String] = ["public.folder"]
+  public static let utis: [String] = ["public.folder"]
+  public static let extensions: [String] = []
   private let entries: [URL]
 
   public init?(url: URL) {

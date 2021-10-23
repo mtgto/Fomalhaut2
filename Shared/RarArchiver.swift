@@ -6,6 +6,7 @@ import Unrar
 
 public class RarArchiver: Archiver {
   public static let utis: [String] = ["com.rarlab.rar-archive", "net.mtgto.Fomalhaut2.cbr"]
+  public static let extensions: [String] = ["rar", "cbr"]
   private let fileURL: URL
   private let entries: [Entry]
   private let operationQueue: OperationQueue

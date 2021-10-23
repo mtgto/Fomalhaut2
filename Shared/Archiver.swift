@@ -4,24 +4,30 @@
 import Cocoa
 
 public protocol Archiver {
+  static var utis: [String] { get }
+  static var extensions: [String] { get }
   func pageCount() -> Int
 
   func image(at page: Int, completion: @escaping (_ image: Result<NSImage, ArchiverError>) -> Void)
 }
 
 public class CombineArchiver: Archiver {
+  public static var utis: [String] =
+    ZipArchiver.utis + RarArchiver.utis + PdfArchiver.utis + SevenZipArchiver.extensions + FolderArchiver.extensions
+  public static var extensions: [String] =
+    ZipArchiver.extensions + RarArchiver.extensions + PdfArchiver.extensions + SevenZipArchiver.extensions
   private let archiver: Archiver
 
   public required init?(from url: URL, ofType typeName: String) {
     let pathExtension = url.pathExtension.lowercased()
     let archiver: Archiver?
-    if ZipArchiver.utis.contains(typeName) || ["zip", "cbz"].contains(pathExtension) {
+    if ZipArchiver.utis.contains(typeName) || ZipArchiver.extensions.contains(pathExtension) {
       archiver = ZipArchiver(url: url)
-    } else if RarArchiver.utis.contains(typeName) || ["rar", "cbr"].contains(pathExtension) {
+    } else if RarArchiver.utis.contains(typeName) || RarArchiver.extensions.contains(pathExtension) {
       archiver = RarArchiver(url: url)
-    } else if PdfArchiver.utis.contains(typeName) || ["pdf"].contains(pathExtension) {
+    } else if PdfArchiver.utis.contains(typeName) || PdfArchiver.extensions.contains(pathExtension) {
       archiver = PdfArchiver(url: url)
-    } else if SevenZipArchiver.utis.contains(typeName) || ["7z", "cb7"].contains(pathExtension) {
+    } else if SevenZipArchiver.utis.contains(typeName) || SevenZipArchiver.extensions.contains(pathExtension) {
       archiver = SevenZipArchiver(url: url)
     } else if FolderArchiver.utis.contains(typeName) {
       archiver = FolderArchiver(url: url)

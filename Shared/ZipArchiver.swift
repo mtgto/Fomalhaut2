@@ -6,6 +6,7 @@ import ZIPFoundation
 
 public class ZipArchiver: Archiver {
   public static let utis: [String] = ["com.pkware.zip-archive", "net.mtgto.Fomalhaut2.cbz"]
+  public static let extensions: [String] = ["zip", "cbz"]
   private let archive: Archive
   private let entries: [Entry]
   private let operationQueue: OperationQueue

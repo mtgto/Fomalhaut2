@@ -7,6 +7,7 @@ import SevenZip
 
 public class SevenZipArchiver: Archiver {
   public static let utis: [String] = ["org.7-zip.7-zip-archive", "net.mtgto.Fomalhaut2.cb7"]
+  public static let extensions: [String] = ["7z", "cb7"]
   private let archive: Archive
   private let entries: [Entry]
   private let operationQueue: OperationQueue

@@ -6,6 +6,7 @@ import PDFKit
 
 public class PdfArchiver: Archiver {
   public static let utis: [String] = ["com.adobe.pdf"]
+  public static let extensions: [String] = ["pdf"]
   private let pdfDocument: PDFDocument
   private let operationQueue = OperationQueue()
 

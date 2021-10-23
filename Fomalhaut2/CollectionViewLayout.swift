@@ -69,9 +69,7 @@ class CollectionViewLayout: NSCollectionViewFlowLayout {
   override var collectionViewContentSize: NSSize {
     guard let collectionView = self.collectionView else { return .zero }
     let width = collectionView.frame.width
-    if let lastCellAttribute = self.cellLayoutAttributes.last?.last
-      as? NSCollectionViewLayoutAttributes
-    {
+    if let last = self.cellLayoutAttributes.last?.last, let lastCellAttribute = last {
       return NSSize(width: width, height: lastCellAttribute.frame.maxY)
     } else {
       return .zero

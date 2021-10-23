@@ -27,4 +27,9 @@ final class ImageCacheKey: NSObject {
   }
 }
 
-let imageCache = NSCache<ImageCacheKey, NSImage>()
+let imageCache: NSCache<ImageCacheKey, NSImage> = {
+  let cache = NSCache<ImageCacheKey, NSImage>()
+  cache.countLimit = 16
+  cache.totalCostLimit = 100 * 1024 * 1024
+  return cache
+}()

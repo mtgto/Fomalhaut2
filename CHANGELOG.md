@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v1.1.0 (2021-10-23)
+
+### Added
+
+- Support 7z/CB7 file format
+
+### Changed
+
+- Update image cache config
+- Update realm-cocoa to 10.17.0 from 10.15.0
+- Update swift-nio to 2.33.0 from 2.23.2
+- Update web packages
+
 ## v1.0.3 (2021-09-19)
 
 ### Added

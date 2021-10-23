@@ -1,12 +1,13 @@
-Fomalhaut2
-====
+# Fomalhaut2
+
 [![swift-format](https://github.com/mtgto/Fomalhaut2/workflows/swift-format/badge.svg)](https://github.com/mtgto/Fomalhaut2/actions?query=workflow%3Aswift-format)
 [![web](https://github.com/mtgto/Fomalhaut2/workflows/web/badge.svg)](https://github.com/mtgto/Fomalhaut2/actions?query=workflow%3Aweb)
 
 A comic viewer for macOS.
 
 - A native macOS GUI application
-- Collect your own comics (zip/cbz, rar/cbr, PDF)
+- Collect your own comics (zip/cbz, rar/cbr, 7z/cb7, PDF)
+- See your own comics via web browser
 
 ## Install
 
@@ -43,12 +44,12 @@ NOTE: This sample comic is under Public Domain. You can view via https://digital
 ## Roadmap
 
 - [x] Web server
-   - [x] Access comics via web browser (PC / smartphone)
+  - [x] Access comics via web browser (PC / smartphone)
 - [ ] Support more file types
-   - [x] zip/cbz
-   - [x] PDF
-   - [x] rar/cbr
-   - [ ] 7z/cb7
+  - [x] zip/cbz
+  - [x] PDF
+  - [x] rar/cbr
+  - [x] 7z/cb7
 - [x] QuickLook Thumbnail Extension
 
 ## Contributing

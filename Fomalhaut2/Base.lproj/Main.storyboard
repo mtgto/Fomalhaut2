@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -514,11 +514,11 @@
                     <window key="window" title="Fomalhaut2" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="MainWindow" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="9I8-xZ-12P">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="490" y="534" width="572" height="270"/>
+                        <rect key="contentRect" x="490" y="534" width="800" height="450"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2880" height="1597"/>
                         <value key="minSize" type="size" width="480" height="270"/>
                         <view key="contentView" id="oQh-IW-Mil">
-                            <rect key="frame" x="0.0" y="0.0" width="572" height="270"/>
+                            <rect key="frame" x="0.0" y="0.0" width="800" height="450"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
                         <toolbar key="toolbar" implicitIdentifier="77CB1D79-397E-4A01-9DEE-E029CD1FEBD1" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="HqW-Zi-JHV">
@@ -587,7 +587,7 @@
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="gIt-eY-hjg">
                                         <rect key="frame" x="8" y="14" width="101" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="push" title="Random" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BPb-vu-jZu">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -688,7 +688,7 @@
                 </viewController>
                 <customObject id="dna-WE-hxx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="64" y="580"/>
+            <point key="canvasLocation" x="-13" y="678"/>
         </scene>
         <!--FilterList-->
         <scene sceneID="7zu-cS-q97">
@@ -696,7 +696,7 @@
                 <controllerPlaceholder storyboardName="FilterList" id="09g-aA-dKs" sceneMemberID="viewController"/>
                 <customObject id="0aB-bH-2yo" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-118" y="908"/>
+            <point key="canvasLocation" x="-39" y="985"/>
         </scene>
         <!--BookCollection-->
         <scene sceneID="V1J-GW-Y3y">
@@ -704,7 +704,7 @@
                 <controllerPlaceholder storyboardName="BookCollection" id="O9R-zs-35c" sceneMemberID="viewController"/>
                 <customObject id="k1C-Vy-RgT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="205" y="908"/>
+            <point key="canvasLocation" x="83" y="985"/>
         </scene>
     </scenes>
 </document>

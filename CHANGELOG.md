@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.1.1 (2021-11-28)
+
+### Added
+
+- Add "Open a random book" button to web view
+
+### Changed
+
+- Fix initial window size
+- Update realm-cocoa to 10.20.0 from 10.17.0
+- Update web packages
+
 ## v1.1.0 (2021-10-23)
 
 ### Added

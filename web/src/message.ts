@@ -7,6 +7,7 @@ export type Message = {
   readonly loading: string;
   readonly loadError: string;
   readonly reload: string;
+  readonly random: string;
   readonly filter: {
     readonly all: string;
     readonly unread: string;
@@ -26,6 +27,7 @@ export const ja: Message = {
   loading: "読込中…",
   loadError: "読み込みに失敗しました",
   reload: "ページリロード",
+  random: "ランダム",
   filter: {
     all: "すべての本",
     unread: "未読",
@@ -45,6 +47,7 @@ export const en: Message = {
   loading: "Loading…",
   loadError: "An error occurred while loading",
   reload: "Reload",
+  random: "Random",
   filter: {
     all: "All",
     unread: "Unread",

@@ -3,6 +3,7 @@
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
 import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
@@ -15,12 +16,13 @@ import Snackbar from "@mui/material/Snackbar";
 import { useTheme } from "@mui/material/styles";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "rocon/react";
 import { message } from "../message";
 import { LoadingState, StateContext } from "../reducer";
-import { collectionRoutes, filterRoutes } from "./Routes";
+import { bookRoutes, collectionRoutes, filterRoutes } from "./Routes";
 
 const drawerWidth = 200;
 
@@ -52,6 +54,14 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
     document.location.reload();
   };
 
+  const handleRandom = () => {
+    if (state.books.length > 0) {
+      const index = Math.floor(Math.random() * state.books.length);
+      const book = state.books[index];
+      navigate(bookRoutes.anyRoute, { id: book.id });
+    }
+  };
+
   return (
     <Fragment>
       <div css={{ flexGrow: 1 }}>
@@ -69,9 +79,13 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
               </IconButton>
             </div>
             <Typography variant="h6">{props.title ?? "Fomalhaut2"}</Typography>
-            <div
-              css={{ flex: 1, display: "flex", justifyContent: "flex-end" }}
-            />
+            <div css={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
+              <Tooltip title={message.random}>
+                <IconButton size="large" color="inherit" onClick={handleRandom}>
+                  <ShuffleIcon />
+                </IconButton>
+              </Tooltip>
+            </div>
           </Toolbar>
         </AppBar>
         <SwipeableDrawer

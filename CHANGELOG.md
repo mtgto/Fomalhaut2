@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v1.1.2 (2021-11-29)
+
+### Changed
+
+- Web sharing is now stable
+
 ## v1.1.1 (2021-11-28)
 
 ### Added

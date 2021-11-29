@@ -13,8 +13,8 @@
 /* Class = "NSTextFieldCell"; title = "Enter the port number"; ObjectID = "i0k-ei-doh"; */
 "i0k-ei-doh.title" = "ポート番号";
 
-/* Class = "NSTextFieldCell"; title = "Web sharing (EXPERIMENTAL)"; ObjectID = "M01-49-yxD"; */
-"M01-49-yxD.title" = "Web共有 (実験的機能)";
+/* Class = "NSTextFieldCell"; title = "Web sharing"; ObjectID = "M01-49-yxD"; */
+"M01-49-yxD.title" = "Web共有";
 
 /* Class = "NSButtonCell"; title = "Open browser"; ObjectID = "qpb-bb-q05"; Note = "OpenBrowser"; */
 "qpb-bb-q05.title" = "ブラウザで開く";

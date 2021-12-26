@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v1.1.3 (2021-12-26)
+
+### Changed
+
+- Update ZipFoundation from 0.9.12 to 0.9.14
+- Update swift-nio from 2.33.0 to 2.36.0
+- Use yarn v3
+
 ## v1.1.2 (2021-11-29)
 
 ### Changed

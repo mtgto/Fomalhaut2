@@ -33,4 +33,4 @@ jobs:
         run: yarn lint
         working-directory: ./web
         env:
-          NPM_CONFIG_ESLINT_ARGS: "-f @jamesacarr/github-actions"
+          ESLINT_ARGS: "-f @jamesacarr/github-actions"

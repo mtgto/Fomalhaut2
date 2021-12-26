@@ -7,7 +7,7 @@
     "serve": "parcel serve src/index.html",
     "build": "yarn run rimraf ./dist ../Fomalhaut2/assets.zip && parcel build ./src/index.html --public-url /assets/ && zip -rj9 ../Fomalhaut2/assets.zip ./dist",
     "lint": "yarn run lint:tsc && yarn run lint:eslint",
-    "lint:eslint": "eslint $npm_config_eslint_args '*/**/*.{ts,tsx}'",
+    "lint:eslint": "eslint ${ESLINT_ARGS:-''} '*/**/*.{ts,tsx}'",
     "lint:tsc": "tsc --noEmit",
     "prepare": "cd .. && husky install web/.husky"
   },

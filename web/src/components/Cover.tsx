@@ -34,17 +34,17 @@ const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
     <Link component={BookLink}>
       <Card
         variant="outlined"
-        css={{ height: "100%", position: "relative" }}
+        sx={{ height: "100%", position: "relative" }}
         square
       >
         <CardMedia
           component="img"
-          css={{ objectFit: "cover" }}
+          sx={{ objectFit: "cover" }}
           image={`/images/books/${props.book.id}/thumbnail`}
         />
         {props.book.like && (
           <FavoriteIcon
-            css={{
+            sx={{
               position: "absolute",
               top: "0px",
               right: "0px",
@@ -53,7 +53,7 @@ const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
           />
         )}
         <CardContent
-          css={{
+          sx={{
             padding: "4px",
             "&:last-child": {
               paddingBottom: "inherit",
@@ -63,7 +63,7 @@ const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
           <Typography
             gutterBottom
             variant="subtitle2"
-            css={{
+            sx={{
               display: "-webkit-box",
               WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",

@@ -21,17 +21,17 @@ import { bookRoutes } from "./Routes";
 
 const pages = (book: Book) => {
   return [...Array(book.pageCount).keys()].map((i: number) => (
-    <img
-      css={{
-        width: "100%",
-        maxWidth: "720px",
-        minHeight: "200px",
-        display: "block",
-        margin: "8px auto",
-      }}
+    <Box
+      component="img"
+      my={1}
+      mx="auto"
+      display="block"
+      width="100%"
+      maxWidth="720px"
+      minHeight="200px"
       key={`${book.id}.${i}`}
       src={`/images/books/${book.id}/pages/${i}`}
-    ></img>
+    ></Box>
   ));
 };
 
@@ -109,7 +109,7 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
       </Container>
       <SpeedDial
         ariaLabel="direction"
-        css={{
+        sx={{
           position: "fixed",
           bottom: theme.spacing(8),
           right: theme.spacing(2),

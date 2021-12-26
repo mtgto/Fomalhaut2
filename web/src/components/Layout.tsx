@@ -5,6 +5,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -64,34 +65,34 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
 
   return (
     <Fragment>
-      <div css={{ flexGrow: 1 }}>
+      <Box flexGrow={1}>
         <AppBar position="static" id="appbar">
-          <Toolbar css={{ justifyContent: "space-between" }}>
-            <div css={{ flex: 1 }}>
+          <Toolbar sx={{ justifyContent: "space-between" }}>
+            <Box flex={1}>
               <IconButton
                 edge="start"
-                css={{ marginRight: theme.spacing(2) }}
+                sx={{ marginRight: theme.spacing(2) }}
                 color="inherit"
                 aria-label="menu"
                 onClick={handleDrawerOpen}
               >
                 <MenuIcon />
               </IconButton>
-            </div>
+            </Box>
             <Typography variant="h6">{props.title ?? "Fomalhaut2"}</Typography>
-            <div css={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
+            <Box display="flex" flex={1} justifyContent="flex-end">
               <Tooltip title={message.random}>
                 <IconButton size="large" color="inherit" onClick={handleRandom}>
                   <ShuffleIcon />
                 </IconButton>
               </Tooltip>
-            </div>
+            </Box>
           </Toolbar>
         </AppBar>
         <SwipeableDrawer
           anchor="left"
           open={open}
-          css={{
+          sx={{
             width: drawerWidth,
             flexShrink: 0,
             ".MuiDrawer-paper": { width: drawerWidth },
@@ -99,18 +100,16 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
           onOpen={() => setOpen(true)}
           onClose={() => setOpen(false)}
         >
-          <div
-            css={{
-              display: "flex",
-              alignItems: "center",
-              padding: theme.spacing(0, 1),
-              justifyContent: "flex-end",
-            }}
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="flex-end"
+            px={1}
           >
             <IconButton onClick={handleDrawerClose}>
               <ChevronLeftIcon />
             </IconButton>
-          </div>
+          </Box>
           <Divider />
           <List
             subheader={<ListSubheader>{message.library}</ListSubheader>}
@@ -152,7 +151,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             </Button>
           }
         />
-      </div>
+      </Box>
       <main>{props.children}</main>
     </Fragment>
   );

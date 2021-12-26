@@ -409,7 +409,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.0.0":
+"@emotion/react@npm:^11.7.1":
   version: 11.7.1
   resolution: "@emotion/react@npm:11.7.1"
   dependencies:
@@ -452,7 +452,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^11.0.0":
+"@emotion/styled@npm:^11.6.0":
   version: 11.6.0
   resolution: "@emotion/styled@npm:11.6.0"
   dependencies:
@@ -7983,8 +7983,8 @@ __metadata:
   resolution: "web@workspace:."
   dependencies:
     "@emotion/babel-preset-css-prop": ^11.2.0
-    "@emotion/react": ^11.0.0
-    "@emotion/styled": ^11.0.0
+    "@emotion/react": ^11.7.1
+    "@emotion/styled": ^11.6.0
     "@jamesacarr/eslint-formatter-github-actions": ^0.1.0
     "@mui/icons-material": ^5.0.0
     "@mui/material": ^5.0.0

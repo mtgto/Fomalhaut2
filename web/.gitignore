@@ -2,3 +2,5 @@
 /.parcel-cache/
 /dist/
 /.vscode/
+.yarn/
+!.yarn/releases/*

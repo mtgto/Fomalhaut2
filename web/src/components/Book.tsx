@@ -84,6 +84,7 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
 
   const handleNext = () => {
     navigateNextBookId();
+    window.scrollTo(0, 0);
   };
 
   const handleSpeedDialClose = () => {

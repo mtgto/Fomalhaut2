@@ -17,7 +17,7 @@ jobs:
           node-version: 14
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
         working-directory: ./web
       - uses: actions/cache@v2
         id: yarn-cache
@@ -27,7 +27,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: yarn install
-        run: yarn --prefer-offline
+        run: yarn
         working-directory: ./web
       - name: Lint
         run: yarn lint

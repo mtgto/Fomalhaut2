@@ -22,10 +22,6 @@
     "rocon": "^1.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.10",
-    "@babel/preset-react": "^7.12.10",
-    "@babel/preset-typescript": "^7.12.7",
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@jamesacarr/eslint-formatter-github-actions": "^0.1.0",
     "@types/node": "^14.14.10",

@@ -263,7 +263,7 @@ class WebSharing: NSObject {
     var data: Data = Data()
     do {
       _ = try self.assetArchive.extract(
-        entry, bufferSize: UInt32(entry.uncompressedSize), skipCRC32: true, progress: nil
+        entry, bufferSize: Int(entry.uncompressedSize), skipCRC32: true, progress: nil
       ) { (html) in
         data.append(html)
       }

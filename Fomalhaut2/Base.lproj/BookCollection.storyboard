@@ -32,7 +32,9 @@
                                                             <collectionView selectable="YES" allowsMultipleSelection="YES" id="181-T4-tof">
                                                                 <rect key="frame" x="0.0" y="0.0" width="268" height="194"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                                                <collectionViewLayout key="collectionViewLayout" id="OWG-c5-DLS" customClass="CollectionViewLayout" customModule="Fomalhaut2" customModuleProvider="target"/>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="dg0-VF-j4j">
+                                                                    <size key="itemSize" width="50" height="50"/>
+                                                                </collectionViewFlowLayout>
                                                                 <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <connections>
                                                                     <outlet property="dataSource" destination="e60-p4-DRD" id="G3Z-FE-Jmo"/>

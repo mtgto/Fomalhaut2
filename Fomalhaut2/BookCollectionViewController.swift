@@ -30,32 +30,33 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   private let collectionOrder = BehaviorRelay<CollectionOrder>(value: .createdAt)
   private let disposeBag = DisposeBag()
   private let bookMenu: NSMenu = NSMenu(title: "Book")
+  private var dataSource: NSCollectionViewDiffableDataSource<Int, String>! = nil
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var collectionView: NSCollectionView!
 
   private func createLayout() -> NSCollectionViewLayout {
-    let layout = NSCollectionViewCompositionalLayout {
-      (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
-      let itemSize = NSCollectionLayoutSize(
-        widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-      let item = NSCollectionLayoutItem(layoutSize: itemSize)
-      item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
+    let itemSize = NSCollectionLayoutSize(
+      widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
 
-      let groupHeight = NSCollectionLayoutDimension.fractionalWidth(0.2)
-      let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: groupHeight)
-      let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 8)
-      let section = NSCollectionLayoutSection(group: group)
-      section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-      return section
-    }
-    return layout
+    let groupHeight = NSCollectionLayoutDimension.fractionalWidth(0.2)
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: groupHeight)
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 8)
+    let section = NSCollectionLayoutSection(group: group)
+    section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+
+    //    let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+    //    let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: NSCollectionView.elementKindSectionHeader, alignment: .top)
+    //    section.boundarySupplementaryItems = [sectionHeader]
+
+    return NSCollectionViewCompositionalLayout(section: section)
   }
 
   override func viewDidLoad() {
     // Do view setup here.
     self.collectionView.menu = self.bookMenu
-    self.collectionView.collectionViewLayout = createLayout()
     self.tableView.menu = self.bookMenu
     self.tableView.registerForDraggedTypes([.fileURL])
     self.collectionView.registerForDraggedTypes([.fileURL])
@@ -66,12 +67,35 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       NSNib(nibNamed: "CollectionViewHeaderView", bundle: .main),
       forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader,
       withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionViewHeaderView.className()))
+    self.collectionView.collectionViewLayout = createLayout()
     let initialTabIndex = UserDefaults.standard.integer(
       forKey: BookCollectionViewController.collectionTabViewInitialIndexKey)
     self.collectionViewStyle.accept(initialTabIndex == 0 ? .collection : .list)
     let collectionOrder = CollectionOrder(
       rawValue: UserDefaults.standard.string(forKey: BookCollectionViewController.collectionOrderKey)!)!
     self.collectionOrder.accept(collectionOrder)
+    self.collectionView.dataSource = nil
+    self.dataSource = NSCollectionViewDiffableDataSource<Int, String>(collectionView: self.collectionView) {
+      (collectionView: NSCollectionView, indexPath: IndexPath, bookId: String) -> NSCollectionViewItem? in
+      let item: BookCollectionViewItem =
+        collectionView.makeItem(
+          withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BookCollectionViewItem"),
+          for: indexPath) as! BookCollectionViewItem
+      let book = self.collectionViewBooks.value![indexPath.item]
+      item.textField?.stringValue = book.displayName
+      item.textField?.toolTip = book.displayName
+      //item.likeImageView?.isHidden = !book.like
+      item.like = book.like
+      if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
+        //log.debug("THUMBNAIL SIZE \(thumbnail.representations.first!.pixelsWide) x \(thumbnail.representations.first!.pixelsHigh)")
+        item.imageView?.image = thumbnail
+        item.imageView?.unregisterDraggedTypes()
+      } else {
+        // TODO: Use more user friendly image
+        item.imageView?.image = NSImage(named: NSImage.bookmarksTemplateName)
+      }
+      return item
+    }
     Schema.shared.state
       .skip { $0 != .finish }
       .flatMap { _ in
@@ -123,10 +147,16 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .map { $0.1 }
       .withUnretained(self)
       .subscribe(onNext: { (owner, changes) in
+        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
         if let changes = changes {
-          owner.collectionView.applyChangeset(changes)
+          snapshot.appendItems(changes.inserted.map { self.collectionViewBooks.value![$0].id }, toSection: 0)
+          snapshot.deleteItems(changes.deleted.map { self.collectionViewBooks.value![$0].id })
+          snapshot.reloadItems(changes.updated.map { self.collectionViewBooks.value![$0].id })
+          self.dataSource.apply(snapshot)
         } else {
-          owner.collectionView.reloadData()
+          snapshot.appendSections([0])
+          snapshot.appendItems(self.collectionViewBooks.value!.map { $0.id }, toSection: 0)
+          self.dataSource.apply(snapshot)
         }
       })
       .disposed(by: self.disposeBag)

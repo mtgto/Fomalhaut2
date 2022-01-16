@@ -47,6 +47,7 @@
 		CEC1EA00257514FA0052228E /* BookCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC1EA02257514FA0052228E /* BookCollection.storyboard */; };
 		CECC07192549C6C700CF56FA /* BookDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC07172549C6C700CF56FA /* BookDocument.swift */; };
 		CECC0740254E8D6200CF56FA /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC073F254E8D6200CF56FA /* Schema.swift */; };
+		CECD721B279470ED0059665C /* NSCollectionView+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD721A279470EC0059665C /* NSCollectionView+Realm.swift */; };
 		CEE4D7C125E11B28003B8EB2 /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4D7B925E11B28003B8EB2 /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEE4D7CA25E11B48003B8EB2 /* PdfArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34A40825BBD75F00B4C0B5 /* PdfArchiver.swift */; };
 		CEE4D7CB25E11B48003B8EB2 /* RarArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34A40E25BBD8EA00B4C0B5 /* RarArchiver.swift */; };
@@ -202,6 +203,7 @@
 		CECC07172549C6C700CF56FA /* BookDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDocument.swift; sourceTree = "<group>"; };
 		CECC072B2549CAFD00CF56FA /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		CECC073F254E8D6200CF56FA /* Schema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
+		CECD721A279470EC0059665C /* NSCollectionView+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Realm.swift"; sourceTree = "<group>"; };
 		CEE4D7B925E11B28003B8EB2 /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE4D7BC25E11B28003B8EB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE4D7E025E11C13003B8EB2 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */,
 				CEA6F69D2550FA1300C50318 /* NSTableView+Realm.swift */,
 				CE9DCB8A256B610D0024FB1B /* NSOutlineView+Realm.swift */,
+				CECD721A279470EC0059665C /* NSCollectionView+Realm.swift */,
 				CE30280F25305AA200986C9A /* Assets.xcassets */,
 				CE30281125305AA200986C9A /* Main.storyboard */,
 				CEB2DA64253EF85D002C3F7E /* Book.storyboard */,
@@ -636,6 +639,7 @@
 				CEA99440255FD6D000B8BCC6 /* CollectionViewHeaderView.swift in Sources */,
 				CEE4D82525E23926003B8EB2 /* PreferencesViewController.swift in Sources */,
 				CEB2DA4A253E91AD002C3F7E /* FilterListViewController.swift in Sources */,
+				CECD721B279470ED0059665C /* NSCollectionView+Realm.swift in Sources */,
 				CEB2D9FC2539946D002C3F7E /* BookCollectionViewController.swift in Sources */,
 				CEA6F6B625543B3400C50318 /* MainStackViewController.swift in Sources */,
 			);

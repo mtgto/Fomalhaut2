@@ -30,7 +30,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   private let collectionOrder = BehaviorRelay<CollectionOrder>(value: .createdAt)
   private let disposeBag = DisposeBag()
   private let bookMenu: NSMenu = NSMenu(title: "Book")
-  private var dataSource: NSCollectionViewDiffableDataSource<Int, String>! = nil
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var collectionView: NSCollectionView!
@@ -73,40 +72,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     let collectionOrder = CollectionOrder(
       rawValue: UserDefaults.standard.string(forKey: BookCollectionViewController.collectionOrderKey)!)!
     self.collectionOrder.accept(collectionOrder)
-    self.collectionView.dataSource = nil
-    self.dataSource = NSCollectionViewDiffableDataSource<Int, String>(collectionView: self.collectionView) {
-      (collectionView: NSCollectionView, indexPath: IndexPath, bookId: String) -> NSCollectionViewItem? in
-      let item: BookCollectionViewItem =
-        collectionView.makeItem(
-          withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BookCollectionViewItem"),
-          for: indexPath) as! BookCollectionViewItem
-      let book = self.collectionViewBooks.value![indexPath.item]
-      item.textField?.stringValue = book.displayName
-      item.textField?.toolTip = book.displayName
-      //item.likeImageView?.isHidden = !book.like
-      item.like = book.like
-      if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
-        item.imageView?.image = thumbnail
-        item.imageView?.unregisterDraggedTypes()
-      } else {
-        // TODO: Use more user friendly image
-        item.imageView?.image = NSImage(named: NSImage.bookmarksTemplateName)
-      }
-      return item
-    }
-    self.dataSource.supplementaryViewProvider = {
-      (collectionView: NSCollectionView, kind: String, indexPath: IndexPath) -> (NSView & NSCollectionViewElement)? in
-      if let supplementaryView = collectionView.makeSupplementaryView(
-        ofKind: kind,
-        withIdentifier: NSUserInterfaceItemIdentifier(
-          rawValue: CollectionViewHeaderView.className()),
-        for: indexPath) as? (NSView & NSCollectionViewElement)
-      {
-        return supplementaryView
-      } else {
-        fatalError("Cannot create new supplementary")
-      }
-    }
     Schema.shared.state
       .skip { $0 != .finish }
       .flatMap { _ in
@@ -158,16 +123,10 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .map { $0.1 }
       .withUnretained(self)
       .subscribe(onNext: { (owner, changes) in
-        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
         if let changes = changes {
-          snapshot.appendItems(changes.inserted.map { self.collectionViewBooks.value![$0].id }, toSection: 0)
-          snapshot.deleteItems(changes.deleted.map { self.collectionViewBooks.value![$0].id })
-          snapshot.reloadItems(changes.updated.map { self.collectionViewBooks.value![$0].id })
-          self.dataSource.apply(snapshot)
+          owner.collectionView.applyChangeset(changes)
         } else {
-          snapshot.appendSections([0])
-          snapshot.appendItems(self.collectionViewBooks.value!.map { $0.id }, toSection: 0)
-          self.dataSource.apply(snapshot)
+          owner.collectionView.reloadData()
         }
       })
       .disposed(by: self.disposeBag)
@@ -228,12 +187,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         }
       })
       .disposed(by: self.disposeBag)
-    //    CollectionViewHeaderView.itemSizeIndex
-    //      .withUnretained(self)
-    //      .subscribe(onNext: { owner, itemSizeIndex in
-    //        owner.collectionView.collectionViewLayout = owner.createLayout(itemSize: CollectionViewHeaderView.itemSizes[itemSizeIndex])
-    //    })
-    //    .disposed(by: self.disposeBag)
     super.viewDidLoad()
   }
 

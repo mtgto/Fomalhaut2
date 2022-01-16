@@ -4,6 +4,10 @@
 import Cocoa
 
 class CollectionViewHeaderView: NSView, NSCollectionViewElement {
+  static let itemSizeIndexKey = "collectionViewitemSizeIndex"
+  static let itemSizes: [NSSize] = [
+    NSMakeSize(100.125, 153), NSMakeSize(120.15, 183.6), NSMakeSize(133.5, 204),
+  ]
 
   @IBOutlet weak var orderButton: NSPopUpButton!
   @IBOutlet weak var collectionSizeSlider: NSSlider!
@@ -20,7 +24,7 @@ class CollectionViewHeaderView: NSView, NSCollectionViewElement {
       rawValue: UserDefaults.standard.string(forKey: BookCollectionViewController.collectionOrderKey)!)!
     self.orderButton.item(at: self.menuItemIndex(collectionOrder: collectionOrder))!.state = .on
     self.collectionSizeSlider.integerValue = UserDefaults.standard.integer(
-      forKey: CollectionViewLayout.itemSizeIndexKey)
+      forKey: CollectionViewHeaderView.itemSizeIndexKey)
   }
 
   private func menuItemIndex(collectionOrder: CollectionOrder) -> Int {
@@ -58,7 +62,7 @@ class CollectionViewHeaderView: NSView, NSCollectionViewElement {
 
   @IBAction func resize(_ sender: Any) {
     if let slider = sender as? NSSlider {
-      CollectionViewLayout.itemSizeIndex.accept(slider.integerValue)
+      UserDefaults.standard.set(slider.integerValue, forKey: CollectionViewHeaderView.itemSizeIndexKey)
     }
   }
 }

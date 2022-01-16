@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       WebSharingViewController.webServerAutoSuspendKey: true,
       PageOrder.pageOrderKey: PageOrder.defaultValue.rawValue,
       FilterListViewController.selectedCollectionContentIdKey: "all",  // Filter.id | Collection.id
-      CollectionViewLayout.itemSizeIndexKey: 2,
+      CollectionViewHeaderView.itemSizeIndexKey: 2,
     ])
   }
 

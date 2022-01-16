@@ -35,15 +35,15 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var collectionView: NSCollectionView!
 
-  private func createLayout() -> NSCollectionViewLayout {
-    let itemSize = NSCollectionLayoutSize(
-      widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+  private func createLayout(itemSize: NSSize) -> NSCollectionViewLayout {
+    let layoutSize = NSCollectionLayoutSize(
+      widthDimension: .absolute(itemSize.width), heightDimension: .absolute(itemSize.height))
+    let item = NSCollectionLayoutItem(layoutSize: layoutSize)
     item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
 
-    let groupHeight = NSCollectionLayoutDimension.fractionalWidth(0.2)
-    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: groupHeight)
-    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 8)
+    let groupSize = NSCollectionLayoutSize(
+      widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(itemSize.height))
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
     let section = NSCollectionLayoutSection(group: group)
     section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
 
@@ -56,7 +56,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   }
 
   override func viewDidLoad() {
-    // Do view setup here.
     self.collectionView.menu = self.bookMenu
     self.tableView.menu = self.bookMenu
     self.tableView.registerForDraggedTypes([.fileURL])
@@ -68,7 +67,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       NSNib(nibNamed: "CollectionViewHeaderView", bundle: .main),
       forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader,
       withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionViewHeaderView.className()))
-    self.collectionView.collectionViewLayout = createLayout()
     let initialTabIndex = UserDefaults.standard.integer(
       forKey: BookCollectionViewController.collectionTabViewInitialIndexKey)
     self.collectionViewStyle.accept(initialTabIndex == 0 ? .collection : .list)
@@ -88,7 +86,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       //item.likeImageView?.isHidden = !book.like
       item.like = book.like
       if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
-        //log.debug("THUMBNAIL SIZE \(thumbnail.representations.first!.pixelsWide) x \(thumbnail.representations.first!.pixelsHigh)")
         item.imageView?.image = thumbnail
         item.imageView?.unregisterDraggedTypes()
       } else {
@@ -221,6 +218,22 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         }
       })
       .disposed(by: self.disposeBag)
+    UserDefaults.standard.rx
+      .observe(Int.self, CollectionViewHeaderView.itemSizeIndexKey)
+      .withUnretained(self)
+      .subscribe(onNext: { owner, itemSizeIndex in
+        if let itemSizeIndex = itemSizeIndex {
+          owner.collectionView.collectionViewLayout = owner.createLayout(
+            itemSize: CollectionViewHeaderView.itemSizes[itemSizeIndex])
+        }
+      })
+      .disposed(by: self.disposeBag)
+    //    CollectionViewHeaderView.itemSizeIndex
+    //      .withUnretained(self)
+    //      .subscribe(onNext: { owner, itemSizeIndex in
+    //        owner.collectionView.collectionViewLayout = owner.createLayout(itemSize: CollectionViewHeaderView.itemSizes[itemSizeIndex])
+    //    })
+    //    .disposed(by: self.disposeBag)
     super.viewDidLoad()
   }
 

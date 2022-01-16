@@ -47,7 +47,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     let section = NSCollectionLayoutSection(group: group)
     section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
 
-    let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+    let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
     let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
       layoutSize: headerSize, elementKind: NSCollectionView.elementKindSectionHeader, alignment: .top)
     section.boundarySupplementaryItems = [sectionHeader]

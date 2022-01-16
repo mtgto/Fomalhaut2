@@ -47,9 +47,10 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     let section = NSCollectionLayoutSection(group: group)
     section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
 
-    //    let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-    //    let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: NSCollectionView.elementKindSectionHeader, alignment: .top)
-    //    section.boundarySupplementaryItems = [sectionHeader]
+    let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+    let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+      layoutSize: headerSize, elementKind: NSCollectionView.elementKindSectionHeader, alignment: .top)
+    section.boundarySupplementaryItems = [sectionHeader]
 
     return NSCollectionViewCompositionalLayout(section: section)
   }
@@ -95,6 +96,19 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         item.imageView?.image = NSImage(named: NSImage.bookmarksTemplateName)
       }
       return item
+    }
+    self.dataSource.supplementaryViewProvider = {
+      (collectionView: NSCollectionView, kind: String, indexPath: IndexPath) -> (NSView & NSCollectionViewElement)? in
+      if let supplementaryView = collectionView.makeSupplementaryView(
+        ofKind: kind,
+        withIdentifier: NSUserInterfaceItemIdentifier(
+          rawValue: CollectionViewHeaderView.className()),
+        for: indexPath) as? (NSView & NSCollectionViewElement)
+      {
+        return supplementaryView
+      } else {
+        fatalError("Cannot create new supplementary")
+      }
     }
     Schema.shared.state
       .skip { $0 != .finish }

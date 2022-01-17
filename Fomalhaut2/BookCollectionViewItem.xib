@@ -26,7 +26,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="3wJ-65-WEO"/>
                     </constraints>
-                    <textFieldCell key="cell" lineBreakMode="charWrapping" title="Label" id="Psd-ut-jZ5">
+                    <textFieldCell key="cell" lineBreakMode="charWrapping" truncatesLastVisibleLine="YES" title="Label" id="Psd-ut-jZ5">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

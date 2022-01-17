@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v1.2.0 (2022-01-17)
+
+### Changed
+
+- Bump up minimum environment to macOS 10.15.
+- Add an animation while book item added / deleted.
+- Update web packages
+
 ## v1.1.3 (2021-12-26)
 
 ### Changed

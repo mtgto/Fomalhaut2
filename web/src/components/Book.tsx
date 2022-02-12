@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "rocon/react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -10,12 +12,10 @@ import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "rocon/react";
+import { useTheme } from "@mui/material/styles";
 import { Book } from "../domain/book";
 import { message } from "../message";
 import { StateContext, toggleLike } from "../reducer";
-import theme from "../theme";
 import Layout from "./Layout";
 import { bookRoutes } from "./Routes";
 
@@ -44,6 +44,7 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
   const [speedDialOpen, setSpeedDialOpen] = useState(false);
   const { state, dispatch } = useContext(StateContext);
   const navigate = useNavigate();
+  const theme = useTheme();
   const book: Book | undefined = state.books.find(
     (book) => book.id === props.id
   );

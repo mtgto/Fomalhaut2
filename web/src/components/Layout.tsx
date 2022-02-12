@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import Snackbar from "@mui/material/Snackbar";
@@ -116,13 +116,12 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             dense
           >
             {state.filters.map((filter) => (
-              <ListItem
-                button
+              <ListItemButton
                 key={filter.id}
                 onClick={() => navigate(filterRoutes.route, { id: filter.id })}
               >
                 <ListItemText primary={filter.name} />
-              </ListItem>
+              </ListItemButton>
             ))}
           </List>
           <List
@@ -130,15 +129,14 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             dense
           >
             {state.collections.map((collection) => (
-              <ListItem
-                button
+              <ListItemButton
                 key={collection.id}
                 onClick={() =>
                   navigate(collectionRoutes.route, { id: collection.id })
                 }
               >
                 <ListItemText primary={collection.name} />
-              </ListItem>
+              </ListItemButton>
             ))}
           </List>
         </SwipeableDrawer>

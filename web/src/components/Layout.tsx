@@ -10,8 +10,6 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import Snackbar from "@mui/material/Snackbar";
 import { useTheme } from "@mui/material/styles";
@@ -24,6 +22,7 @@ import { useLocation, useNavigate } from "rocon/react";
 import { message } from "../message";
 import { LoadingState, StateContext } from "../reducer";
 import { bookRoutes, collectionRoutes, filterRoutes } from "./Routes";
+import ListItemLink from "./ListItemLink";
 
 const drawerWidth = 200;
 
@@ -116,12 +115,12 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             dense
           >
             {state.filters.map((filter) => (
-              <ListItemButton
+              <ListItemLink
                 key={filter.id}
-                onClick={() => navigate(filterRoutes.route, { id: filter.id })}
-              >
-                <ListItemText primary={filter.name} />
-              </ListItemButton>
+                primary={filter.name}
+                route={filterRoutes.route}
+                match={{ id: filter.id }}
+              />
             ))}
           </List>
           <List
@@ -129,14 +128,12 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             dense
           >
             {state.collections.map((collection) => (
-              <ListItemButton
+              <ListItemLink
                 key={collection.id}
-                onClick={() =>
-                  navigate(collectionRoutes.route, { id: collection.id })
-                }
-              >
-                <ListItemText primary={collection.name} />
-              </ListItemButton>
+                primary={collection.name}
+                route={collectionRoutes.route}
+                match={{ id: collection.id }}
+              />
             ))}
           </List>
         </SwipeableDrawer>

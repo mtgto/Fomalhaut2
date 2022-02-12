@@ -20,6 +20,7 @@ type Props = {
 const Library: React.VoidFunctionComponent<Props> = (props: Props) => {
   const handleChangePage = (_e: React.ChangeEvent<unknown>, page: number) => {
     props.pageChanged(page);
+    window.scrollTo({ top: 0 });
   };
   const numberOfBooksPerPage = 20;
   const pageCount = Math.ceil(props.books.length / numberOfBooksPerPage);

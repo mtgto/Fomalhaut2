@@ -111,7 +111,9 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
           </Box>
           <Divider />
           <List
-            subheader={<ListSubheader>{message.library}</ListSubheader>}
+            subheader={
+              <ListSubheader disableSticky>{message.library}</ListSubheader>
+            }
             dense
           >
             {state.filters.map((filter) => (
@@ -123,8 +125,11 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
               />
             ))}
           </List>
+          <Divider />
           <List
-            subheader={<ListSubheader>{message.collection}</ListSubheader>}
+            subheader={
+              <ListSubheader disableSticky>{message.collection}</ListSubheader>
+            }
             dense
           >
             {state.collections.map((collection) => (

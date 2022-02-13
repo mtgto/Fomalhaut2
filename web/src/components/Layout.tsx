@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import Snackbar from "@mui/material/Snackbar";
 import { useTheme } from "@mui/material/styles";
@@ -18,7 +20,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "rocon/react";
+import { useLocation, useNavigate, Link } from "rocon/react";
 import { message } from "../message";
 import { LoadingState, StateContext } from "../reducer";
 import { bookRoutes, collectionRoutes, filterRoutes } from "./Routes";
@@ -117,12 +119,19 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             dense
           >
             {state.filters.map((filter) => (
-              <ListItemLink
+              // ListItemLink causes re-render...
+              // <ListItemLink
+              //   key={filter.id}
+              //   primary={filter.name}
+              //   route={filterRoutes.route}
+              //   match={{ id: filter.id }}
+              // />
+              <ListItemButton
                 key={filter.id}
-                primary={filter.name}
-                route={filterRoutes.route}
-                match={{ id: filter.id }}
-              />
+                onClick={() => navigate(filterRoutes.route, { id: filter.id })}
+              >
+                <ListItemText primary={filter.name} />
+              </ListItemButton>
             ))}
           </List>
           <Divider />
@@ -133,12 +142,20 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             dense
           >
             {state.collections.map((collection) => (
-              <ListItemLink
+              // <ListItemLink
+              //   key={collection.id}
+              //   primary={collection.name}
+              //   route={collectionRoutes.route}
+              //   match={{ id: collection.id }}
+              // />
+              <ListItemButton
                 key={collection.id}
-                primary={collection.name}
-                route={collectionRoutes.route}
-                match={{ id: collection.id }}
-              />
+                onClick={() =>
+                  navigate(collectionRoutes.route, { id: collection.id })
+                }
+              >
+                <ListItemText primary={collection.name} />
+              </ListItemButton>
             ))}
           </List>
         </SwipeableDrawer>

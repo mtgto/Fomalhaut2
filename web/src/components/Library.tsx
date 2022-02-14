@@ -11,6 +11,7 @@ import Cover from "./Cover";
 import Layout from "./Layout";
 
 type Props = {
+  readonly id: string | undefined; // current id of collection or id of filter
   readonly books: ReadonlyArray<Book>;
   readonly title: string;
   readonly page: number | undefined;
@@ -29,7 +30,7 @@ const Library: React.VoidFunctionComponent<Props> = (props: Props) => {
     ((props.page ?? 1) - 1) * numberOfBooksPerPage + numberOfBooksPerPage
   );
   return (
-    <Layout>
+    <Layout id={props.id}>
       <Container maxWidth="md">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom>

@@ -34,6 +34,7 @@ const CollectionPage: React.VoidFunctionComponent<Props> = (props: Props) => {
 
   return (
     <Library
+      id={props.id}
       books={books}
       title={collection?.name ?? "Loading"}
       page={props.page}

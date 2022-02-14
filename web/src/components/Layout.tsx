@@ -20,15 +20,16 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate, Link } from "rocon/react";
+import { useLocation, useNavigate } from "rocon/react";
 import { message } from "../message";
 import { LoadingState, StateContext } from "../reducer";
 import { bookRoutes, collectionRoutes, filterRoutes } from "./Routes";
-import ListItemLink from "./ListItemLink";
+// import ListItemLink from "./ListItemLink";
 
 const drawerWidth = 200;
 
 type Props = {
+  readonly id?: string; // current id of collection or id of filter
   readonly title?: string;
   readonly children: React.ReactNode;
 };
@@ -128,6 +129,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
               // />
               <ListItemButton
                 key={filter.id}
+                selected={filter.id === props.id}
                 onClick={() => navigate(filterRoutes.route, { id: filter.id })}
               >
                 <ListItemText primary={filter.name} />
@@ -150,6 +152,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
               // />
               <ListItemButton
                 key={collection.id}
+                selected={collection.id === props.id}
                 onClick={() =>
                   navigate(collectionRoutes.route, { id: collection.id })
                 }

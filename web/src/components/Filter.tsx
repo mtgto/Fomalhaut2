@@ -33,6 +33,7 @@ const FilterPage: React.VoidFunctionComponent<Props> = (props: Props) => {
   }, [filter, books.map((book) => book.id).join(",")]);
   return (
     <Library
+      id={props.id}
       books={books}
       title={filter?.name ?? message.filter.all}
       page={props.page}

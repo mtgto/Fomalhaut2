@@ -20,7 +20,10 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
         action: #selector(duplicateCollection(_:)),
         keyEquivalent: ""))
     self.defaultManu = NSMenu(title: "Default")
-    self.defaultManu.addItem(NSMenuItem(title: NSLocalizedString("FilterListMenuAdd", comment: "Add collection"), action: #selector(addCollection(_:)), keyEquivalent: ""))
+    self.defaultManu.addItem(
+      NSMenuItem(
+        title: NSLocalizedString("FilterListMenuAdd", comment: "Add collection"), action: #selector(addCollection(_:)),
+        keyEquivalent: ""))
     self.collectionMenu.addItem(NSMenuItem.separator())
     self.collectionMenu.addItem(NSMenuItem(title: "Delete", action: #selector(deleteCollection(_:)), keyEquivalent: ""))
     super.init(coder: coder)
@@ -70,7 +73,7 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
       self.selectedCollection = nil
     }
   }
-  
+
   @objc func addCollection(_ sender: Any) {
     if let vc = self.delegate as? FilterListViewController {
       vc.addCollection(sender)

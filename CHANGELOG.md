@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v1.2.1 (2022-02-19)
+
+### Added
+
+- Add Dark mode in web
+- Add context menu to create new collection in filter/collection list
+
+### Changed
+
+- Update realm-cocoa from 10.20.2 to 10.22.0
+- Update RxRealm from 5.0.3 to 5.0.4
+- Update RxSwift from 6.2.0 to 6.5.0
+- Update swift-nio from 2.36.0 to 2.38.0
+- Update web packages
+
 ## v1.2.0 (2022-01-17)
 
 ### Changed

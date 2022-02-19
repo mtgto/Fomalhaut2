@@ -55,6 +55,9 @@
 /* Rename */
 "FilterListMenuRename" = "名前を変更";
 
+/* Add a new collection */
+"FilterListMenuAdd" = "新規コレクションを追加";
+
 /* Library */
 "LibraryHeader" = "ライブラリ";
 

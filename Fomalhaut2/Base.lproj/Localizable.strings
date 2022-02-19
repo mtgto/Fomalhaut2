@@ -19,6 +19,7 @@
 "FilterListMenuDelete" = "Delete %@";
 "FilterListMenuRename" = "Rename";
 "FilterListMenuDuplicate" = "Duplicate";
+"FilterListMenuAdd" = "Add a new Collection";
 
 "Start" = "Start";
 "Stop" = "Stop";

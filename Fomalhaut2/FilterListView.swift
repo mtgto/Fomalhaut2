@@ -5,6 +5,7 @@ import Cocoa
 
 class FilterListView: NSOutlineView, NSMenuDelegate {
   private let collectionMenu: NSMenu
+  private let defaultManu: NSMenu
   private var selectedCollection: Collection? = nil
 
   required init?(coder: NSCoder) {
@@ -18,6 +19,8 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
         title: NSLocalizedString("FilterListMenuDuplicate", comment: "Duplicate"),
         action: #selector(duplicateCollection(_:)),
         keyEquivalent: ""))
+    self.defaultManu = NSMenu(title: "Default")
+    self.defaultManu.addItem(NSMenuItem(title: NSLocalizedString("FilterListMenuAdd", comment: "Add collection"), action: #selector(addCollection(_:)), keyEquivalent: ""))
     self.collectionMenu.addItem(NSMenuItem.separator())
     self.collectionMenu.addItem(NSMenuItem(title: "Delete", action: #selector(deleteCollection(_:)), keyEquivalent: ""))
     super.init(coder: coder)
@@ -35,8 +38,12 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
       return self.collectionMenu
     } else {
       self.selectedCollection = nil
+      if clickedRow == -1 {
+        return self.defaultManu
+      } else {
+        return nil
+      }
     }
-    return nil
   }
 
   // MARK: - NSMenu
@@ -61,6 +68,12 @@ class FilterListView: NSOutlineView, NSMenuDelegate {
       NotificationCenter.default.post(
         name: collectionDeleteNotificationName, object: nil, userInfo: ["collection": collection])
       self.selectedCollection = nil
+    }
+  }
+  
+  @objc func addCollection(_ sender: Any) {
+    if let vc = self.delegate as? FilterListViewController {
+      vc.addCollection(sender)
     }
   }
 

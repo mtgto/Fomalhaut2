@@ -9,6 +9,7 @@ import Shared
 
 struct LoadedImage {
   let preload: Bool
+  let firstPageIndex: Int // page index of first page in images
   let images: [NSImage]
 }
 
@@ -92,7 +93,7 @@ class SpreadPageViewController: NSViewController {
       scheduler: MainScheduler.instance
     )
     .enumerated()
-    .map { LoadedImage(preload: $0.index > 0, images: $0.element) }
+    .map { LoadedImage(preload: $0.index > 0, firstPageIndex: pageIndex, images: $0.element) }
   }
 
   override var representedObject: Any? {
@@ -155,14 +156,31 @@ class SpreadPageViewController: NSViewController {
           let contentHeight = max(firstImageSize.height, (secondImageSize?.height ?? 0))
 
           self.firstImageView.image = firstImage
+          if self.pageOrder.value == .rtl {
+            self.rightPageNumberTextField.stringValue = String(loadedImage.firstPageIndex + 1)
+          } else {
+            self.leftPageNumberTextField.stringValue = String(loadedImage.firstPageIndex + 1)
+          }
           if secondImage != nil {
             self.firstImageView.imageAlignment = self.pageOrder.value == .rtl ? .alignLeft : .alignRight
             self.secondImageView.imageAlignment = self.pageOrder.value == .rtl ? .alignRight : .alignLeft
             self.secondImageView.image = secondImage
             self.secondImageView.isHidden = false
+            if self.pageOrder.value == .rtl {
+              self.leftPageNumberTextField.isHidden = false
+              self.leftPageNumberTextField.stringValue = String(loadedImage.firstPageIndex + 2)
+            } else {
+              self.rightPageNumberTextField.isHidden = false
+              self.rightPageNumberTextField.stringValue = String(loadedImage.firstPageIndex + 2)
+            }
           } else {
             self.firstImageView.imageAlignment = .alignCenter
             self.secondImageView.isHidden = true
+            if self.pageOrder.value == .rtl {
+              self.leftPageNumberTextField.isHidden = true
+            } else {
+              self.rightPageNumberTextField.isHidden = true
+            }
           }
           guard let window = self.view.window else {
             log.error("window is nil")

@@ -32,7 +32,9 @@ class SpreadPageViewController: NSViewController {
   @IBOutlet weak var imageStackView: NSStackView!
   @IBOutlet weak var firstImageView: BookImageView!
   @IBOutlet weak var secondImageView: BookImageView!
-
+  @IBOutlet weak var leftPageNumberTextField: NSTextField!
+  @IBOutlet weak var rightPageNumberTextField: NSTextField!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do view setup here.

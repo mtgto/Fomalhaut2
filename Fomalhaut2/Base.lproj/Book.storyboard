@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="I31-ld-zmx">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="I31-ld-zmx">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,10 +43,36 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cEA-Ir-Jx9">
+                                <rect key="frame" x="20" y="22" width="37" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="33" id="9Wl-XE-LGt"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="0YS-Vz-y4e">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UVr-yY-GEm">
+                                <rect key="frame" x="393" y="22" width="37" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="33" id="tUI-y9-3Ck"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Nda-ZU-TF4">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="UYl-6I-vbB" secondAttribute="bottom" id="2X0-jq-0B0"/>
+                            <constraint firstAttribute="trailing" secondItem="UVr-yY-GEm" secondAttribute="trailing" constant="22" id="GHk-QC-dw2"/>
+                            <constraint firstAttribute="bottom" secondItem="UVr-yY-GEm" secondAttribute="bottom" constant="22" id="Gba-Xj-l0h"/>
+                            <constraint firstAttribute="bottom" secondItem="cEA-Ir-Jx9" secondAttribute="bottom" constant="22" id="ZVw-MP-XpE"/>
                             <constraint firstItem="UYl-6I-vbB" firstAttribute="top" secondItem="Lp6-be-l1E" secondAttribute="top" id="gh4-Sh-KEB"/>
+                            <constraint firstItem="cEA-Ir-Jx9" firstAttribute="leading" secondItem="Lp6-be-l1E" secondAttribute="leading" constant="22" id="jq7-LS-oQV"/>
                             <constraint firstItem="UYl-6I-vbB" firstAttribute="leading" secondItem="Lp6-be-l1E" secondAttribute="leading" id="meH-r4-WCj"/>
                             <constraint firstAttribute="trailing" secondItem="UYl-6I-vbB" secondAttribute="trailing" id="wLf-dv-ic9"/>
                         </constraints>
@@ -54,6 +80,8 @@
                     <connections>
                         <outlet property="firstImageView" destination="7FC-xx-Ash" id="Dd6-ob-BHa"/>
                         <outlet property="imageStackView" destination="UYl-6I-vbB" id="nUE-kv-OtO"/>
+                        <outlet property="leftPageNumberTextField" destination="cEA-Ir-Jx9" id="J5n-S3-4ad"/>
+                        <outlet property="rightPageNumberTextField" destination="UVr-yY-GEm" id="F2U-7t-Okq"/>
                         <outlet property="secondImageView" destination="2i5-YN-Rub" id="IoT-5v-cxw"/>
                     </connections>
                 </viewController>
@@ -80,7 +108,7 @@
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="grQ-q3-Ia3">
                                         <rect key="frame" x="0.0" y="14" width="75" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="2OF-NQ-M4L">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -97,7 +125,7 @@
                                     <nil key="toolTip"/>
                                     <button key="view" toolTip="Go First" verticalHuggingPriority="750" id="7wl-XX-QNR">
                                         <rect key="frame" x="10" y="14" width="30" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="first" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iLw-u0-JDG">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -111,7 +139,7 @@
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="WvN-Nn-JeU">
                                         <rect key="frame" x="0.0" y="14" width="71" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="1Rl-bO-XaM">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -129,11 +157,11 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="j9D-dA-3KM"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="elp-kS-fEt"/>
-                                <toolbarItem implicitItemIdentifier="A8F6A301-D838-4A0F-B003-BA6D74540351" label="Like" paletteLabel="Like" sizingBehavior="auto" id="JgL-3n-H2O">
+                                <toolbarItem implicitItemIdentifier="A8F6A301-D838-4A0F-B003-BA6D74540351" label="Like" paletteLabel="Like" title="♥" sizingBehavior="auto" id="JgL-3n-H2O">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="gRp-EK-n9b">
                                         <rect key="frame" x="0.0" y="14" width="30" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="roundTextured" title="♥" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RO6-9q-14E">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -144,7 +172,7 @@
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="mfl-J5-UV0">
                                         <rect key="frame" x="3" y="14" width="75" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="dP7-d8-KIT">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -188,8 +216,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSTouchBarGoDownTemplate" width="16" height="30"/>
-        <image name="NSTouchBarGoUpTemplate" width="16" height="30"/>
+        <image name="NSTouchBarGoDownTemplate" width="15" height="9"/>
+        <image name="NSTouchBarGoUpTemplate" width="15" height="9"/>
         <image name="down" width="19" height="19"/>
         <image name="first" width="19" height="19"/>
         <image name="left.to.right" width="19" height="19"/>

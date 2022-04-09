@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v1.3.0 (2022-04-09)
+
+### Added
+
+- Show page number (default: true)
+
+### Changed
+
+- Update Realm from 10.22.0 to 10.25.0
+- Update RxRealm from 5.0.4 to 5.0.5
+- Update swift-nio from 2.38.0 to 2.39.0
+- Update Unrar.swift from 0.3.7 to 0.3.9
+
 ## v1.2.1 (2022-02-19)
 
 ### Added

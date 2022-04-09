@@ -23,6 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       PageOrder.pageOrderKey: PageOrder.defaultValue.rawValue,
       FilterListViewController.selectedCollectionContentIdKey: "all",  // Filter.id | Collection.id
       CollectionViewHeaderView.itemSizeIndexKey: 2,
+      SpreadPageViewController.showPageNumberKey: true,
     ])
   }
 

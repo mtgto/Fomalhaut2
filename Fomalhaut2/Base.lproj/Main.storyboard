@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -365,6 +365,12 @@
                                                 </attributedString>
                                             </menu>
                                         </menuItem>
+                                        <menuItem title="Show Page Number" state="on" id="FS6-Yr-cTD">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleShowPageNumber:" target="Ady-hI-5gd" id="eSc-Dh-M7E"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="OnA-dZ-Sks"/>
                                         <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
@@ -505,7 +511,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="50" y="-25"/>
+            <point key="canvasLocation" x="68" y="-280"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="clz-W3-5Yg">
@@ -586,7 +592,7 @@
                                 <toolbarItem implicitItemIdentifier="E8B2DFA9-AE6C-48B2-A064-505A5404DCBF" label="Open a random book" paletteLabel="Open a random book" bordered="YES" title="Random" sizingBehavior="auto" id="aXc-hw-I3c">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="gIt-eY-hjg">
-                                        <rect key="frame" x="8" y="14" width="101" height="44"/>
+                                        <rect key="frame" x="17" y="14" width="84" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="push" title="Random" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BPb-vu-jZu">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

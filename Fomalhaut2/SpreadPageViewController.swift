@@ -17,11 +17,13 @@ private let firstImageViewMouseUpNotificationName = Notification.Name("firstImag
 private let secondImageViewMouseUpNotificationName = Notification.Name("secondImageViewMouseUp")
 
 class SpreadPageViewController: NSViewController {
+  static let showPageNumberKey = "showPageNumber"
   let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
   let currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let like: BehaviorRelay<Bool?> = BehaviorRelay(value: nil)
   var isFullScreen: Bool = false
+  private let showPageNumber: BehaviorRelay<Bool> = BehaviorRelay(value: true)
   private var shiftedSignlePage: Bool = false
   // manualViewHeight has non-nil view height after user resized window
   private var manualViewHeight: CGFloat? = nil
@@ -70,6 +72,15 @@ class SpreadPageViewController: NSViewController {
         }
       })
       .disposed(by: self.disposeBag)
+    self.showPageNumber
+      .observe(on: MainScheduler.instance)
+      .withUnretained(self)
+      .subscribe(onNext: { owner, showPageNumber in
+        owner.leftPageNumberButton.isHidden = !showPageNumber
+        owner.rightPageNumberButton.isHidden = !showPageNumber
+      })
+      .disposed(by: self.disposeBag)
+    self.showPageNumber.accept(UserDefaults.standard.bool(forKey: SpreadPageViewController.showPageNumberKey))
   }
 
   override func viewWillDisappear() {
@@ -114,11 +125,17 @@ class SpreadPageViewController: NSViewController {
         self.pageOrder.accept(lastPageOrder)
       }
       self.pageOrder
+        .distinctUntilChanged()
         .withUnretained(self)
         .observe(on: MainScheduler.instance)
         .subscribe(onNext: { owner, pageOrder in
           owner.imageStackView.userInterfaceLayoutDirection =
             pageOrder == PageOrder.rtl ? .rightToLeft : .leftToRight
+          if !self.rightPageNumberButton.isHidden {
+            let title = self.rightPageNumberButton.title
+            self.rightPageNumberButton.title = self.leftPageNumberButton.title
+            self.leftPageNumberButton.title = title
+          }
         })
         .disposed(by: self.disposeBag)
       if let isLike = document.isLike() {
@@ -173,19 +190,25 @@ class SpreadPageViewController: NSViewController {
             self.secondImageView.image = secondImage
             self.secondImageView.isHidden = false
             if self.pageOrder.value == .rtl {
-              self.leftPageNumberButton.isHidden = false
+              if self.showPageNumber.value {
+                self.leftPageNumberButton.isHidden = false
+              }
               self.leftPageNumberButton.title = String(loadedImage.firstPageIndex + 2)
             } else {
-              self.rightPageNumberButton.isHidden = false
+              if self.showPageNumber.value {
+                self.rightPageNumberButton.isHidden = false
+              }
               self.rightPageNumberButton.title = String(loadedImage.firstPageIndex + 2)
             }
           } else {
             self.firstImageView.imageAlignment = .alignCenter
-            self.secondImageView.isHidden = true
-            if self.pageOrder.value == .rtl {
-              self.leftPageNumberButton.isHidden = true
-            } else {
-              self.rightPageNumberButton.isHidden = true
+            if self.showPageNumber.value {
+              self.secondImageView.isHidden = true
+              if self.pageOrder.value == .rtl {
+                self.leftPageNumberButton.isHidden = true
+              } else {
+                self.rightPageNumberButton.isHidden = true
+              }
             }
           }
           guard let window = self.view.window else {
@@ -241,6 +264,11 @@ class SpreadPageViewController: NSViewController {
     } else {
       return NSSize(width: width, height: height)
     }
+  }
+  
+  @IBAction func toggleShowPageNumber(_ sender: Any) {
+    UserDefaults.standard.set(!self.showPageNumber.value, forKey: SpreadPageViewController.showPageNumberKey)
+    self.showPageNumber.accept(!self.showPageNumber.value)
   }
 
   // increment page (two page increment)
@@ -331,5 +359,17 @@ class SpreadPageViewController: NSViewController {
       self.swipeDeltaX = 0
       self.swipeDeltaY = 0
     }
+  }
+}
+
+extension SpreadPageViewController: NSMenuItemValidation {
+  func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    guard let selector = menuItem.action else {
+      return false
+    }
+    if selector == #selector(toggleShowPageNumber(_:)) {
+      menuItem.state = UserDefaults.standard.bool(forKey: SpreadPageViewController.showPageNumberKey) ? .on : .off
+    }
+    return true
   }
 }

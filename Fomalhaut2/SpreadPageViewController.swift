@@ -33,16 +33,22 @@ class SpreadPageViewController: NSViewController {
   @IBOutlet weak var imageStackView: NSStackView!
   @IBOutlet weak var firstImageView: BookImageView!
   @IBOutlet weak var secondImageView: BookImageView!
-  @IBOutlet weak var leftPageNumberTextField: NSTextField!
-  @IBOutlet weak var rightPageNumberTextField: NSTextField!
+  @IBOutlet weak var leftPageNumberButton: NSButton!
+  @IBOutlet weak var rightPageNumberButton: NSButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
     // TODO: Use NSStackView#setViews instead of use userInterfaceLayoutDirection for page order?
     self.imageStackView.userInterfaceLayoutDirection = .rightToLeft
     self.firstImageView.notificationName = firstImageViewMouseUpNotificationName
     self.secondImageView.notificationName = secondImageViewMouseUpNotificationName
+    
+    self.leftPageNumberButton.wantsLayer = true
+    self.leftPageNumberButton.layer?.backgroundColor = CGColor(gray: 0.5, alpha: 0.4)
+    self.leftPageNumberButton.layer?.cornerRadius = 10
+    self.rightPageNumberButton.wantsLayer = true
+    self.rightPageNumberButton.layer?.backgroundColor = CGColor(gray: 0.5, alpha: 0.6)
+    self.rightPageNumberButton.layer?.cornerRadius = 10
 
     NotificationCenter.default.rx.notification(firstImageViewMouseUpNotificationName, object: nil)
       .subscribe(onNext: { notification in
@@ -157,9 +163,9 @@ class SpreadPageViewController: NSViewController {
 
           self.firstImageView.image = firstImage
           if self.pageOrder.value == .rtl {
-            self.rightPageNumberTextField.stringValue = String(loadedImage.firstPageIndex + 1)
+            self.rightPageNumberButton.title = String(loadedImage.firstPageIndex + 1)
           } else {
-            self.leftPageNumberTextField.stringValue = String(loadedImage.firstPageIndex + 1)
+            self.leftPageNumberButton.title = String(loadedImage.firstPageIndex + 1)
           }
           if secondImage != nil {
             self.firstImageView.imageAlignment = self.pageOrder.value == .rtl ? .alignLeft : .alignRight
@@ -167,19 +173,19 @@ class SpreadPageViewController: NSViewController {
             self.secondImageView.image = secondImage
             self.secondImageView.isHidden = false
             if self.pageOrder.value == .rtl {
-              self.leftPageNumberTextField.isHidden = false
-              self.leftPageNumberTextField.stringValue = String(loadedImage.firstPageIndex + 2)
+              self.leftPageNumberButton.isHidden = false
+              self.leftPageNumberButton.title = String(loadedImage.firstPageIndex + 2)
             } else {
-              self.rightPageNumberTextField.isHidden = false
-              self.rightPageNumberTextField.stringValue = String(loadedImage.firstPageIndex + 2)
+              self.rightPageNumberButton.isHidden = false
+              self.rightPageNumberButton.title = String(loadedImage.firstPageIndex + 2)
             }
           } else {
             self.firstImageView.imageAlignment = .alignCenter
             self.secondImageView.isHidden = true
             if self.pageOrder.value == .rtl {
-              self.leftPageNumberTextField.isHidden = true
+              self.leftPageNumberButton.isHidden = true
             } else {
-              self.rightPageNumberTextField.isHidden = true
+              self.rightPageNumberButton.isHidden = true
             }
           }
           guard let window = self.view.window else {

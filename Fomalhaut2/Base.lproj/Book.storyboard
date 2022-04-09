@@ -43,45 +43,40 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cEA-Ir-Jx9">
-                                <rect key="frame" x="20" y="22" width="37" height="16"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="33" id="9Wl-XE-LGt"/>
-                                </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="0YS-Vz-y4e">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UVr-yY-GEm">
-                                <rect key="frame" x="393" y="22" width="37" height="16"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="33" id="tUI-y9-3Ck"/>
-                                </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Nda-ZU-TF4">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sMZ-x5-Oom">
+                                <rect key="frame" x="20" y="19" width="35" height="19"/>
+                                <buttonCell key="cell" type="recessed" title="left" bezelStyle="recessed" alignment="center" enabled="NO" borderStyle="border" inset="2" id="K0s-Cq-RmM">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                    <font key="font" metaFont="systemBold" size="12"/>
+                                </buttonCell>
+                                <color key="contentTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ncg-Ci-wqb">
+                                <rect key="frame" x="387" y="19" width="43" height="19"/>
+                                <buttonCell key="cell" type="recessed" title="right" bezelStyle="recessed" alignment="center" enabled="NO" borderStyle="border" inset="2" id="x6R-ie-dm6">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                    <font key="font" metaFont="systemBold" size="12"/>
+                                </buttonCell>
+                                <color key="contentTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="UYl-6I-vbB" secondAttribute="bottom" id="2X0-jq-0B0"/>
-                            <constraint firstAttribute="trailing" secondItem="UVr-yY-GEm" secondAttribute="trailing" constant="22" id="GHk-QC-dw2"/>
-                            <constraint firstAttribute="bottom" secondItem="UVr-yY-GEm" secondAttribute="bottom" constant="22" id="Gba-Xj-l0h"/>
-                            <constraint firstAttribute="bottom" secondItem="cEA-Ir-Jx9" secondAttribute="bottom" constant="22" id="ZVw-MP-XpE"/>
+                            <constraint firstItem="sMZ-x5-Oom" firstAttribute="leading" secondItem="Lp6-be-l1E" secondAttribute="leading" constant="20" id="OlP-ok-YTk"/>
+                            <constraint firstAttribute="trailing" secondItem="ncg-Ci-wqb" secondAttribute="trailing" constant="20" id="VoD-n9-Jod"/>
+                            <constraint firstItem="ncg-Ci-wqb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sMZ-x5-Oom" secondAttribute="trailing" constant="8" symbolic="YES" id="aMK-RF-dQd"/>
                             <constraint firstItem="UYl-6I-vbB" firstAttribute="top" secondItem="Lp6-be-l1E" secondAttribute="top" id="gh4-Sh-KEB"/>
-                            <constraint firstItem="cEA-Ir-Jx9" firstAttribute="leading" secondItem="Lp6-be-l1E" secondAttribute="leading" constant="22" id="jq7-LS-oQV"/>
                             <constraint firstItem="UYl-6I-vbB" firstAttribute="leading" secondItem="Lp6-be-l1E" secondAttribute="leading" id="meH-r4-WCj"/>
+                            <constraint firstAttribute="bottom" secondItem="ncg-Ci-wqb" secondAttribute="bottom" constant="20" id="r8T-ND-gGX"/>
                             <constraint firstAttribute="trailing" secondItem="UYl-6I-vbB" secondAttribute="trailing" id="wLf-dv-ic9"/>
+                            <constraint firstAttribute="bottom" secondItem="sMZ-x5-Oom" secondAttribute="bottom" constant="20" id="zGh-wy-Yr1"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="firstImageView" destination="7FC-xx-Ash" id="Dd6-ob-BHa"/>
                         <outlet property="imageStackView" destination="UYl-6I-vbB" id="nUE-kv-OtO"/>
-                        <outlet property="leftPageNumberTextField" destination="cEA-Ir-Jx9" id="J5n-S3-4ad"/>
-                        <outlet property="rightPageNumberTextField" destination="UVr-yY-GEm" id="F2U-7t-Okq"/>
+                        <outlet property="leftPageNumberButton" destination="sMZ-x5-Oom" id="bJh-yB-fLU"/>
+                        <outlet property="rightPageNumberButton" destination="ncg-Ci-wqb" id="9Le-Cv-LlO"/>
                         <outlet property="secondImageView" destination="2i5-YN-Rub" id="IoT-5v-cxw"/>
                     </connections>
                 </viewController>

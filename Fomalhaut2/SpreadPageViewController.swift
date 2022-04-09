@@ -9,7 +9,7 @@ import Shared
 
 struct LoadedImage {
   let preload: Bool
-  let firstPageIndex: Int // page index of first page in images
+  let firstPageIndex: Int  // page index of first page in images
   let images: [NSImage]
 }
 
@@ -37,14 +37,14 @@ class SpreadPageViewController: NSViewController {
   @IBOutlet weak var secondImageView: BookImageView!
   @IBOutlet weak var leftPageNumberButton: NSButton!
   @IBOutlet weak var rightPageNumberButton: NSButton!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // TODO: Use NSStackView#setViews instead of use userInterfaceLayoutDirection for page order?
     self.imageStackView.userInterfaceLayoutDirection = .rightToLeft
     self.firstImageView.notificationName = firstImageViewMouseUpNotificationName
     self.secondImageView.notificationName = secondImageViewMouseUpNotificationName
-    
+
     self.leftPageNumberButton.wantsLayer = true
     self.leftPageNumberButton.layer?.backgroundColor = CGColor(gray: 0.5, alpha: 0.4)
     self.leftPageNumberButton.layer?.cornerRadius = 10
@@ -265,7 +265,7 @@ class SpreadPageViewController: NSViewController {
       return NSSize(width: width, height: height)
     }
   }
-  
+
   @IBAction func toggleShowPageNumber(_ sender: Any) {
     UserDefaults.standard.set(!self.showPageNumber.value, forKey: SpreadPageViewController.showPageNumberKey)
     self.showPageNumber.accept(!self.showPageNumber.value)

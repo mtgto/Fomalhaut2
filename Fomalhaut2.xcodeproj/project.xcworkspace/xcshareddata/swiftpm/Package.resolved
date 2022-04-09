@@ -2,21 +2,21 @@
   "object": {
     "pins": [
       {
-        "package": "Realm",
-        "repositoryURL": "https://github.com/realm/realm-cocoa.git",
-        "state": {
-          "branch": null,
-          "revision": "9dff9f2862240d521ad6ad599541269177ddb993",
-          "version": "10.22.0"
-        }
-      },
-      {
         "package": "RealmDatabase",
         "repositoryURL": "https://github.com/realm/realm-core",
         "state": {
           "branch": null,
-          "revision": "6b81f1a7a2d421f9e0b9e7f04e76bcf736a54409",
-          "version": "11.9.0"
+          "revision": "3c78cccdc0d9f967c5c15b7f3ea081814e2b3ef2",
+          "version": "11.13.0"
+        }
+      },
+      {
+        "package": "Realm",
+        "repositoryURL": "https://github.com/realm/realm-swift.git",
+        "state": {
+          "branch": null,
+          "revision": "f9400ca044844701ea32491a4c6c4b06d74ab24d",
+          "version": "10.25.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/RxSwiftCommunity/RxRealm.git",
         "state": {
           "branch": null,
-          "revision": "63d00c6349b31d4e26fd5b5a5e428400b6b91356",
-          "version": "5.0.4"
+          "revision": "a7de576348d48286d8b100a501f757a1c531f1dd",
+          "version": "5.0.5"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
-          "revision": "154f1d32366449dcccf6375a173adf4ed2a74429",
-          "version": "2.38.0"
+          "revision": "d6e3762e0a5f7ede652559f53623baf11006e17c",
+          "version": "2.39.0"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/mtgto/Unrar.swift.git",
         "state": {
           "branch": null,
-          "revision": "64e42cc434ab609924ed0b5488253bf79c4af190",
-          "version": "0.3.7"
+          "revision": "bee23bfcab5184f0a96d20c82c41596783c0219f",
+          "version": "0.3.9"
         }
       },
       {

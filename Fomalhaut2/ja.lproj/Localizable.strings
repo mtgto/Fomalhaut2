@@ -46,6 +46,9 @@
 /* (No Comment) */
 "ErrorNoImage" = "アーカイブに画像が見つかりません";
 
+/* Add collection */
+"FilterListMenuAdd" = "新規コレクションを追加";
+
 /* Delete %@ */
 "FilterListMenuDelete" = "%@ を削除";
 
@@ -54,9 +57,6 @@
 
 /* Rename */
 "FilterListMenuRename" = "名前を変更";
-
-/* Add a new collection */
-"FilterListMenuAdd" = "新規コレクションを追加";
 
 /* Library */
 "LibraryHeader" = "ライブラリ";

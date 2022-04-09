@@ -118,6 +118,9 @@
 /* Class = "NSSegmentedCell"; fhf-YH-hap.ibShadowedLabels[1] = "List"; ObjectID = "fhf-YH-hap"; Note = "CollectionStyleSegmentCell"; */
 "fhf-YH-hap.ibShadowedLabels[1]" = "リスト";
 
+/* Class = "NSMenuItem"; title = "Show Page Number"; ObjectID = "FS6-Yr-cTD"; */
+"FS6-Yr-cTD.title" = "ページ番号を表示";
+
 /* Class = "NSMenu"; title = "View As"; ObjectID = "fTm-Bv-lvD"; Note = "ViewAsMenuItem"; */
 "fTm-Bv-lvD.title" = "表示形式";
 

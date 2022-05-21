@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.3.1 (2022-05-21)
+
+### Added
+
+- Show an alert when user try to open or show in Finder deleted file.
+
+### Changed
+
+- Update Realm from 10.25.0 to 10.27.0
+- Update swift-nio from 2.39.0 to 2.40.0
+- Update web packages
+
 ## v1.3.0 (2022-04-09)
 
 ### Added

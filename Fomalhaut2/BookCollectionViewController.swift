@@ -336,8 +336,16 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     if books.isEmpty {
       return
     }
-    self.open(books[Int(arc4random_uniform(UInt32(books.count)))]).subscribe {
-      // do nothing
+    let index = Int(arc4random_uniform(UInt32(books.count)))
+    self.open(books[index]).subscribe {
+      if self.collectionViewStyle.value == .collection {
+        let indexPath = IndexPath(item: index, section: 0)
+        self.collectionView.deselectAll(nil)
+        self.collectionView.selectItems(at: [indexPath], scrollPosition: .top)
+      } else {
+        self.tableView.deselectAll(nil)
+        self.tableView.selectRowIndexes([index], byExtendingSelection: false)
+      }
     } onFailure: { error in
       log.error("Error while open a book: \(error)")
       NSAlert(error: error).runModal()

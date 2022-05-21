@@ -367,8 +367,10 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         // do nothing
         bookCollectionViewItem?.opening = false
       } onFailure: { error in
-        // TODO: show error dialog
         log.error("Error while open a book: \(error)")
+        let message = NSLocalizedString("ErrorFileDoesNotExists", comment: "This file does not exists.")
+        let information = NSLocalizedString("ErrorBrokenFile", comment: "File is corrupt or unsupported file type")
+        self.showModalDialog(message: message, information: information)
       } onDisposed: {
         bookCollectionViewItem?.opening = false
       }.disposed(by: self.disposeBag)
@@ -384,8 +386,8 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         NSWorkspace.shared.activateFileViewerSelecting([url])
         url.stopAccessingSecurityScopedResource()
       } else {
-        // TODO: show error dialog
-        self.showModalDialog(message: "", information: "")
+        let message = NSLocalizedString("ErrorUnresolvedBookmarkData", comment: "This book might be deleted.")
+        self.showModalDialog(message: message, information: "")
       }
     }
   }

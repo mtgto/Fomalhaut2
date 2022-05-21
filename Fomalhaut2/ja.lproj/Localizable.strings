@@ -46,6 +46,9 @@
 /* (No Comment) */
 "ErrorNoImage" = "アーカイブに画像が見つかりません";
 
+"ErrorUnresolvedBookmarkData" = "この本は削除されているようです";
+"ErrorFileDoesNotExists" = "ファイルが見つかりません";
+
 /* Add collection */
 "FilterListMenuAdd" = "新規コレクションを追加";
 

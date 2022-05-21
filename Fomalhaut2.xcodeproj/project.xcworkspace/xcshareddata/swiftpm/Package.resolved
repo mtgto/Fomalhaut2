@@ -1,97 +1,95 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "RealmDatabase",
-        "repositoryURL": "https://github.com/realm/realm-core",
-        "state": {
-          "branch": null,
-          "revision": "3c78cccdc0d9f967c5c15b7f3ea081814e2b3ef2",
-          "version": "11.13.0"
-        }
-      },
-      {
-        "package": "Realm",
-        "repositoryURL": "https://github.com/realm/realm-swift.git",
-        "state": {
-          "branch": null,
-          "revision": "f9400ca044844701ea32491a4c6c4b06d74ab24d",
-          "version": "10.25.0"
-        }
-      },
-      {
-        "package": "RxRealm",
-        "repositoryURL": "https://github.com/RxSwiftCommunity/RxRealm.git",
-        "state": {
-          "branch": null,
-          "revision": "a7de576348d48286d8b100a501f757a1c531f1dd",
-          "version": "5.0.5"
-        }
-      },
-      {
-        "package": "RxSwift",
-        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
-        "state": {
-          "branch": null,
-          "revision": "b4307ba0b6425c0ba4178e138799946c3da594f8",
-          "version": "6.5.0"
-        }
-      },
-      {
-        "package": "SevenZip",
-        "repositoryURL": "https://github.com/mtgto/SevenZip.swift",
-        "state": {
-          "branch": null,
-          "revision": "1b54d6767ab3373c0ceb438a79d02d6c3dca49f8",
-          "version": "0.1.1"
-        }
-      },
-      {
-        "package": "swift-nio",
-        "repositoryURL": "https://github.com/apple/swift-nio.git",
-        "state": {
-          "branch": null,
-          "revision": "d6e3762e0a5f7ede652559f53623baf11006e17c",
-          "version": "2.39.0"
-        }
-      },
-      {
-        "package": "Swiftra",
-        "repositoryURL": "https://github.com/mtgto/Swiftra.git",
-        "state": {
-          "branch": null,
-          "revision": "390f4bc765acf0fc5c0cc3632b153b2142bf9ce8",
-          "version": "0.5.0"
-        }
-      },
-      {
-        "package": "Unrar",
-        "repositoryURL": "https://github.com/mtgto/Unrar.swift.git",
-        "state": {
-          "branch": null,
-          "revision": "bee23bfcab5184f0a96d20c82c41596783c0219f",
-          "version": "0.3.9"
-        }
-      },
-      {
-        "package": "XCGLogger",
-        "repositoryURL": "https://github.com/DaveWoodCom/XCGLogger.git",
-        "state": {
-          "branch": null,
-          "revision": "a9c4667b247928a29bdd41be2ec2c8d304215a54",
-          "version": "7.0.1"
-        }
-      },
-      {
-        "package": "ZIPFoundation",
-        "repositoryURL": "https://github.com/weichsel/ZIPFoundation.git",
-        "state": {
-          "branch": null,
-          "revision": "7254c74b49cec2cb81520523ba993c671f71b066",
-          "version": "0.9.14"
-        }
+  "pins" : [
+    {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core",
+      "state" : {
+        "revision" : "d97eed3ae7dff2f2e2ffbda83fa8f3b8c445c6ba",
+        "version" : "11.17.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "realm-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-swift.git",
+      "state" : {
+        "revision" : "7f123e48ec12926bb5080e449df360127ee0352d",
+        "version" : "10.26.0"
+      }
+    },
+    {
+      "identity" : "rxrealm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/RxRealm.git",
+      "state" : {
+        "revision" : "a7de576348d48286d8b100a501f757a1c531f1dd",
+        "version" : "5.0.5"
+      }
+    },
+    {
+      "identity" : "rxswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveX/RxSwift.git",
+      "state" : {
+        "revision" : "b4307ba0b6425c0ba4178e138799946c3da594f8",
+        "version" : "6.5.0"
+      }
+    },
+    {
+      "identity" : "sevenzip.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mtgto/SevenZip.swift",
+      "state" : {
+        "revision" : "1b54d6767ab3373c0ceb438a79d02d6c3dca49f8",
+        "version" : "0.1.1"
+      }
+    },
+    {
+      "identity" : "swift-nio",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-nio.git",
+      "state" : {
+        "revision" : "124119f0bb12384cef35aa041d7c3a686108722d",
+        "version" : "2.40.0"
+      }
+    },
+    {
+      "identity" : "swiftra",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mtgto/Swiftra.git",
+      "state" : {
+        "revision" : "390f4bc765acf0fc5c0cc3632b153b2142bf9ce8",
+        "version" : "0.5.0"
+      }
+    },
+    {
+      "identity" : "unrar.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mtgto/Unrar.swift.git",
+      "state" : {
+        "revision" : "78b3c107310128fa303d272da8a74bee274d5090",
+        "version" : "0.3.10"
+      }
+    },
+    {
+      "identity" : "xcglogger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DaveWoodCom/XCGLogger.git",
+      "state" : {
+        "revision" : "a9c4667b247928a29bdd41be2ec2c8d304215a54",
+        "version" : "7.0.1"
+      }
+    },
+    {
+      "identity" : "zipfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/weichsel/ZIPFoundation.git",
+      "state" : {
+        "revision" : "7254c74b49cec2cb81520523ba993c671f71b066",
+        "version" : "0.9.14"
+      }
+    }
+  ],
+  "version" : 2
 }

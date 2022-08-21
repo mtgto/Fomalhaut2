@@ -256,11 +256,11 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>YACReader Comic</string>
+			<string>Fomalhaut2 Comic Book</string>
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.yacreader.yacreader.cbz</string>
+			<string>net.mtgto.Fomalhaut2.cbz</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -279,11 +279,11 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>YACReader Comic</string>
+			<string>Fomalhaut2 Comic Book</string>
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.yacreader.yacreader.cbr</string>
+			<string>net.mtgto.Fomalhaut2.cbr</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -302,11 +302,11 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>YACReader Comic</string>
+			<string>Fomalhaut2 Comic Book</string>
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.yacreader.yacreader.rar</string>
+			<string>net.mtgto.Fomalhaut2.rar</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -316,6 +316,29 @@
 				<key>public.mime-type</key>
 				<array>
 					<string>application/x-rar-compressed</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Fomalhaut2 Comic Book</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>net.mtgto.Fomalhaut2.cb7</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cb7</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/x-7z-compressed</string>
 				</array>
 			</dict>
 		</dict>

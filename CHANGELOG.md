@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v1.3.2 (2022-08-21)
+
+### Added
+
+- Add "Go previous book" button to web view
+
+### Changed
+
+- Bug fixes
+- Update web packages
+
 ## v1.3.1 (2022-05-21)
 
 ### Added

@@ -13,7 +13,7 @@ type Props = {
 const ListItemLink = (props: Props) => {
   const renderLink = useMemo(
     () =>
-      forwardRef<HTMLAnchorElement, unknown>(function Link(itemProps, ref) {
+      forwardRef<HTMLAnchorElement>(function Link(itemProps, ref) {
         return (
           <RoconLink
             route={props.route}

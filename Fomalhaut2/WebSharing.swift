@@ -173,7 +173,11 @@ class WebSharing: NSObject {
         archiver.image(at: page) { (result) in
           switch result {
           case .success(let image):
-            let data = image.resizedImageFixedAspectRatio(maxPixelsWide: 1024, maxPixelsHigh: 1024)!
+            guard let data = image.resizedImageFixedAspectRatio(maxPixelsWide: 1024, maxPixelsHigh: 1024) else {
+              log.warning("Fail to resize image with unknown reason")
+              promise.succeed(self.internalServerError)
+              break
+            }
             promise.succeed(
               Response(data: data, contentType: contentTypeJpeg, headers: [(cacheControlKey, "private, max-age=1440")]))
           case .failure(let error):

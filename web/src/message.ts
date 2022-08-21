@@ -18,6 +18,7 @@ export type Message = {
     readonly like: string;
     readonly dislike: string;
     readonly next: string;
+    readonly prev: string;
   };
 };
 
@@ -38,6 +39,7 @@ export const ja: Message = {
     like: "好き",
     dislike: "好きを取り消し",
     next: "次の本を開く",
+    prev: "前の本を開く",
   },
 };
 
@@ -58,6 +60,7 @@ export const en: Message = {
     like: "Like",
     dislike: "Cancel Like",
     next: "Go to next book",
+    prev: "Go to previous book",
   },
 };
 

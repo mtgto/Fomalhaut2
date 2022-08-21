@@ -7,6 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
@@ -31,7 +32,7 @@ const pages = (book: Book) => {
       minHeight="200px"
       key={`${book.id}.${i}`}
       src={`/images/books/${book.id}/pages/${i}`}
-    ></Box>
+    />
   ));
 };
 
@@ -55,11 +56,15 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
     state.selectedBookIds.length > currentBookIndex + 1
       ? state.selectedBookIds[currentBookIndex + 1]
       : undefined;
-  const navigateNextBookId = () => {
-    if (nextBookId) {
-      navigate(bookRoutes.anyRoute, { id: nextBookId });
+  const navigateBookId = (bookId: string | undefined) => {
+    if (bookId) {
+      navigate(bookRoutes.anyRoute, { id: bookId });
     }
   };
+  const prevBookId: string | undefined =
+    currentBookIndex > 0
+      ? state.selectedBookIds[currentBookIndex - 1]
+      : undefined;
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -84,7 +89,12 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
   };
 
   const handleNext = () => {
-    navigateNextBookId();
+    navigateBookId(nextBookId);
+    window.scrollTo(0, 0);
+  };
+
+  const handlePrev = () => {
+    navigateBookId(prevBookId);
     window.scrollTo(0, 0);
   };
 
@@ -139,6 +149,13 @@ const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
             onClick={handleNext}
             icon={<SkipNextIcon />}
             tooltipTitle={message.commands.next}
+          />
+        ) : null}
+        {prevBookId ? (
+          <SpeedDialAction
+            onClick={handlePrev}
+            icon={<SkipPreviousIcon />}
+            tooltipTitle={message.commands.prev}
           />
         ) : null}
       </SpeedDial>

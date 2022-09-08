@@ -18,7 +18,7 @@ type Props = {
   readonly pageChanged: (page: number) => void;
 };
 
-const Library: React.VoidFunctionComponent<Props> = (props: Props) => {
+const Library: React.FunctionComponent<Props> = (props: Props) => {
   const handleChangePage = (_e: React.ChangeEvent<unknown>, page: number) => {
     props.pageChanged(page);
     window.scrollTo({ top: 0 });

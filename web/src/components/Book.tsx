@@ -40,7 +40,7 @@ type Props = {
   readonly id: string;
 };
 
-const BookPage: React.VoidFunctionComponent<Props> = (props: Props) => {
+const BookPage: React.FunctionComponent<Props> = (props: Props) => {
   const [calling, setCalling] = useState(false);
   const [speedDialOpen, setSpeedDialOpen] = useState(false);
   const { state, dispatch } = useContext(StateContext);

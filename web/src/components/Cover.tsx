@@ -17,7 +17,7 @@ type Props = {
   book: Book;
 };
 
-const Cover: React.VoidFunctionComponent<Props> = (props: Props) => {
+const Cover: React.FunctionComponent<Props> = (props: Props) => {
   const BookLink = useMemo(
     () =>
       // eslint-disable-next-line react/display-name

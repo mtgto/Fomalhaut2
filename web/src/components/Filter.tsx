@@ -15,7 +15,7 @@ type Props = {
   readonly page?: number;
 };
 
-const FilterPage: React.VoidFunctionComponent<Props> = (props: Props) => {
+const FilterPage: React.FunctionComponent<Props> = (props: Props) => {
   const { dispatch, state } = useContext(StateContext);
   const filter: Filter | undefined = state.filters.find(
     (filter) => filter.id === props.id

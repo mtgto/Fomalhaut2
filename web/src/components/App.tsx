@@ -24,7 +24,7 @@ import Routes from "./Routes";
 const parseBook = (book: Book): Book =>
   new Book(book.id, book.name, book.pageCount, book.readCount, book.like);
 
-const App: React.VoidFunctionComponent = () => {
+const App: React.FunctionComponent = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [state, dispatch] = useReducer(reducer, initialState);
 

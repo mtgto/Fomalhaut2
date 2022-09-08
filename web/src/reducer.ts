@@ -22,6 +22,7 @@ export interface State {
   readonly filters: ReadonlyArray<Filter>;
   readonly books: ReadonlyArray<Book>;
   readonly selectedBookIds: ReadonlyArray<string>;
+  readonly viewMode: "horizontal" | "vertical";
 }
 
 const SetLoading = "SetLoading" as const;
@@ -29,13 +30,15 @@ const SetBooks = "SetBooks" as const;
 const SetCollections = "SetCollections" as const;
 const ToggleLike = "ToggleLike" as const;
 const SetCurrentList = "SetCurrentList" as const;
+const SetViewMode = "SetViewMode" as const;
 
 type Actions =
   | ReturnType<typeof setLoading>
   | ReturnType<typeof setBooks>
   | ReturnType<typeof setCollections>
   | ReturnType<typeof toggleLike>
-  | ReturnType<typeof setCurrentList>;
+  | ReturnType<typeof setCurrentList>
+  | ReturnType<typeof setViewMode>;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const setLoading = (LoadingState: LoadingStateType) => ({
@@ -67,6 +70,25 @@ export const setCurrentList = (selectedBookIds: ReadonlyArray<string>) => ({
   payload: selectedBookIds,
 });
 
+export const setViewMode = (viewMode: State["viewMode"]) => ({
+  type: SetViewMode,
+  payload: viewMode,
+});
+
+const getViewMode = (): State["viewMode"] => {
+  const value = localStorage.getItem("net.mtgto.Fomalhaut2");
+  if (value) {
+    const obj = JSON.parse(value);
+    return obj["viewMode"] ?? "horizontal";
+  } else {
+    return "horizontal";
+  }
+};
+
+const saveViewMode = (viewMode: State["viewMode"]) => {
+  localStorage.setItem("net.mtgto.Fomalhaut2", JSON.stringify({ viewMode }));
+};
+
 export const initialState: State = {
   loading: LoadingState.Initial,
   collections: [],
@@ -81,6 +103,7 @@ export const initialState: State = {
   ],
   books: [],
   selectedBookIds: [],
+  viewMode: getViewMode(),
 };
 
 export const StateContext = createContext<{
@@ -107,6 +130,12 @@ export const reducer = (state: State, action: Actions): State => {
       return {
         ...state,
         selectedBookIds: action.payload,
+      };
+    case SetViewMode:
+      saveViewMode(action.payload);
+      return {
+        ...state,
+        viewMode: action.payload,
       };
     default:
       return initialState;

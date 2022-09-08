@@ -4,6 +4,8 @@
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
+import SwipeIcon from "@mui/icons-material/Swipe";
+import SwipeVerticalIcon from "@mui/icons-material/SwipeVertical";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -16,13 +18,15 @@ import ListSubheader from "@mui/material/ListSubheader";
 import Snackbar from "@mui/material/Snackbar";
 import { useTheme } from "@mui/material/styles";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "rocon/react";
 import { message } from "../message";
-import { LoadingState, StateContext } from "../reducer";
+import { LoadingState, setViewMode, State, StateContext } from "../reducer";
 import { bookRoutes, collectionRoutes, filterRoutes } from "./Routes";
 // import ListItemLink from "./ListItemLink";
 
@@ -35,11 +39,12 @@ type Props = {
 };
 
 const Layout: React.FunctionComponent<Props> = (props: Props) => {
-  const { state } = useContext(StateContext);
+  const { dispatch, state } = useContext(StateContext);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
+
   useEffect(() => {
     // close drawer when route changed
     setOpen(false);
@@ -83,6 +88,21 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             </Box>
             <Typography variant="h6">{props.title ?? "Fomalhaut2"}</Typography>
             <Box display="flex" flex={1} justifyContent="flex-end">
+              <ToggleButtonGroup
+                value={state.viewMode}
+                exclusive
+                onChange={(_, value: State["viewMode"]) =>
+                  dispatch(setViewMode(value))
+                }
+                sx={{ mr: 1 }}
+              >
+                <ToggleButton value="horizontal">
+                  <SwipeIcon />
+                </ToggleButton>
+                <ToggleButton value="vertical">
+                  <SwipeVerticalIcon />
+                </ToggleButton>
+              </ToggleButtonGroup>
               <Tooltip title={message.random}>
                 <IconButton size="large" color="inherit" onClick={handleRandom}>
                   <ShuffleIcon />

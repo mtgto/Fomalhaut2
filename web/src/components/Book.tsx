@@ -8,7 +8,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
@@ -17,24 +16,10 @@ import { useTheme } from "@mui/material/styles";
 import { Book } from "../domain/book";
 import { message } from "../message";
 import { StateContext, toggleLike } from "../reducer";
+import HorizontalBookView from "./HorizontalBookView";
 import Layout from "./Layout";
 import { bookRoutes } from "./Routes";
-
-const pages = (book: Book) => {
-  return [...Array(book.pageCount).keys()].map((i: number) => (
-    <Box
-      component="img"
-      my={1}
-      mx="auto"
-      display="block"
-      width="100%"
-      maxWidth="720px"
-      minHeight="200px"
-      key={`${book.id}.${i}`}
-      src={`/images/books/${book.id}/pages/${i}`}
-    />
-  ));
-};
+import VerticalBookView from "./VerticalBookView";
 
 type Props = {
   readonly id: string;
@@ -115,9 +100,15 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
   return (
     <Layout title={book?.name}>
       <Container maxWidth="md">
-        <Box mx="auto">
-          {book ? pages(book) : <span>{message.loading}</span>}
-        </Box>
+        {book ? (
+          state.viewMode === "horizontal" ? (
+            <HorizontalBookView book={book} />
+          ) : (
+            <VerticalBookView book={book} />
+          )
+        ) : (
+          <span>{message.loading}</span>
+        )}
       </Container>
       <SpeedDial
         ariaLabel="direction"

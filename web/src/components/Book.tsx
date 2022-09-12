@@ -101,8 +101,8 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
     <Layout title={book?.name}>
       <Container maxWidth="md">
         {book ? (
-          state.viewMode === "horizontal" ? (
-            <HorizontalBookView book={book} />
+          state.viewMode === "left" || state.viewMode === "right" ? (
+            <HorizontalBookView book={book} direction={state.viewMode} />
           ) : (
             <VerticalBookView book={book} />
           )

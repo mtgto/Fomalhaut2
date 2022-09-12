@@ -22,7 +22,7 @@ export interface State {
   readonly filters: ReadonlyArray<Filter>;
   readonly books: ReadonlyArray<Book>;
   readonly selectedBookIds: ReadonlyArray<string>;
-  readonly viewMode: "horizontal" | "vertical";
+  readonly viewMode: "left" | "right" | "vertical";
 }
 
 const SetLoading = "SetLoading" as const;
@@ -79,10 +79,16 @@ const getViewMode = (): State["viewMode"] => {
   const value = localStorage.getItem("net.mtgto.Fomalhaut2");
   if (value) {
     const obj = JSON.parse(value);
-    return obj["viewMode"] ?? "horizontal";
-  } else {
-    return "horizontal";
+    const viewMode = obj["viewMode"];
+    if (
+      viewMode === "left" ||
+      viewMode === "right" ||
+      viewMode === "vertical"
+    ) {
+      return viewMode;
+    }
   }
+  return "right";
 };
 
 const saveViewMode = (viewMode: State["viewMode"]) => {

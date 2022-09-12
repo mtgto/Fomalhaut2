@@ -4,8 +4,9 @@
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
-import SwipeIcon from "@mui/icons-material/Swipe";
-import SwipeVerticalIcon from "@mui/icons-material/SwipeVertical";
+import SwipeLeftIcon from "@mui/icons-material/SwipeLeft";
+import SwipeRightIcon from "@mui/icons-material/SwipeRight";
+import SwipeDownIcon from "@mui/icons-material/SwipeDown";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -96,11 +97,14 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
                 }
                 sx={{ mr: 1 }}
               >
-                <ToggleButton value="horizontal">
-                  <SwipeIcon />
-                </ToggleButton>
                 <ToggleButton value="vertical">
-                  <SwipeVerticalIcon />
+                  <SwipeDownIcon />
+                </ToggleButton>
+                <ToggleButton value="left">
+                  <SwipeLeftIcon />
+                </ToggleButton>
+                <ToggleButton value="right">
+                  <SwipeRightIcon />
                 </ToggleButton>
               </ToggleButtonGroup>
               <Tooltip title={message.random}>

@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 
 type Props = {
   readonly book: Book;
+  readonly direction: "left" | "right";
 };
 
 const pages = (book: Book) => {
@@ -33,6 +34,7 @@ const pages = (book: Book) => {
 const HorizontalBookView = (props: Props) => (
   <Box
     display="flex"
+    flexDirection={props.direction === "right" ? "row" : "row-reverse"}
     sx={{
       width: "100%",
       height: "100vh",

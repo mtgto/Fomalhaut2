@@ -703,7 +703,11 @@ extension BookCollectionViewController: NSTableViewDelegate {
     }
     switch identifier.rawValue {
     case "name":
-      cellView.textField?.stringValue = self.tableViewBooks.value![row].displayName
+      let book = self.tableViewBooks.value![row]
+      cellView.textField?.stringValue = book.displayName
+      if let data = book.thumbnailData, let thumbnail = NSImage(data: data) {
+        cellView.imageView?.image = thumbnail
+      }
     case "view":
       cellView.textField?.stringValue = String(self.tableViewBooks.value![row].readCount)
     case "like":

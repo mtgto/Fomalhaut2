@@ -272,7 +272,15 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
             if documentWasAlreadyOpen {
               document.showWindows()
             } else {
-              if let document = document as? BookDocument {
+              if let document = document as? BookDocument, let realm = try? Realm() {
+                do {
+                  try realm.write {
+                    book.readCount = book.readCount + 1
+                  }
+                } catch {
+                  single(.failure(error))
+                  return
+                }
                 document.book = book.freeze()
               }
               document.makeWindowControllers()

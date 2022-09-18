@@ -9,7 +9,7 @@ extension NSTableView {
     beginUpdates()
     removeRows(at: IndexSet(changes.deleted))
     insertRows(at: IndexSet(changes.inserted))
-    reloadData(forRowIndexes: IndexSet(changes.updated), columnIndexes: [0, 1])
+    reloadData(forRowIndexes: IndexSet(changes.updated), columnIndexes: [0, 1, 2])
     endUpdates()
   }
 }

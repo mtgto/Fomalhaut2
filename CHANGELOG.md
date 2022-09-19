@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v1.4.0 (2022-09-19)
+
+### Added
+
+- Add thumbnail in book list
+- Add horizontal scroll mode in web view
+- Add navigation view after last page in web view
+
+### Changed
+
+- Fix readCount never increments
+- Fix like does not appear to changed in book list
+- Update web packages
+
 ## v1.3.2 (2022-08-21)
 
 ### Added

@@ -1,14 +1,15 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import { Book } from "../domain/book";
-import { message } from "../message";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
+import { useEffect, useRef } from "react";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { Book } from "../domain/book";
+import { message } from "../message";
 
 type Props = Readonly<{
   book: Book;
@@ -43,7 +44,11 @@ const pages = (book: Book) => {
 };
 
 const HorizontalBookView = (props: Props) => {
+  const topRef = useRef<HTMLElement>(null);
   const nextBook = props.nextBook;
+  useEffect(() => {
+    topRef.current?.scrollIntoView();
+  }, [props.book]);
 
   return (
     <Box
@@ -56,6 +61,7 @@ const HorizontalBookView = (props: Props) => {
         overflowX: "auto",
       }}
     >
+      <span ref={topRef} />
       {pages(props.book)}
       <Box
         display="flex"

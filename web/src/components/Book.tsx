@@ -122,7 +122,12 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
               onRandom={handleRandom}
             />
           ) : (
-            <VerticalBookView book={book} />
+            <VerticalBookView
+              book={book}
+              nextBook={nextBook}
+              onNext={handleNext}
+              onRandom={handleRandom}
+            />
           )
         ) : (
           <span>{message.loading}</span>

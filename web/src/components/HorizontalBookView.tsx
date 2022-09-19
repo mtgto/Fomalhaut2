@@ -2,14 +2,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import { useEffect, useRef } from "react";
-import ShuffleIcon from "@mui/icons-material/Shuffle";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { Book } from "../domain/book";
-import { message } from "../message";
+import NavigationPage from "./NavigationPage";
 
 type Props = Readonly<{
   book: Book;
@@ -45,7 +40,6 @@ const pages = (book: Book) => {
 
 const HorizontalBookView = (props: Props) => {
   const topRef = useRef<HTMLElement>(null);
-  const nextBook = props.nextBook;
   useEffect(() => {
     topRef.current?.scrollIntoView();
   }, [props.book]);
@@ -66,7 +60,6 @@ const HorizontalBookView = (props: Props) => {
       <Box
         display="flex"
         flexDirection="column"
-        mx="auto"
         width="100%"
         height="100%"
         flexShrink={0}
@@ -74,37 +67,12 @@ const HorizontalBookView = (props: Props) => {
         alignItems="center"
         sx={{ scrollSnapAlign: "start" }}
       >
-        {nextBook ? (
-          <Typography
-            variant="h5"
-            sx={{ marginY: (theme) => theme.spacing(2) }}
-          >
-            NEXT: 「{nextBook.name}」
-          </Typography>
-        ) : (
-          false
-        )}
-        <Stack direction="row" spacing={2}>
-          {nextBook ? (
-            <Button
-              variant="outlined"
-              startIcon={<SkipNextIcon />}
-              onClick={props.onNext}
-            >
-              {message.commands.next}
-            </Button>
-          ) : (
-            false
-          )}
-          <Button
-            color="secondary"
-            variant="outlined"
-            startIcon={<ShuffleIcon />}
-            onClick={props.onRandom}
-          >
-            {message.random}
-          </Button>
-        </Stack>
+        <NavigationPage
+          book={props.book}
+          nextBook={props.nextBook}
+          onNext={props.onNext}
+          onRandom={props.onRandom}
+        />
       </Box>
     </Box>
   );

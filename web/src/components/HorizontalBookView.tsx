@@ -13,6 +13,7 @@ const pages = (book: Book) => {
   return [...Array(book.pageCount).keys()].map((i: number) => (
     <Box
       key={i}
+      display="flex"
       mx="auto"
       width="100%"
       height="100%"
@@ -21,9 +22,10 @@ const pages = (book: Book) => {
     >
       <Box
         component="img"
-        my={0}
+        my="auto"
         mx="auto"
         maxHeight="100%"
+        maxWidth="100%"
         src={`/images/books/${book.id}/pages/${i}`}
         display="block"
       />

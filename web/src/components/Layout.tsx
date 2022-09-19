@@ -4,7 +4,6 @@
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
-import ShuffleIcon from "@mui/icons-material/Shuffle";
 import SwipeDownIcon from "@mui/icons-material/SwipeDown";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -33,7 +32,7 @@ import {
 import { useLocation, useNavigate } from "rocon/react";
 import { message } from "../message";
 import { LoadingState, setViewMode, StateContext } from "../reducer";
-import { bookRoutes, collectionRoutes, filterRoutes } from "./Routes";
+import { collectionRoutes, filterRoutes } from "./Routes";
 // import ListItemLink from "./ListItemLink";
 
 const drawerWidth = 200;
@@ -72,14 +71,6 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
     document.location.reload();
   };
 
-  const handleRandom = () => {
-    if (state.books.length > 0) {
-      const index = Math.floor(Math.random() * state.books.length);
-      const book = state.books[index];
-      navigate(bookRoutes.anyRoute, { id: book.id });
-    }
-  };
-
   return (
     <Fragment>
       <Box flexGrow={1}>
@@ -98,11 +89,6 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
             </Box>
             <Typography variant="h6">{props.title ?? "Fomalhaut2"}</Typography>
             <Box display="flex" flex={1} justifyContent="flex-end">
-              <Tooltip title={message.random}>
-                <IconButton size="large" color="inherit" onClick={handleRandom}>
-                  <ShuffleIcon />
-                </IconButton>
-              </Tooltip>
               <Tooltip title={message.settings}>
                 <IconButton
                   size="large"

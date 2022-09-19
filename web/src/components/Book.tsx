@@ -41,6 +41,10 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
     state.selectedBookIds.length > currentBookIndex + 1
       ? state.selectedBookIds[currentBookIndex + 1]
       : undefined;
+  const nextBook: Book | undefined = nextBookId
+    ? state.books.find((book) => book.id === nextBookId)
+    : undefined;
+
   const navigateBookId = (bookId: string | undefined) => {
     if (bookId) {
       navigate(bookRoutes.anyRoute, { id: bookId });
@@ -91,6 +95,14 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
     setSpeedDialOpen(true);
   };
 
+  const handleRandom = () => {
+    if (state.books.length > 0) {
+      const index = Math.floor(Math.random() * state.books.length);
+      const book = state.books[index];
+      navigate(bookRoutes.anyRoute, { id: book.id });
+    }
+  };
+
   useEffect(() => {
     if (book) {
       document.title = `${book.name} - Fomalhaut2`;
@@ -102,7 +114,13 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
       <Container maxWidth="md">
         {book ? (
           state.viewMode === "left" || state.viewMode === "right" ? (
-            <HorizontalBookView book={book} direction={state.viewMode} />
+            <HorizontalBookView
+              book={book}
+              nextBook={nextBook}
+              direction={state.viewMode}
+              onNext={handleNext}
+              onRandom={handleRandom}
+            />
           ) : (
             <VerticalBookView book={book} />
           )

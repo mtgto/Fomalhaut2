@@ -3,9 +3,8 @@
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
+import SettingsIcon from "@mui/icons-material/Settings";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
-import SwipeLeftIcon from "@mui/icons-material/SwipeLeft";
-import SwipeRightIcon from "@mui/icons-material/SwipeRight";
 import SwipeDownIcon from "@mui/icons-material/SwipeDown";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,49 +13,59 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import Snackbar from "@mui/material/Snackbar";
 import { useTheme } from "@mui/material/styles";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import { Fragment, useContext, useEffect, useState } from "react";
+import {
+  Fragment,
+  FunctionComponent,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useLocation, useNavigate } from "rocon/react";
 import { message } from "../message";
-import { LoadingState, setViewMode, State, StateContext } from "../reducer";
+import { LoadingState, setViewMode, StateContext } from "../reducer";
 import { bookRoutes, collectionRoutes, filterRoutes } from "./Routes";
 // import ListItemLink from "./ListItemLink";
 
 const drawerWidth = 200;
 
-type Props = {
+type Props = PropsWithChildren<{
   readonly id?: string; // current id of collection or id of filter
   readonly title?: string;
-  readonly children: React.ReactNode;
-};
+}>;
 
-const Layout: React.FunctionComponent<Props> = (props: Props) => {
+const Layout: FunctionComponent<Props> = (props: Props) => {
   const { dispatch, state } = useContext(StateContext);
-  const [open, setOpen] = useState(false);
+  const [openLeftDrawer, setOpenLeftDrawer] = useState(false);
+  const [openRightDrawer, setOpenRightDrawer] = useState(false);
   const theme = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     // close drawer when route changed
-    setOpen(false);
+    setOpenLeftDrawer(false);
   }, [location]);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const handleLeftDrawerOpen = () => {
+    setOpenLeftDrawer(true);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleLeftDrawerClose = () => {
+    setOpenLeftDrawer(false);
+  };
+
+  const handleRightDrawerOpen = () => {
+    setOpenRightDrawer(true);
   };
 
   const handleReload = () => {
@@ -82,34 +91,25 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
                 sx={{ marginRight: theme.spacing(2) }}
                 color="inherit"
                 aria-label="menu"
-                onClick={handleDrawerOpen}
+                onClick={handleLeftDrawerOpen}
               >
                 <MenuIcon />
               </IconButton>
             </Box>
             <Typography variant="h6">{props.title ?? "Fomalhaut2"}</Typography>
             <Box display="flex" flex={1} justifyContent="flex-end">
-              <ToggleButtonGroup
-                value={state.viewMode}
-                exclusive
-                onChange={(_, value: State["viewMode"]) =>
-                  dispatch(setViewMode(value))
-                }
-                sx={{ mr: 1 }}
-              >
-                <ToggleButton value="vertical">
-                  <SwipeDownIcon />
-                </ToggleButton>
-                <ToggleButton value="left">
-                  <SwipeLeftIcon />
-                </ToggleButton>
-                <ToggleButton value="right">
-                  <SwipeRightIcon />
-                </ToggleButton>
-              </ToggleButtonGroup>
               <Tooltip title={message.random}>
                 <IconButton size="large" color="inherit" onClick={handleRandom}>
                   <ShuffleIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={message.settings}>
+                <IconButton
+                  size="large"
+                  color="inherit"
+                  onClick={handleRightDrawerOpen}
+                >
+                  <SettingsIcon />
                 </IconButton>
               </Tooltip>
             </Box>
@@ -117,14 +117,14 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
         </AppBar>
         <SwipeableDrawer
           anchor="left"
-          open={open}
+          open={openLeftDrawer}
           sx={{
             width: drawerWidth,
             flexShrink: 0,
             ".MuiDrawer-paper": { width: drawerWidth },
           }}
-          onOpen={() => setOpen(true)}
-          onClose={() => setOpen(false)}
+          onOpen={() => setOpenLeftDrawer(true)}
+          onClose={() => setOpenLeftDrawer(false)}
         >
           <Box
             display="flex"
@@ -132,7 +132,7 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
             justifyContent="flex-end"
             px={1}
           >
-            <IconButton onClick={handleDrawerClose}>
+            <IconButton onClick={handleLeftDrawerClose}>
               <ChevronLeftIcon />
             </IconButton>
           </Box>
@@ -184,6 +184,49 @@ const Layout: React.FunctionComponent<Props> = (props: Props) => {
                 <ListItemText primary={collection.name} />
               </ListItemButton>
             ))}
+          </List>
+        </SwipeableDrawer>
+        <SwipeableDrawer
+          anchor="right"
+          open={openRightDrawer}
+          onOpen={() => setOpenRightDrawer(true)}
+          onClose={() => setOpenRightDrawer(false)}
+        >
+          <List
+            subheader={
+              <ListSubheader disableSticky>
+                {message.viewMode.name}
+              </ListSubheader>
+            }
+          >
+            <ListItemButton
+              selected={state.viewMode === "vertical"}
+              onClick={() => dispatch(setViewMode("vertical"))}
+            >
+              <ListItemIcon>
+                <SwipeDownIcon />
+              </ListItemIcon>
+              <ListItemText>{message.viewMode.vertical}</ListItemText>
+            </ListItemButton>
+            <ListItemButton
+              selected={state.viewMode === "left"}
+              onClick={() => dispatch(setViewMode("left"))}
+            >
+              <ListItemIcon>
+                <SwipeDownIcon />
+              </ListItemIcon>
+              <ListItemText>{message.viewMode.left}</ListItemText>
+            </ListItemButton>
+            <ListItemButton
+              selected={state.viewMode === "right"}
+              onClick={() => dispatch(setViewMode("right"))}
+            >
+              <ListItemIcon>
+                <SwipeDownIcon />
+              </ListItemIcon>
+              <ListItemText>{message.viewMode.right}</ListItemText>
+            </ListItemButton>
+            <Divider />
           </List>
         </SwipeableDrawer>
         <Snackbar

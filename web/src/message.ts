@@ -1,26 +1,33 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-export type Message = {
-  readonly collection: string;
-  readonly library: string;
-  readonly loading: string;
-  readonly loadError: string;
-  readonly reload: string;
-  readonly random: string;
-  readonly filter: {
-    readonly all: string;
-    readonly unread: string;
-    readonly like: string;
-  };
-  readonly commands: {
-    readonly scrollToTop: string;
-    readonly like: string;
-    readonly dislike: string;
-    readonly next: string;
-    readonly prev: string;
-  };
-};
+export type Message = Readonly<{
+  collection: string;
+  library: string;
+  loading: string;
+  loadError: string;
+  reload: string;
+  random: string;
+  settings: string;
+  filter: Readonly<{
+    all: string;
+    unread: string;
+    like: string;
+  }>;
+  commands: Readonly<{
+    scrollToTop: string;
+    like: string;
+    dislike: string;
+    next: string;
+    prev: string;
+  }>;
+  viewMode: Readonly<{
+    name: string;
+    left: string;
+    right: string;
+    vertical: string;
+  }>;
+}>;
 
 export const ja: Message = {
   collection: "コレクション",
@@ -29,6 +36,7 @@ export const ja: Message = {
   loadError: "読み込みに失敗しました",
   reload: "ページリロード",
   random: "ランダム",
+  settings: "設定",
   filter: {
     all: "すべての本",
     unread: "未読",
@@ -41,6 +49,12 @@ export const ja: Message = {
     next: "次の本を開く",
     prev: "前の本を開く",
   },
+  viewMode: {
+    name: "スクロール",
+    left: "左方向",
+    right: "右方向",
+    vertical: "下方向",
+  },
 };
 
 export const en: Message = {
@@ -50,6 +64,7 @@ export const en: Message = {
   loadError: "An error occurred while loading",
   reload: "Reload",
   random: "Random",
+  settings: "Settings",
   filter: {
     all: "All",
     unread: "Unread",
@@ -61,6 +76,12 @@ export const en: Message = {
     dislike: "Cancel Like",
     next: "Go to next book",
     prev: "Go to previous book",
+  },
+  viewMode: {
+    name: "Scroll",
+    left: "Left",
+    right: "Right",
+    vertical: "Down",
   },
 };
 

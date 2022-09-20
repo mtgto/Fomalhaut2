@@ -1,8 +1,11 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-import { useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
+import type { History } from "history";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { useHistory } from "rocon/react";
 import { Book } from "../domain/book";
 import NavigationPage from "./NavigationPage";
 
@@ -14,36 +17,61 @@ type Props = Readonly<{
   onRandom: () => void;
 }>;
 
-const pages = (book: Book) => {
-  return [...Array(book.pageCount).keys()].map((i: number) => (
-    <Box
-      key={i}
-      display="flex"
-      mx="auto"
-      width="100%"
-      height="100%"
-      flexShrink={0}
-      sx={{ scrollSnapAlign: "start" }}
-    >
+const pages = (
+  book: Book,
+  history: History,
+  refs: MutableRefObject<HTMLElement[]>
+) => {
+  return [...Array(book.pageCount).keys()].map((i: number) => {
+    const { ref } = useInView({
+      onChange: (inView) => {
+        if (inView) {
+          history.replace({ hash: `${i}` });
+        }
+      },
+    });
+    return (
       <Box
-        component="img"
-        loading="lazy" // TODO: 次の3ページまでは即時読み込みたい
-        my="auto"
+        id={`${i}`}
+        ref={(element: HTMLElement) => (refs.current[i] = element)}
+        key={i}
+        display="flex"
         mx="auto"
-        maxHeight="100%"
-        maxWidth="100%"
-        src={`/images/books/${book.id}/pages/${i}`}
-        display="block"
-      />
-    </Box>
-  ));
+        width="100%"
+        height="100%"
+        flexShrink={0}
+        sx={{ scrollSnapAlign: "start" }}
+      >
+        <Box
+          ref={ref}
+          component="img"
+          loading="lazy" // TODO: Load first 3 pages
+          my="auto"
+          mx="auto"
+          maxHeight="100%"
+          maxWidth="100%"
+          src={`/images/books/${book.id}/pages/${i}`}
+          display="block"
+        />
+      </Box>
+    );
+  });
 };
 
 const HorizontalBookView = (props: Props) => {
-  const topRef = useRef<HTMLElement>(null);
+  const refs = useRef<HTMLElement[]>([]);
+  const history = useHistory();
+  const [initialHash] = useState(location.hash);
+
   useEffect(() => {
-    topRef.current?.scrollIntoView();
-  }, [props.book]);
+    const pageIndex = parseInt(initialHash.substring(1));
+    if (!isNaN(pageIndex)) {
+      if (refs.current && refs.current[pageIndex]) {
+        refs.current[pageIndex].scrollIntoView();
+      }
+    }
+    //topRef.current?.scrollIntoView();
+  }, [props.book, initialHash]);
 
   return (
     <Box
@@ -56,8 +84,7 @@ const HorizontalBookView = (props: Props) => {
         overflowX: "auto",
       }}
     >
-      <span ref={topRef} />
-      {pages(props.book)}
+      {pages(props.book, history, refs)}
       <Box
         display="flex"
         flexDirection="column"

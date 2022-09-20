@@ -17,44 +17,59 @@ type Props = Readonly<{
   onRandom: () => void;
 }>;
 
+const Page = (
+  props: Readonly<{
+    index: number;
+    book: Book;
+    history: History;
+    refs: MutableRefObject<HTMLElement[]>;
+  }>
+) => {
+  const { ref } = useInView({
+    onChange: (inView) => {
+      if (inView) {
+        console.log(`replace hash ${props.index}`);
+        props.history.replace({
+          hash: props.index === 0 ? "" : `${props.index}`,
+        });
+      }
+    },
+  });
+  return (
+    <Box
+      id={`${props.index}`}
+      ref={(element: HTMLElement) =>
+        (props.refs.current[props.index] = element)
+      }
+      display="flex"
+      mx="auto"
+      width="100%"
+      height="100%"
+      flexShrink={0}
+      sx={{ scrollSnapAlign: "start" }}
+    >
+      <Box
+        ref={ref}
+        component="img"
+        loading="lazy" // TODO: Load first 3 pages
+        my="auto"
+        mx="auto"
+        maxHeight="100%"
+        maxWidth="100%"
+        src={`/images/books/${props.book.id}/pages/${props.index}`}
+        display="block"
+      />
+    </Box>
+  );
+};
+
 const pages = (
   book: Book,
   history: History,
   refs: MutableRefObject<HTMLElement[]>
 ) => {
   return [...Array(book.pageCount).keys()].map((i: number) => {
-    const { ref } = useInView({
-      onChange: (inView) => {
-        if (inView) {
-          history.replace({ hash: i === 0 ? "" : `${i}` });
-        }
-      },
-    });
-    return (
-      <Box
-        id={`${i}`}
-        ref={(element: HTMLElement) => (refs.current[i] = element)}
-        key={i}
-        display="flex"
-        mx="auto"
-        width="100%"
-        height="100%"
-        flexShrink={0}
-        sx={{ scrollSnapAlign: "start" }}
-      >
-        <Box
-          ref={ref}
-          component="img"
-          loading="lazy" // TODO: Load first 3 pages
-          my="auto"
-          mx="auto"
-          maxHeight="100%"
-          maxWidth="100%"
-          src={`/images/books/${book.id}/pages/${i}`}
-          display="block"
-        />
-      </Box>
-    );
+    return <Page key={i} index={i} book={book} history={history} refs={refs} />;
   });
 };
 
@@ -65,10 +80,12 @@ const HorizontalBookView = (props: Props) => {
 
   useEffect(() => {
     const pageIndex = parseInt(initialHash.substring(1));
-    if (!isNaN(pageIndex)) {
-      if (refs.current && refs.current[pageIndex]) {
-        refs.current[pageIndex].scrollIntoView();
-      }
+    if (!isNaN(pageIndex) && refs.current && refs.current[pageIndex]) {
+      refs.current[pageIndex].scrollIntoView();
+      console.log(`scroll to ${pageIndex}`);
+    } else if (refs.current && refs.current[0]) {
+      console.log(`scroll to 0`);
+      refs.current[0].scrollIntoView();
     }
   }, [props.book, initialHash]);
 

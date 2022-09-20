@@ -16,6 +16,7 @@ const pages = (book: Book) => {
   return [...Array(book.pageCount).keys()].map((i: number) => (
     <Box
       component="img"
+      loading="lazy"
       my={1}
       mx="auto"
       display="block"

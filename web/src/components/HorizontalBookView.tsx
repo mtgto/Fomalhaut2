@@ -27,6 +27,7 @@ const pages = (book: Book) => {
     >
       <Box
         component="img"
+        loading="lazy" // TODO: 次の3ページまでは即時読み込みたい
         my="auto"
         mx="auto"
         maxHeight="100%"

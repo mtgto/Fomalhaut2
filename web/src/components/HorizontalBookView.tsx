@@ -26,7 +26,7 @@ const pages = (
     const { ref } = useInView({
       onChange: (inView) => {
         if (inView) {
-          history.replace({ hash: `${i}` });
+          history.replace({ hash: i === 0 ? "" : `${i}` });
         }
       },
     });
@@ -70,7 +70,6 @@ const HorizontalBookView = (props: Props) => {
         refs.current[pageIndex].scrollIntoView();
       }
     }
-    //topRef.current?.scrollIntoView();
   }, [props.book, initialHash]);
 
   return (

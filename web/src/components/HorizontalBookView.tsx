@@ -3,7 +3,7 @@
 
 import Box from "@mui/material/Box";
 import type { History } from "history";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { useHistory } from "rocon/react";
 import { Book } from "../domain/book";
@@ -28,7 +28,6 @@ const Page = (
   const { ref } = useInView({
     onChange: (inView) => {
       if (inView) {
-        console.log(`replace hash ${props.index}`);
         props.history.replace({
           hash: props.index === 0 ? "" : `${props.index}`,
         });
@@ -76,18 +75,15 @@ const pages = (
 const HorizontalBookView = (props: Props) => {
   const refs = useRef<HTMLElement[]>([]);
   const history = useHistory();
-  const [initialHash] = useState(location.hash);
 
   useEffect(() => {
-    const pageIndex = parseInt(initialHash.substring(1));
+    const pageIndex = parseInt(location.hash.substring(1));
     if (!isNaN(pageIndex) && refs.current && refs.current[pageIndex]) {
       refs.current[pageIndex].scrollIntoView();
-      console.log(`scroll to ${pageIndex}`);
     } else if (refs.current && refs.current[0]) {
-      console.log(`scroll to 0`);
       refs.current[0].scrollIntoView();
     }
-  }, [props.book, initialHash]);
+  }, [props.book]);
 
   return (
     <Box

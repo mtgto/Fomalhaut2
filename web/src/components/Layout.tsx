@@ -5,6 +5,8 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SwipeDownIcon from "@mui/icons-material/SwipeDown";
+import SwipeLeftIcon from "@mui/icons-material/SwipeLeft";
+import SwipeRightIcon from "@mui/icons-material/SwipeRight";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -199,7 +201,7 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
               onClick={() => dispatch(setViewMode("left"))}
             >
               <ListItemIcon>
-                <SwipeDownIcon />
+                <SwipeLeftIcon />
               </ListItemIcon>
               <ListItemText>{message.viewMode.left}</ListItemText>
             </ListItemButton>
@@ -208,7 +210,7 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
               onClick={() => dispatch(setViewMode("right"))}
             >
               <ListItemIcon>
-                <SwipeDownIcon />
+                <SwipeRightIcon />
               </ListItemIcon>
               <ListItemText>{message.viewMode.right}</ListItemText>
             </ListItemButton>

@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v1.4.1 (2022-09-24)
+
+### Added
+
+- Enable to hide web sharing sheet
+
+### Changed
+
+- Fix wrong icons in settings of web view
+- Update Realm from 11.17.0 to 12.7.0
+- Update RealmSwift from 10.26.0 to 10.30.0
+- Update swift-nio from 2.40.0 to 2.41.1
+- Update Unrar.swift from 0.3.10 to 0.3.11
+- Update ZIPFoundation from 0.9.14 to 0.9.15
+- Update web packages
+
 ## v1.4.0 (2022-09-19)
 
 ### Added

@@ -29,7 +29,7 @@ class Book: Object, Encodable {
   }
 
   enum CodingKeys: String, CodingKey {
-    case id, name, readCount, like, pageCount
+    case id, name, readCount, like, pageCount, isRightToLeft
   }
 
   func encode(to encoder: Encoder) throws {
@@ -39,6 +39,7 @@ class Book: Object, Encodable {
     try container.encode(self.readCount, forKey: .readCount)
     try container.encode(self.like, forKey: .like)
     try container.encode(self.pageCount, forKey: .pageCount)
+    try container.encode(self.isRightToLeft, forKey: .isRightToLeft)
   }
 
   func resolveURL(bookmarkDataIsStale: inout Bool) throws -> URL {

@@ -22,7 +22,14 @@ import {
 import Routes from "./Routes";
 
 const parseBook = (book: Book): Book =>
-  new Book(book.id, book.name, book.pageCount, book.readCount, book.like);
+  new Book(
+    book.id,
+    book.name,
+    book.pageCount,
+    book.readCount,
+    book.like,
+    book.isRightToLeft
+  );
 
 const App: React.FunctionComponent = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -62,15 +69,12 @@ const App: React.FunctionComponent = () => {
   );
 
   useEffect(() => {
-    let unmounted = false;
     // Fetch All books
     async function fetchBooks() {
       const books = await fetch("/api/v1/books")
         .then((response) => response.json())
         .then((books: Book[]) => books.map((book) => parseBook(book)));
-      if (!unmounted) {
-        dispatch(setBooks(books));
-      }
+      dispatch(setBooks(books));
     }
     async function fetchCollections() {
       const collections: Collection[] = await fetch("/api/v1/collections")
@@ -85,9 +89,7 @@ const App: React.FunctionComponent = () => {
               )
           )
         );
-      if (!unmounted) {
-        dispatch(setCollections(collections));
-      }
+      dispatch(setCollections(collections));
     }
     dispatch(setLoading(LoadingState.Loading));
     Promise.all([fetchBooks(), fetchCollections()])
@@ -96,9 +98,6 @@ const App: React.FunctionComponent = () => {
         console.error(error);
         dispatch(setLoading(LoadingState.Error));
       });
-    return () => {
-      unmounted = true;
-    };
   }, []);
 
   return (

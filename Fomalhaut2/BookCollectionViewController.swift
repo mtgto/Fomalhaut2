@@ -389,11 +389,13 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     // TODO: what selection is best...?
     if let book = self.selectedBooks().first {
       var bookmarkDataIsStale = false
-      if let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) {
+      do {
+        let url = try book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale)
         _ = url.startAccessingSecurityScopedResource()
         NSWorkspace.shared.activateFileViewerSelecting([url])
         url.stopAccessingSecurityScopedResource()
-      } else {
+      } catch {
+        log.error("Error while resolving URL: \(error)")
         let message = NSLocalizedString("ErrorUnresolvedBookmarkData", comment: "This book might be deleted.")
         self.showModalDialog(message: message, information: "")
       }

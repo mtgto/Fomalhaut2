@@ -8,6 +8,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
   private let disposeBag = DisposeBag()
   @IBOutlet weak var collectionViewStyleSegmentedControl: NSSegmentedControl!
   @IBOutlet weak var searchField: NSSearchField!
+  @IBOutlet weak var webSharingButton: NSButton!
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -25,6 +26,18 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
     self.searchField.rx.text.asDriver()
       .drive(onNext: { text in
         bookCollectionViewController.searchText.accept(text)
+      })
+      .disposed(by: self.disposeBag)
+    WebSharing.shared.started
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { started in
+        if started {
+          self.webSharingButton.title = NSLocalizedString("WebSharingStop", comment: "Stop WebSharing")
+          self.webSharingButton.image = NSImage(named: "NSStatusAvailable")
+        } else {
+          self.webSharingButton.title = NSLocalizedString("WebSharingStart", comment: "Start WebSharing…")
+          self.webSharingButton.image = nil
+        }
       })
       .disposed(by: self.disposeBag)
     // NOTE: windowFrameAutosaveName should be different from NSWindow's autosave name
@@ -63,8 +76,22 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
   }
 
   @IBAction func startWebServer(_ sender: Any) {
-    let vc = WebSharingViewController(nibName: WebSharingViewController.className(), bundle: nil)
-    self.contentViewController?.presentAsSheet(vc)
+    if WebSharing.shared.started.value {
+      self.webSharingButton.isEnabled = false
+      WebSharing.shared.stop { error in
+        DispatchQueue.main.async {
+          self.webSharingButton.isEnabled = true
+        }
+        log.debug("Stopped WebSharing")
+        if let error = error {
+          // TODO: Show alert
+          log.error("Error while stopping web sharing: \(error)")
+        }
+      }
+    } else {
+      let vc = WebSharingViewController(nibName: WebSharingViewController.className(), bundle: nil)
+      self.contentViewController?.presentAsSheet(vc)
+    }
   }
 
   @IBAction func openRandomBook(_ sender: Any) {

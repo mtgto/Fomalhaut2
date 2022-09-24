@@ -8,7 +8,6 @@ import RxSwift
 class WebSharingViewController: NSViewController {
   static let webServerPortKey = "webServerPort"
   static let webServerAutoSuspendKey = "webServerAutoSuspend"
-  private let webSharing = WebSharing()
   private let dateFormatter = DateFormatter()
   private var timeoutDisposable: Disposable? = nil
   private let disposeBag = DisposeBag()
@@ -39,14 +38,13 @@ class WebSharingViewController: NSViewController {
         self.timeoutDisposable?.dispose()
         if started {
           log.info("Stop WebServer...")
-          self.webSharing.stop { (error) in
+          WebSharing.shared.stop { (error) in
             DispatchQueue.main.async {
               self.portTextField.isEnabled = true
-              self.closeButton.isEnabled = true
               self.openBrowserButton.isEnabled = false
               self.toggleWebServerButton.title = NSLocalizedString("Start", comment: "Start")
               self.timeoutCheckboxButton.isEnabled = true
-              WebSharing.remoteAddress.accept("")
+              WebSharing.shared.remoteAddress.accept("")
             }
           }
           return false
@@ -55,7 +53,7 @@ class WebSharingViewController: NSViewController {
             log.info("Start WebServer (port = \(portNumber))")
             if self.timeoutCheckboxButton.state == .on {
               // Close web sharing automatically after 10 minutes since last access
-              self.timeoutDisposable = WebSharing.remoteAddress
+              self.timeoutDisposable = WebSharing.shared.remoteAddress
                 .debounce(.seconds(60 * 10), scheduler: MainScheduler.instance)
                 .take(1)
                 .asSingle()
@@ -66,11 +64,10 @@ class WebSharingViewController: NSViewController {
               self.timeoutDisposable?.disposed(by: self.disposeBag)
             }
             do {
-              try self.webSharing.start(port: portNumber)
+              try WebSharing.shared.start(port: portNumber)
               self.informationLabel.stringValue = ""
               UserDefaults.standard.set(Int(portNumber), forKey: WebSharingViewController.webServerPortKey)
               self.portTextField.isEnabled = false
-              self.closeButton.isEnabled = false
               self.openBrowserButton.isEnabled = true
               self.toggleWebServerButton.title = NSLocalizedString("Stop", comment: "Stop")
               self.timeoutCheckboxButton.isEnabled = false
@@ -84,7 +81,7 @@ class WebSharingViewController: NSViewController {
       }
       .subscribe()
       .disposed(by: self.disposeBag)
-    WebSharing.remoteAddress
+    WebSharing.shared.remoteAddress
       .observe(on: MainScheduler.instance)
       .distinctUntilChanged()
       .subscribe(onNext: { remoteAddress in
@@ -100,7 +97,6 @@ class WebSharingViewController: NSViewController {
   }
 
   @IBAction func close(_ sender: Any) {
-    self.webSharing.stop()
     self.presentingViewController?.dismiss(self)
   }
 

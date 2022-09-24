@@ -16,9 +16,10 @@ private let noCache = "no-cache"
 private let contentTypeJpeg = "image/jpeg"
 
 class WebSharing: NSObject {
-  static let remoteAddress = PublishRelay<String>()
+  static let shared = WebSharing()
+  let remoteAddress = PublishRelay<String>()
+  let started = BehaviorRelay<Bool>(value: false)
   private let server = App()
-  private(set) var started: Bool = false
   private var collections: [Collection] = []
   private var books: [Book] = []
   private let cache = NSCache<NSString, CombineArchiver>()
@@ -194,7 +195,7 @@ class WebSharing: NSObject {
       .observe(on: MainScheduler.asyncInstance)
       .subscribe { event in
         if let ipAddress = event.element {
-          WebSharing.remoteAddress.accept(ipAddress)
+          WebSharing.shared.remoteAddress.accept(ipAddress)
         }
       }
       .disposed(by: self.disposeBag)
@@ -211,14 +212,14 @@ class WebSharing: NSObject {
   func start(port: Int = 8080) throws {
     try self.server.start(port)
     log.info("WebServer started. port = \(port)")
-    self.started = true
+    self.started.accept(true)
   }
 
   func stop(callback: ((Error?) -> Void)? = nil) {
-    if self.started {
+    if self.started.value {
       self.server.stop { (error) in
         log.info("WebServer is stopped")
-        self.started = false
+        self.started.accept(false)
         callback?(error)
       }
       log.info("WebServer is stopping.")

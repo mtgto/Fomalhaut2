@@ -41,3 +41,6 @@
 "AlertMessageTextDeleteCollection" = "Do you delete a selected collection?";
 "Cancel" = "Cancel";
 "Delete" = "Delete";
+
+"WebSharingStart" = "Start WebSharing…";
+"WebSharingStop" = "Stop WebSharing";

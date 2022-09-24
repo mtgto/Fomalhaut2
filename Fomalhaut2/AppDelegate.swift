@@ -10,6 +10,7 @@ let log = Shared.log
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+  @IBOutlet weak var webSharingMenuItem: NSMenuItem!
   private let disposeBag = DisposeBag()
 
   override init() {
@@ -45,6 +46,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       alert.runModal()
       NSApp.terminate(nil)
     }
+    WebSharing.shared.started
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { started in
+        if started {
+          self.webSharingMenuItem.title = NSLocalizedString("WebSharingStop", comment: "Stop WebSharing")
+        } else {
+          self.webSharingMenuItem.title = NSLocalizedString("WebSharingStart", comment: "Start WebSharing…")
+        }
+      })
+      .disposed(by: self.disposeBag)
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {

@@ -100,3 +100,5 @@
 /* (No Comment) */
 "WebSharingTimeout" = "しばらくアクセスがなかったためWeb共有を停止しました";
 
+"WebSharingStart" = "Web共有を開始…";
+"WebSharingStop" = "Web共有を停止";

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="89S-Z6-qTv">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -507,7 +507,11 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Fomalhaut2" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Fomalhaut2" customModuleProvider="target">
+                    <connections>
+                        <outlet property="webSharingMenuItem" destination="JCM-nt-Spv" id="fQj-5T-Yqa"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -575,9 +579,9 @@
                                 <toolbarItem implicitItemIdentifier="E6A704CB-20B4-4B7C-9453-6015965140DC" label="Web Sharing" paletteLabel="Web Sharing" title="Web Sharing" sizingBehavior="auto" id="tys-GO-6x8">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="QqI-I0-ZUK">
-                                        <rect key="frame" x="0.0" y="14" width="111" height="32"/>
+                                        <rect key="frame" x="0.0" y="14" width="131" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <buttonCell key="cell" type="push" title="Web Sharing" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HBl-ak-bCB">
+                                        <buttonCell key="cell" type="push" title="Web Sharing" bezelStyle="rounded" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HBl-ak-bCB">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -620,6 +624,7 @@
                     <connections>
                         <outlet property="collectionViewStyleSegmentedControl" destination="WnA-DQ-KgP" id="JBc-KN-nlO"/>
                         <outlet property="searchField" destination="3G3-IO-GLY" id="pVp-Bv-RXY"/>
+                        <outlet property="webSharingButton" destination="QqI-I0-ZUK" id="jx1-C2-GNJ"/>
                         <segue destination="mTF-4H-rG1" kind="relationship" relationship="window.shadowedContentViewController" id="gBX-sP-150"/>
                     </connections>
                 </windowController>

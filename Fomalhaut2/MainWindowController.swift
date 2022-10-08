@@ -83,7 +83,7 @@ class MainWindowController: NSWindowController, NSWindowDelegate, NSMenuItemVali
           self.webSharingButton.isEnabled = true
         }
         log.debug("Stopped WebSharing")
-        if let error = error {
+        if let error {
           // TODO: Show alert
           log.error("Error while stopping web sharing: \(error)")
         }

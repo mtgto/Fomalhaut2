@@ -154,7 +154,7 @@ class SpreadPageViewController: NSViewController {
       }
       self.like
         .subscribe(onNext: { like in
-          if let like = like {
+          if let like {
             try? document.setLike(like)
           }
         })

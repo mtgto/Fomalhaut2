@@ -84,7 +84,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
             keyPath: $0.key!, ascending: $0.ascending)
         }
         let realm = try! Realm()
-        if let collectionContent = collectionContent {
+        if let collectionContent {
           switch collectionContent {
           case .filter(let filter):
             let predicate: NSPredicate = self.predicateFrom(searchText: searchText, filterPredicate: filter.predicate)
@@ -102,7 +102,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { (collectionContent, searchText, order) in
         let realm = try! Realm()
-        if let collectionContent = collectionContent {
+        if let collectionContent {
           switch collectionContent {
           case .filter(let filter):
             let predicate: NSPredicate = self.predicateFrom(searchText: searchText, filterPredicate: filter.predicate)
@@ -123,7 +123,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .map { $0.1 }
       .withUnretained(self)
       .subscribe(onNext: { (owner, changes) in
-        if let changes = changes {
+        if let changes {
           owner.collectionView.applyChangeset(changes)
         } else {
           owner.collectionView.reloadData()
@@ -136,7 +136,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .map { $0.1 }
       .withUnretained(self)
       .subscribe(onNext: { owner, changes in
-        if let changes = changes {
+        if let changes {
           owner.tableView.applyChangeset(changes)
         } else {
           owner.tableView.reloadData()
@@ -179,13 +179,15 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .disposed(by: self.disposeBag)
     UserDefaults.standard.rx
       .observe(Int.self, CollectionViewHeaderView.itemSizeIndexKey)
-      .withUnretained(self)
-      .subscribe(onNext: { owner, itemSizeIndex in
-        if let itemSizeIndex = itemSizeIndex {
-          owner.collectionView.collectionViewLayout = owner.createLayout(
-            itemSize: CollectionViewHeaderView.itemSizes[itemSizeIndex])
+      .subscribe(
+        with: self,
+        onNext: { owner, itemSizeIndex in
+          if let itemSizeIndex {
+            owner.collectionView.collectionViewLayout = owner.createLayout(
+              itemSize: CollectionViewHeaderView.itemSizes[itemSizeIndex])
+          }
         }
-      })
+      )
       .disposed(by: self.disposeBag)
     super.viewDidLoad()
   }
@@ -193,26 +195,28 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   override func viewDidAppear() {
     var progressViewController: ProgressViewController? = nil
     Schema.shared.state
-      .withUnretained(self)
       .observe(on: MainScheduler.instance)
-      .subscribe(onNext: { owner, state in
-        switch state {
-        case .start:
-          progressViewController = ProgressViewController(
-            nibName: ProgressViewController.className(), bundle: nil)
-          owner.presentAsSheet(progressViewController!)
-        case .finish:
-          if let progressViewController = progressViewController {
-            self.dismiss(progressViewController)
+      .subscribe(
+        with: self,
+        onNext: { owner, state in
+          switch state {
+          case .start:
+            progressViewController = ProgressViewController(
+              nibName: ProgressViewController.className(), bundle: nil)
+            owner.presentAsSheet(progressViewController!)
+          case .finish:
+            if let progressViewController {
+              self.dismiss(progressViewController)
+            }
           }
         }
-      })
+      )
       .disposed(by: self.disposeBag)
   }
 
   func predicateFrom(searchText: String?, filterPredicate: NSPredicate?) -> NSPredicate {
     let searchPredicate: NSPredicate?
-    if let searchText = searchText, !searchText.isEmpty {
+    if let searchText, !searchText.isEmpty {
       searchPredicate = NSPredicate(format: "name CONTAINS[c] %@", searchText)
     } else {
       searchPredicate = nil
@@ -259,12 +263,12 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
           defer {
             url.stopAccessingSecurityScopedResource()
           }
-          if let error = error {
+          if let error {
             // TODO: show error dialog
             log.error("Error while open a book at \(url.path): \(error)")
             single(.failure(error))
           } else {
-            guard let document = document else {
+            guard let document else {
               log.error("Failed to open a document: \(url.path)")
               single(.failure(BookCollectionViewControllerError.openFailure))
               return

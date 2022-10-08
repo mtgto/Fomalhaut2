@@ -35,7 +35,7 @@ public class CombineArchiver: Archiver {
       log.error("Failed to open a file \(url.path)")
       return nil
     }
-    if let archiver = archiver {
+    if let archiver {
       self.archiver = archiver
     } else {
       return nil

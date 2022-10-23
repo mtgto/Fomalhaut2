@@ -254,6 +254,14 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   }
 
   func open(_ book: Book) -> Single<Void> {
+    do {
+      let realm = try Realm()
+      try realm.write {
+        book.readCount = book.readCount + 1
+      }
+    } catch {
+      print(error)
+    }
     return Single.create { single in
       self.resolveBookURL(book).subscribe { url in
         let success = url.startAccessingSecurityScopedResource()
@@ -276,15 +284,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
             if documentWasAlreadyOpen {
               document.showWindows()
             } else {
-              if let document = document as? BookDocument, let realm = try? Realm() {
-                do {
-                  try realm.write {
-                    book.readCount = book.readCount + 1
-                  }
-                } catch {
-                  single(.failure(error))
-                  return
-                }
+              if let document = document as? BookDocument {
                 document.book = book.freeze()
               }
               document.makeWindowControllers()
@@ -298,6 +298,12 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       }.disposed(by: self.disposeBag)
       return Disposables.create()
     }
+    //    .do(onSuccess: {
+    //      let realm = try Realm()
+    //      try realm.write {
+    //        book.readCount = book.readCount + 1
+    //      }
+    //    })
   }
 
   func showModalDialog(message: String, information: String) {

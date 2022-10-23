@@ -254,14 +254,6 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
   }
 
   func open(_ book: Book) -> Single<Void> {
-    do {
-      let realm = try threadLocalRealm()
-      try realm.write {
-        book.readCount = book.readCount + 1
-      }
-    } catch {
-      print(error)
-    }
     return Single.create { single in
       self.resolveBookURL(book).subscribe { url in
         let success = url.startAccessingSecurityScopedResource()
@@ -298,12 +290,27 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       }.disposed(by: self.disposeBag)
       return Disposables.create()
     }
-    //    .do(onSuccess: {
-    //      let realm = try Realm()
-    //      try realm.write {
-    //        book.readCount = book.readCount + 1
-    //      }
-    //    })
+    .flatMap { self.incrementReadCount(book: book) }
+  }
+
+  func incrementReadCount(book: Book) -> Single<Void> {
+    return Single.create { single in
+      do {
+        let realm = try threadLocalRealm()
+        realm.writeAsync {
+          book.readCount = book.readCount + 1
+        } onComplete: { error in
+          if let error {
+            single(.failure(error))
+          } else {
+            single(.success(()))
+          }
+        }
+      } catch {
+        single(.failure(error))
+      }
+      return Disposables.create()
+    }
   }
 
   func showModalDialog(message: String, information: String) {
@@ -365,7 +372,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         self.tableView.selectRowIndexes([index], byExtendingSelection: false)
       }
     } onFailure: { error in
-      log.error("Error while open a book: \(error)")
+      log.error("Error while open a random book: \(error)")
       NSAlert(error: error).runModal()
     }.disposed(by: self.disposeBag)
   }

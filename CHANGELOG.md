@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v1.4.2 (2022-10-23)
+
+### Changed
+
+- Fix crash while open a book randomly
+
 ## v1.4.1 (2022-09-24)
 
 ### Added

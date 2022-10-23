@@ -141,7 +141,7 @@ class SpreadPageViewController: NSViewController {
       if let isLike = document.isLike() {
         self.like.accept(isLike)
       }
-      if let realm = try? Realm(), let bookId = document.book?.id {
+      if let realm = try? threadLocalRealm(), let bookId = document.book?.id {
         if let book = realm.object(ofType: Book.self, forPrimaryKey: bookId) {
           Observable.from(object: book, properties: ["like"])
             .map { $0.like }

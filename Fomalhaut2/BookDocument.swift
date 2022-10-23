@@ -35,7 +35,7 @@ class BookDocument: NSDocument {
     lastPageIndex: Int, isRightToLeft: Bool, shiftedSignlePage: Bool, manualViewHeight: CGFloat?
   ) throws {
     if let selfBook = self.book {
-      let realm = try Realm()
+      let realm = try threadLocalRealm()
       if let book = realm.object(ofType: Book.self, forPrimaryKey: selfBook.id) {
         try realm.write {
           book.lastPageIndex = lastPageIndex
@@ -52,7 +52,7 @@ class BookDocument: NSDocument {
 
   func setLike(_ like: Bool) throws {
     if let selfBook = self.book {
-      let realm = try Realm()
+      let realm = try threadLocalRealm()
       if let book = realm.object(ofType: Book.self, forPrimaryKey: selfBook.id) {
         try realm.write {
           book.like = like
@@ -67,7 +67,7 @@ class BookDocument: NSDocument {
       throw ArchiverError.brokenFile
     }
     self.archiver = archiver
-    let realm = try Realm()
+    let realm = try threadLocalRealm()
     if let book = realm.objects(Book.self).filter("filePath = %@", url.path).first {
       self.book = book.freeze()
     } else {
@@ -113,7 +113,7 @@ class BookDocument: NSDocument {
   }
 
   func setBookThumbnail(_ image: NSImage) throws {
-    let realm = try Realm()
+    let realm = try threadLocalRealm()
     if let book = realm.object(ofType: Book.self, forPrimaryKey: self.book!.id) {
       if book.thumbnailData == nil {
         if let data = image.resizedImageFixedAspectRatio(

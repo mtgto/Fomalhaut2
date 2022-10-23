@@ -83,7 +83,7 @@ class Schema {
     // start migration if need.
     // NOTE: If database version is newer than schemaVersion, an exception is raised.
     // ex. "Provided schema version 1 is less than last set version 2."
-    let realm = try Realm()
+    let realm = try threadLocalRealm()
     if needReorderCollection {
       let collections = realm.objects(Collection.self).sorted(byKeyPath: "createdAt")
       try realm.write {

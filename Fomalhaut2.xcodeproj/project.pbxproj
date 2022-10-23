@@ -12,6 +12,7 @@
 		CE30281025305AA200986C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE30280F25305AA200986C9A /* Assets.xcassets */; };
 		CE30281325305AA200986C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30281125305AA200986C9A /* Main.storyboard */; };
 		CE38431B25F4E19500262E4E /* FilterList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE38431D25F4E19500262E4E /* FilterList.storyboard */; };
+		CE4309572904E85B00560957 /* Realm+ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4309562904E85B00560957 /* Realm+ThreadLocal.swift */; };
 		CE46413C25EA19A7004F0F0D /* PageOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34A41825BC105800B4C0B5 /* PageOrder.swift */; };
 		CE4641AA25EA7F33004F0F0D /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = CE4641A925EA7F33004F0F0D /* RxRealm */; };
 		CE4641B025EA7F79004F0F0D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CE4641AF25EA7F79004F0F0D /* RxCocoa */; };
@@ -169,6 +170,7 @@
 		CE34A41825BC105800B4C0B5 /* PageOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOrder.swift; sourceTree = "<group>"; };
 		CE38431C25F4E19500262E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FilterList.storyboard; sourceTree = "<group>"; };
 		CE38432125F4E19900262E4E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FilterList.strings; sourceTree = "<group>"; };
+		CE4309562904E85B00560957 /* Realm+ThreadLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+ThreadLocal.swift"; sourceTree = "<group>"; };
 		CE4641C925EB6E45004F0F0D /* CollectionOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionOrder.swift; sourceTree = "<group>"; };
 		CE654D752537E9520051D575 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		CE7A1C57271A7B9800177824 /* SevenZipArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenZipArchiver.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				CEEFC6612580F5DB008D9636 /* assets.zip */,
 				CEE5474F259F515400F9AA30 /* defaultThumbnail.jpg */,
 				CEA994842560E06400B8BCC6 /* Localizable.strings */,
+				CE4309562904E85B00560957 /* Realm+ThreadLocal.swift */,
 			);
 			path = Fomalhaut2;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */,
+				CE4309572904E85B00560957 /* Realm+ThreadLocal.swift in Sources */,
 				CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */,
 				CEE4D82F25E240B1003B8EB2 /* Preferences.swift in Sources */,
 				CEB2DA52253E9384002C3F7E /* Filter.swift in Sources */,

@@ -101,7 +101,7 @@ class WebSharing: NSObject {
 
       post("/api/v1/books/:id/like") { req in
         self.recordAccess(req)
-        guard let realm = try? Realm() else {
+        guard let realm = try? threadLocalRealm() else {
           return self.internalServerError
         }
         guard let book = realm.object(ofType: Book.self, forPrimaryKey: req.params("id")) else {
@@ -119,7 +119,7 @@ class WebSharing: NSObject {
 
       post("/api/v1/books/:id/dislike") { req in
         self.recordAccess(req)
-        guard let realm = try? Realm() else {
+        guard let realm = try? threadLocalRealm() else {
           return self.internalServerError
         }
         guard let book = realm.object(ofType: Book.self, forPrimaryKey: req.params("id")) else {
@@ -227,7 +227,7 @@ class WebSharing: NSObject {
   }
 
   private func setup() {
-    let realm = try! Realm()
+    let realm = try! threadLocalRealm()
     Observable.array(from: realm.objects(Collection.self).sorted(byKeyPath: "order"))
       .withUnretained(self)
       .subscribe(onNext: { owner, collections in

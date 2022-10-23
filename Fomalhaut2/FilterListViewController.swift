@@ -37,7 +37,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
       .skip { $0 != .finish }
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { _ in
-        let realm = try! Realm()
+        let realm = try! threadLocalRealm()
         self.collections.accept(realm.objects(Collection.self).sorted(byKeyPath: "order"))
         let selectedCollectionContentId = UserDefaults.standard.string(
           forKey: FilterListViewController.selectedCollectionContentIdKey)
@@ -100,7 +100,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     collection.name = NSLocalizedString("NewCollection", comment: "New Collection")
     collection.order = self.collections.value?.count ?? 0
     do {
-      let realm = try Realm()
+      let realm = try threadLocalRealm()
       try realm.write {
         realm.add(collection)
       }
@@ -116,7 +116,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
       self.filterListView.removeItems(at: IndexSet([index]), inParent: self.rootItems[1])
     }
     do {
-      let realm = try Realm()
+      let realm = try threadLocalRealm()
       try realm.write {
         self.collections.value?.forEach({ col in
           if col.order > collection.order {
@@ -134,7 +134,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
     let newCollection = collection.duplicate()
     newCollection.order = collection.order + 1
     do {
-      let realm = try Realm()
+      let realm = try threadLocalRealm()
       try realm.write {
         self.collections.value?.forEach({ col in
           if col.order > collection.order {
@@ -260,7 +260,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
   func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int)
     -> Bool
   {
-    guard let realm = try? Realm() else {
+    guard let realm = try? threadLocalRealm() else {
       // TODO: Show alert
       log.error("Failed to initialize Realm")
       return false
@@ -417,7 +417,7 @@ extension FilterListViewController: NSControlTextEditingDelegate {
     {
       textField.isEditable = false
       do {
-        try Realm().write {
+        try threadLocalRealm().write {
           collection.name = textField.stringValue
         }
       } catch {

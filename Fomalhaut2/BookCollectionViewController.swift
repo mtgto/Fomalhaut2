@@ -83,7 +83,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
           SortDescriptor(
             keyPath: $0.key!, ascending: $0.ascending)
         }
-        let realm = try! Realm()
+        let realm = try! threadLocalRealm()
         if let collectionContent {
           switch collectionContent {
           case .filter(let filter):
@@ -101,7 +101,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       .flatMap { _ in Observable.combineLatest(CollectionContent.selected, self.searchText, self.collectionOrder) }
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { (collectionContent, searchText, order) in
-        let realm = try! Realm()
+        let realm = try! threadLocalRealm()
         if let collectionContent {
           switch collectionContent {
           case .filter(let filter):
@@ -234,7 +234,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         if bookmarkDataIsStale {
           log.info("Regenerate book.bookmark of \(url.path)")
           do {
-            let realm = try Realm()
+            let realm = try threadLocalRealm()
             try realm.write {
               book.bookmark = try url.bookmarkData(options: [.withSecurityScope, .securityScopeAllowOnlyReadAccess])
             }
@@ -255,7 +255,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
 
   func open(_ book: Book) -> Single<Void> {
     do {
-      let realm = try Realm()
+      let realm = try threadLocalRealm()
       try realm.write {
         book.readCount = book.readCount + 1
       }
@@ -414,7 +414,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
 
   @objc func toggleLike(_ sender: Any) {
     do {
-      let realm = try Realm()
+      let realm = try threadLocalRealm()
       try realm.write {
         self.selectedBooks().forEach { book in
           book.like = !book.like
@@ -428,7 +428,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
 
   @objc func markUnread(_ sender: Any) {
     do {
-      let realm = try Realm()
+      let realm = try threadLocalRealm()
       try realm.write {
         self.selectedBooks().forEach { book in
           book.readCount = 0
@@ -445,7 +445,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     if case .collection(let collection) = CollectionContent.selected.value {
       let indexes = books.compactMap { collection.books.index(of: $0) }
       do {
-        let realm = try Realm()
+        let realm = try threadLocalRealm()
         try realm.write {
           collection.books.remove(atOffsets: IndexSet(indexes))
         }
@@ -513,7 +513,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     if validExtensionFileURLs.isEmpty {
       return false
     }
-    guard let realm = try? Realm() else {
+    guard let realm = try? threadLocalRealm() else {
       log.error("Failed to initialize Realm")
       return true
     }

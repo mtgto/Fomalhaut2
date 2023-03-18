@@ -126,7 +126,26 @@ const sortBooks = (
   sortOrder: SortOrder,
   books: ReadonlyArray<Book>
 ): ReadonlyArray<Book> => {
-  return books;
+  return [...books].sort((a: Book, b: Book): number => {
+    switch (sortOrder) {
+      case "name":
+        if (a.name < b.name) {
+          return -1;
+        } else if (a.name > b.name) {
+          return 1;
+        } else {
+          return 0;
+        }
+      case "readCount": // order by desc
+        if (a.readCount < b.readCount) {
+          return 1;
+        } else if (a.readCount > b.readCount) {
+          return -1;
+        } else {
+          return 0;
+        }
+    }
+  });
 };
 
 export const initialState: State = {
@@ -158,7 +177,7 @@ export const reducer = (state: State, action: Actions): State => {
     case SetCollections:
       return { ...state, collections: action.payload };
     case SetBooks:
-      return { ...state, books: action.payload };
+      return { ...state, books: sortBooks(state.sortOrder, action.payload) };
     case ToggleLike:
       return {
         ...state,

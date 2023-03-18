@@ -35,7 +35,12 @@ import {
 } from "react";
 import { useLocation, useNavigate } from "rocon/react";
 import { message } from "../message.ts";
-import { LoadingState, setViewMode, StateContext } from "../reducer.ts";
+import {
+  LoadingState,
+  setViewMode,
+  setSortOrder,
+  StateContext,
+} from "../reducer.ts";
 import { collectionRoutes, filterRoutes } from "./Routes.tsx";
 // import ListItemLink from "./ListItemLink";
 
@@ -226,8 +231,8 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
             }
           >
             <ListItemButton
-              selected={state.viewMode === "vertical"}
-              onClick={() => dispatch(setViewMode("vertical"))}
+              selected={state.sortOrder === "name"}
+              onClick={() => dispatch(setSortOrder("name"))}
             >
               <ListItemIcon>
                 <SortByAlphaIcon />
@@ -235,8 +240,8 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
               <ListItemText>{message.sortOrder.name}</ListItemText>
             </ListItemButton>
             <ListItemButton
-              selected={state.viewMode === "vertical"}
-              onClick={() => dispatch(setViewMode("vertical"))}
+              selected={state.sortOrder === "readCount"}
+              onClick={() => dispatch(setSortOrder("readCount"))}
             >
               <ListItemIcon>
                 <BookIcon />

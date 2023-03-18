@@ -3,12 +3,12 @@
 
 import { useContext, useEffect } from "react";
 import { useNavigate } from "rocon/react";
-import { Book } from "../domain/book";
-import { Filter } from "../domain/filter";
-import { message } from "../message";
-import { setCurrentList, StateContext } from "../reducer";
-import Library from "./Library";
-import { filterRoutes } from "./Routes";
+import { Book } from "../domain/book.ts";
+import { Filter } from "../domain/filter.ts";
+import { message } from "../message.ts";
+import { setCurrentList, StateContext } from "../reducer.ts";
+import Library from "./Library.tsx";
+import { filterRoutes } from "./Routes.tsx";
 
 type Props = {
   readonly id: string;

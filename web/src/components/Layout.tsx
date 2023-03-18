@@ -4,6 +4,8 @@
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
+import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
+import BookIcon from "@mui/icons-material/Book";
 import SwipeDownIcon from "@mui/icons-material/SwipeDown";
 import SwipeLeftIcon from "@mui/icons-material/SwipeLeft";
 import SwipeRightIcon from "@mui/icons-material/SwipeRight";
@@ -32,9 +34,9 @@ import {
   useState,
 } from "react";
 import { useLocation, useNavigate } from "rocon/react";
-import { message } from "../message";
-import { LoadingState, setViewMode, StateContext } from "../reducer";
-import { collectionRoutes, filterRoutes } from "./Routes";
+import { message } from "../message.ts";
+import { LoadingState, setViewMode, StateContext } from "../reducer.ts";
+import { collectionRoutes, filterRoutes } from "./Routes.tsx";
 // import ListItemLink from "./ListItemLink";
 
 const drawerWidth = 200;
@@ -215,6 +217,32 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
               <ListItemText>{message.viewMode.right}</ListItemText>
             </ListItemButton>
             <Divider />
+          </List>
+          <List
+            subheader={
+              <ListSubheader disableSticky>
+                {message.sortOrder.header}
+              </ListSubheader>
+            }
+          >
+            <ListItemButton
+              selected={state.viewMode === "vertical"}
+              onClick={() => dispatch(setViewMode("vertical"))}
+            >
+              <ListItemIcon>
+                <SortByAlphaIcon />
+              </ListItemIcon>
+              <ListItemText>{message.sortOrder.name}</ListItemText>
+            </ListItemButton>
+            <ListItemButton
+              selected={state.viewMode === "vertical"}
+              onClick={() => dispatch(setViewMode("vertical"))}
+            >
+              <ListItemIcon>
+                <BookIcon />
+              </ListItemIcon>
+              <ListItemText>{message.sortOrder.readCount}</ListItemText>
+            </ListItemButton>
           </List>
         </SwipeableDrawer>
         <Snackbar

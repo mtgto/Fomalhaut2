@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import { Path, Search, useRoutes } from "rocon/react";
-import BookPage from "./Book";
-import CollectionPage from "./Collection";
-import FilterPage from "./Filter";
+import BookPage from "./Book.tsx";
+import CollectionPage from "./Collection.tsx";
+import FilterPage from "./Filter.tsx";
 
 export const bookRoutes = Path().any("id", {
   action: ({ id }) => {

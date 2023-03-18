@@ -8,8 +8,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect, useMemo, useReducer } from "react";
 import { RoconRoot } from "rocon/react";
-import { Book } from "../domain/book";
-import { Collection } from "../domain/collection";
+import { Book } from "../domain/book.ts";
+import { Collection } from "../domain/collection.ts";
 import {
   initialState,
   LoadingState,
@@ -18,8 +18,8 @@ import {
   setCollections,
   setLoading,
   StateContext,
-} from "../reducer";
-import Routes from "./Routes";
+} from "../reducer.ts";
+import Routes from "./Routes.tsx";
 
 const parseBook = (book: Book): Book =>
   new Book(

@@ -27,6 +27,11 @@ export type Message = Readonly<{
     right: string;
     vertical: string;
   }>;
+  sortOrder: Readonly<{
+    header: string;
+    name: string;
+    readCount: string;
+  }>;
 }>;
 
 export const ja: Message = {
@@ -55,6 +60,11 @@ export const ja: Message = {
     right: "右方向",
     vertical: "下方向",
   },
+  sortOrder: {
+    header: "順序",
+    name: "名前順",
+    readCount: "読んだ回数",
+  },
 };
 
 export const en: Message = {
@@ -82,6 +92,11 @@ export const en: Message = {
     left: "Left",
     right: "Right",
     vertical: "Down",
+  },
+  sortOrder: {
+    header: "Sort by",
+    name: "Name",
+    readCount: "View Count",
   },
 };
 

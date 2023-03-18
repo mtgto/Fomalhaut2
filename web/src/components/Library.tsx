@@ -6,9 +6,9 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 import Typography from "@mui/material/Typography";
-import { Book } from "../domain/book";
-import Cover from "./Cover";
-import Layout from "./Layout";
+import { Book } from "../domain/book.ts";
+import Cover from "./Cover.tsx";
+import Layout from "./Layout.tsx";
 
 type Props = {
   readonly id: string | undefined; // current id of collection or id of filter

@@ -13,13 +13,13 @@ import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import { useTheme } from "@mui/material/styles";
-import { Book } from "../domain/book";
-import { message } from "../message";
-import { StateContext, toggleLike } from "../reducer";
-import HorizontalBookView from "./HorizontalBookView";
-import Layout from "./Layout";
-import { bookRoutes } from "./Routes";
-import VerticalBookView from "./VerticalBookView";
+import { Book } from "../domain/book.ts";
+import { message } from "../message.ts";
+import { StateContext, toggleLike } from "../reducer.ts";
+import HorizontalBookView from "./HorizontalBookView.tsx";
+import Layout from "./Layout.tsx";
+import { bookRoutes } from "./Routes.tsx";
+import VerticalBookView from "./VerticalBookView.tsx";
 
 type Props = {
   readonly id: string;

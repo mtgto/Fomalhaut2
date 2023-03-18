@@ -3,11 +3,11 @@
 
 import { useContext, useEffect } from "react";
 import { useNavigate } from "rocon/react";
-import { Book } from "../domain/book";
-import { Collection } from "../domain/collection";
-import { setCurrentList, StateContext } from "../reducer";
-import Library from "./Library";
-import { collectionRoutes } from "./Routes";
+import { Book } from "../domain/book.ts";
+import { Collection } from "../domain/collection.ts";
+import { setCurrentList, StateContext } from "../reducer.ts";
+import Library from "./Library.tsx";
+import { collectionRoutes } from "./Routes.tsx";
 
 type Props = {
   readonly id: string;

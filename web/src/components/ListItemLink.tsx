@@ -1,8 +1,11 @@
+// SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
+// SPDX-License-Identifier: GPL-3.0-only
+
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { forwardRef, useMemo } from "react";
 import { Link as RoconLink } from "rocon/react";
-import { collectionRoutes, filterRoutes } from "./Routes";
+import { collectionRoutes, filterRoutes } from "./Routes.tsx";
 
 type Props = {
   primary: string;

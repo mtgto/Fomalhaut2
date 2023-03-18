@@ -6,8 +6,8 @@ import type { History } from "history";
 import { MutableRefObject, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { useHistory } from "rocon/react";
-import { Book } from "../domain/book";
-import NavigationPage from "./NavigationPage";
+import { Book } from "../domain/book.ts";
+import NavigationPage from "./NavigationPage.tsx";
 
 type Props = Readonly<{
   book: Book;

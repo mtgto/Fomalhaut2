@@ -1,10 +1,13 @@
+// SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
+// SPDX-License-Identifier: GPL-3.0-only
+
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { Book } from "../domain/book";
-import { message } from "../message";
+import { Book } from "../domain/book.ts";
+import { message } from "../message.ts";
 
 type Props = Readonly<{
   book: Book;

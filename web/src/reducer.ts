@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import React, { createContext } from "react";
-import { Book } from "./domain/book";
-import { Collection } from "./domain/collection";
-import { Filter } from "./domain/filter";
-import { message } from "./message";
+import { Book } from "./domain/book.ts";
+import { Collection } from "./domain/collection.ts";
+import { Filter } from "./domain/filter.ts";
+import { message } from "./message.ts";
 
 export const LoadingState = {
   Initial: 0,
@@ -14,7 +14,9 @@ export const LoadingState = {
   Error: 3,
 } as const;
 
-type LoadingStateType = typeof LoadingState[keyof typeof LoadingState];
+export type SortOrder = "name" | "readCount";
+
+type LoadingStateType = (typeof LoadingState)[keyof typeof LoadingState];
 
 export interface State {
   readonly loading: LoadingStateType;
@@ -23,6 +25,7 @@ export interface State {
   readonly books: ReadonlyArray<Book>;
   readonly selectedBookIds: ReadonlyArray<string>;
   readonly viewMode: "left" | "right" | "vertical";
+  readonly sortOrder: SortOrder;
 }
 
 const SetLoading = "SetLoading" as const;
@@ -31,6 +34,7 @@ const SetCollections = "SetCollections" as const;
 const ToggleLike = "ToggleLike" as const;
 const SetCurrentList = "SetCurrentList" as const;
 const SetViewMode = "SetViewMode" as const;
+const SetSortOrder = "SetSortOrder" as const;
 
 type Actions =
   | ReturnType<typeof setLoading>
@@ -38,7 +42,8 @@ type Actions =
   | ReturnType<typeof setCollections>
   | ReturnType<typeof toggleLike>
   | ReturnType<typeof setCurrentList>
-  | ReturnType<typeof setViewMode>;
+  | ReturnType<typeof setViewMode>
+  | ReturnType<typeof setSortOrder>;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const setLoading = (LoadingState: LoadingStateType) => ({
@@ -75,24 +80,53 @@ export const setViewMode = (viewMode: State["viewMode"]) => ({
   payload: viewMode,
 });
 
-const getViewMode = (): State["viewMode"] => {
+export const setSortOrder = (sortOrder: SortOrder) => ({
+  type: SetSortOrder,
+  payload: sortOrder,
+});
+
+const loadLocalStorage = (): {
+  viewMode: State["viewMode"];
+  sortOrder: SortOrder;
+} => {
   const value = localStorage.getItem("net.mtgto.Fomalhaut2");
+  let sortOrder: SortOrder = "name";
   if (value) {
     const obj = JSON.parse(value);
     const viewMode = obj["viewMode"];
+    const sortOrderRaw = obj["sortOrder"];
     if (
       viewMode === "left" ||
       viewMode === "right" ||
       viewMode === "vertical"
     ) {
-      return viewMode;
+      if (sortOrderRaw === "name" || sortOrderRaw === "readCount") {
+        sortOrder = sortOrderRaw;
+      }
+      return { viewMode, sortOrder };
     }
   }
-  return "right";
+  return { viewMode: "right", sortOrder };
 };
 
-const saveViewMode = (viewMode: State["viewMode"]) => {
-  localStorage.setItem("net.mtgto.Fomalhaut2", JSON.stringify({ viewMode }));
+const saveLocalStorage = (
+  viewMode: State["viewMode"],
+  sortOrder: SortOrder
+) => {
+  const item = localStorage.getItem("net.mtgto.Fomalhaut2");
+  if (item) {
+    localStorage.setItem(
+      "net.mtgto.Fomalhaut2",
+      JSON.stringify({ viewMode, sortOrder })
+    );
+  }
+};
+
+const sortBooks = (
+  sortOrder: SortOrder,
+  books: ReadonlyArray<Book>
+): ReadonlyArray<Book> => {
+  return books;
 };
 
 export const initialState: State = {
@@ -109,7 +143,7 @@ export const initialState: State = {
   ],
   books: [],
   selectedBookIds: [],
-  viewMode: getViewMode(),
+  ...loadLocalStorage(),
 };
 
 export const StateContext = createContext<{
@@ -138,10 +172,17 @@ export const reducer = (state: State, action: Actions): State => {
         selectedBookIds: action.payload,
       };
     case SetViewMode:
-      saveViewMode(action.payload);
+      saveLocalStorage(action.payload, state.sortOrder);
       return {
         ...state,
         viewMode: action.payload,
+      };
+    case SetSortOrder:
+      saveLocalStorage(state.viewMode, action.payload);
+      return {
+        ...state,
+        books: sortBooks(action.payload, state.books),
+        sortOrder: action.payload,
       };
     default:
       return initialState;

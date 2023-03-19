@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v1.4.3 (2023-03-19)
+
+### Added
+
+- Select sort order in web view
+
+### Changed
+
+- Update SevenZip.swift from 0.1.1 to 0.1.2
+- Update Unrar.swift from 0.3.11 to 0.3.12
+- Update ZIPFoundation from 0.9.15 to 0.9.16
+- Update web packages
+
 ## v1.4.2 (2022-10-23)
 
 ### Changed

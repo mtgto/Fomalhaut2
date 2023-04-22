@@ -39,7 +39,7 @@ NOTE: This sample comic is under Public Domain. You can view via https://digital
 
 ## System requirements
 
-- macOS 10.15+
+- macOS 11.5+
 
 ## Roadmap
 

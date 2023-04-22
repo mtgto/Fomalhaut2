@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "serve": "vite",
-    "build": "yarn run rimraf ../Fomalhaut2/assets.zip && vite build && zip -rj9 ../Fomalhaut2/assets.zip ./dist",
-    "lint": "yarn run lint:tsc && yarn run lint:eslint",
+    "build": "pnpm exec rimraf ../Fomalhaut2/assets.zip && vite build && zip -rj9 ../Fomalhaut2/assets.zip ./dist",
+    "lint": "pnpm run lint:tsc && pnpm run lint:eslint",
     "lint:eslint": "eslint ${ESLINT_ARGS:-''} '*/**/*.{ts,tsx}'",
     "lint:tsc": "tsc --noEmit",
     "prepare": "cd .. && husky install web/.husky"
@@ -40,6 +40,5 @@
     "rimraf": "^4.4.0",
     "typescript": "^5.0.2",
     "vite": "^4.2.0"
-  },
-  "packageManager": "yarn@3.5.0"
+  }
 }

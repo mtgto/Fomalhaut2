@@ -1,2 +1,2 @@
-cd web && yarn run lint-staged
+cd web && pnpm exec lint-staged
 

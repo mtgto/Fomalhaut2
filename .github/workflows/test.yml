@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
     - uses: actions/checkout@v3
     - uses: apple-actions/import-codesign-certs@v2

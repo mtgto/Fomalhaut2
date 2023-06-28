@@ -32,7 +32,8 @@ class BookDocument: NSDocument {
   }
 
   func storeViewerStatus(
-    lastPageIndex: Int, isRightToLeft: Bool, shiftedSignlePage: Bool, manualViewHeight: CGFloat?
+    lastPageIndex: Int, isRightToLeft: Bool, shiftedSignlePage: Bool, manualViewHeight: CGFloat?,
+    viewStyle: BookViewStyle
   ) throws {
     if let selfBook = self.book {
       let realm = try threadLocalRealm()
@@ -45,6 +46,7 @@ class BookDocument: NSDocument {
           if selfBook.pageCount == 0 {
             book.pageCount = self.archiver.pageCount()
           }
+          book.viewStyle = viewStyle.rawValue
         }
       }
     }
@@ -148,5 +150,19 @@ class BookDocument: NSDocument {
 
   func shiftedSignlePage() -> Bool? {
     return book?.shiftedSignlePage
+  }
+
+  func viewStyle() -> BookViewStyle? {
+    guard let book = self.book else {
+      return nil
+    }
+    switch book.viewStyle {
+    case BookViewStyle.spread.rawValue:
+      return .spread
+    case BookViewStyle.single.rawValue:
+      return .single
+    default:
+      fatalError("Unsupported value \(book.viewStyle) found in BookViewStyle")
+    }
   }
 }

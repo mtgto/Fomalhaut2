@@ -92,7 +92,8 @@ class SpreadPageViewController: NSViewController {
         lastPageIndex: self.currentPageIndex.value,
         isRightToLeft: self.pageOrder.value == .rtl,
         shiftedSignlePage: self.shiftedSignlePage,
-        manualViewHeight: self.manualViewHeight
+        manualViewHeight: self.manualViewHeight,
+        viewStyle: self.viewStyle.value
       )
     }
   }
@@ -107,7 +108,8 @@ class SpreadPageViewController: NSViewController {
     }
     .concat()
     .buffer(
-      timeSpan: .never, count: pageIndex == 0 && !self.shiftedSignlePage ? 1 : 2,
+      timeSpan: .never,
+      count: pageIndex == 0 && !self.shiftedSignlePage || self.viewStyle.value == .single ? 1 : 2,
       scheduler: MainScheduler.instance
     )
     .enumerated()
@@ -142,6 +144,9 @@ class SpreadPageViewController: NSViewController {
       if let isLike = document.isLike() {
         self.like.accept(isLike)
       }
+      if let viewStyle = document.viewStyle() {
+        self.viewStyle.accept(viewStyle)
+      }
       if let realm = try? threadLocalRealm(), let bookId = document.book?.id {
         if let book = realm.object(ofType: Book.self, forPrimaryKey: bookId) {
           Observable.from(object: book, properties: ["like"])
@@ -167,7 +172,7 @@ class SpreadPageViewController: NSViewController {
       .subscribe(
         onNext: { (loadedImage) in
           //log.debug("image = \(loadedImage.images.count), prefetch = \(loadedImage.preload)")
-          if loadedImage.preload || loadedImage.images.count == 0 {
+          if loadedImage.preload || loadedImage.images.isEmpty {
             return
           }
           let images = loadedImage.images
@@ -272,9 +277,14 @@ class SpreadPageViewController: NSViewController {
     self.showPageNumber.accept(!self.showPageNumber.value)
   }
 
-  // increment page (two page increment)
+  // increment page (two page increment in default)
   func forwardPage() {
-    let incremental = self.currentPageIndex.value == 0 && !self.shiftedSignlePage ? 1 : 2
+    if self.viewStyle.value == .single {
+      forwardSinglePage()
+      return
+    }
+    let incremental =
+      self.currentPageIndex.value == 0 && !self.shiftedSignlePage || self.viewStyle.value == .single ? 1 : 2
     if self.currentPageIndex.value + incremental < self.pageCount.value {
       self.currentPageIndex.accept(self.currentPageIndex.value + incremental)
     }
@@ -287,8 +297,12 @@ class SpreadPageViewController: NSViewController {
     }
   }
 
-  // decrement page (two page decrement)
+  // decrement page (two page decrement in default)
   func backwardPage() {
+    if self.viewStyle.value == .single {
+      backwardSinglePage()
+      return
+    }
     let decremental = self.currentPageIndex.value == 1 ? 1 : 2
     if self.currentPageIndex.value - decremental >= 0 {
       self.currentPageIndex.accept(self.currentPageIndex.value - decremental)

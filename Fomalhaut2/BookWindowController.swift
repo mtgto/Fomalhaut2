@@ -10,6 +10,7 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
   @IBOutlet weak var pageOrderControl: NSSegmentedControl!
   @IBOutlet weak var likeButton: NSButton!
   @IBOutlet weak var singlePageControl: NSSegmentedControl!
+  @IBOutlet weak var viewStyleControl: NSSegmentedControl!
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -36,6 +37,12 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { (like) in
         self.likeButton.state = like ? .on : .off
+      })
+      .disposed(by: self.disposeBag)
+    spreadPageViewController.viewStyle
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { (viewStyle) in
+        self.viewStyleControl.selectSegment(withTag: viewStyle == .spread ? 0 : 1)
       })
       .disposed(by: self.disposeBag)
     self.likeButton.rx.state

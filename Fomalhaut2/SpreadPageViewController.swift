@@ -25,7 +25,7 @@ class SpreadPageViewController: NSViewController {
   let like: BehaviorRelay<Bool?> = BehaviorRelay(value: nil)
   var isFullScreen: Bool = false
   private let showPageNumber: BehaviorRelay<Bool> = BehaviorRelay(value: true)
-  private var shiftedSignlePage: Bool = false
+  private var shiftedSinglePage: Bool = false
   // manualViewHeight has non-nil view height after user resized window
   private var manualViewHeight: CGFloat? = nil
   private(set) var contentSize: CGSize = .zero
@@ -82,6 +82,19 @@ class SpreadPageViewController: NSViewController {
       })
       .disposed(by: self.disposeBag)
     self.showPageNumber.accept(UserDefaults.standard.bool(forKey: SpreadPageViewController.showPageNumberKey))
+    self.viewStyle
+      .observe(on: MainScheduler.instance)
+      .subscribe(
+        with: self,
+        onNext: { owner, viewStyle in
+          if viewStyle == .single {
+            owner.setSinglePageView()
+          } else {
+            owner.setSpreadPageView()
+          }
+        }
+      )
+      .disposed(by: self.disposeBag)
   }
 
   override func viewWillDisappear() {
@@ -91,7 +104,7 @@ class SpreadPageViewController: NSViewController {
       try? document.storeViewerStatus(
         lastPageIndex: self.currentPageIndex.value,
         isRightToLeft: self.pageOrder.value == .rtl,
-        shiftedSignlePage: self.shiftedSignlePage,
+        shiftedSinglePage: self.shiftedSinglePage,
         manualViewHeight: self.manualViewHeight,
         viewStyle: self.viewStyle.value
       )
@@ -109,7 +122,7 @@ class SpreadPageViewController: NSViewController {
     .concat()
     .buffer(
       timeSpan: .never,
-      count: pageIndex == 0 && !self.shiftedSignlePage || self.viewStyle.value == .single ? 1 : 2,
+      count: pageIndex == 0 && !self.shiftedSinglePage ? 1 : 2,
       scheduler: MainScheduler.instance
     )
     .enumerated()
@@ -120,7 +133,7 @@ class SpreadPageViewController: NSViewController {
     didSet {
       guard let document = representedObject as? BookDocument else { return }
       self.pageCount.accept(document.pageCount())
-      self.shiftedSignlePage = document.shiftedSignlePage() ?? false
+      self.shiftedSinglePage = document.shiftedSinglePage() ?? false
       if let lastPageIndex = document.lastPageIndex() {
         self.currentPageIndex.accept(lastPageIndex)
       }
@@ -178,70 +191,17 @@ class SpreadPageViewController: NSViewController {
           let images = loadedImage.images
           let firstImage: NSImage = images.first!  // TODO: It might be nil if all files are broken
           let secondImage: NSImage? = images.count >= 2 ? images.last : nil
-          let firstImageSize = self.imageSize(firstImage)
-          let secondImageSize = secondImage != nil ? self.imageSize(secondImage!) : nil
-          let contentWidth =
-            max(firstImageSize.width, (secondImageSize?.width ?? 0)) * (secondImage != nil ? 2 : 1)
-          let contentHeight = max(firstImageSize.height, (secondImageSize?.height ?? 0))
 
           self.firstImageView.image = firstImage
-          if self.pageOrder.value == .rtl {
-            self.rightPageNumberButton.title = String(loadedImage.firstPageIndex + 1)
-          } else {
-            self.leftPageNumberButton.title = String(loadedImage.firstPageIndex + 1)
-          }
           if secondImage != nil {
-            self.firstImageView.imageAlignment = self.pageOrder.value == .rtl ? .alignLeft : .alignRight
-            self.secondImageView.imageAlignment = self.pageOrder.value == .rtl ? .alignRight : .alignLeft
             self.secondImageView.image = secondImage
-            self.secondImageView.isHidden = false
-            if self.pageOrder.value == .rtl {
-              if self.showPageNumber.value {
-                self.leftPageNumberButton.isHidden = false
-              }
-              self.leftPageNumberButton.title = String(loadedImage.firstPageIndex + 2)
-            } else {
-              if self.showPageNumber.value {
-                self.rightPageNumberButton.isHidden = false
-              }
-              self.rightPageNumberButton.title = String(loadedImage.firstPageIndex + 2)
-            }
+          }
+          if self.currentPageIndex.value > 0 && self.viewStyle.value == .spread {
+            self.setSpreadPageView()
           } else {
-            self.firstImageView.imageAlignment = .alignCenter
-            if self.showPageNumber.value {
-              self.secondImageView.isHidden = true
-              if self.pageOrder.value == .rtl {
-                self.leftPageNumberButton.isHidden = true
-              } else {
-                self.rightPageNumberButton.isHidden = true
-              }
-            }
+            self.setSinglePageView()
           }
-          guard let window = self.view.window else {
-            log.error("window is nil")
-            return
-          }
-          window.contentAspectRatio = NSSize(width: contentWidth, height: contentHeight)
-          // Set window size as screen size
-          let resizeRatio: CGFloat
-          if let manualViewHeight = self.manualViewHeight {
-            resizeRatio = manualViewHeight / contentHeight
-          } else {
-            resizeRatio = 1.0
-          }
-          let rect = window.constrainFrameRect(
-            NSRect(
-              x: window.frame.origin.x,
-              y: window.frame.origin.y,
-              width: CGFloat(contentWidth * resizeRatio),
-              height: CGFloat(contentHeight * resizeRatio)), to: NSScreen.main)
-          self.contentSize = rect.size
-          window.setContentSize(self.contentSize)
-          window.setFrameOrigin(rect.origin)
-          if self.isFullScreen {
-            window.center()
-          }
-          log.debug("window.setContentSize(\(rect.size.width), \(rect.size.height))")
+          self.updateWindowContentSize()
         },
         onCompleted: {
           log.debug("onCompleted")
@@ -284,7 +244,7 @@ class SpreadPageViewController: NSViewController {
       return
     }
     let incremental =
-      self.currentPageIndex.value == 0 && !self.shiftedSignlePage || self.viewStyle.value == .single ? 1 : 2
+      self.currentPageIndex.value == 0 && !self.shiftedSinglePage || self.viewStyle.value == .single ? 1 : 2
     if self.currentPageIndex.value + incremental < self.pageCount.value {
       self.currentPageIndex.accept(self.currentPageIndex.value + incremental)
     }
@@ -293,7 +253,7 @@ class SpreadPageViewController: NSViewController {
   func forwardSinglePage() {
     if self.canForwardPage() {
       self.currentPageIndex.accept(self.currentPageIndex.value + 1)
-      self.shiftedSignlePage = !self.shiftedSignlePage
+      self.shiftedSinglePage = !self.shiftedSinglePage
     }
   }
 
@@ -312,7 +272,7 @@ class SpreadPageViewController: NSViewController {
   func backwardSinglePage() {
     if self.canBackwardPage() {
       self.currentPageIndex.accept(self.currentPageIndex.value - 1)
-      self.shiftedSignlePage = !self.shiftedSignlePage
+      self.shiftedSinglePage = !self.shiftedSinglePage
     }
   }
 
@@ -340,6 +300,86 @@ class SpreadPageViewController: NSViewController {
 
   func resizedWindowByManual() {
     self.manualViewHeight = self.view.frame.size.height
+  }
+
+  private func setSpreadPageView() {
+    self.firstImageView.imageAlignment = self.pageOrder.value == .rtl ? .alignLeft : .alignRight
+    self.secondImageView.imageAlignment = self.pageOrder.value == .rtl ? .alignRight : .alignLeft
+    self.secondImageView.isHidden = false
+    if self.pageOrder.value == .rtl {
+      if self.showPageNumber.value {
+        self.rightPageNumberButton.title = String(self.currentPageIndex.value + 1)
+        self.rightPageNumberButton.isHidden = false
+        self.leftPageNumberButton.title = String(self.currentPageIndex.value + 2)
+        self.leftPageNumberButton.isHidden = false
+      }
+    } else {
+      if self.showPageNumber.value {
+        self.leftPageNumberButton.title = String(self.currentPageIndex.value + 1)
+        self.leftPageNumberButton.isHidden = false
+        self.rightPageNumberButton.title = String(self.currentPageIndex.value + 2)
+        self.rightPageNumberButton.isHidden = false
+      }
+    }
+    self.updateWindowContentSize()
+  }
+
+  private func setSinglePageView() {
+    self.firstImageView.imageAlignment = .alignCenter
+    if self.showPageNumber.value {
+      self.secondImageView.isHidden = true
+      if self.pageOrder.value == .rtl {
+        self.rightPageNumberButton.title = String(self.currentPageIndex.value + 1)
+        self.rightPageNumberButton.isHidden = false
+        self.leftPageNumberButton.title = String(self.currentPageIndex.value + 2)
+        self.leftPageNumberButton.isHidden = true
+      } else {
+        self.leftPageNumberButton.title = String(self.currentPageIndex.value + 1)
+        self.leftPageNumberButton.isHidden = false
+        self.rightPageNumberButton.title = String(self.currentPageIndex.value + 2)
+        self.rightPageNumberButton.isHidden = true
+      }
+    }
+    self.updateWindowContentSize()
+  }
+
+  private func updateWindowContentSize() {
+    guard let window = self.view.window else {
+      log.error("window is nil")
+      return
+    }
+    guard let firstImage = self.firstImageView.image else {
+      log.debug("First Image is not yet loaded")
+      return
+    }
+
+    let firstImageSize = self.imageSize(firstImage)
+    let secondImage = self.secondImageView.isHidden ? nil : self.secondImageView.image
+    let secondImageSize = secondImage != nil ? self.imageSize(secondImage!) : nil
+    let contentWidth =
+      max(firstImageSize.width, (secondImageSize?.width ?? 0)) * (secondImage != nil ? 2 : 1)
+    let contentHeight = max(firstImageSize.height, (secondImageSize?.height ?? 0))
+    window.contentAspectRatio = NSSize(width: contentWidth, height: contentHeight)
+    // Set window size as screen size
+    let resizeRatio: CGFloat
+    if let manualViewHeight = self.manualViewHeight {
+      resizeRatio = manualViewHeight / contentHeight
+    } else {
+      resizeRatio = 1.0
+    }
+    let rect = window.constrainFrameRect(
+      NSRect(
+        x: window.frame.origin.x,
+        y: window.frame.origin.y,
+        width: CGFloat(contentWidth * resizeRatio),
+        height: CGFloat(contentHeight * resizeRatio)), to: NSScreen.main)
+    self.contentSize = rect.size
+    window.setContentSize(self.contentSize)
+    window.setFrameOrigin(rect.origin)
+    if self.isFullScreen {
+      window.center()
+    }
+    log.debug("window.setContentSize(\(rect.size.width), \(rect.size.height))")
   }
 
   override func scrollWheel(with event: NSEvent) {

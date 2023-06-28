@@ -32,7 +32,7 @@ class BookDocument: NSDocument {
   }
 
   func storeViewerStatus(
-    lastPageIndex: Int, isRightToLeft: Bool, shiftedSignlePage: Bool, manualViewHeight: CGFloat?,
+    lastPageIndex: Int, isRightToLeft: Bool, shiftedSinglePage: Bool, manualViewHeight: CGFloat?,
     viewStyle: BookViewStyle
   ) throws {
     if let selfBook = self.book {
@@ -41,7 +41,7 @@ class BookDocument: NSDocument {
         try realm.write {
           book.lastPageIndex = lastPageIndex
           book.isRightToLeft = isRightToLeft
-          book.shiftedSignlePage = shiftedSignlePage
+          book.shiftedSignlePage = shiftedSinglePage
           book.manualViewHeight = manualViewHeight.flatMap(Double.init)
           if selfBook.pageCount == 0 {
             book.pageCount = self.archiver.pageCount()
@@ -148,7 +148,7 @@ class BookDocument: NSDocument {
     return book.isRightToLeft ? .rtl : .ltr
   }
 
-  func shiftedSignlePage() -> Bool? {
+  func shiftedSinglePage() -> Bool? {
     return book?.shiftedSignlePage
   }
 

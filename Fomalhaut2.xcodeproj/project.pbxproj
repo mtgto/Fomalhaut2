@@ -71,6 +71,7 @@
 		CEE9793D25403AD500A35C39 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9793C25403AD500A35C39 /* MainWindowController.swift */; };
 		CEE9794D25417A9A00A35C39 /* NSImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */; };
 		CEEBAE622721A25D0048034E /* SevenZip in Frameworks */ = {isa = PBXBuildFile; productRef = CEEBAE612721A25D0048034E /* SevenZip */; };
+		CEEF12D72A4BD923008F22DC /* BookViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF12D62A4BD923008F22DC /* BookViewStyle.swift */; };
 		CEEFC63B257C9590008D9636 /* WebSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC63A257C9590008D9636 /* WebSharing.swift */; };
 		CEEFC6622580F5DB008D9636 /* assets.zip in Resources */ = {isa = PBXBuildFile; fileRef = CEEFC6612580F5DB008D9636 /* assets.zip */; };
 		CEEFC66B25810C24008D9636 /* WebSharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFC66925810C24008D9636 /* WebSharingViewController.swift */; };
@@ -219,6 +220,7 @@
 		CEE9793325402BEA00A35C39 /* BookCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookCollectionViewItem.xib; sourceTree = "<group>"; };
 		CEE9793C25403AD500A35C39 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		CEE9794C25417A9A00A35C39 /* NSImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Resize.swift"; sourceTree = "<group>"; };
+		CEEF12D62A4BD923008F22DC /* BookViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewStyle.swift; sourceTree = "<group>"; };
 		CEEFC63A257C9590008D9636 /* WebSharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSharing.swift; sourceTree = "<group>"; };
 		CEEFC6612580F5DB008D9636 /* assets.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = assets.zip; sourceTree = "<group>"; };
 		CEEFC66925810C24008D9636 /* WebSharingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSharingViewController.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				CEE5474F259F515400F9AA30 /* defaultThumbnail.jpg */,
 				CEA994842560E06400B8BCC6 /* Localizable.strings */,
 				CE4309562904E85B00560957 /* Realm+ThreadLocal.swift */,
+				CEEF12D62A4BD923008F22DC /* BookViewStyle.swift */,
 			);
 			path = Fomalhaut2;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE9EE5E22532C49400B5AF5C /* BookWindowController.swift in Sources */,
+				CEEF12D72A4BD923008F22DC /* BookViewStyle.swift in Sources */,
 				CE4309572904E85B00560957 /* Realm+ThreadLocal.swift in Sources */,
 				CEE9793425402BEA00A35C39 /* BookCollectionViewItem.swift in Sources */,
 				CEE4D82F25E240B1003B8EB2 /* Preferences.swift in Sources */,

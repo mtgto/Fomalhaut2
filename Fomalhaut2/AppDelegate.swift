@@ -21,10 +21,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       BookCollectionViewController.collectionOrderKey: CollectionOrder.createdAt.rawValue,
       WebSharingViewController.webServerPortKey: 8080,
       WebSharingViewController.webServerAutoSuspendKey: true,
-      PageOrder.pageOrderKey: PageOrder.defaultValue.rawValue,
+      PageOrder.userDefaultsKey: PageOrder.defaultValue.rawValue,
       FilterListViewController.selectedCollectionContentIdKey: "all",  // Filter.id | Collection.id
       CollectionViewHeaderView.itemSizeIndexKey: 2,
       SpreadPageViewController.showPageNumberKey: true,
+      BookViewStyle.userDefaultsKey: BookViewStyle.defaultValue.rawValue,
     ])
   }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="I31-ld-zmx">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="I31-ld-zmx">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -102,7 +102,7 @@
                                 <toolbarItem implicitItemIdentifier="48B39D7A-0CDD-4127-B978-D89050CE6037" label="Control" paletteLabel="Control" sizingBehavior="auto" id="fuc-9u-iU4">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="grQ-q3-Ia3">
-                                        <rect key="frame" x="0.0" y="14" width="75" height="27"/>
+                                        <rect key="frame" x="0.0" y="14" width="71" height="24"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="2OF-NQ-M4L">
                                             <font key="font" metaFont="system"/>
@@ -119,7 +119,7 @@
                                 <toolbarItem implicitItemIdentifier="8A3B9B22-C476-48F1-AA8E-636DEC5A62C7" label="Go First" paletteLabel="Go First" image="first" sizingBehavior="auto" id="oTV-Y3-Ona">
                                     <nil key="toolTip"/>
                                     <button key="view" toolTip="Go First" verticalHuggingPriority="750" id="7wl-XX-QNR">
-                                        <rect key="frame" x="10" y="14" width="30" height="24"/>
+                                        <rect key="frame" x="10" y="14" width="30" height="23"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="first" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iLw-u0-JDG">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -133,7 +133,7 @@
                                 <toolbarItem implicitItemIdentifier="8AEFB3A0-E185-4140-B993-564EFAF0099A" label="Page Order" paletteLabel="Page Order" sizingBehavior="auto" id="MNP-GK-6ey">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="WvN-Nn-JeU">
-                                        <rect key="frame" x="0.0" y="14" width="71" height="24"/>
+                                        <rect key="frame" x="0.0" y="14" width="73" height="24"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="1Rl-bO-XaM">
                                             <font key="font" metaFont="system"/>
@@ -155,7 +155,7 @@
                                 <toolbarItem implicitItemIdentifier="A8F6A301-D838-4A0F-B003-BA6D74540351" label="Like" paletteLabel="Like" title="♥" sizingBehavior="auto" id="JgL-3n-H2O">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="gRp-EK-n9b">
-                                        <rect key="frame" x="0.0" y="14" width="30" height="25"/>
+                                        <rect key="frame" x="0.0" y="14" width="29" height="23"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="roundTextured" title="♥" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RO6-9q-14E">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
@@ -166,7 +166,7 @@
                                 <toolbarItem implicitItemIdentifier="421940CB-307D-47B5-B2E3-6582ED88DD0A" label="Single Control" paletteLabel="Single Control" sizingBehavior="auto" id="TNH-8s-IdF">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="mfl-J5-UV0">
-                                        <rect key="frame" x="3" y="14" width="75" height="27"/>
+                                        <rect key="frame" x="6" y="14" width="71" height="24"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="dP7-d8-KIT">
                                             <font key="font" metaFont="system"/>
@@ -183,6 +183,23 @@
                                         <fragment content="Single Control"/>
                                     </attributedString>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="D5AD80B8-6E37-43E0-85FD-7A326992C296" label="View Style" paletteLabel="View Style" sizingBehavior="auto" id="Wjg-eo-OiB">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="jFu-IR-q9R">
+                                        <rect key="frame" x="0.0" y="14" width="77" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Dql-Cz-5zY">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment toolTip="Spread pages" image="left.to.right" width="32"/>
+                                                <segment toolTip="Single page" image="doc" catalog="system" width="32" selected="YES" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="updateBookViewStyle:" target="I31-ld-zmx" id="URE-AH-neQ"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="JgL-3n-H2O"/>
@@ -190,6 +207,7 @@
                                 <toolbarItem reference="TNH-8s-IdF"/>
                                 <toolbarItem reference="oTV-Y3-Ona"/>
                                 <toolbarItem reference="MNP-GK-6ey"/>
+                                <toolbarItem reference="Wjg-eo-OiB"/>
                                 <toolbarItem reference="elp-kS-fEt"/>
                             </defaultToolbarItems>
                         </toolbar>
@@ -211,8 +229,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSTouchBarGoDownTemplate" width="15" height="9"/>
-        <image name="NSTouchBarGoUpTemplate" width="15" height="9"/>
+        <image name="NSTouchBarGoDownTemplate" width="18" height="11"/>
+        <image name="NSTouchBarGoUpTemplate" width="18" height="11"/>
+        <image name="doc" catalog="system" width="14" height="16"/>
         <image name="down" width="19" height="19"/>
         <image name="first" width="19" height="19"/>
         <image name="left.to.right" width="19" height="19"/>

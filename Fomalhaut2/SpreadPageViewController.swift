@@ -20,6 +20,7 @@ class SpreadPageViewController: NSViewController {
   static let showPageNumberKey = "showPageNumber"
   let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
+  let viewStyle: BehaviorRelay<BookViewStyle> = BehaviorRelay(value: .spread)
   let currentPageIndex: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let like: BehaviorRelay<Bool?> = BehaviorRelay(value: nil)
   var isFullScreen: Bool = false
@@ -317,6 +318,10 @@ class SpreadPageViewController: NSViewController {
     self.imageStackView.userInterfaceLayoutDirection =
       pageOrder == .rtl ? .rightToLeft : .leftToRight
     self.pageOrder.accept(pageOrder)
+  }
+
+  func setBookViewStyle(_ bookViewStyle: BookViewStyle) {
+    self.viewStyle.accept(bookViewStyle)
   }
 
   func resizedWindowByManual() {

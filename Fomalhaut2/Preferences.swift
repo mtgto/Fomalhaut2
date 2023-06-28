@@ -16,6 +16,6 @@ struct Preferences {
   mutating func setDefaultPageOrder(_ pageOrder: PageOrder) {
     let userDefaults = UserDefaults.standard
     self.defaultPageOrder = pageOrder
-    userDefaults.setValue(pageOrder.rawValue, forKey: PageOrder.pageOrderKey)
+    userDefaults.setValue(pageOrder.rawValue, forKey: PageOrder.userDefaultsKey)
   }
 }

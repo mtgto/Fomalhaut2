@@ -166,6 +166,17 @@ class BookWindowController: NSWindowController, NSMenuItemValidation, NSWindowDe
     }
   }
 
+  @IBAction func updateBookViewStyle(_ sender: Any) {
+    let spreadPageViewController = self.contentViewController as! SpreadPageViewController
+    if let segmentedControl = sender as? NSSegmentedControl {
+      if segmentedControl.selectedSegment == 0 {
+        spreadPageViewController.setBookViewStyle(.spread)
+      } else {
+        spreadPageViewController.setBookViewStyle(.single)
+      }
+    }
+  }
+
   @IBAction func goFirstPage(_ sender: Any) {
     let spreadPageViewController = self.contentViewController as! SpreadPageViewController
     spreadPageViewController.firstPage()

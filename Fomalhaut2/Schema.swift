@@ -79,6 +79,7 @@ class Schema {
             }
           }
           if oldSchemaVersion < 4 {
+            migration.renameProperty(onType: Book.className(), from: "shiftedSignlePage", to: "shiftedSinglePage")
             migration.enumerateObjects(ofType: Book.className()) { oldObject, newObject in
               newObject!["viewStyle"] = 0
             }

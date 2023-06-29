@@ -16,8 +16,7 @@ class Book: Object, Encodable {
   // for viewer information
   @Persisted var isRightToLeft: Bool = true
   @Persisted var lastPageIndex: Int = 0
-  // TODO: Fix typo (signle -> single)
-  @Persisted var shiftedSignlePage: Bool = false
+  @Persisted var shiftedSinglePage: Bool = false
   @Persisted var manualViewHeight: Double? = nil
   // jpeg data
   @Persisted var thumbnailData: Data? = nil

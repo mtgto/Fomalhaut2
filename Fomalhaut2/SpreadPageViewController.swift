@@ -193,10 +193,8 @@ class SpreadPageViewController: NSViewController {
           let secondImage: NSImage? = images.count >= 2 ? images.last : nil
 
           self.firstImageView.image = firstImage
-          if secondImage != nil {
-            self.secondImageView.image = secondImage
-          }
-          if self.currentPageIndex.value > 0 && self.viewStyle.value == .spread {
+          self.secondImageView.image = secondImage
+          if self.currentPageIndex.value > 0 && self.viewStyle.value == .spread && secondImage != nil {
             self.setSpreadPageView()
           } else {
             self.setSinglePageView()

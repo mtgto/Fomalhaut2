@@ -41,7 +41,7 @@ class BookDocument: NSDocument {
         try realm.write {
           book.lastPageIndex = lastPageIndex
           book.isRightToLeft = isRightToLeft
-          book.shiftedSignlePage = shiftedSinglePage
+          book.shiftedSinglePage = shiftedSinglePage
           book.manualViewHeight = manualViewHeight.flatMap(Double.init)
           if selfBook.pageCount == 0 {
             book.pageCount = self.archiver.pageCount()
@@ -149,7 +149,7 @@ class BookDocument: NSDocument {
   }
 
   func shiftedSinglePage() -> Bool? {
-    return book?.shiftedSignlePage
+    return book?.shiftedSinglePage
   }
 
   func viewStyle() -> BookViewStyle? {

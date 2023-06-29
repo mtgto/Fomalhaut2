@@ -191,8 +191,8 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Dql-Cz-5zY">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment toolTip="Spread pages" image="left.to.right" width="32"/>
-                                                <segment toolTip="Single page" image="doc" catalog="system" width="32" selected="YES" tag="1"/>
+                                                <segment toolTip="Spread pages" image="square.split.2x1" catalog="system" width="32"/>
+                                                <segment toolTip="Single page" image="square" catalog="system" width="32" selected="YES" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -232,11 +232,12 @@
     <resources>
         <image name="NSTouchBarGoDownTemplate" width="18" height="11"/>
         <image name="NSTouchBarGoUpTemplate" width="18" height="11"/>
-        <image name="doc" catalog="system" width="14" height="16"/>
         <image name="down" width="19" height="19"/>
         <image name="first" width="19" height="19"/>
         <image name="left.to.right" width="19" height="19"/>
         <image name="right.to.left" width="19" height="19"/>
+        <image name="square" catalog="system" width="15" height="14"/>
+        <image name="square.split.2x1" catalog="system" width="15" height="14"/>
         <image name="up" width="19" height="19"/>
     </resources>
 </document>

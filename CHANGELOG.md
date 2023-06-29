@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v1.5.0 (2023-06-29)
+
+### Added
+
+- Add single page mode (#10)
+
+### Changed
+
+- Bump up latest system version from macOS 10.15 to 11.5
+- Update Unrar.swift from 0.3.12 to 0.3.13
+- Fix typo in Book model
+- Update web packages
+
 ## v1.4.3 (2023-03-19)
 
 ### Added

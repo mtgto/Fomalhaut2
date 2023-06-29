@@ -13,6 +13,12 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Go First"; ObjectID = "7wl-XX-QNR"; */
 "7wl-XX-QNR.ibShadowedToolTip" = "最初のページに移動";
 
+/* Class = "NSSegmentedCell"; Dql-Cz-5zY.ibShadowedToolTips[0] = "Spread pages"; ObjectID = "Dql-Cz-5zY"; */
+"Dql-Cz-5zY.ibShadowedToolTips[0]" = "見開き";
+
+/* Class = "NSSegmentedCell"; Dql-Cz-5zY.ibShadowedToolTips[1] = "Single page"; ObjectID = "Dql-Cz-5zY"; */
+"Dql-Cz-5zY.ibShadowedToolTips[1]" = "単ページ";
+
 /* Class = "NSToolbarItem"; label = "Control"; ObjectID = "fuc-9u-iU4"; */
 "fuc-9u-iU4.label" = "コントロール";
 

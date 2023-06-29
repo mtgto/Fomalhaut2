@@ -37,17 +37,20 @@
 /* Delete */
 "Delete" = "削除";
 
-/* (No Comment) */
+/* File is corrupt or unsupported file type */
 "ErrorBrokenFile" = "ファイルが壊れているか未対応です";
 
 /* (No Comment) */
 "ErrorEncrypted" = "ファイルが暗号化されています";
 
+/* This file does not exists. */
+"ErrorFileDoesNotExists" = "ファイルが見つかりません";
+
 /* (No Comment) */
 "ErrorNoImage" = "アーカイブに画像が見つかりません";
 
+/* This book might be deleted. */
 "ErrorUnresolvedBookmarkData" = "この本は削除されているようです";
-"ErrorFileDoesNotExists" = "ファイルが見つかりません";
 
 /* Add collection */
 "FilterListMenuAdd" = "新規コレクションを追加";
@@ -97,8 +100,12 @@
 /* Last Access from %@ at %@ */
 "WebSharingIpAddressInformation" = "最終アクセス %@ 日時 %@";
 
+/* Start WebSharing… */
+"WebSharingStart" = "Web共有を開始…";
+
+/* Stop WebSharing */
+"WebSharingStop" = "Web共有を停止";
+
 /* (No Comment) */
 "WebSharingTimeout" = "しばらくアクセスがなかったためWeb共有を停止しました";
 
-"WebSharingStart" = "Web共有を開始…";
-"WebSharingStop" = "Web共有を停止";

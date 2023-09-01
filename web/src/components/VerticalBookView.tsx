@@ -74,12 +74,8 @@ const VerticalBookView = (props: Props) => {
     const pageIndex = parseInt(location.hash.substring(1));
     if (!isNaN(pageIndex) && refs.current && refs.current[pageIndex]) {
       refs.current[pageIndex].scrollIntoView();
-      console.log(`scroll to ${pageIndex}`);
     } else if (refs.current && refs.current[0]) {
       refs.current[0].scrollIntoView();
-      console.log("scroll to 0");
-    } else {
-      console.log("AAA");
     }
   }, [props.book]);
 

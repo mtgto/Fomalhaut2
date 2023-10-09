@@ -19,7 +19,7 @@ You can choose Mac App Store or download from github release page.
 
 ### 2. Manual Download
 
-NOTE: It does not have a feature `Check for update`.
+NOTE: manual download app does not have a feature `Check for update`.
 
 1. Download .dmg file from [Release page](https://github.com/mtgto/Fomalhaut2/releases).
 2. Copy `Fomalhaut2.app` to `/Applications` (or you want to).
@@ -36,6 +36,16 @@ NOTE: This sample comic is under Public Domain. You can view via https://digital
 ![Collection screenshot](https://github.com/mtgto/Fomalhaut2/blob/gh-pages/screenshot1.png)
 
 ![Viewer screenshot](https://github.com/mtgto/Fomalhaut2/blob/gh-pages/screenshot2.png)
+
+## Development
+
+Install node.js and pnpm.
+
+```console
+cd web
+pnpm install
+pnpm build
+```
 
 ## System requirements
 

@@ -23,6 +23,7 @@ const Page = (
     book: Book;
     history: History;
     refs: MutableRefObject<HTMLElement[]>;
+    onClick: (e: React.MouseEvent) => void;
   }>
 ) => {
   const { ref } = useInView({
@@ -46,6 +47,7 @@ const Page = (
       height="100%"
       flexShrink={0}
       sx={{ scrollSnapAlign: "start" }}
+      onClick={props.onClick}
     >
       <Box
         ref={ref}
@@ -67,8 +69,29 @@ const pages = (
   history: History,
   refs: MutableRefObject<HTMLElement[]>
 ) => {
+  const onClick = (e: React.MouseEvent, page: number) => {
+    if (e.shiftKey) {
+      if (page > 0) {
+        refs.current[page - 1].scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      if (refs.current.length > page + 1) {
+        refs.current[page + 1].scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return [...Array(book.pageCount).keys()].map((i: number) => {
-    return <Page key={i} index={i} book={book} history={history} refs={refs} />;
+    return (
+      <Page
+        key={i}
+        index={i}
+        book={book}
+        history={history}
+        refs={refs}
+        onClick={(e) => onClick(e, i)}
+      />
+    );
   });
 };
 

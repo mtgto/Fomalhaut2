@@ -37,7 +37,7 @@ class WebSharing: NSObject {
 
   override init() {
     let assetsURL = Bundle.main.url(forResource: "assets", withExtension: "zip")!
-    self.assetArchive = Archive(url: assetsURL, accessMode: .read)
+    self.assetArchive = try! Archive(url: assetsURL, accessMode: .read, pathEncoding: nil)
     self.cache.countLimit = 1
     super.init()
     if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") {

@@ -22,7 +22,7 @@ public class CombineArchiver: Archiver {
     let pathExtension = url.pathExtension.lowercased()
     let archiver: Archiver?
     if ZipArchiver.utis.contains(typeName) || ZipArchiver.extensions.contains(pathExtension) {
-      archiver = ZipArchiver(url: url)
+      archiver = try? ZipArchiver(url: url)
     } else if RarArchiver.utis.contains(typeName) || RarArchiver.extensions.contains(pathExtension) {
       archiver = RarArchiver(url: url)
     } else if PdfArchiver.utis.contains(typeName) || PdfArchiver.extensions.contains(pathExtension) {

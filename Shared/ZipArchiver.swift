@@ -11,10 +11,8 @@ public class ZipArchiver: Archiver {
   private let entries: [Entry]
   private let operationQueue: OperationQueue
 
-  public init?(url: URL) {
-    guard let archive = Archive(url: url, accessMode: .read, preferredEncoding: .shiftJIS) else {
-      return nil
-    }
+  public init(url: URL) throws {
+    let archive = try Archive(url: url, accessMode: .read, pathEncoding: .shiftJIS)
     self.archive = archive
     self.entries = archive.sorted { (lhs, rhs) -> Bool in
       lhs.path.localizedStandardCompare(rhs.path) == .orderedAscending

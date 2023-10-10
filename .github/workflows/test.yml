@@ -27,5 +27,5 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
     - name: test
       run: |
-        touch Fomalhaut2/assets.zip
+        cp Fomalhaut2Tests/fixture/empty.zip Fomalhaut2/assets.zip
         set -o pipefail && xcodebuild -target Fomalhaut2Tests -scheme Fomalhaut2 -clonedSourcePackagesDirPath .build clean test | xcpretty

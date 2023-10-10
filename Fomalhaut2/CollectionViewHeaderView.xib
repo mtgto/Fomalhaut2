@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -44,7 +44,7 @@
                     </connections>
                 </slider>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PrZ-u6-XBx">
-                    <rect key="frame" x="151" y="5.5" width="24" height="29"/>
+                    <rect key="frame" x="151" y="3.5" width="24" height="33"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="HdM-7u-yO8"/>
                         <constraint firstAttribute="width" constant="24" id="R8a-ke-YZt"/>
@@ -52,7 +52,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSIconViewTemplate" id="3A4-9W-wkY"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h5r-gH-vU4">
-                    <rect key="frame" x="8" y="12.5" width="20" height="15"/>
+                    <rect key="frame" x="8" y="10.5" width="20" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="N8r-Ji-hbt"/>
                         <constraint firstAttribute="height" constant="10" id="qSx-zA-Hkb"/>
@@ -78,6 +78,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="NSIconViewTemplate" width="15" height="14"/>
+        <image name="NSIconViewTemplate" width="19" height="18"/>
     </resources>
 </document>

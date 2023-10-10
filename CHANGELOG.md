@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v1.5.1 (2023-10-10)
+
+### Added
+
+- Enable mouse clicking navigation in web
+
+### Changed
+
+- Update SevenZip.swift from 0.1.2 to 0.2.0
+- Update swift-nio from 2.41.1 to 2.59.0
+- Update Unrar.swift from 0.3.13 to 0.3.14
+- Update ZIPFoundation from 0.9.16 to 0.9.17
+- Update web packages
+
 ## v1.5.0 (2023-06-29)
 
 ### Added

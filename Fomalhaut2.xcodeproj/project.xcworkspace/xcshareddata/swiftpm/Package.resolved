@@ -41,8 +41,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mtgto/SevenZip.swift",
       "state" : {
-        "revision" : "1b54d6767ab3373c0ceb438a79d02d6c3dca49f8",
-        "version" : "0.1.1"
+        "revision" : "875907f6064389a68c6aba34ec22d871d3dab98d"
       }
     },
     {

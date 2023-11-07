@@ -20,6 +20,7 @@ public class RarArchiver: Archiver {
           let path = entry.fileName.lowercased()
           return path.hasSuffix(".jpg") || path.hasSuffix(".jpeg") || path.hasSuffix(".png")
             || path.hasSuffix(".gif") || path.hasSuffix(".bmp") || path.hasSuffix(".tif") || path.hasSuffix(".tiff")
+            || path.hasSuffix(".webp")
         })
         .sorted(by: { (lhs, rhs) -> Bool in
           return lhs.fileName.localizedStandardCompare(rhs.fileName) == .orderedAscending

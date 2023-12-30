@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
       "state" : {
-        "revision" : "b4307ba0b6425c0ba4178e138799946c3da594f8",
-        "version" : "6.5.0"
+        "revision" : "9dcaa4b333db437b0fbfaf453fad29069044a8b4",
+        "version" : "6.6.0"
       }
     },
     {
@@ -85,8 +85,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mtgto/Unrar.swift.git",
       "state" : {
-        "revision" : "5d288ad39794a5b1fa0aac1149779252daac3595",
-        "version" : "0.3.14"
+        "revision" : "2c711ff8faadd7713ee85e78b69ed6946dcf0485",
+        "version" : "0.3.15"
       }
     },
     {

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v1.6.1 (2024-01-06)
+
+### Changed
+
+- Bugfix: Did not refer to the page order in the settings when opening a book from the library
+- Update web packages
+
 ## v1.6.0 (2023-12-30)
 
 ### Added

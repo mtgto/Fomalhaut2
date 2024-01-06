@@ -71,6 +71,11 @@ class BookDocument: NSDocument {
     self.archiver = archiver
     let realm = try threadLocalRealm()
     if let book = realm.objects(Book.self).filter("filePath = %@", url.path).first {
+      if book.readCount == 0 {
+        try realm.write {
+          book.isRightToLeft = Preferences.standard.defaultPageOrder == .rtl
+        }
+      }
       self.book = book.freeze()
     } else {
       let book = Book()

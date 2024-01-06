@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.6.0 (2023-12-30)
+
+### Added
+
+- Support WebP format
+
+### Changed
+
+- Update RxSwift from 6.5.0 to 6.6.0
+- Update Unrar.swift from 0.3.14 to 0.3.15
+- Update web packages
+
 ## v1.5.1 (2023-10-10)
 
 ### Added

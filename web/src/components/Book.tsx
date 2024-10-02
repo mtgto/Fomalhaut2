@@ -80,11 +80,13 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
   const handleNext = () => {
     navigateBookId(nextBookId);
     window.scrollTo(0, 0);
+    setSpeedDialOpen(false);
   };
 
   const handlePrev = () => {
     navigateBookId(prevBookId);
     window.scrollTo(0, 0);
+    setSpeedDialOpen(false);
   };
 
   const handleSpeedDialClose = () => {

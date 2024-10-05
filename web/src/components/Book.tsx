@@ -3,6 +3,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "rocon/react";
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -20,6 +21,7 @@ import HorizontalBookView from "./HorizontalBookView.tsx";
 import Layout from "./Layout.tsx";
 import { bookRoutes } from "./Routes.tsx";
 import VerticalBookView from "./VerticalBookView.tsx";
+import { AddToCollection } from "./AddToCollection.tsx";
 
 type Props = {
   readonly id: string;
@@ -28,6 +30,7 @@ type Props = {
 const BookPage: React.FunctionComponent<Props> = (props: Props) => {
   const [calling, setCalling] = useState(false);
   const [speedDialOpen, setSpeedDialOpen] = useState(false);
+  const [addToCollectionOpen, setAddToCollectionOpen] = useState(false);
   const { state, dispatch } = useContext(StateContext);
   const navigate = useNavigate();
   const theme = useTheme();
@@ -77,6 +80,11 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
     }
   };
 
+  const handleAddToCollection = () => {
+    setAddToCollectionOpen(true);
+    setSpeedDialOpen(false);
+  };
+
   const handleNext = () => {
     navigateBookId(nextBookId);
     window.scrollTo(0, 0);
@@ -111,11 +119,11 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
     }
   }, [book]);
 
-  return (
-    <Layout title={book?.name}>
-      <Container maxWidth="md">
-        {book ? (
-          state.viewMode === "left" || state.viewMode === "right" ? (
+  if (book) {
+    return (
+      <Layout title={book.name}>
+        <Container maxWidth="md">
+          {state.viewMode === "left" || state.viewMode === "right" ? (
             <HorizontalBookView
               book={book}
               nextBook={nextBook}
@@ -130,52 +138,68 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
               onNext={handleNext}
               onRandom={handleRandom}
             />
-          )
-        ) : (
+          )}
+          <SpeedDial
+            ariaLabel="direction"
+            sx={{
+              position: "fixed",
+              bottom: theme.spacing(8),
+              right: theme.spacing(2),
+            }}
+            open={speedDialOpen}
+            onOpen={handleSpeedDialOpen}
+            onClose={handleSpeedDialClose}
+            icon={<SpeedDialIcon />}
+          >
+            <SpeedDialAction
+              onClick={handleScrollToTop}
+              icon={<KeyboardArrowUpIcon />}
+              tooltipTitle={message.commands.scrollToTop}
+            />
+            <SpeedDialAction
+              onClick={handleToggleLike}
+              FabProps={{ disabled: calling }}
+              icon={book?.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+              tooltipTitle={
+                book?.like ? message.commands.dislike : message.commands.like
+              }
+            />
+            <SpeedDialAction
+              onClick={handleAddToCollection}
+              icon={<BookmarkAddIcon />}
+              tooltipTitle={message.commands.addToCollection}
+            />
+            {nextBookId ? (
+              <SpeedDialAction
+                onClick={handleNext}
+                icon={<SkipNextIcon />}
+                tooltipTitle={message.commands.next}
+              />
+            ) : null}
+            {prevBookId ? (
+              <SpeedDialAction
+                onClick={handlePrev}
+                icon={<SkipPreviousIcon />}
+                tooltipTitle={message.commands.prev}
+              />
+            ) : null}
+          </SpeedDial>
+          <AddToCollection
+            bookId={book.id}
+            open={addToCollectionOpen}
+            onClose={() => setAddToCollectionOpen(false)}
+          />
+        </Container>
+      </Layout>
+    );
+  } else {
+    return (
+      <Layout title={undefined}>
+        <Container maxWidth="md">
           <span>{message.loading}</span>
-        )}
-      </Container>
-      <SpeedDial
-        ariaLabel="direction"
-        sx={{
-          position: "fixed",
-          bottom: theme.spacing(8),
-          right: theme.spacing(2),
-        }}
-        open={speedDialOpen}
-        onOpen={handleSpeedDialOpen}
-        onClose={handleSpeedDialClose}
-        icon={<SpeedDialIcon />}
-      >
-        <SpeedDialAction
-          onClick={handleScrollToTop}
-          icon={<KeyboardArrowUpIcon />}
-          tooltipTitle={message.commands.scrollToTop}
-        />
-        <SpeedDialAction
-          onClick={handleToggleLike}
-          FabProps={{ disabled: calling }}
-          icon={book?.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          tooltipTitle={
-            book?.like ? message.commands.dislike : message.commands.like
-          }
-        />
-        {nextBookId ? (
-          <SpeedDialAction
-            onClick={handleNext}
-            icon={<SkipNextIcon />}
-            tooltipTitle={message.commands.next}
-          />
-        ) : null}
-        {prevBookId ? (
-          <SpeedDialAction
-            onClick={handlePrev}
-            icon={<SkipPreviousIcon />}
-            tooltipTitle={message.commands.prev}
-          />
-        ) : null}
-      </SpeedDial>
-    </Layout>
-  );
+        </Container>
+      </Layout>
+    );
+  }
 };
 export default BookPage;

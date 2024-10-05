@@ -29,6 +29,8 @@ class WebSharing: NSObject {
   private let disposeBag = DisposeBag()
   private let notFound = Response(text: "Not Found", status: .notFound)
   private let internalServerError = Response(text: "Internal Server Error", status: .internalServerError)
+  private let badRequest = Response(text: "Bad Request", status: .badRequest)
+  private let jsonDecoder = JSONDecoder()
 
   enum WebServerError: Error {
     case badBookURL
@@ -97,6 +99,33 @@ class WebSharing: NSObject {
           return self.notFound
         }
         return Response(json: collection, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
+      }
+
+      post("/api/v1/collections/:id") { req in
+        struct Hoge: Decodable {
+          let bookId: String
+        }
+        self.recordAccess(req)
+        guard let body = req.data(), let json = try? self.jsonDecoder.decode(Hoge.self, from: body) else {
+          return self.badRequest
+        }
+        guard let realm = try? threadLocalRealm() else {
+          return self.internalServerError
+        }
+        guard let collection = realm.object(ofType: Collection.self, forPrimaryKey: req.params("id")) else {
+          return self.notFound
+        }
+        guard let book = realm.object(ofType: Book.self, forPrimaryKey: json.bookId) else {
+          return self.badRequest
+        }
+        do {
+          try realm.write {
+            collection.books.append(book)
+          }
+        } catch {
+          return self.internalServerError
+        }
+        return Response(json: collection) ?? self.internalServerError
       }
 
       post("/api/v1/books/:id/like") { req in

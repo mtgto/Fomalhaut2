@@ -35,6 +35,7 @@ const ToggleLike = "ToggleLike" as const;
 const SetCurrentList = "SetCurrentList" as const;
 const SetViewMode = "SetViewMode" as const;
 const SetSortOrder = "SetSortOrder" as const;
+const AddBookToCollection = "AddBookToCollection" as const;
 
 type Actions =
   | ReturnType<typeof setLoading>
@@ -43,7 +44,8 @@ type Actions =
   | ReturnType<typeof toggleLike>
   | ReturnType<typeof setCurrentList>
   | ReturnType<typeof setViewMode>
-  | ReturnType<typeof setSortOrder>;
+  | ReturnType<typeof setSortOrder>
+  | ReturnType<typeof addBookToCollection>;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const setLoading = (LoadingState: LoadingStateType) => ({
@@ -83,6 +85,11 @@ export const setViewMode = (viewMode: State["viewMode"]) => ({
 export const setSortOrder = (sortOrder: SortOrder) => ({
   type: SetSortOrder,
   payload: sortOrder,
+});
+
+export const addBookToCollection = (bookId: string, collectionId: string) => ({
+  type: AddBookToCollection,
+  payload: [bookId, collectionId],
 });
 
 const loadLocalStorage = (): {
@@ -148,6 +155,14 @@ const sortBooks = (
   });
 };
 
+const addBook = (bookId: string, collection: Collection): Collection => {
+  if (collection.bookIds.includes(bookId)) {
+    return collection;
+  } else {
+    return { ...collection, bookIds: collection.bookIds.concat(bookId) };
+  }
+};
+
 export const initialState: State = {
   loading: LoadingState.Initial,
   collections: [],
@@ -202,6 +217,17 @@ export const reducer = (state: State, action: Actions): State => {
         ...state,
         books: sortBooks(action.payload, state.books),
         sortOrder: action.payload,
+      };
+    case AddBookToCollection:
+      return {
+        ...state,
+        collections: state.collections.map((collection) => {
+          if (collection.id === action.payload[0]) {
+            return addBook(action.payload[1], collection);
+          } else {
+            return collection;
+          }
+        }),
       };
     default:
       return initialState;

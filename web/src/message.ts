@@ -18,6 +18,7 @@ export type Message = Readonly<{
     scrollToTop: string;
     like: string;
     dislike: string;
+    addToCollection: string;
     next: string;
     prev: string;
   }>;
@@ -51,6 +52,7 @@ export const ja: Message = {
     scrollToTop: "一番上に戻る",
     like: "好き",
     dislike: "好きを取り消し",
+    addToCollection: "コレクションに追加",
     next: "次の本を開く",
     prev: "前の本を開く",
   },
@@ -84,6 +86,7 @@ export const en: Message = {
     scrollToTop: "Go to page top",
     like: "Like",
     dislike: "Cancel Like",
+    addToCollection: "Add to Collection",
     next: "Go to next book",
     prev: "Go to previous book",
   },

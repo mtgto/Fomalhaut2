@@ -18,6 +18,7 @@ private let secondImageViewMouseUpNotificationName = Notification.Name("secondIm
 
 class SpreadPageViewController: NSViewController {
   static let showPageNumberKey = "showPageNumber"
+  static let keepFirstImageWindowSizeKey = "keepFirstImageWindowSize"
   let pageCount: BehaviorRelay<Int> = BehaviorRelay(value: 0)
   let pageOrder: BehaviorRelay<PageOrder> = BehaviorRelay(value: .rtl)
   let viewStyle: BehaviorRelay<BookViewStyle> = BehaviorRelay(value: .spread)
@@ -32,6 +33,7 @@ class SpreadPageViewController: NSViewController {
   private let disposeBag = DisposeBag()
   private var swipeDeltaX: CGFloat = 0
   private var swipeDeltaY: CGFloat = 0
+  private var keepFirstImageWindowSize: Bool = false
 
   @IBOutlet weak var imageStackView: NSStackView!
   @IBOutlet weak var firstImageView: BookImageView!
@@ -52,6 +54,7 @@ class SpreadPageViewController: NSViewController {
     self.rightPageNumberButton.wantsLayer = true
     self.rightPageNumberButton.layer?.backgroundColor = CGColor(gray: 0.5, alpha: 0.6)
     self.rightPageNumberButton.layer?.cornerRadius = 10
+    self.keepFirstImageWindowSize = UserDefaults.standard.bool(forKey: Self.keepFirstImageWindowSizeKey)
 
     NotificationCenter.default.rx.notification(firstImageViewMouseUpNotificationName, object: nil)
       .subscribe(onNext: { notification in
@@ -362,6 +365,9 @@ class SpreadPageViewController: NSViewController {
     let resizeRatio: CGFloat
     if let manualViewHeight = self.manualViewHeight {
       resizeRatio = manualViewHeight / contentHeight
+    } else if self.keepFirstImageWindowSize && self.contentSize != .zero {
+      // Keep window height even if image is larger than prev image
+      resizeRatio = self.contentSize.height < contentHeight ? self.contentSize.height / contentHeight : 1.0
     } else {
       resizeRatio = 1.0
     }

@@ -26,6 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       CollectionViewHeaderView.itemSizeIndexKey: 2,
       SpreadPageViewController.showPageNumberKey: true,
       BookViewStyle.userDefaultsKey: BookViewStyle.defaultValue.rawValue,
+      SpreadPageViewController.keepFirstImageWindowSizeKey: false,
     ])
   }
 

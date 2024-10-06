@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FfR-gF-BLU">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="FfR-gF-BLU">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23094"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,7 +43,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="LRL-bG-fBE">
-                                <rect key="frame" x="125" y="89" width="230" height="93"/>
+                                <rect key="frame" x="83" y="96" width="314" height="78"/>
                                 <rows>
                                     <gridRow id="fnb-KD-ddb"/>
                                     <gridRow id="J9O-1z-BhJ"/>
@@ -55,8 +55,8 @@
                                 </columns>
                                 <gridCells>
                                     <gridCell row="fnb-KD-ddb" column="Hkb-Su-qNq" id="BBt-zE-k32">
-                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eUU-rE-8oK">
-                                            <rect key="frame" x="-2" y="72" width="120" height="16"/>
+                                        <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eUU-rE-8oK">
+                                            <rect key="frame" x="-2" y="58" width="120" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Default Page Order" id="eZR-JX-E3r">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -69,10 +69,10 @@
                                     </gridCell>
                                     <gridCell row="fnb-KD-ddb" column="iYf-cN-Li2" id="Wia-Hn-kdU">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P5Z-mq-dHc">
-                                            <rect key="frame" x="120" y="69" width="113" height="25"/>
+                                            <rect key="frame" x="145" y="54" width="114" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Right to Left" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="mQa-9D-KLh" id="Ieg-LH-CJn">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="message"/>
                                                 <menu key="menu" id="4DF-2h-fDS">
                                                     <items>
                                                         <menuItem title="Right to Left" state="on" id="mQa-9D-KLh">
@@ -89,8 +89,31 @@
                                             </connections>
                                         </popUpButton>
                                     </gridCell>
-                                    <gridCell row="J9O-1z-BhJ" column="Hkb-Su-qNq" id="Ecn-nm-eHX"/>
-                                    <gridCell row="J9O-1z-BhJ" column="iYf-cN-Li2" id="142-3W-Sa9"/>
+                                    <gridCell row="J9O-1z-BhJ" column="Hkb-Su-qNq" id="Ecn-nm-eHX">
+                                        <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lzy-UT-Uhi">
+                                            <rect key="frame" x="-2" y="36" width="146" height="16"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Keep First Window Size" id="9AO-Av-hky">
+                                                <font key="font" usesAppearanceFont="YES"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="J9O-1z-BhJ" column="iYf-cN-Li2" id="142-3W-Sa9">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JlC-ei-BPi">
+                                            <rect key="frame" x="146" y="35" width="168" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Keep First Window Size" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="cNu-RD-isG">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                                <connections>
+                                                    <binding destination="XWL-qr-jWh" name="value" keyPath="values.keepFirstImageWindowSize" id="NWH-sW-fxh"/>
+                                                </connections>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="XWL-qr-jWh" name="value" keyPath="values.keepFirstImageWindowSize" id="MYl-9L-iuM"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
                                     <gridCell row="fvd-yj-T2Y" column="Hkb-Su-qNq" id="x2p-8q-bgI"/>
                                     <gridCell row="fvd-yj-T2Y" column="iYf-cN-Li2" id="wss-kQ-XQr"/>
                                 </gridCells>
@@ -109,6 +132,7 @@
                     </connections>
                 </viewController>
                 <customObject id="L75-i2-ert" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="XWL-qr-jWh"/>
             </objects>
             <point key="canvasLocation" x="-190" y="86"/>
         </scene>

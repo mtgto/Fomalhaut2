@@ -31,6 +31,7 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
   const [calling, setCalling] = useState(false);
   const [speedDialOpen, setSpeedDialOpen] = useState(false);
   const [addToCollectionOpen, setAddToCollectionOpen] = useState(false);
+  const [reading, setReading] = useState(true);
   const { state, dispatch } = useContext(StateContext);
   const navigate = useNavigate();
   const theme = useTheme();
@@ -99,10 +100,12 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
 
   const handleSpeedDialClose = () => {
     setSpeedDialOpen(false);
+    setReading(true);
   };
 
   const handleSpeedDialOpen = () => {
     setSpeedDialOpen(true);
+    setReading(false);
   };
 
   const handleRandom = () => {
@@ -145,6 +148,7 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
               position: "fixed",
               bottom: theme.spacing(8),
               right: theme.spacing(2),
+              opacity: reading ? 0.25 : 1.0,
             }}
             open={speedDialOpen}
             onOpen={handleSpeedDialOpen}

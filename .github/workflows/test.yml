@@ -8,13 +8,9 @@ on:
 
 jobs:
   test:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v4
-    - uses: apple-actions/import-codesign-certs@v3
-      with: 
-        p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
-        p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
     - uses: actions/cache@v4
       id: cache
       with:
@@ -28,4 +24,4 @@ jobs:
     - name: test
       run: |
         cp Fomalhaut2Tests/fixture/empty.zip Fomalhaut2/assets.zip
-        set -o pipefail && xcodebuild -target Fomalhaut2Tests -scheme Fomalhaut2 -clonedSourcePackagesDirPath .build clean test | xcpretty
+        set -o pipefail && xcodebuild -target Fomalhaut2Tests -scheme Fomalhaut2 -clonedSourcePackagesDirPath DEVELOPMENT_TEAM= .build clean test | xcpretty

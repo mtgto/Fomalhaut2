@@ -11,11 +11,11 @@ jobs:
     runs-on: macos-13
     steps:
     - uses: actions/checkout@v4
-    - uses: apple-actions/import-codesign-certs@v2
+    - uses: apple-actions/import-codesign-certs@v3
       with: 
         p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
         p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       id: cache
       with:
         path: .build

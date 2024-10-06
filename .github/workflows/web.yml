@@ -16,13 +16,12 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
-          version: 8
           run_install: true
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: pnpm
           cache-dependency-path: web/pnpm-lock.yaml
       - name: Lint

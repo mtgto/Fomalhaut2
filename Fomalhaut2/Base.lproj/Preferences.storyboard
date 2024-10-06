@@ -43,7 +43,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="LRL-bG-fBE">
-                                <rect key="frame" x="83" y="96" width="314" height="78"/>
+                                <rect key="frame" x="113" y="96" width="255" height="78"/>
                                 <rows>
                                     <gridRow id="fnb-KD-ddb"/>
                                     <gridRow id="J9O-1z-BhJ"/>
@@ -101,8 +101,8 @@
                                     </gridCell>
                                     <gridCell row="J9O-1z-BhJ" column="iYf-cN-Li2" id="142-3W-Sa9">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JlC-ei-BPi">
-                                            <rect key="frame" x="146" y="35" width="168" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Keep First Window Size" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="cNu-RD-isG">
+                                            <rect key="frame" x="146" y="34" width="18" height="18"/>
+                                            <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="cNu-RD-isG">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                                 <connections>

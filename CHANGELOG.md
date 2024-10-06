@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## v1.7.0 (2024-10-07)
+
+### Added
+
+- Add setting to choose whether keep window size (#13)
+- Add a book to collection from web
+
+### Changed
+
+- Close the floating action button after open next/prev book in web
+- Set translucent color for floating action button in web
+- Update SwiftNIO to v2.74.0
+- Update SevenZip.swift to v0.2.1
+- Update Unrar.swift to v0.3.16
+- Update ZIPFoundation to v0.9.19
+- Update web packages
+
 ## v1.6.1 (2024-01-06)
 
 ### Changed

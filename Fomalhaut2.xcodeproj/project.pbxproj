@@ -931,7 +931,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2037;
+				CURRENT_PROJECT_VERSION = 2038;
 				DEVELOPMENT_TEAM = W3A6B7FDC7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Fomalhaut2/Info.plist;
@@ -939,7 +939,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.6.1;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.Fomalhaut2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -956,7 +956,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2037;
+				CURRENT_PROJECT_VERSION = 2038;
 				DEVELOPMENT_TEAM = W3A6B7FDC7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Fomalhaut2/Info.plist;
@@ -964,7 +964,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.6.1;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.Fomalhaut2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1079,7 +1079,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fomalhaut2QuickLook/Fomalhaut2QuickLook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2035;
+				CURRENT_PROJECT_VERSION = 2038;
 				DEVELOPMENT_TEAM = W3A6B7FDC7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Fomalhaut2QuickLook/Info.plist;
@@ -1088,7 +1088,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.Fomalhaut2.Fomalhaut2QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1102,7 +1102,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fomalhaut2QuickLook/Fomalhaut2QuickLook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2035;
+				CURRENT_PROJECT_VERSION = 2038;
 				DEVELOPMENT_TEAM = W3A6B7FDC7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Fomalhaut2QuickLook/Info.plist;
@@ -1111,7 +1111,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.Fomalhaut2.Fomalhaut2QuickLook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

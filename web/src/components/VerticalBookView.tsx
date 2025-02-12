@@ -3,7 +3,7 @@
 
 import Box from "@mui/material/Box";
 import type { History } from "history";
-import { MutableRefObject, useCallback, useEffect, useRef } from "react";
+import { RefObject, useCallback, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { useHistory } from "rocon/react";
 import { Book } from "../domain/book";
@@ -21,7 +21,7 @@ const Page = (
     index: number;
     book: Book;
     history: History;
-    refs: MutableRefObject<HTMLElement[]>;
+    refs: RefObject<HTMLElement[]>;
     onClick: (e: React.MouseEvent) => void;
   }>
 ) => {
@@ -61,7 +61,7 @@ const Page = (
 const pages = (
   book: Book,
   history: History,
-  refs: MutableRefObject<HTMLElement[]>
+  refs: RefObject<HTMLElement[]>
 ) => {
   const onClick = (e: React.MouseEvent, page: number) => {
     if (e.shiftKey) {

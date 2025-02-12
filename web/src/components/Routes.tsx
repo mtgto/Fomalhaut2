@@ -41,7 +41,7 @@ export const topLevelRoutes = Path()
   .route("collections", (route) => route.attach(collectionRoutes))
   .route("filters", (route) => route.attach(filterRoutes));
 
-const Routes: React.VFC = () => {
+const Routes: React.FC = () => {
   return useRoutes(topLevelRoutes);
 };
 

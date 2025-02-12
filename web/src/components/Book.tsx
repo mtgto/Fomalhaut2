@@ -7,6 +7,7 @@ import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import VerticalAlignTopIcon from "@mui/icons-material/VerticalAlignTop";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import Container from "@mui/material/Container";
@@ -98,6 +99,13 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
     setSpeedDialOpen(false);
   };
 
+  const handleGoFirst = () => {
+    const firstPage = document.getElementById("0");
+    if (firstPage) {
+      firstPage.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const handleSpeedDialClose = () => {
     setSpeedDialOpen(false);
     setReading(true);
@@ -187,6 +195,11 @@ const BookPage: React.FunctionComponent<Props> = (props: Props) => {
                 tooltipTitle={message.commands.prev}
               />
             ) : null}
+            <SpeedDialAction
+              onClick={handleGoFirst}
+              icon={<VerticalAlignTopIcon />}
+              tooltipTitle={message.commands.goFirst}
+            />
           </SpeedDial>
           <AddToCollection
             bookId={book.id}

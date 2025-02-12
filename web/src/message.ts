@@ -15,6 +15,7 @@ export type Message = Readonly<{
     like: string;
   }>;
   commands: Readonly<{
+    goFirst: string;
     scrollToTop: string;
     like: string;
     dislike: string;
@@ -49,6 +50,7 @@ export const ja: Message = {
     like: "好き",
   },
   commands: {
+    goFirst: "最初のページに移動",
     scrollToTop: "一番上に戻る",
     like: "好き",
     dislike: "好きを取り消し",
@@ -83,6 +85,7 @@ export const en: Message = {
     like: "Like",
   },
   commands: {
+    goFirst: "Go First",
     scrollToTop: "Go to page top",
     like: "Like",
     dislike: "Cancel Like",

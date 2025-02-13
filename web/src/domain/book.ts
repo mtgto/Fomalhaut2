@@ -8,6 +8,7 @@ export class Book {
   readonly readCount: number;
   readonly like: boolean;
   readonly isRightToLeft: boolean;
+  readonly createdAt: Date;
 
   constructor(
     id: string,
@@ -15,7 +16,8 @@ export class Book {
     pageCount: number,
     readCount: number,
     like: boolean,
-    isRightToLeft: boolean
+    isRightToLeft: boolean,
+    createdAt: Date
   ) {
     this.id = id;
     this.name = name;
@@ -23,5 +25,6 @@ export class Book {
     this.readCount = readCount;
     this.like = like;
     this.isRightToLeft = isRightToLeft;
+    this.createdAt = createdAt;
   }
 }

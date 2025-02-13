@@ -30,10 +30,13 @@ class Book: Object, Encodable {
   }
 
   enum CodingKeys: String, CodingKey {
-    case id, name, readCount, like, pageCount, isRightToLeft, viewStyle
+    case id, name, readCount, like, pageCount, isRightToLeft, viewStyle, createdAt
   }
 
   func encode(to encoder: Encoder) throws {
+    if let encoder = encoder as? JSONEncoder {
+      encoder.dateEncodingStrategy = .iso8601
+    }
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(self.id, forKey: .id)
     try container.encode(self.displayName, forKey: .name)
@@ -42,6 +45,7 @@ class Book: Object, Encodable {
     try container.encode(self.pageCount, forKey: .pageCount)
     try container.encode(self.isRightToLeft, forKey: .isRightToLeft)
     try container.encode(self.viewStyle, forKey: .viewStyle)
+    try container.encode(self.createdAt, forKey: .createdAt)
   }
 
   func resolveURL(bookmarkDataIsStale: inout Bool) throws -> URL {

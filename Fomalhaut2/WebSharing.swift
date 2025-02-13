@@ -31,6 +31,7 @@ class WebSharing: NSObject {
   private let internalServerError = Response(text: "Internal Server Error", status: .internalServerError)
   private let badRequest = Response(text: "Bad Request", status: .badRequest)
   private let jsonDecoder = JSONDecoder()
+  private let jsonEncoder = JSONEncoder()
 
   enum WebServerError: Error {
     case badBookURL
@@ -41,6 +42,7 @@ class WebSharing: NSObject {
     let assetsURL = Bundle.main.url(forResource: "assets", withExtension: "zip")!
     self.assetArchive = try! Archive(url: assetsURL, accessMode: .read, pathEncoding: nil)
     self.cache.countLimit = 1
+    self.jsonEncoder.dateEncodingStrategy = .iso8601
     super.init()
     if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") {
       self.server.defaultHeaders = [
@@ -90,7 +92,8 @@ class WebSharing: NSObject {
 
       get("/api/v1/collections") { req in
         self.recordAccess(req)
-        return Response(json: self.collections, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
+        return Response(json: self.collections, headers: [(cacheControlKey, noCache)], jsonEncoder: self.jsonEncoder)
+          ?? self.internalServerError
       }
 
       get("/api/v1/collections/:id") { req in
@@ -98,7 +101,8 @@ class WebSharing: NSObject {
         guard let collection = self.collections.first(where: { $0.id == req.params("id") }) else {
           return self.notFound
         }
-        return Response(json: collection, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
+        return Response(json: collection, headers: [(cacheControlKey, noCache)], jsonEncoder: self.jsonEncoder)
+          ?? self.internalServerError
       }
 
       post("/api/v1/collections/:id") { req in
@@ -125,7 +129,7 @@ class WebSharing: NSObject {
         } catch {
           return self.internalServerError
         }
-        return Response(json: collection) ?? self.internalServerError
+        return Response(json: collection, jsonEncoder: self.jsonEncoder) ?? self.internalServerError
       }
 
       post("/api/v1/books/:id/like") { req in
@@ -143,7 +147,7 @@ class WebSharing: NSObject {
         } catch {
           return self.internalServerError
         }
-        return Response(json: book) ?? self.internalServerError
+        return Response(json: book, jsonEncoder: self.jsonEncoder) ?? self.internalServerError
       }
 
       post("/api/v1/books/:id/dislike") { req in
@@ -161,12 +165,13 @@ class WebSharing: NSObject {
         } catch {
           return self.internalServerError
         }
-        return Response(json: book) ?? self.internalServerError
+        return Response(json: book, jsonEncoder: self.jsonEncoder) ?? self.internalServerError
       }
 
       get("/api/v1/books") { req in
         self.recordAccess(req)
-        return Response(json: self.books, headers: [(cacheControlKey, noCache)]) ?? self.internalServerError
+        return Response(json: self.books, headers: [(cacheControlKey, noCache)], jsonEncoder: self.jsonEncoder)
+          ?? self.internalServerError
       }
 
       get("/images/books/:id/thumbnail") { req in

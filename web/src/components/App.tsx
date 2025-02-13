@@ -21,14 +21,17 @@ import {
 } from "../reducer.ts";
 import Routes from "./Routes.tsx";
 
-const parseBook = (book: Book): Book =>
+type ApiBook = Omit<Book, "createdAt"> & { createdAt: string };
+
+const parseBook = (book: ApiBook): Book =>
   new Book(
     book.id,
     book.name,
     book.pageCount,
     book.readCount,
     book.like,
-    book.isRightToLeft
+    book.isRightToLeft,
+    new Date(book.createdAt)
   );
 
 const App: React.FunctionComponent = () => {
@@ -73,13 +76,13 @@ const App: React.FunctionComponent = () => {
     async function fetchBooks() {
       const books = await fetch("/api/v1/books")
         .then((response) => response.json())
-        .then((books: Book[]) => books.map((book) => parseBook(book)));
+        .then((books: ApiBook[]) => books.map((book) => parseBook(book)));
       dispatch(setBooks(books));
     }
     async function fetchCollections() {
       const collections: Collection[] = await fetch("/api/v1/collections")
         .then((response) => response.json())
-        .then((collections: { id: string; name: string; books: Book[] }[]) =>
+        .then((collections: { id: string; name: string; books: ApiBook[] }[]) =>
           collections.map(
             (collection) =>
               new Collection(

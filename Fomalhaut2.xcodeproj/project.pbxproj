@@ -1207,7 +1207,7 @@
 			repositoryURL = "https://github.com/mtgto/Swiftra.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.5.0;
+				minimumVersion = 0.6.0;
 			};
 		};
 		CEAD7A0F25A494EC00927D10 /* XCRemoteSwiftPackageReference "Unrar.swift" */ = {
@@ -1223,7 +1223,7 @@
 			repositoryURL = "https://github.com/mtgto/SevenZip.swift";
 			requirement = {
 				kind = revision;
-				revision = e8267192051adc97cf6252a93919b1263c140f87;
+				revision = d64eb6aef346c05e39cb2479b21510bb7b8e230f;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

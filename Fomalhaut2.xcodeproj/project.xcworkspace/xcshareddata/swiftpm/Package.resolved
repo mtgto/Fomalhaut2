@@ -42,7 +42,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mtgto/SevenZip.swift",
       "state" : {
-        "revision" : "e8267192051adc97cf6252a93919b1263c140f87"
+        "revision" : "d64eb6aef346c05e39cb2479b21510bb7b8e230f"
       }
     },
     {
@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mtgto/Swiftra.git",
       "state" : {
-        "revision" : "390f4bc765acf0fc5c0cc3632b153b2142bf9ce8",
-        "version" : "0.5.0"
+        "revision" : "3ef2fb8cd02ade116fd7559b18f9074e03e0aa1c",
+        "version" : "0.6.0"
       }
     },
     {
@@ -118,5 +118,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

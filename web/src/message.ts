@@ -33,6 +33,7 @@ export type Message = Readonly<{
     header: string;
     name: string;
     readCount: string;
+    created: string;
   }>;
 }>;
 
@@ -68,6 +69,7 @@ export const ja: Message = {
     header: "順序",
     name: "名前順",
     readCount: "読んだ回数",
+    created: "作成順",
   },
 };
 
@@ -103,6 +105,7 @@ export const en: Message = {
     header: "Sort by",
     name: "Name",
     readCount: "View Count",
+    created: "Created",
   },
 };
 

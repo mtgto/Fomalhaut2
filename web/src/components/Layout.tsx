@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2020 mtgto <hogerappa@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -237,16 +238,25 @@ const Layout: FunctionComponent<Props> = (props: Props) => {
               <ListItemIcon>
                 <SortByAlphaIcon />
               </ListItemIcon>
-              <ListItemText>{message.sortOrder.name}</ListItemText>
+              <ListItemText>{message.sortOrder.readCount}</ListItemText>
             </ListItemButton>
             <ListItemButton
               selected={state.sortOrder === "readCount"}
               onClick={() => dispatch(setSortOrder("readCount"))}
             >
               <ListItemIcon>
+                <CalendarMonthIcon />
+              </ListItemIcon>
+              <ListItemText>{message.sortOrder.created}</ListItemText>
+            </ListItemButton>
+            <ListItemButton
+              selected={state.sortOrder === "created"}
+              onClick={() => dispatch(setSortOrder("created"))}
+            >
+              <ListItemIcon>
                 <BookIcon />
               </ListItemIcon>
-              <ListItemText>{message.sortOrder.readCount}</ListItemText>
+              <ListItemText>{message.sortOrder.created}</ListItemText>
             </ListItemButton>
           </List>
         </SwipeableDrawer>

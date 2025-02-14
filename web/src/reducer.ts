@@ -14,7 +14,7 @@ export const LoadingState = {
   Error: 3,
 } as const;
 
-export type SortOrder = "name" | "readCount";
+export type SortOrder = "name" | "readCount" | "created";
 
 type LoadingStateType = (typeof LoadingState)[keyof typeof LoadingState];
 
@@ -107,7 +107,11 @@ const loadLocalStorage = (): {
       viewMode === "right" ||
       viewMode === "vertical"
     ) {
-      if (sortOrderRaw === "name" || sortOrderRaw === "readCount") {
+      if (
+        sortOrderRaw === "name" ||
+        sortOrderRaw === "readCount" ||
+        sortOrderRaw === "created"
+      ) {
         sortOrder = sortOrderRaw;
       }
       return { viewMode, sortOrder };
@@ -120,13 +124,10 @@ const saveLocalStorage = (
   viewMode: State["viewMode"],
   sortOrder: SortOrder
 ) => {
-  const item = localStorage.getItem("net.mtgto.Fomalhaut2");
-  if (item) {
-    localStorage.setItem(
-      "net.mtgto.Fomalhaut2",
-      JSON.stringify({ viewMode, sortOrder })
-    );
-  }
+  localStorage.setItem(
+    "net.mtgto.Fomalhaut2",
+    JSON.stringify({ viewMode, sortOrder })
+  );
 };
 
 const sortBooks = (
@@ -147,6 +148,14 @@ const sortBooks = (
         if (a.readCount < b.readCount) {
           return 1;
         } else if (a.readCount > b.readCount) {
+          return -1;
+        } else {
+          return 0;
+        }
+      case "created":
+        if (a.createdAt < b.createdAt) {
+          return 1;
+        } else if (a.createdAt > b.createdAt) {
           return -1;
         } else {
           return 0;

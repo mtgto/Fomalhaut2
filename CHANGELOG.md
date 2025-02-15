@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v1.8.0 (2025-02-15)
+
+### Added
+
+- Add new sort order by Created in web
+- Add "Go First" action in web
+
+### Changed
+
+- Update SevenZip.swift to v0.2.2
+- Update Swiftra to v0.6.0
+- Update web packages
+
 ## v1.7.0 (2024-10-07)
 
 ### Added

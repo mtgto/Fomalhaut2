@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v2.1.0 (2026-11-07)
+
+### Changed
+
+- Drop support for macOS 11 (macOS 12 or later is required)
+- Update web packages
+- Update Realm to v20.0.6
+- Update RxRealm to v6.0.0
+- Update RxSwift to v6.9.1
+- Update swift-nio to v2.105.0
+- Update SevenZip to v0.5.0
+- Update Unrar to v0.5.4
+
 ## v2.0.1 (2026-05-08)
 
 ### Added

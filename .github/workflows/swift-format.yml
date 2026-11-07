@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 2
       - name: Lint
-        uses: mtgto/swift-format-action@main
+        uses: mtgto/swift-format-action@v1.1.1
         with:
           # Please comment out if you won't specify configuration file
           configuration_file: .swift-format

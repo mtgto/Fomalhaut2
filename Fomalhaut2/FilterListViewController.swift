@@ -90,7 +90,7 @@ class FilterListViewController: NSViewController, NSOutlineViewDataSource, NSOut
         owner.filterListView.selectRowIndexes(IndexSet([row < 0 ? 1 : row]), byExtendingSelection: false)
       })
       .disposed(by: self.disposeBag)
-    self.rootItems.forEach { (rootItem) in
+    for rootItem in self.rootItems {
       self.filterListView.expandItem(rootItem)
     }
   }

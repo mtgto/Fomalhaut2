@@ -379,7 +379,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
 
   // MARK: - NSMenu for NSTableView and NSCollectionView
   @objc func openViewer(_ sender: Any) {
-    self.selectedBooks().forEach { book in
+    for book in self.selectedBooks() {
       var bookCollectionViewItem: BookCollectionViewItem? = nil
       if self.collectionViewStyle.value == .collection {
         if let index = self.collectionViewBooks.value?.index(of: book) {
@@ -423,7 +423,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     do {
       let realm = try threadLocalRealm()
       try realm.write {
-        self.selectedBooks().forEach { book in
+        for book in self.selectedBooks() {
           book.like = !book.like
         }
       }
@@ -437,7 +437,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
     do {
       let realm = try threadLocalRealm()
       try realm.write {
-        self.selectedBooks().forEach { book in
+        for book in self.selectedBooks() {
           book.readCount = 0
         }
       }
@@ -524,10 +524,10 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       log.error("Failed to initialize Realm")
       return true
     }
-    validExtensionFileURLs.forEach { (fileURL) in
+    for fileURL in validExtensionFileURLs {
       if realm.objects(Book.self).filter("filePath = %@", fileURL.path).first != nil {
         log.info("file \(fileURL.path) is already added.")
-        return
+        continue
       }
       let book = Book()
       book.isRightToLeft = Preferences.standard.defaultPageOrder == .rtl
@@ -535,7 +535,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         try book.setURL(fileURL)
       } catch {
         log.error("Error while create bookmarkData from \(fileURL.path): \(error)")
-        return
+        continue
       }
       // Write before open a NSDocument
       try? realm.write {
@@ -548,7 +548,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
       var bookmarkDataIsStale = false
       guard let url = try? book.resolveURL(bookmarkDataIsStale: &bookmarkDataIsStale) else {
         log.warning("Unresolved file is dropped")
-        return
+        continue
       }
       _ = url.startAccessingSecurityScopedResource()
       do {
@@ -583,7 +583,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
             try NSDocumentController.shared.makeDocument(
               withContentsOf: url, ofType: SevenZipArchiver.utis[1]) as! BookDocument
         } else {
-          return
+          continue
         }
         try? realm.write {
           book.pageCount = document.pageCount()
@@ -851,6 +851,6 @@ extension BookCollectionViewController: NSCollectionViewDelegate {
     willBeginAt screenPoint: NSPoint,
     forItemsAt indexPaths: Set<IndexPath>
   ) {
-    indexPaths.forEach { collectionView.item(at: $0)?.view.isHidden = false }
+    for indexPath in indexPaths { collectionView.item(at: indexPath)?.view.isHidden = false }
   }
 }

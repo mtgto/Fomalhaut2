@@ -52,7 +52,7 @@ class CollectionViewHeaderView: NSView, NSCollectionViewElement {
       log.error("Unknown collection order selected: \(selectedIndex)")
       collectionOrder = .createdAt
     }
-    self.orderButton.itemArray.enumerated().forEach { (item) in
+    for item in self.orderButton.itemArray.enumerated() {
       item.element.state = item.offset == selectedIndex ? .on : .off
     }
     NotificationCenter.default.post(

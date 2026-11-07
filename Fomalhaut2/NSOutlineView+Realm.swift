@@ -13,7 +13,7 @@ extension NSOutlineView {
     self.beginUpdates()
     self.removeItems(at: IndexSet(changes.deleted), inParent: rootItem, withAnimation: .slideUp)
     self.insertItems(at: IndexSet(changes.inserted), inParent: rootItem, withAnimation: .slideUp)
-    updatedItems.forEach { self.reloadItem($0) }
+    for item in updatedItems { self.reloadItem(item) }
     endUpdates()
   }
 }

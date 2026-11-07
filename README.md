@@ -49,7 +49,7 @@ pnpm build
 
 ## System requirements
 
-- macOS 11.5+
+- macOS 12+
 
 ## Roadmap
 

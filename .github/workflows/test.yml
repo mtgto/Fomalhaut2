@@ -11,10 +11,6 @@ jobs:
     runs-on: macos-26
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: apple-actions/import-codesign-certs@v7.2.0
-        with:
-          p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
-          p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
       - uses: actions/cache@v6.1.0
         id: cache
         with:
@@ -28,4 +24,7 @@ jobs:
       - name: test
         run: |
           cp Fomalhaut2Tests/fixture/empty.zip Fomalhaut2/assets.zip
-          set -o pipefail && xcodebuild -target Fomalhaut2Tests -scheme Fomalhaut2 -clonedSourcePackagesDirPath .build clean test | xcpretty
+          # Sign ad-hoc without a team so that no certificate or provisioning profile is required
+          set -o pipefail && xcodebuild -target Fomalhaut2Tests -scheme Fomalhaut2 -clonedSourcePackagesDirPath .build \
+            CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=- DEVELOPMENT_TEAM= \
+            clean test | xcpretty

@@ -9,7 +9,6 @@ workflows:
     '.github/workflows/test.yml':
         - 'actions/cache@v6.1.0'
         - 'actions/checkout@v7.0.1'
-        - 'apple-actions/import-codesign-certs@v7.2.0'
     '.github/workflows/web.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/setup-node@v6.5.0'
@@ -30,11 +29,6 @@ dependencies:
         commit: 'sha1-249970729cb0ef3589644e2896645e5dc5ba9c38'
         owner_id: 44036562
         repo_id: 189476904
-    'apple-actions/import-codesign-certs@v7.2.0':
-        ref: 'v7.2.0'
-        commit: 'sha1-288b8ec97b82c66b6f2a6baaf7acc8dfbcbe331c'
-        owner_id: 60242489
-        repo_id: 235022350
     'mtgto/swift-format-action@v1.1.1':
         ref: 'v1.1.1'
         commit: 'sha1-3d4c30190807f8439bbf74015217603c1f18870d'

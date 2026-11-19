@@ -824,6 +824,10 @@ extension BookCollectionViewController: NSCollectionViewDelegate {
     if dropFileCount == 0 {
       return []
     }
+    // Files are added to the collection, not onto a specific item.
+    // Avoid `.on` so that no item gets the `.asDropTarget` highlight.
+    proposedDropIndexPath.pointee = IndexPath(item: self.collectionViewBooks.value?.count ?? 0, section: 0) as NSIndexPath
+    proposedDropOperation.pointee = .before
     return .copy
   }
 

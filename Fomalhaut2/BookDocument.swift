@@ -102,7 +102,7 @@ class BookDocument: NSDocument {
           completion: { (result) in
             switch result {
             case .success(let image):
-              imageCache.setObject(image, forKey: imageCacheKey)
+              imageCache.setObject(image, forKey: imageCacheKey, cost: image.estimatedMemoryCost)
               observer.onNext(image)
               observer.onCompleted()
             case .failure(let error):

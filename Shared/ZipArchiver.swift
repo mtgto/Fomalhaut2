@@ -34,6 +34,23 @@ public class ZipArchiver: Archiver {
   }
 
   public func image(at page: Int, completion: @escaping (Result<NSImage, ArchiverError>) -> Void) {
+    self.imageData(at: page) { result in
+      switch result {
+      case .success(let data):
+        guard let image = NSImage(data: data) else {
+          completion(.failure(ArchiverError.brokenFile))
+          return
+        }
+        completion(.success(image))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+  }
+}
+
+extension ZipArchiver: ImageDataProviding {
+  public func imageData(at page: Int, completion: @escaping (Result<Data, ArchiverError>) -> Void) {
     self.operationQueue.addOperation {
       let entry = self.entries[page]
       var rawData = Data()
@@ -45,11 +62,7 @@ public class ZipArchiver: Archiver {
           // log.debug("size of data = \(data.count)")
           rawData.append(data)
           if rawData.count >= entry.uncompressedSize {
-            guard let image = NSImage(data: rawData) else {
-              completion(.failure(ArchiverError.brokenFile))
-              return
-            }
-            completion(.success(image))
+            completion(.success(rawData))
           }
         }
       } catch {

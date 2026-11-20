@@ -134,6 +134,42 @@ class BookDocument: NSDocument {
     }
   }
 
+  /// Generate the thumbnail of the first page and save it.
+  /// If the archiver can provide the raw image data, the full-size image is neither decoded nor put into the image cache.
+  /// Otherwise it falls back to loading the first page.
+  func generateThumbnail() -> Observable<Void> {
+    guard let provider = (self.archiver as? CombineArchiver)?.imageDataProvider, self.pageCount() > 0 else {
+      return self.image(at: 0).map { _ in () }
+    }
+    return Observable<Data?>.create { observer in
+      provider.imageData(at: 0) { result in
+        switch result {
+        case .success(let data):
+          observer.onNext(
+            NSImage.thumbnailJPEGData(
+              from: data, maxPixelsWide: BookDocument.thumbnailMaxWidth, maxPixelsHigh: BookDocument.thumbnailMaxHeight)
+          )
+          observer.onCompleted()
+        case .failure(let error):
+          observer.onError(error)
+        }
+      }
+      return Disposables.create()
+    }.flatMap { jpeg -> Observable<Void> in
+      guard let jpeg else {
+        log.info("Failed to create a thumbnail with ImageIO. Fall back to loading the first page")
+        return self.image(at: 0).map { _ in () }
+      }
+      let realm = try threadLocalRealm()
+      if let book = realm.object(ofType: Book.self, forPrimaryKey: self.book!.id), book.thumbnailData == nil {
+        try realm.write {
+          book.thumbnailData = jpeg
+        }
+      }
+      return Observable.just(())
+    }
+  }
+
   func pageCount() -> Int {
     return self.archiver.pageCount()
   }

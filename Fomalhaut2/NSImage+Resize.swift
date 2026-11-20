@@ -48,6 +48,49 @@ extension NSImage {
     return newBitmap.representation(using: .jpeg, properties: [:])
   }
 
+  /// Create a JPEG thumbnail from encoded image data with ImageIO.
+  /// It does not decode the full-size image. The image is fit into the max size (never enlarged),
+  /// EXIF orientation is applied and transparent pixels are composited over white.
+  static func thumbnailJPEGData(from data: Data, maxPixelsWide: Int, maxPixelsHigh: Int) -> Data? {
+    guard maxPixelsWide > 0, maxPixelsHigh > 0,
+      let source = CGImageSourceCreateWithData(data as CFData, nil),
+      let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any],
+      let pixelWidth = properties[kCGImagePropertyPixelWidth] as? Int,
+      let pixelHeight = properties[kCGImagePropertyPixelHeight] as? Int,
+      pixelWidth > 0, pixelHeight > 0
+    else {
+      return nil
+    }
+    // Orientation 5...8 swaps width and height
+    let orientation = (properties[kCGImagePropertyOrientation] as? Int) ?? 1
+    let (width, height) = orientation >= 5 ? (pixelHeight, pixelWidth) : (pixelWidth, pixelHeight)
+    let scale = min(CGFloat(maxPixelsWide) / CGFloat(width), CGFloat(maxPixelsHigh) / CGFloat(height), 1.0)
+    let maxPixelSize = max(1, Int((CGFloat(max(width, height)) * scale).rounded()))
+    let options: [CFString: Any] = [
+      kCGImageSourceCreateThumbnailFromImageAlways: true,
+      kCGImageSourceCreateThumbnailWithTransform: true,
+      kCGImageSourceShouldCacheImmediately: true,
+      kCGImageSourceThumbnailMaxPixelSize: maxPixelSize,
+    ]
+    guard let thumbnail = CGImageSourceCreateThumbnailAtIndex(source, 0, options as CFDictionary) else {
+      return nil
+    }
+    // JPEG has no alpha channel. Flatten over white.
+    guard
+      let context = CGContext(
+        data: nil, width: thumbnail.width, height: thumbnail.height, bitsPerComponent: 8, bytesPerRow: 0,
+        space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue)
+    else {
+      return nil
+    }
+    let rect = CGRect(x: 0, y: 0, width: thumbnail.width, height: thumbnail.height)
+    context.setFillColor(CGColor(gray: 1.0, alpha: 1.0))
+    context.fill(rect)
+    context.draw(thumbnail, in: rect)
+    guard let flattened = context.makeImage() else { return nil }
+    return NSBitmapImageRep(cgImage: flattened).representation(using: .jpeg, properties: [:])
+  }
+
   func monochrome() -> NSImage? {
     guard let tiffRepresentation = self.tiffRepresentation else { return nil }
     guard let ciImage = CIImage(data: tiffRepresentation) else { return nil }

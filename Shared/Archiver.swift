@@ -11,6 +11,11 @@ public protocol Archiver {
   func image(at page: Int, completion: @escaping (_ image: Result<NSImage, ArchiverError>) -> Void)
 }
 
+/// Archiver which can provide the raw (encoded) data of a page image without decoding it.
+public protocol ImageDataProviding {
+  func imageData(at page: Int, completion: @escaping (_ data: Result<Data, ArchiverError>) -> Void)
+}
+
 public class CombineArchiver: Archiver {
   public static var utis: [String] =
     ZipArchiver.utis + RarArchiver.utis + PdfArchiver.utis + SevenZipArchiver.extensions + FolderArchiver.extensions
@@ -44,6 +49,11 @@ public class CombineArchiver: Archiver {
 
   public func pageCount() -> Int {
     return self.archiver.pageCount()
+  }
+
+  /// Non-nil only if the underlying archiver can provide raw image data.
+  public var imageDataProvider: ImageDataProviding? {
+    return self.archiver as? ImageDataProviding
   }
 
   public func image(at page: Int, completion: @escaping (_ image: Result<NSImage, ArchiverError>) -> Void) {

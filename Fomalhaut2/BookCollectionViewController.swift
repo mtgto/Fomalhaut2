@@ -589,7 +589,7 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
           book.pageCount = document.pageCount()
         }
         // Generate thumbnail
-        document.image(at: 0).subscribe(onNext: { (result) in
+        document.generateThumbnail().subscribe(onNext: { _ in
           url.stopAccessingSecurityScopedResource()
           document.close()
         }).disposed(by: self.disposeBag)

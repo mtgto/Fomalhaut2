@@ -233,6 +233,13 @@ class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation 
         log.debug("bookmarkDataIsStale = \(bookmarkDataIsStale)")
         if bookmarkDataIsStale {
           log.warning("bookmark data is already stale.")
+          // Recreating a security-scoped bookmark requires access to the resource
+          let accessing = url.startAccessingSecurityScopedResource()
+          defer {
+            if accessing {
+              url.stopAccessingSecurityScopedResource()
+            }
+          }
           do {
             let realm = try threadLocalRealm()
             try realm.write {

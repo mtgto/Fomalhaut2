@@ -92,8 +92,9 @@ extension NSImage {
   }
 
   func monochrome() -> NSImage? {
-    guard let tiffRepresentation = self.tiffRepresentation else { return nil }
-    guard let ciImage = CIImage(data: tiffRepresentation) else { return nil }
+    // Avoid creating a full-size TIFF representation
+    guard let cgImage = self.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
+    let ciImage = CIImage(cgImage: cgImage)
     guard let filter = CIFilter(name: "CIPhotoEffectNoir") else { return nil }
     filter.setValue(ciImage, forKey: kCIInputImageKey)
     guard let outputCIImage = filter.outputImage else { return nil }

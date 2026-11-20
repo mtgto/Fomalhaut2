@@ -254,59 +254,12 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
+				<string>public.archive</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Fomalhaut2 Comic Book</string>
-			<key>UTTypeIcons</key>
-			<dict/>
+			<string>RAR Archive</string>
 			<key>UTTypeIdentifier</key>
-			<string>net.mtgto.Fomalhaut2.cbz</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>cbz</string>
-				</array>
-				<key>public.mime-type</key>
-				<array>
-					<string>application/zip</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Fomalhaut2 Comic Book</string>
-			<key>UTTypeIcons</key>
-			<dict/>
-			<key>UTTypeIdentifier</key>
-			<string>net.mtgto.Fomalhaut2.cbr</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>cbr</string>
-				</array>
-				<key>public.mime-type</key>
-				<array>
-					<string>application/x-rar-compressed</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Fomalhaut2 Comic Book</string>
-			<key>UTTypeIcons</key>
-			<dict/>
-			<key>UTTypeIdentifier</key>
-			<string>net.mtgto.Fomalhaut2.rar</string>
+			<string>com.rarlab.rar-archive</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -316,6 +269,7 @@
 				<key>public.mime-type</key>
 				<array>
 					<string>application/x-rar-compressed</string>
+					<string>application/vnd.rar</string>
 				</array>
 			</dict>
 		</dict>
@@ -323,18 +277,17 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
+				<string>public.archive</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Fomalhaut2 Comic Book</string>
-			<key>UTTypeIcons</key>
-			<dict/>
+			<string>7-Zip Archive</string>
 			<key>UTTypeIdentifier</key>
-			<string>net.mtgto.Fomalhaut2.cb7</string>
+			<string>org.7-zip.7-zip-archive</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
-					<string>cb7</string>
+					<string>7z</string>
 				</array>
 				<key>public.mime-type</key>
 				<array>

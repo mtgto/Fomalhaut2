@@ -18,7 +18,7 @@ public protocol ImageDataProviding {
 
 public class CombineArchiver: Archiver {
   public static var utis: [String] =
-    ZipArchiver.utis + RarArchiver.utis + PdfArchiver.utis + SevenZipArchiver.extensions + FolderArchiver.extensions
+    ZipArchiver.utis + RarArchiver.utis + PdfArchiver.utis + SevenZipArchiver.utis + FolderArchiver.utis
   public static var extensions: [String] =
     ZipArchiver.extensions + RarArchiver.extensions + PdfArchiver.extensions + SevenZipArchiver.extensions
   private let archiver: Archiver

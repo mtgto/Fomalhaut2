@@ -205,20 +205,45 @@ class WebSharing: NSObject {
           promise.succeed(self.notFound)
           return promise.futureResult
         }
-        archiver.image(at: page) { (result) in
-          switch result {
-          case .success(let image):
-            guard let data = image.resizedImageFixedAspectRatio(maxPixelsWide: 1024, maxPixelsHigh: 1024) else {
-              log.warning("Fail to resize image with unknown reason")
+        let succeed = { (data: Data) in
+          promise.succeed(
+            Response(data: data, contentType: contentTypeJpeg, headers: [(cacheControlKey, "private, max-age=1440")]))
+        }
+        // Decode the full-size image and resize it.
+        let decodeAndResize = {
+          archiver.image(at: page) { (result) in
+            switch result {
+            case .success(let image):
+              guard let data = image.resizedImageFixedAspectRatio(maxPixelsWide: 1024, maxPixelsHigh: 1024) else {
+                log.warning("Fail to resize image with unknown reason")
+                promise.succeed(self.internalServerError)
+                break
+              }
+              succeed(data)
+            case .failure(let error):
+              log.warning("Fail to resize image: \(error)")
               promise.succeed(self.internalServerError)
-              break
             }
-            promise.succeed(
-              Response(data: data, contentType: contentTypeJpeg, headers: [(cacheControlKey, "private, max-age=1440")]))
-          case .failure(let error):
-            log.warning("Fail to resize image: \(error)")
-            promise.succeed(self.internalServerError)
           }
+        }
+        if let provider = (archiver as? CombineArchiver)?.imageDataProvider {
+          // Resize with ImageIO without decoding the full-size image
+          provider.imageData(at: page) { (result) in
+            switch result {
+            case .success(let rawData):
+              if let data = NSImage.thumbnailJPEGData(from: rawData, maxPixelsWide: 1024, maxPixelsHigh: 1024) {
+                succeed(data)
+              } else {
+                log.info("Fail to resize image with ImageIO. Fall back to decoding the full-size image")
+                decodeAndResize()
+              }
+            case .failure(let error):
+              log.warning("Fail to load image data: \(error)")
+              promise.succeed(self.internalServerError)
+            }
+          }
+        } else {
+          decodeAndResize()
         }
         return promise.futureResult
       }

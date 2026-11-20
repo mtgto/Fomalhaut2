@@ -5,22 +5,23 @@ import Cocoa
 
 extension NSImage {
   func resizedImageFixedAspectRatio(maxPixelsWide: Int, maxPixelsHigh: Int) -> Data? {
-    let maxWidth = CGFloat(maxPixelsWide)
-    let maxHeight = CGFloat(maxPixelsHigh)
-    let width: CGFloat
-    let height: CGFloat
-    let aspectRatio = self.size.height / self.size.width
-    if self.size.height / self.size.width > maxHeight / maxWidth {
-      width = maxHeight / aspectRatio
-      height = maxHeight
-    } else {
-      width = maxWidth
-      height = maxWidth * aspectRatio
+    guard self.size.width > 0, self.size.height > 0, maxPixelsWide > 0, maxPixelsHigh > 0 else {
+      log.error("Invalid image size or max pixels: \(self.size), \(maxPixelsWide)x\(maxPixelsHigh)")
+      return nil
     }
-    return self.resizedImage(pixelsWide: Int(width), pixelsHigh: Int(height))
+    // Fit into the max size while keeping the aspect ratio. Never enlarge the image (scale <= 1.0).
+    let scale = min(
+      CGFloat(maxPixelsWide) / self.size.width, CGFloat(maxPixelsHigh) / self.size.height, 1.0)
+    let width = max(1, Int((self.size.width * scale).rounded()))
+    let height = max(1, Int((self.size.height * scale).rounded()))
+    return self.resizedImage(pixelsWide: width, pixelsHigh: height)
   }
 
   func resizedImage(pixelsWide: Int, pixelsHigh: Int) -> Data? {
+    guard pixelsWide > 0, pixelsHigh > 0 else {
+      log.error("Invalid pixels: \(pixelsWide)x\(pixelsHigh)")
+      return nil
+    }
     guard
       let newBitmap = NSBitmapImageRep(
         bitmapDataPlanes: nil,

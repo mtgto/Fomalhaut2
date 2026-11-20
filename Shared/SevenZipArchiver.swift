@@ -39,20 +39,32 @@ public class SevenZipArchiver: Archiver {
   }
 
   public func image(at page: Int, completion: @escaping (Result<NSImage, ArchiverError>) -> Void) {
-    self.operationQueue.addOperation {
-      do {
-        let entry = self.entries[page]
-        let data = try self.archive.extract(entry: entry)
+    self.imageData(at: page) { result in
+      switch result {
+      case .success(let data):
         guard let image = NSImage(data: data) else {
           completion(.failure(.brokenFile))
           return
         }
         completion(.success(image))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+  }
+}
+
+extension SevenZipArchiver: ImageDataProviding {
+  public func imageData(at page: Int, completion: @escaping (Result<Data, ArchiverError>) -> Void) {
+    self.operationQueue.addOperation {
+      do {
+        let entry = self.entries[page]
+        let data = try self.archive.extract(entry: entry)
+        completion(.success(data))
       } catch {
         log.error("Error while extracting at \(page): \(error)")
         completion(.failure(.brokenFile))
       }
     }
   }
-
 }

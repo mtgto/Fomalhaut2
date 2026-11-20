@@ -41,16 +41,29 @@ public class RarArchiver: Archiver {
   }
 
   public func image(at page: Int, completion: @escaping (Result<NSImage, ArchiverError>) -> Void) {
-    self.operationQueue.addOperation {
-      let entry = self.entries[page]
-      do {
-        let archive = try Archive(path: self.fileURL.path)
-        let data = try archive.extract(entry)
+    self.imageData(at: page) { result in
+      switch result {
+      case .success(let data):
         guard let image = NSImage(data: data) else {
           completion(.failure(ArchiverError.brokenFile))
           return
         }
         completion(.success(image))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+  }
+}
+
+extension RarArchiver: ImageDataProviding {
+  public func imageData(at page: Int, completion: @escaping (Result<Data, ArchiverError>) -> Void) {
+    self.operationQueue.addOperation {
+      let entry = self.entries[page]
+      do {
+        let archive = try Archive(path: self.fileURL.path)
+        let data = try archive.extract(entry)
+        completion(.success(data))
       } catch {
         log.info("Error while extracting at \(page): \(error)")
         completion(.failure(ArchiverError.brokenFile))

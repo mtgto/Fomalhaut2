@@ -19,7 +19,7 @@ enum BookCollectionViewControllerError: Error {
 
 let collectionOrderChangedNotificationName = Notification.Name("collectionOrderChanged")
 
-class BookCollectionViewController: NSSplitViewController, NSMenuItemValidation {
+class BookCollectionViewController: NSViewController, NSMenuItemValidation {
   static let collectionTabViewInitialIndexKey = "collectionTabViewInitialIndex"
   static let collectionOrderKey = "collectionOrder"
   private let tableViewBooks = BehaviorRelay<AnyRealmCollection<Book>?>(value: nil)

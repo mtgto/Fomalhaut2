@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v2.1.1 (2026-11-22)
+
+### Changed
+
+- Fix the item size slider and the sort popup in the collection view header not responding
+- Fix books with stale bookmarks failing to open
+- Fix duplicated selection in the collection view after adding books
+- Fix drop-target highlight remaining on items after dropping files
+- Reduce memory usage when generating thumbnails, sharing pages to web and applying the monochrome filter
+- Never enlarge images when resizing them
+- Fix imported type declarations of rar and 7z archives in Info.plist
+- Update web packages
+
 ## v2.1.0 (2026-11-07)
 
 ### Changed
